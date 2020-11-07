@@ -524,6 +524,10 @@ class _DailyNewScreenState extends State<DailyNewScreen>
                                                                         15.0)),
                                                           ),
                                                           width: 60,
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  left: 8,
+                                                                  right: 8),
                                                           child: Row(
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
@@ -556,6 +560,10 @@ class _DailyNewScreenState extends State<DailyNewScreen>
                                                         left: 0.0,
                                                         child: Container(
                                                           height: 60,
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  left: 8,
+                                                                  right: 8),
                                                           width: MediaQuery.of(
                                                                   context)
                                                               .size
@@ -574,64 +582,59 @@ class _DailyNewScreenState extends State<DailyNewScreen>
 //                                                                      .circular(
 //                                                                      18.0)),
                                                           ),
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    left: 12.0,
-                                                                    right: 14),
-                                                            child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: <
-                                                                  Widget>[
-                                                                SizedBox(
-                                                                  height: 5,
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: <Widget>[
+                                                              SizedBox(
+                                                                height: 5,
+                                                              ),
+                                                              Container(
+                                                                child: Text(
+                                                                  link[
+                                                                      "content"],
+                                                                  maxLines: 2,
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          11,
+                                                                      letterSpacing:
+                                                                          0.1),
                                                                 ),
-                                                                Container(
-                                                                  child: Text(
-                                                                    link[
-                                                                        "content"],
+                                                              ),
+                                                              SizedBox(
+                                                                height: 5,
+                                                              ),
+                                                              Row(
+                                                                children: <
+                                                                    Widget>[
+                                                                  Icon(
+                                                                    Icons.timer,
+                                                                    size: 14,
+                                                                    color: Colors
+                                                                        .grey,
+                                                                  ),
+                                                                  Text(
+                                                                    "11 september 2019",
                                                                     style: TextStyle(
                                                                         color: Colors
                                                                             .white,
-                                                                        fontSize:
-                                                                            11,
                                                                         letterSpacing:
-                                                                            0.1),
-                                                                  ),
-                                                                ),
-                                                                SizedBox(
-                                                                  height: 5,
-                                                                ),
-                                                                Row(
-                                                                  children: <
-                                                                      Widget>[
-                                                                    Icon(
-                                                                      Icons
-                                                                          .timer,
-                                                                      size: 14,
-                                                                      color: Colors
-                                                                          .grey,
-                                                                    ),
-                                                                    Text(
-                                                                      "11 september 2019",
-                                                                      style: TextStyle(
-                                                                          color: Colors
-                                                                              .white,
-                                                                          letterSpacing:
-                                                                              0.5,
-                                                                          fontSize:
-                                                                              8),
-                                                                    )
-                                                                  ],
-                                                                ),
-                                                                SizedBox(
-                                                                  height: 5,
-                                                                ),
-                                                              ],
-                                                            ),
+                                                                            0.5,
+                                                                        fontSize:
+                                                                            8),
+                                                                  )
+                                                                ],
+                                                              ),
+                                                              SizedBox(
+                                                                height: 5,
+                                                              ),
+                                                            ],
                                                           ),
                                                         )),
                                                   ],

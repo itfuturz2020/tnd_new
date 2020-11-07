@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:the_national_dawn/Common/Constants.dart';
 
 class PopularNewsScreen extends StatefulWidget {
+  var newsData;
+
+  PopularNewsScreen({this.newsData});
+
   @override
   _PopularNewsScreenState createState() => _PopularNewsScreenState();
 }
@@ -25,9 +30,9 @@ class _PopularNewsScreenState extends State<PopularNewsScreen> {
                     child: Container(
                       height: 420,
                       width: MediaQuery.of(context).size.width,
-                      child: Image.asset(
-                        "assets/10.jpeg",
-                        fit: BoxFit.cover,
+                      child: FadeInImage.assetNetwork(
+                        placeholder: "assets/TND Logo_PNG_Newspaper.png",
+                        image: Image_URL + "${widget.newsData["newsImage"]}",
                       ),
                     ),
                   ),
@@ -180,7 +185,7 @@ class _PopularNewsScreenState extends State<PopularNewsScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text("Developer pays Due due to corona\npandemic.",
+                    Text("${widget.newsData["headline"]}",
                         textAlign: TextAlign.justify,
                         style: TextStyle(
                             color: Colors.black,
@@ -189,31 +194,7 @@ class _PopularNewsScreenState extends State<PopularNewsScreen> {
                     SizedBox(
                       height: 10,
                     ),
-                    Text(
-                        "These symptoms are similar to the flu (influenza)"
-                        " or the common cold, which are a lot more common "
-                        "than COVID-19. This is why testing is required to "
-                        "confirm if someone has COVID-19. It’s important to"
-                        " remember that key prevention measures are the same – "
-                        "frequent hand washing, and respiratory hygiene "
-                        "(cover your cough or sneeze with a flexed elbow or"
-                        " tissue, then throw away the tissue into a closed bin"
-                        "which are a lot more common than COVID-19. This is why "
-                        "testing is required to confirm if someone has COVID-19."
-                        " It’s important to remember that key prevention measures"
-                        "are the same –frequent hand washing, and respiratory "
-                        "hygiene(cover your cough or sneeze with a flexed elbow or"
-                        " tissue, then throw away the tissue into a closed bin)."
-                        " or the common cold, which are a lot more common "
-                        "than COVID-19. This is why testing is required to "
-                        "confirm if someone has COVID-19. It’s important to"
-                        " remember that key prevention measures are the same – "
-                        "frequent hand washing, and respiratory hygiene "
-                        "(cover your cough or sneeze with a flexed elbow or"
-                        " tissue, then throw away the tissue into a closed bin"
-                        "which are a lot more common than COVID-19. This is why "
-                        "testing is required to confirm if someone has COVID-19."
-                        " It’s important to remember that key prevention measures",
+                    Text("${widget.newsData["content"]}",
                         textAlign: TextAlign.justify,
                         style: TextStyle(
                             color: Color(0xff010101),
