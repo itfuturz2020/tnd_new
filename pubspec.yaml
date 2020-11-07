@@ -44,10 +44,16 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.7.0"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
+flutter_icons:
+  ios: true
+  android: true
+  image_path_ios: "assets/TND Logo_PNG_Newspaper.png"
+  adaptive_icon_foreground: "assets/TND Logo_PNG_Newspaper.png"
+  image_path_android: "assets/TND Logo_PNG_Newspaper.png"
 # The following section is specific to Flutter.
 flutter:
 
