@@ -23,17 +23,10 @@ class _HomeScreenState extends State<HomeScreen>
   void initState() {
     super.initState();
     _bannerImage();
-    // tabController = TabController(length: 3, vsync: this);
   }
 
   List imgList = [];
   bool isBannerLoading = true;
-
-  List<String> links = [
-    "assets/splash.png",
-    "assets/splash.png",
-    "assets/splash.png",
-  ];
 
   _showDialog(BuildContext context) {
     showDialog(

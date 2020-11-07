@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
+import 'package:the_national_dawn/Common/Services.dart';
 import 'package:the_national_dawn/Components/CategoryComponent.dart';
+import 'package:the_national_dawn/Components/LoadingBlueComponent.dart';
 
 class HomeCategoryScreen extends StatefulWidget {
   @override
@@ -8,6 +13,14 @@ class HomeCategoryScreen extends StatefulWidget {
 }
 
 class _HomeCategoryScreenState extends State<HomeCategoryScreen> {
+  List CategoryList = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    _getCategory();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,22 +107,61 @@ class _HomeCategoryScreenState extends State<HomeCategoryScreen> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(top: 10.0, left: 15, right: 15),
-                child: GridView.builder(
-                  physics: BouncingScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 1,
+                child: isLoading == true
+                    ? Center(child: LoadingBlueComponent())
+                    : GridView.builder(
+                        physics: BouncingScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 1,
 //                        //widthScreen / heightScreen,
-                      crossAxisSpacing: 20.0,
-                      mainAxisSpacing: 25.0),
-                  itemBuilder: (BuildContext context, int index) {
-                    return CategoryComponent();
-                  },
-                  itemCount: 10,
-                ),
+                            crossAxisSpacing: 20.0,
+                            mainAxisSpacing: 25.0),
+                        itemBuilder: (BuildContext context, int index) {
+                          return CategoryComponent(
+                            CatData: CategoryList[index],
+                          );
+                        },
+                        itemCount: CategoryList.length,
+                      ),
               ),
             ),
           ],
         ));
+  }
+
+  _getCategory() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+//        var body = {};
+        Services.PostForList(
+          api_name: 'admin/getNewsCategory',
+        ).then((ResponseList) async {
+          setState(() {
+            isLoading = false;
+          });
+          if (ResponseList.length > 0) {
+            setState(() {
+              CategoryList = ResponseList;
+            });
+          } else {
+            setState(() {
+              isLoading = false;
+            });
+            Fluttertoast.showToast(msg: "No Data Found");
+            //show "data not found" in dialog
+          }
+        }, onError: (e) {
+          setState(() {
+            isLoading = false;
+          });
+          print("error on call -> ${e.message}");
+          Fluttertoast.showToast(msg: "Something Went Wrong");
+        });
+      }
+    } on SocketException catch (_) {
+      Fluttertoast.showToast(msg: "No Internet Connection.");
+    }
   }
 }
