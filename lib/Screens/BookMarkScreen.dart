@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
+import 'package:the_national_dawn/Common/Services.dart';
 import 'package:the_national_dawn/Components/BookMarkComponent.dart';
+import 'package:the_national_dawn/Components/LoadingBlueComponent.dart';
 
 class BookMarkScreen extends StatefulWidget {
   @override
@@ -8,6 +13,14 @@ class BookMarkScreen extends StatefulWidget {
 }
 
 class _BookMarkScreenState extends State<BookMarkScreen> {
+  List bookmarkList = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    _getBookmark();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,14 +93,53 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
           padding: const EdgeInsets.only(right: 15.0, left: 15, top: 15),
           child: Container(
             height: MediaQuery.of(context).size.height,
-            child: ListView.builder(
-                physics: BouncingScrollPhysics(),
-                // scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                itemBuilder: (BuildContext context, int index) {
-                  return BookMarkComponent();
-                }),
+            child: isLoading == true
+                ? LoadingBlueComponent()
+                : ListView.builder(
+                    physics: BouncingScrollPhysics(),
+                    // scrollDirection: Axis.horizontal,
+                    itemCount: bookmarkList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return BookMarkComponent(
+                        bookmarkData: bookmarkList[index],
+                      );
+                    }),
           ),
         ));
+  }
+
+  _getBookmark() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+//        var body = {};
+        Services.PostForList(
+          api_name: 'admin/getAllBookMarkNews',
+        ).then((ResponseList) async {
+          setState(() {
+            isLoading = false;
+          });
+          if (ResponseList.length > 0) {
+            setState(() {
+              bookmarkList = ResponseList;
+            });
+          } else {
+            setState(() {
+              isLoading = false;
+            });
+            Fluttertoast.showToast(msg: "No Data Found");
+            //show "data not found" in dialog
+          }
+        }, onError: (e) {
+          setState(() {
+            isLoading = false;
+          });
+          print("error on call -> ${e.message}");
+          Fluttertoast.showToast(msg: "Something Went Wrong");
+        });
+      }
+    } on SocketException catch (_) {
+      Fluttertoast.showToast(msg: "No Internet Connection.");
+    }
   }
 }

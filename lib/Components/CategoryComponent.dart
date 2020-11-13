@@ -53,7 +53,7 @@ class _CategoryComponentState extends State<CategoryComponent> {
               height: 10,
             ),
             Text(
-              "${widget.CatData["newsType"]}",
+              "${widget.CatData["categoryName"]}",
               style: TextStyle(color: Colors.black, fontSize: 12),
             )
           ],

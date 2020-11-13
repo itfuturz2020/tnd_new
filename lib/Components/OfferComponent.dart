@@ -1,7 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Screens/OfferDetailScreen.dart';
 
 class OfferComponent extends StatefulWidget {
+  var offerData;
+
+  OfferComponent({this.offerData});
+
   @override
   _OfferComponentState createState() => _OfferComponentState();
 }
@@ -15,16 +21,32 @@ class _OfferComponentState extends State<OfferComponent> {
         children: [
           GestureDetector(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => OfferDetailScreen()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => OfferDetailScreen(
+                            offerData: widget.offerData,
+                          )));
             },
             child: Container(
               height: 179,
               width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.grey[100], width: 1),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey[400].withOpacity(0.2),
+                        blurRadius: 1.0,
+                        spreadRadius: 1.0,
+                        offset: Offset(3.0, 5.0))
+                  ]),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: Image.asset(
-                  "assets/10.jpeg",
+                child: Image.network(
+                  //"assets/10.jpeg",
+                  Image_URL + "${widget.offerData["bannerImage"]}",
                   fit: BoxFit.cover,
                 ),
               ),
@@ -35,18 +57,24 @@ class _OfferComponentState extends State<OfferComponent> {
             left: 0.0,
             child: Container(
               height: 24,
-              width: 80,
+              width: 100,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                     bottomRight: Radius.circular(12.0),
                     topRight: Radius.circular(12.0),
                     topLeft: Radius.circular(12.0)),
-                color: Color(0xff16B8FF3D),
+                color: appPrimaryMaterialColor[300],
               ),
               child: Center(
-                  child: Text(
-                "Category",
-                style: TextStyle(color: Colors.white),
+                  child: Padding(
+                padding: const EdgeInsets.only(left: 3.0),
+                child: Text(
+                  //"Category",
+                  "${widget.offerData["title"]}",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(color: Colors.white),
+                ),
               )),
             ),
           ),
@@ -60,12 +88,12 @@ class _OfferComponentState extends State<OfferComponent> {
                 borderRadius: BorderRadius.only(
                     bottomRight: Radius.circular(12.0),
                     topLeft: Radius.circular(12.0)),
-                color: Color(0xff16B8FF3D),
+                color: appPrimaryMaterialColor[300],
                 //color: ColorUtils.buttonDarkBlueColor,
               ),
               child: Center(
                   child: Text(
-                "Expires on: 12-Dec-2020",
+                "Expires on: " + "${widget.offerData["offerExpire"]}",
                 style: TextStyle(color: Colors.white),
               )),
             ),

@@ -35,6 +35,31 @@ class Services {
     }
   }
 
+  static Future<List> GetEventData(String sdate, edate) async {
+    String url = API_URL + 'admin/getEvents?fromDate=${sdate}&toDate=${edate}';
+    print("GetEventDetailByDate URL: " + url);
+    try {
+      Response response = await dio.post(url);
+      if (response.statusCode == 200) {
+        List list = [];
+        print("GetEventDetailByDate Response: " + response.data.toString());
+        var regionalData = response.data;
+        if (regionalData["IsSuccess"] == true &&
+            regionalData["Data"].length > 0) {
+          list = regionalData["Data"];
+        } else {
+          list = [];
+        }
+        return list;
+      } else {
+        throw Exception(response.data.toString());
+      }
+    } catch (e) {
+      print("GetEventDetailByDate Error : " + e.toString());
+      throw Exception(e.toString());
+    }
+  }
+
   static Future<SaveDataClass> postForSave({apiname, body}) async {
     print(body.toString());
     String url = API_URL + '$apiname';
@@ -66,39 +91,14 @@ class Services {
     }
   }
 
-  static Future<List<StateClass>> getState() async {
-    String url = API_URL + 'getState';
+  static Future<List<OfferClass>> getState() async {
+    String url = API_URL + 'admin/businessCategory';
     try {
       Response response = await dio.post(url);
       if (response.statusCode == 200) {
-        StateClassData stateClassData =
-            new StateClassData.fromJson(response.data);
-        return stateClassData.Data;
-      } else {
-        print("error ->" + response.data.toString());
-        throw Exception(response.data.toString());
-      }
-    } catch (e) {
-      print("error -> ${e.toString()}");
-      throw Exception(e.toString());
-    }
-  }
-
-  static Future<List<CityClass>> getCity({body}) async {
-    print(body.toString());
-    String url = API_URL + 'getCity';
-
-    Response response;
-    try {
-      if (body == null) {
-        response = await dio.post(url);
-      } else {
-        response = await dio.post(url, data: body);
-      }
-      // Response response = await dio.post(url);
-      if (response.statusCode == 200) {
-        CityClassData cityClassData = new CityClassData.fromJson(response.data);
-        return cityClassData.Data;
+        OfferClassData offerClassData =
+            new OfferClassData.fromJson(response.data);
+        return offerClassData.Data;
       } else {
         print("error ->" + response.data.toString());
         throw Exception(response.data.toString());

@@ -163,7 +163,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
 //        var body = {};
         Services.PostForList(
-          api_name: 'admin/getNewsCategory',
+          api_name: 'admin/businessCategory',
         ).then((ResponseList) async {
           setState(() {
             isLoading = false;

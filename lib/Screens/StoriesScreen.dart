@@ -151,7 +151,7 @@ class _StoriesScreenState extends State<StoriesScreen> {
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 8.0),
                                 child: Container(
-                                    height: 80,
+//                                    height: 80,
                                     color: Colors.white,
                                     child: Row(
                                       mainAxisAlignment:

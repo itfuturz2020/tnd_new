@@ -6,69 +6,36 @@ class SaveDataClass {
   SaveDataClass({this.Message, this.IsSuccess, this.Data});
 }
 
-class StateClassData {
+class OfferClassData {
   String Message;
   bool IsSuccess;
-  List<StateClass> Data;
+  List<OfferClass> Data;
 
-  StateClassData({
+  OfferClassData({
     this.Message,
     this.IsSuccess,
     this.Data,
   });
 
-  factory StateClassData.fromJson(Map<String, dynamic> json) {
-    return StateClassData(
+  factory OfferClassData.fromJson(Map<String, dynamic> json) {
+    return OfferClassData(
         Message: json['Message'] as String,
         IsSuccess: json['IsSuccess'] as bool,
         Data: json['Data']
-            .map<StateClass>((singleJson) => StateClass.fromJson(singleJson))
+            .map<OfferClass>((singleJson) => OfferClass.fromJson(singleJson))
             .toList());
   }
 }
 
-class StateClass {
-  String stateId;
-  String stateName;
+class OfferClass {
+  String offerId;
+  String offerName;
 
-  StateClass({this.stateId, this.stateName});
+  OfferClass({this.offerId, this.offerName});
 
-  factory StateClass.fromJson(Map<String, dynamic> json) {
-    return StateClass(
-        stateId: json['StateId'] as String,
-        stateName: json['StateName'] as String);
-  }
-}
-
-class CityClassData {
-  String Message;
-  bool IsSuccess;
-  List<CityClass> Data;
-
-  CityClassData({
-    this.Message,
-    this.IsSuccess,
-    this.Data,
-  });
-
-  factory CityClassData.fromJson(Map<String, dynamic> json) {
-    return CityClassData(
-        Message: json['Message'] as String,
-        IsSuccess: json['IsSuccess'] as bool,
-        Data: json['Data']
-            .map<CityClass>((singleJson) => CityClass.fromJson(singleJson))
-            .toList());
-  }
-}
-
-class CityClass {
-  String cityId;
-  String cityName;
-
-  CityClass({this.cityId, this.cityName});
-
-  factory CityClass.fromJson(Map<String, dynamic> json) {
-    return CityClass(
-        cityId: json['CityId'] as String, cityName: json['CityName'] as String);
+  factory OfferClass.fromJson(Map<String, dynamic> json) {
+    return OfferClass(
+        offerId: json['_id'] as String,
+        offerName: json['categoryName'] as String);
   }
 }

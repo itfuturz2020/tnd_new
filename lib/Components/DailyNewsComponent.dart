@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -75,10 +73,10 @@ class _DailyNewsComponentState extends State<DailyNewsComponent> {
                         height: 8,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 13.0),
+                        padding: const EdgeInsets.only(left: 13.0, right: 0),
                         child: Container(
                           height: 22,
-                          width: 100,
+                          width: 120,
                           decoration: BoxDecoration(
                             //color: Color(0xff4B4B4BE6),
                             color: Colors.grey[600],
@@ -88,6 +86,7 @@ class _DailyNewsComponentState extends State<DailyNewsComponent> {
                           child: Center(
                               child: Text(
                             "${widget.newsData["newsType"]["newsType"]} ",
+                            overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 12,

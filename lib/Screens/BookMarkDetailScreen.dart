@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 
-class PopularNewsScreen extends StatefulWidget {
-  var newsData;
-
-  PopularNewsScreen({this.newsData});
-
+class BookMarkDetailScreen extends StatefulWidget {
+  var bookmarkData;
+  BookMarkDetailScreen({this.bookmarkData});
   @override
-  _PopularNewsScreenState createState() => _PopularNewsScreenState();
+  _BookMarkDetailScreenState createState() => _BookMarkDetailScreenState();
 }
 
-class _PopularNewsScreenState extends State<PopularNewsScreen> {
+class _BookMarkDetailScreenState extends State<BookMarkDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +31,8 @@ class _PopularNewsScreenState extends State<PopularNewsScreen> {
                       child: FadeInImage.assetNetwork(
                         placeholder: "assets/TND Logo_PNG_Newspaper.png",
                         fit: BoxFit.fill,
-                        image: Image_URL + "${widget.newsData["newsImage"]}",
+                        image:
+                            Image_URL + "${widget.bookmarkData["newsImage"]}",
                       ),
                     ),
                   ),
@@ -46,43 +45,43 @@ class _PopularNewsScreenState extends State<PopularNewsScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                Container(
-                                  height: 24,
-                                  width: 70,
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(12)),
-                                    color: Colors.grey[100],
-                                  ),
-                                  child: Center(
-                                      child: Text(
-                                    "celebrity",
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 11),
-                                  )),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Container(
-                                  height: 24,
-                                  width: 65,
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(12)),
-                                    color: Colors.grey[100],
-                                  ),
-                                  child: Center(
-                                      child: Text(
-                                    "ronaldo",
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 11),
-                                  )),
-                                ),
-                              ],
-                            ),
+//                            Row(
+//                              children: <Widget>[
+//                                Container(
+//                                  height: 24,
+//                                  width: 70,
+//                                  decoration: BoxDecoration(
+//                                    borderRadius:
+//                                        BorderRadius.all(Radius.circular(12)),
+//                                    color: Colors.grey[100],
+//                                  ),
+//                                  child: Center(
+//                                      child: Text(
+//                                    "celebrity",
+//                                    style: TextStyle(
+//                                        color: Colors.black, fontSize: 11),
+//                                  )),
+//                                ),
+//                                SizedBox(
+//                                  width: 10,
+//                                ),
+//                                Container(
+//                                  height: 24,
+//                                  width: 65,
+//                                  decoration: BoxDecoration(
+//                                    borderRadius:
+//                                        BorderRadius.all(Radius.circular(12)),
+//                                    color: Colors.grey[100],
+//                                  ),
+//                                  child: Center(
+//                                      child: Text(
+//                                    "ronaldo",
+//                                    style: TextStyle(
+//                                        color: Colors.black, fontSize: 11),
+//                                  )),
+//                                ),
+//                              ],
+//                            ),
                             SizedBox(
                               height: 5,
                             ),
@@ -90,13 +89,14 @@ class _PopularNewsScreenState extends State<PopularNewsScreen> {
                               // crossAxisAlignment: CrossAxisAlignment.start,
                               //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                Icon(
-                                  Icons.timer,
-                                  size: 20,
-                                  color: Colors.grey,
-                                ),
+//                                Icon(
+//                                  Icons.timer,
+//                                  size: 20,
+//                                  color: Colors.grey,
+//                                ),
                                 Text(
-                                  "12 september 2020",
+//                                  "12 september 2020",
+                                  "",
                                   style: TextStyle(
                                       color: Colors.grey, fontSize: 8),
                                 )
@@ -186,7 +186,7 @@ class _PopularNewsScreenState extends State<PopularNewsScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text("${widget.newsData["headline"]}",
+                    Text("${widget.bookmarkData["headline"]}",
                         textAlign: TextAlign.justify,
                         style: TextStyle(
                             color: Colors.black,
@@ -195,7 +195,7 @@ class _PopularNewsScreenState extends State<PopularNewsScreen> {
                     SizedBox(
                       height: 10,
                     ),
-                    Text("${widget.newsData["content"]}",
+                    Text("${widget.bookmarkData["content"]}",
                         textAlign: TextAlign.justify,
                         style: TextStyle(
                             color: Color(0xff010101),

@@ -1,5 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:the_national_dawn/Common/ClassList.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
+import 'package:the_national_dawn/Common/Services.dart';
+import 'package:the_national_dawn/Components/LoadingBlueComponent.dart';
 import 'package:the_national_dawn/Components/OfferComponent.dart';
 
 class OfferScreen extends StatefulWidget {
@@ -9,6 +15,86 @@ class OfferScreen extends StatefulWidget {
 
 class _OfferScreenState extends State<OfferScreen> {
   String dropdownValue;
+  bool isOfferLoading = true;
+  bool isLoading = true;
+  List offerList = [];
+  List<OfferClass> offerCatList = [];
+  OfferClass selectedOfferCat;
+
+  @override
+  void initState() {
+    _getOfferCat();
+  }
+
+  _getOfferCat() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        Services.getState().then((responseList) async {
+          setState(() {
+            isOfferLoading = false;
+          });
+          if (responseList.length > 0) {
+            setState(() {
+              offerCatList = responseList;
+              selectedOfferCat = responseList[0];
+            });
+            //_getOffer(selectedOfferCat.offerId);
+            _getOffer(responseList[0].offerId);
+          } else {
+            Fluttertoast.showToast(msg: "Data Not Found");
+          }
+        }, onError: (e) {
+          setState(() {
+            isOfferLoading = false;
+          });
+          print("error on call -> ${e.message}");
+          Fluttertoast.showToast(msg: "Something Went Wrong");
+        });
+      }
+    } on SocketException catch (_) {
+      Fluttertoast.showToast(msg: "No Internet Connection.");
+    }
+  }
+
+  _getOffer(var offerId) async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        setState(() {
+          isLoading = true;
+        });
+
+        var body = {"businessCategory_id": "${offerId}"};
+        Services.PostForList(api_name: 'admin/getOffer', body: body).then(
+            (subCatResponseList) async {
+          setState(() {
+            isLoading = false;
+          });
+          if (subCatResponseList.length > 0) {
+            setState(() {
+              offerList = subCatResponseList;
+              //set "data" here to your variable
+            });
+          } else {
+            setState(() {
+              offerList = [];
+            });
+            Fluttertoast.showToast(msg: "Data Not Found");
+            //show "data not found" in dialog
+          }
+        }, onError: (e) {
+          setState(() {
+            isLoading = false;
+          });
+          print("error on call -> ${e.message}");
+          Fluttertoast.showToast(msg: "Something Went Wrong");
+        });
+      }
+    } on SocketException catch (_) {
+      Fluttertoast.showToast(msg: "No Internet Connection.");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,49 +158,90 @@ class _OfferScreenState extends State<OfferScreen> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8.0),
                       child: DropdownButtonHideUnderline(
-                        child: DropdownButton(
-                          hint: dropdownValue == null
-                              ? Text(
-                                  "Select category",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                  ),
-                                )
-                              : Text(dropdownValue),
-                          dropdownColor: Colors.white,
-                          icon: Icon(
-                            Icons.arrow_drop_down,
-                            size: 40,
-                            color: Colors.black,
-                          ),
-                          isExpanded: true,
-                          value: dropdownValue,
-                          items: [
-                            "Sports",
-                            "Entertainment",
-                            "Politics",
-                            "Religion"
-                          ].map((value) {
-                            return DropdownMenuItem<String>(
-                                value: value, child: Text(value));
-                          }).toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              dropdownValue = value;
-                            });
-                          },
-                        ),
+                        child: isOfferLoading
+                            ? LoadingBlueComponent()
+                            : DropdownButton<OfferClass>(
+//                                hint: dropdownValue == null
+//                                    ? Text(
+//                                        "Select category",
+//                                        style: TextStyle(
+//                                          color: Colors.black,
+//                                        ),
+//                                      )
+//                                    : Text(dropdownValue),
+                                dropdownColor: Colors.white,
+                                icon: Icon(
+                                  Icons.arrow_drop_down,
+                                  size: 40,
+                                  color: Colors.black,
+                                ),
+                                isExpanded: true,
+                                value: selectedOfferCat,
+                                onChanged: (value) {
+                                  setState(() {
+                                    selectedOfferCat = value;
+                                    // _getCity(selectedState.stateId);
+                                  });
+                                },
+                                items: offerCatList.map(
+                                  (OfferClass offer) {
+                                    return DropdownMenuItem<OfferClass>(
+                                      child: Text(offer.offerName),
+                                      value: offer,
+                                    );
+                                  },
+                                ).toList(),
+                              ),
                       ),
+
+//                          DropdownButtonHideUnderline(
+//                        child: DropdownButton(
+//                          hint: dropdownValue == null
+//                              ? Text(
+//                                  "Select category",
+//                                  style: TextStyle(
+//                                    color: Colors.black,
+//                                  ),
+//                                )
+//                              : Text(dropdownValue),
+//                          dropdownColor: Colors.white,
+//                          icon: Icon(
+//                            Icons.arrow_drop_down,
+//                            size: 40,
+//                            color: Colors.black,
+//                          ),
+//                          isExpanded: true,
+//                          value: dropdownValue,
+//                          items: [
+//                            "Sports",
+//                            "Entertainment",
+//                            "Politics",
+//                            "Religion"
+//                          ].map((value) {
+//                            return DropdownMenuItem<String>(
+//                                value: value, child: Text(value));
+//                          }).toList(),
+//                          onChanged: (value) {
+//                            setState(() {
+//                              dropdownValue = value;
+//                            });
+//                          },
+//                        ),
+//                      ),
                     )),
               ),
               Expanded(
-                child: ListView.builder(
-                    physics: BouncingScrollPhysics(),
-                    // scrollDirection: Axis.horizontal,
-                    itemCount: 10,
-                    itemBuilder: (BuildContext context, int index) {
-                      return OfferComponent();
-                    }),
+                child: isLoading == true
+                    ? LoadingBlueComponent()
+                    : ListView.builder(
+                        physics: BouncingScrollPhysics(),
+                        // scrollDirection: Axis.horizontal,
+                        itemCount: offerList.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return OfferComponent(
+                            offerData: offerList[index],
+                          );
+                        }),
               ),
             ],
           ),

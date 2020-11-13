@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 
 class OfferDetailScreen extends StatefulWidget {
+  var offerData;
+  OfferDetailScreen({this.offerData});
   @override
   _OfferDetailScreenState createState() => _OfferDetailScreenState();
 }
@@ -27,23 +29,28 @@ class _OfferDetailScreenState extends State<OfferDetailScreen> {
         leading: Padding(
           padding:
               const EdgeInsets.only(top: 8.0, right: 0, left: 10, bottom: 8),
-          child: Container(
-            height: 20,
-            width: 40,
-            decoration: BoxDecoration(
-                color: Colors.grey[100],
-                border: Border.all(color: Colors.grey[200], width: 1),
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey[600].withOpacity(0.2),
-                      blurRadius: 1.0,
-                      spreadRadius: 1.0,
-                      offset: Offset(3.0, 5.0))
-                ]),
-            child: Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: Container(
+              height: 20,
+              width: 40,
+              decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  border: Border.all(color: Colors.grey[200], width: 1),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey[600].withOpacity(0.2),
+                        blurRadius: 1.0,
+                        spreadRadius: 1.0,
+                        offset: Offset(3.0, 5.0))
+                  ]),
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+              ),
             ),
           ),
         ),
@@ -64,8 +71,8 @@ class _OfferDetailScreenState extends State<OfferDetailScreen> {
                 width: MediaQuery.of(context).size.width,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  child: Image.asset(
-                    "assets/10.jpeg",
+                  child: Image.network(
+                    Image_URL + "${widget.offerData["bannerImage"]}",
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -101,7 +108,8 @@ class _OfferDetailScreenState extends State<OfferDetailScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Container(
-                        width: 80,
+                        width: 90,
+                        height: 90,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           border: Border.all(color: Colors.grey[200], width: 1),
@@ -109,16 +117,16 @@ class _OfferDetailScreenState extends State<OfferDetailScreen> {
                         ),
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
-                            child: Image.asset(
-                              'assets/pic.png',
+                            child: Image.network(
+                              Image_URL + "${widget.offerData["bannerImage"]}",
                               fit: BoxFit.cover,
                             )),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 6.0),
                         child: Text(
-                          "IT Futurz InfoSolution",
-                          maxLines: 2,
+                          "${widget.offerData["title"]}",
+                          maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               color: appPrimaryMaterialColor,
@@ -168,7 +176,7 @@ class _OfferDetailScreenState extends State<OfferDetailScreen> {
                           child: Center(
                               child: Padding(
                             padding: const EdgeInsets.all(5.0),
-                            child: Text("16-Dec-2020",
+                            child: Text("${widget.offerData["offerExpire"]}",
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 18)),
                           )),
@@ -185,7 +193,8 @@ class _OfferDetailScreenState extends State<OfferDetailScreen> {
                       child: Center(
                           child: Padding(
                         padding: const EdgeInsets.all(5.0),
-                        child: Text("36 Days to Go",
+                        child: Text(
+                            "${widget.offerData["daysRemain"]}" + " Days to Go",
                             style:
                                 TextStyle(color: Colors.black, fontSize: 18)),
                       )),
@@ -216,23 +225,7 @@ class _OfferDetailScreenState extends State<OfferDetailScreen> {
               height: 15,
             ),
             Text(
-              "Lorem ipsum dolor sit amet, consectetur"
-              " adipiscing elit. Donec blandit augue et "
-              "leo condimentum imperdiet. In id suscipit augue. "
-              "Aenean porttitor quis lacus eget molestie. Integer "
-              "sodales quam ante, vel egestas ipsum luctus et. Fusce "
-              "bibendum, dolor vel blandit pellentesque, ex justo "
-              "posuere dui, a lobortis nisl ipsum nec libero. "
-              "Aenean porttitor quis lacus eget molestie. Integer "
-              "sodales quam ante, vel egestas ipsum luctus et. Fusce "
-              "bibendum, dolor vel blandit pellentesque, ex justo "
-              "posuere dui, a lobortis nisl ipsum nec libero. "
-              "Aenean porttitor quis lacus eget molestie. Integer "
-              "sodales quam ante, vel egestas ipsum luctus et. Fusce "
-              "bibendum, dolor vel blandit pellentesque, ex justo "
-              "posuere dui, a lobortis nisl ipsum nec libero. "
-              "Aliquam non leo elit. Aliquam erat volutpat."
-              " Vestibulum vestibulum dignissim scelerisque.",
+              "${widget.offerData["details"]}",
               textAlign: TextAlign.justify,
               style: TextStyle(
                   color: Colors.black, fontSize: 14, letterSpacing: 0.2),

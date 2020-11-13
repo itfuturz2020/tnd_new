@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:the_national_dawn/Screens/BookMarkDetailScreen.dart';
 import 'package:the_national_dawn/Screens/BookMarkScreen.dart';
 import 'package:the_national_dawn/Screens/BusinessCardScreen.dart';
 import 'package:the_national_dawn/Screens/CalenderScreen.dart';
@@ -65,6 +66,7 @@ class _MyAppState extends State<MyApp> {
         '/HomeCalendarScreen': (context) => HomeCalendarScreen(),
         '/HomeStoriesScreen': (context) => HomeStoriesScreen(),
         '/HomeNetworkScreen': (context) => HomeNetworkScreen(),
+        '/BookMarkDetailScreen': (context) => BookMarkDetailScreen(),
       },
       theme: ThemeData(
           //fontFamily: 'RobotoSlab',

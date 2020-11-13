@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -9,6 +10,10 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen>
     with TickerProviderStateMixin {
   TabController _tabController;
+  var _name;
+  var _comp_name;
+  var _mobileNo;
+  var _email;
 
   @override
   void initState() {
@@ -18,6 +23,20 @@ class _ProfileScreenState extends State<ProfileScreen>
       length: 2,
       initialIndex: 0,
     );
+    _profile();
+  }
+
+  _profile() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _name = prefs.getString(Session.CustomerName);
+      _comp_name = prefs.getString(Session.CustomerCompanyName);
+      _email = prefs.getString(Session.CustomerEmailId);
+
+      _mobileNo = prefs.getString(Session.CustomerPhoneNo);
+      // img = prefs.getString(Session.CustomerImage);
+      //  print(img);
+    });
   }
 
   @override
@@ -192,7 +211,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                         MainAxisAlignment.spaceAround,
                                     children: <Widget>[
                                       Text(
-                                        "Mr. Natasha Goel",
+                                        // "Mr. Natasha Goel",
+                                        "${_name}",
                                         style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 20,
@@ -203,7 +223,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                                               color: Colors.grey[700],
                                               fontSize: 18,
                                               fontWeight: FontWeight.w500)),
-                                      Text("Future Group Info Soft",
+                                      Text(
+//                                          "Future Group Info Soft",
+                                          "${_comp_name}",
                                           style: TextStyle(
                                               color: Colors.grey[700],
                                               fontSize: 16,
@@ -268,20 +290,25 @@ class _ProfileScreenState extends State<ProfileScreen>
                                               CrossAxisAlignment.start,
                                           children: <Widget>[
                                             Text(
-                                              "+91-8488848476",
+//                                              "+91-8488848476",
+                                              "${_mobileNo}",
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.bold,
                                                   letterSpacing: 1),
                                             ),
-                                            Text("+91-9723131314",
+                                            Text(
+//                                                "+91-9723131314",
+                                                "${_mobileNo}",
                                                 style: TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 20,
                                                     fontWeight:
                                                         FontWeight.bold)),
-                                            Text("xsantosh7@gmail.com",
+                                            Text(
+//                                                "xsantosh7@gmail.com",
+                                                "${_email}",
                                                 style: TextStyle(
                                                     color: Colors.grey[700],
                                                     fontSize: 16,
@@ -403,7 +430,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                           MainAxisAlignment.spaceAround,
                                       children: <Widget>[
                                         Text(
-                                          "Mr. Natasha Goel",
+//                                          "Mr. Natasha Goel",
+                                          "${_name}",
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 20,
@@ -414,7 +442,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                 color: Colors.grey[700],
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w500)),
-                                        Text("Future Group Info Soft",
+                                        Text(
+//                                            "Future Group Info Soft",
+                                            "${_comp_name}",
                                             style: TextStyle(
                                                 color: Colors.grey[700],
                                                 fontSize: 16,
