@@ -88,23 +88,28 @@ class _ProfileScreenState extends State<ProfileScreen>
           Padding(
             padding:
                 const EdgeInsets.only(top: 8.0, right: 18, left: 10, bottom: 8),
-            child: Container(
-              height: 20,
-              width: 40,
-              decoration: BoxDecoration(
-                  color: Colors.grey[100],
-                  border: Border.all(color: Colors.grey[200], width: 1),
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey[600].withOpacity(0.2),
-                        blurRadius: 1.0,
-                        spreadRadius: 1.0,
-                        offset: Offset(3.0, 5.0))
-                  ]),
-              child: Icon(
-                Icons.edit,
-                color: Colors.black,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushNamed('/UpdateProfileScreen');
+              },
+              child: Container(
+                height: 20,
+                width: 40,
+                decoration: BoxDecoration(
+                    color: Colors.grey[100],
+                    border: Border.all(color: Colors.grey[200], width: 1),
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey[600].withOpacity(0.2),
+                          blurRadius: 1.0,
+                          spreadRadius: 1.0,
+                          offset: Offset(3.0, 5.0))
+                    ]),
+                child: Icon(
+                  Icons.edit,
+                  color: Colors.black,
+                ),
               ),
             ),
           )

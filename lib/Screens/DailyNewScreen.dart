@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:carousel_pro/carousel_pro.dart';
@@ -22,6 +23,8 @@ class _DailyNewScreenState extends State<DailyNewScreen>
   List imgList = [];
   bool isLoadingCat = true;
   bool isLoadingNews = false;
+  List searchlist = new List();
+  bool _isSearching = false, isfirst = false;
 
   @override
   void initState() {
@@ -139,6 +142,7 @@ class _DailyNewScreenState extends State<DailyNewScreen>
                             keyboardType: TextInputType.text,
                             style: TextStyle(fontSize: 15),
                             cursorColor: appPrimaryMaterialColor,
+                            onChanged: searchOperation,
                             decoration: InputDecoration(
                               suffixIcon: Icon(
                                 Icons.search,
@@ -624,21 +628,82 @@ class _DailyNewScreenState extends State<DailyNewScreen>
                                               ],
                                             ),
                                           ),
-                                          ListView.builder(
-                                              physics:
-                                                  NeverScrollableScrollPhysics(),
-                                              shrinkWrap: true,
-                                              // scrollDirection: Axis.horizontal,
-                                              itemCount:
-                                                  subCategoriesList.length,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                return DailyNewsComponent(
-                                                  newsData:
-                                                      subCategoriesList[index],
-                                                );
-                                              }),
+                                          isLoadingCat
+                                              ? Center(
+                                                  child: LoadingBlueComponent())
+                                              : subCategoriesList.length > 0 &&
+                                                      subCategoriesList != null
+                                                  ? searchlist.length != 0
+                                                      ? ListView.builder(
+                                                          physics:
+                                                              NeverScrollableScrollPhysics(),
+                                                          shrinkWrap: true,
+                                                          // scrollDirection: Axis.horizontal,
+                                                          itemCount:
+                                                              searchlist.length,
+                                                          itemBuilder:
+                                                              (BuildContext
+                                                                      context,
+                                                                  int index) {
+                                                            return DailyNewsComponent(
+                                                              newsData:
+                                                                  searchlist[
+                                                                      index],
+                                                            );
+                                                          })
+                                                      : _isSearching && isfirst
+                                                          ? ListView.builder(
+                                                              physics:
+                                                                  NeverScrollableScrollPhysics(),
+                                                              shrinkWrap: true,
+                                                              // scrollDirection: Axis.horizontal,
+                                                              itemCount:
+                                                                  searchlist
+                                                                      .length,
+                                                              itemBuilder:
+                                                                  (BuildContext
+                                                                          context,
+                                                                      int
+                                                                          index) {
+                                                                return DailyNewsComponent(
+                                                                  newsData:
+                                                                      searchlist[
+                                                                          index],
+                                                                );
+                                                              })
+                                                          : ListView.builder(
+                                                              physics:
+                                                                  NeverScrollableScrollPhysics(),
+                                                              shrinkWrap: true,
+                                                              // scrollDirection: Axis.horizontal,
+                                                              itemCount:
+                                                                  subCategoriesList
+                                                                      .length,
+                                                              itemBuilder:
+                                                                  (BuildContext
+                                                                          context,
+                                                                      int index) {
+                                                                return DailyNewsComponent(
+                                                                  newsData:
+                                                                      subCategoriesList[
+                                                                          index],
+                                                                );
+                                                              })
+                                                  : Center(
+                                                      child: Container(
+                                                        //color: Color.fromRGBO(0, 0, 0, 0.6),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 20,
+                                                                vertical: 10),
+                                                        child: Text(
+                                                            "No Data Available",
+                                                            style: TextStyle(
+                                                                fontSize: 20,
+                                                                color:
+                                                                    appPrimaryMaterialColor)),
+                                                      ),
+                                                    )
                                         ],
                                       ),
                                     ),
@@ -740,5 +805,29 @@ class _DailyNewScreenState extends State<DailyNewScreen>
     } on SocketException catch (_) {
       Fluttertoast.showToast(msg: "No Internet Connection.");
     }
+  }
+
+  void searchOperation(String searchText) {
+    log('===========0================');
+    searchlist.clear();
+    if (_isSearching != null) {
+      isfirst = true;
+      log('===========1================');
+      print(subCategoriesList[1]["headline"]);
+      for (int i = 0; i < subCategoriesList.length; i++) {
+        print(subCategoriesList.length);
+        String headline = subCategoriesList[i]["headline"].toString();
+
+        String newstype =
+            subCategoriesList[i]["newsType"]["newsType"].toString();
+        log('===========2================');
+        if (headline.toLowerCase().contains(searchText.toLowerCase()) ||
+            newstype.toLowerCase().contains(searchText.toLowerCase())) {
+          searchlist.add(subCategoriesList[i]);
+          log('===========3================');
+        }
+      }
+    }
+    setState(() {});
   }
 }

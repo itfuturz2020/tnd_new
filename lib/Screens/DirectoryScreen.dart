@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -15,6 +16,8 @@ class DirectoryScreen extends StatefulWidget {
 class _DirectoryScreenState extends State<DirectoryScreen> {
   List directoryList = [];
   bool isLoading = true;
+  List searchlist = new List();
+  bool _isSearching = false, isfirst = false;
 
   @override
   void initState() {
@@ -99,6 +102,7 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
                   keyboardType: TextInputType.text,
                   style: TextStyle(fontSize: 15),
                   cursorColor: appPrimaryMaterialColor,
+                  onChanged: searchOperation,
                   decoration: InputDecoration(
                     suffixIcon: Icon(
                       Icons.search,
@@ -133,15 +137,49 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
                 padding: const EdgeInsets.only(top: 10.0),
                 child: isLoading == true
                     ? Center(child: LoadingBlueComponent())
-                    : ListView.builder(
-                        physics: BouncingScrollPhysics(),
-                        // scrollDirection: Axis.horizontal,
-                        itemCount: directoryList.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return DirectoryComponent(
-                            directoryData: directoryList[index],
-                          );
-                        }),
+                    : directoryList.length > 0 && directoryList != null
+                        ? searchlist.length != 0
+                            ? ListView.builder(
+                                physics: BouncingScrollPhysics(),
+                                // scrollDirection: Axis.horizontal,
+                                itemCount: searchlist.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return DirectoryComponent(
+                                    directoryData: searchlist[index],
+                                  );
+                                })
+                            : _isSearching && isfirst
+                                ? ListView.builder(
+                                    physics: BouncingScrollPhysics(),
+                                    // scrollDirection: Axis.horizontal,
+                                    itemCount: searchlist.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return DirectoryComponent(
+                                        directoryData: searchlist[index],
+                                      );
+                                    })
+                                : ListView.builder(
+                                    physics: BouncingScrollPhysics(),
+                                    // scrollDirection: Axis.horizontal,
+                                    itemCount: directoryList.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return DirectoryComponent(
+                                        directoryData: directoryList[index],
+                                      );
+                                    })
+                        : Center(
+                            child: Container(
+                              //color: Color.fromRGBO(0, 0, 0, 0.6),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 10),
+                              child: Text("No Data Available",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color: appPrimaryMaterialColor)),
+                            ),
+                          ),
               ),
             ),
           ],
@@ -181,5 +219,28 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
     } on SocketException catch (_) {
       Fluttertoast.showToast(msg: "No Internet Connection.");
     }
+  }
+
+  void searchOperation(String searchText) {
+    log('===========0================');
+    searchlist.clear();
+    if (_isSearching != null) {
+      isfirst = true;
+      log('===========1================');
+      print(directoryList[1]["name"]);
+      for (int i = 0; i < directoryList.length; i++) {
+        print(directoryList.length);
+        String name = directoryList[i]["name"].toString();
+
+        String cmpName = directoryList[i]["business_category"].toString();
+        log('===========2================');
+        if (name.toLowerCase().contains(searchText.toLowerCase()) ||
+            cmpName.toLowerCase().contains(searchText.toLowerCase())) {
+          searchlist.add(directoryList[i]);
+          log('===========3================');
+        }
+      }
+    }
+    setState(() {});
   }
 }

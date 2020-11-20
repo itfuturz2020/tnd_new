@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BusinessCardComponent extends StatefulWidget {
   var businessData;
@@ -36,9 +37,9 @@ class _BusinessCardComponentState extends State<BusinessCardComponent> {
                   borderRadius: BorderRadius.circular(10)),
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Image.asset(
-                    // Image_URL + "${widget.businessData["img"]}",
-                    "assets/z.jpeg",
+                  child: Image.network(
+                    Image_URL + "${widget.businessData["img"]}",
+//                    "assets/z.jpeg",
                     fit: BoxFit.cover,
                   )),
             ),
@@ -50,8 +51,8 @@ class _BusinessCardComponentState extends State<BusinessCardComponent> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      // "${widget.businessData["name"]}",
-                      "Arpit Shah",
+                      "${widget.businessData["name"]}",
+//                      "Arpit Shah",
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.start,
                       style: TextStyle(
@@ -62,8 +63,7 @@ class _BusinessCardComponentState extends State<BusinessCardComponent> {
                     Padding(
                       padding: const EdgeInsets.only(top: 3.0),
                       child: Text(
-                        "ITFUTURZ",
-                        //"${widget.businessData["company_name"]}",
+                        "${widget.businessData["company_name"]}",
                         //widget.directoryData["business_category"],
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.start,
@@ -76,32 +76,38 @@ class _BusinessCardComponentState extends State<BusinessCardComponent> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 15.0),
-                      child: Container(
-                        height: 25,
-                        width: 90,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(
-                              color: appPrimaryMaterialColor[100], width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        ),
-                        child: Row(
-                          // mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            // Image.asset('assets/videocall.png'),
-                            Icon(
-                              Icons.call,
-                              color: appPrimaryMaterialColor,
-                              size: 20,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 3.0),
-                              child: Text(
-                                "Call",
-                                style: TextStyle(fontSize: 12),
+                      child: GestureDetector(
+                        onTap: () {
+                          launch(('tel:// ${widget.businessData["mobile"]}'));
+                        },
+                        child: Container(
+                          height: 25,
+                          width: 90,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(
+                                color: appPrimaryMaterialColor[100], width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                          ),
+                          child: Row(
+                            // mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              // Image.asset('assets/videocall.png'),
+                              Icon(
+                                Icons.call,
+                                color: appPrimaryMaterialColor,
+                                size: 20,
                               ),
-                            )
-                          ],
+                              Padding(
+                                padding: const EdgeInsets.only(left: 3.0),
+                                child: Text(
+                                  "Call",
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -109,7 +115,7 @@ class _BusinessCardComponentState extends State<BusinessCardComponent> {
                       padding: const EdgeInsets.only(top: 10.0),
                       child: GestureDetector(
                         onTap: () {
-                          //  Navigator.of(context).pushNamed('/ViewDetailScreen');
+                          _launchURL(widget.businessData["email"], '', '');
                         },
                         child: Container(
                           height: 25,
@@ -154,5 +160,14 @@ class _BusinessCardComponentState extends State<BusinessCardComponent> {
         ),
       ),
     );
+  }
+
+  _launchURL(String toMailId, String subject, String body) async {
+    var url = 'mailto:$toMailId?subject=$subject&body=$body';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

@@ -220,45 +220,45 @@ class _HomeScreenState extends State<HomeScreen>
               Divider(
                 color: appPrimaryMaterialColor,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 35.0, right: 35, top: 25),
-                child: Container(
-                  height: 35,
-                  child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    style: TextStyle(fontSize: 15),
-                    cursorColor: appPrimaryMaterialColor,
-                    decoration: InputDecoration(
-                      suffixIcon: Icon(
-                        Icons.search,
-                        size: 25,
-                        color: Colors.black,
-                      ),
-
-//                    Padding(
-//                      padding: const EdgeInsets.only(right: 5.0, top: 0),
-//                      child: Image.asset("assets/search.png"),
+//              Padding(
+//                padding: const EdgeInsets.only(left: 35.0, right: 35, top: 25),
+//                child: Container(
+//                  height: 35,
+//                  child: TextFormField(
+//                    keyboardType: TextInputType.text,
+//                    style: TextStyle(fontSize: 15),
+//                    cursorColor: appPrimaryMaterialColor,
+//                    decoration: InputDecoration(
+//                      suffixIcon: Icon(
+//                        Icons.search,
+//                        size: 25,
+//                        color: Colors.black,
+//                      ),
+//
+////                    Padding(
+////                      padding: const EdgeInsets.only(right: 5.0, top: 0),
+////                      child: Image.asset("assets/search.png"),
+////                    ),
+//                      counterText: "",
+//                      contentPadding: EdgeInsets.only(
+//                          top: 0.0, bottom: 0, left: 15, right: 5),
+//                      hintText: "Type to Search...",
+//                      hintStyle: TextStyle(
+//                          color: Colors.grey[400], fontWeight: FontWeight.w500),
+//                      enabledBorder: OutlineInputBorder(
+//                        borderRadius: BorderRadius.all(Radius.circular(25.0)),
+//                        borderSide: BorderSide(color: Colors.black),
+//                      ),
+//                      focusedBorder: OutlineInputBorder(
+//                        borderRadius: BorderRadius.all(Radius.circular(25.0)),
+//                        borderSide: BorderSide(color: Colors.black),
+//                      ),
 //                    ),
-                      counterText: "",
-                      contentPadding: EdgeInsets.only(
-                          top: 0.0, bottom: 0, left: 15, right: 5),
-                      hintText: "Type to Search...",
-                      hintStyle: TextStyle(
-                          color: Colors.grey[400], fontWeight: FontWeight.w500),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(25.0)),
-                        borderSide: BorderSide(color: Colors.black),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(25.0)),
-                        borderSide: BorderSide(color: Colors.black),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+//                  ),
+//                ),
+//              ),
               Padding(
-                padding: const EdgeInsets.only(left: 25.0, right: 25, top: 20),
+                padding: const EdgeInsets.only(left: 25.0, right: 25, top: 35),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

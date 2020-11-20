@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -15,6 +16,8 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> {
   List CategoryList = [];
   bool isLoading = true;
+  List searchlist = new List();
+  bool _isSearching = false, isfirst = false;
 
   @override
   void initState() {
@@ -102,6 +105,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   keyboardType: TextInputType.text,
                   style: TextStyle(fontSize: 15),
                   cursorColor: appPrimaryMaterialColor,
+                  onChanged: searchOperation,
                   decoration: InputDecoration(
                     suffixIcon: Icon(
                       Icons.search,
@@ -134,23 +138,72 @@ class _CategoryScreenState extends State<CategoryScreen> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(top: 10.0, left: 15, right: 15),
-                child: isLoading == true
+                child: isLoading
                     ? Center(child: LoadingBlueComponent())
-                    : GridView.builder(
-                        physics: BouncingScrollPhysics(),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            childAspectRatio: 1,
+                    : CategoryList.length > 0 && CategoryList != null
+                        ? searchlist.length != 0
+                            ? GridView.builder(
+                                physics: BouncingScrollPhysics(),
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                        childAspectRatio: 1,
 //                        //widthScreen / heightScreen,
-                            crossAxisSpacing: 20.0,
-                            mainAxisSpacing: 25.0),
-                        itemBuilder: (BuildContext context, int index) {
-                          return CategoryComponent(
-                            CatData: CategoryList[index],
-                          );
-                        },
-                        itemCount: CategoryList.length,
-                      ),
+                                        crossAxisSpacing: 20.0,
+                                        mainAxisSpacing: 25.0),
+                                itemBuilder: (BuildContext context, int index) {
+                                  return CategoryComponent(
+                                    CatData: searchlist[index],
+                                  );
+                                },
+                                itemCount: searchlist.length,
+                              )
+                            : _isSearching && isfirst
+                                ? GridView.builder(
+                                    physics: BouncingScrollPhysics(),
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2,
+                                            childAspectRatio: 1,
+//                        //widthScreen / heightScreen,
+                                            crossAxisSpacing: 20.0,
+                                            mainAxisSpacing: 25.0),
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return CategoryComponent(
+                                        CatData: searchlist[index],
+                                      );
+                                    },
+                                    itemCount: searchlist.length,
+                                  )
+                                : GridView.builder(
+                                    physics: BouncingScrollPhysics(),
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2,
+                                            childAspectRatio: 1,
+//                        //widthScreen / heightScreen,
+                                            crossAxisSpacing: 20.0,
+                                            mainAxisSpacing: 25.0),
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return CategoryComponent(
+                                        CatData: CategoryList[index],
+                                      );
+                                    },
+                                    itemCount: CategoryList.length,
+                                  )
+                        : Center(
+                            child: Container(
+                              //color: Color.fromRGBO(0, 0, 0, 0.6),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 10),
+                              child: Text("No Data Available",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color: appPrimaryMaterialColor)),
+                            ),
+                          ),
               ),
             ),
           ],
@@ -190,5 +243,30 @@ class _CategoryScreenState extends State<CategoryScreen> {
     } on SocketException catch (_) {
       Fluttertoast.showToast(msg: "No Internet Connection.");
     }
+  }
+
+  void searchOperation(String searchText) {
+    log('===========0================');
+    searchlist.clear();
+    if (_isSearching != null) {
+      isfirst = true;
+      log('===========1================');
+      print(CategoryList[1]["name"]);
+      for (int i = 0; i < CategoryList.length; i++) {
+        print(CategoryList.length);
+        String name = CategoryList[i]["categoryName"].toString();
+
+//        String cmpName = CategoryList[i]["company_name"].toString();
+        log('===========2================');
+        if (name.toLowerCase().contains(searchText.toLowerCase())
+//            ||
+//            cmpName.toLowerCase().contains(searchText.toLowerCase())
+            ) {
+          searchlist.add(CategoryList[i]);
+          log('===========3================');
+        }
+      }
+    }
+    setState(() {});
   }
 }

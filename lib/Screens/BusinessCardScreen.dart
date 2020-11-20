@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
 import 'package:the_national_dawn/Components/BusinessCardComponent.dart';
+import 'package:the_national_dawn/Components/LoadingBlueComponent.dart';
 
 class BusinessCardScreen extends StatefulWidget {
   @override
@@ -15,10 +17,12 @@ class BusinessCardScreen extends StatefulWidget {
 class _BusinessCardScreenState extends State<BusinessCardScreen> {
   List businessList = [];
   bool isLoading = true;
+  List searchlist = new List();
+  bool _isSearching = false, isfirst = false;
 
   @override
   void initState() {
-    // _getBusiness();
+    _getBusiness();
   }
 
   @override
@@ -99,6 +103,7 @@ class _BusinessCardScreenState extends State<BusinessCardScreen> {
                   keyboardType: TextInputType.text,
                   style: TextStyle(fontSize: 15),
                   cursorColor: appPrimaryMaterialColor,
+                  onChanged: searchOperation,
                   decoration: InputDecoration(
                     suffixIcon: Icon(
                       Icons.search,
@@ -131,19 +136,51 @@ class _BusinessCardScreenState extends State<BusinessCardScreen> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(top: 10.0),
-                child:
-//                isLoading == true
-//                    ? Center(child: LoadingBlueComponent())
-//                    :
-                    ListView.builder(
-                        physics: BouncingScrollPhysics(),
-                        // scrollDirection: Axis.horizontal,
-                        itemCount: 5,
-                        itemBuilder: (BuildContext context, int index) {
-                          return BusinessCardComponent(
-                              //businessData: businessList[index],
-                              );
-                        }),
+                child: isLoading == true
+                    ? Center(child: LoadingBlueComponent())
+                    : businessList.length > 0 && businessList != null
+                        ? searchlist.length != 0
+                            ? ListView.builder(
+                                physics: BouncingScrollPhysics(),
+                                // scrollDirection: Axis.horizontal,
+                                itemCount: searchlist.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return BusinessCardComponent(
+                                    businessData: searchlist[index],
+                                  );
+                                })
+                            : _isSearching && isfirst
+                                ? ListView.builder(
+                                    physics: BouncingScrollPhysics(),
+                                    // scrollDirection: Axis.horizontal,
+                                    itemCount: searchlist.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return BusinessCardComponent(
+                                        businessData: searchlist[index],
+                                      );
+                                    })
+                                : ListView.builder(
+                                    physics: BouncingScrollPhysics(),
+                                    // scrollDirection: Axis.horizontal,
+                                    itemCount: businessList.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return BusinessCardComponent(
+                                        businessData: businessList[index],
+                                      );
+                                    })
+                        : Center(
+                            child: Container(
+                              //color: Color.fromRGBO(0, 0, 0, 0.6),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 10),
+                              child: Text("No Data Available",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color: appPrimaryMaterialColor)),
+                            ),
+                          ),
               ),
             ),
           ],
@@ -158,7 +195,8 @@ class _BusinessCardScreenState extends State<BusinessCardScreen> {
           isLoading = true;
         });
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        var body = {"businessCategory_id": prefs.getString(Session.CustomerId)};
+        var body = {"id": prefs.getString(Session.CustomerId)};
+        log(prefs.getString(Session.CustomerId));
         Services.PostForList(api_name: 'directory/profile', body: body).then(
             (subCatResponseList) async {
           setState(() {
@@ -187,5 +225,28 @@ class _BusinessCardScreenState extends State<BusinessCardScreen> {
     } on SocketException catch (_) {
       Fluttertoast.showToast(msg: "No Internet Connection.");
     }
+  }
+
+  void searchOperation(String searchText) {
+    log('===========0================');
+    searchlist.clear();
+    if (_isSearching != null) {
+      isfirst = true;
+      log('===========1================');
+      print(businessList[1]["name"]);
+      for (int i = 0; i < businessList.length; i++) {
+        print(businessList.length);
+        String name = businessList[i]["name"].toString();
+
+        String cmpName = businessList[i]["company_name"].toString();
+        log('===========2================');
+        if (name.toLowerCase().contains(searchText.toLowerCase()) ||
+            cmpName.toLowerCase().contains(searchText.toLowerCase())) {
+          searchlist.add(businessList[i]);
+          log('===========3================');
+        }
+      }
+    }
+    setState(() {});
   }
 }

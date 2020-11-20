@@ -131,6 +131,7 @@ class _HomeCalendarScreenState extends State<HomeCalendarScreen>
       initialCalendarFormat: CalendarFormat.month,
       formatAnimation: FormatAnimation.slide,
       startingDayOfWeek: StartingDayOfWeek.monday,
+
       availableGestures: AvailableGestures.all,
       availableCalendarFormats: const {
         CalendarFormat.month: 'Month',

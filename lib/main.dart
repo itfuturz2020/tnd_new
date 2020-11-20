@@ -23,6 +23,7 @@ import 'package:the_national_dawn/Screens/ProfileScreen.dart';
 import 'package:the_national_dawn/Screens/RegisterScreen.dart';
 import 'package:the_national_dawn/Screens/SplashScreen.dart';
 import 'package:the_national_dawn/Screens/StoriesScreen.dart';
+import 'package:the_national_dawn/Screens/UpdateProfileScreen.dart';
 import 'package:the_national_dawn/Screens/ViewDetailScreen.dart';
 
 void main() {
@@ -67,6 +68,7 @@ class _MyAppState extends State<MyApp> {
         '/HomeStoriesScreen': (context) => HomeStoriesScreen(),
         '/HomeNetworkScreen': (context) => HomeNetworkScreen(),
         '/BookMarkDetailScreen': (context) => BookMarkDetailScreen(),
+        '/UpdateProfileScreen': (context) => UpdateProfileScreen(),
       },
       theme: ThemeData(
           //fontFamily: 'RobotoSlab',
