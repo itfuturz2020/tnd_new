@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -15,6 +16,8 @@ class HomeNetworkScreen extends StatefulWidget {
 class _HomeNetworkScreenState extends State<HomeNetworkScreen> {
   List networkList = [];
   bool isLoading = true;
+  List searchlist = new List();
+  bool _isSearching = false, isfirst = false;
 
   @override
   void initState() {
@@ -74,6 +77,7 @@ class _HomeNetworkScreenState extends State<HomeNetworkScreen> {
                 child: TextFormField(
                   keyboardType: TextInputType.text,
                   style: TextStyle(fontSize: 15),
+                  onChanged: searchOperation,
                   cursorColor: appPrimaryMaterialColor,
                   decoration: InputDecoration(
                     suffixIcon: Icon(
@@ -106,19 +110,65 @@ class _HomeNetworkScreenState extends State<HomeNetworkScreen> {
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: isLoading == true
-                    ? Center(child: LoadingBlueComponent())
-                    : ListView.builder(
-                        physics: BouncingScrollPhysics(),
-                        // scrollDirection: Axis.horizontal,
-                        itemCount: networkList.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return NetworkComponent(
-                            networkData: networkList[index],
-                          );
-                        }),
-              ),
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child:
+//                isLoading == true
+//                    ? Center(child: LoadingBlueComponent())
+//                    : ListView.builder(
+//                        physics: BouncingScrollPhysics(),
+//                        // scrollDirection: Axis.horizontal,
+//                        itemCount: networkList.length,
+//                        itemBuilder: (BuildContext context, int index) {
+//                          return NetworkComponent(
+//                            networkData: networkList[index],
+//                          );
+//                        }),
+                      isLoading
+                          ? Center(child: LoadingBlueComponent())
+                          : networkList.length > 0 && networkList != null
+                              ? searchlist.length != 0
+                                  ? ListView.builder(
+                                      physics: BouncingScrollPhysics(),
+                                      // scrollDirection: Axis.horizontal,
+                                      itemCount: searchlist.length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return NetworkComponent(
+                                          networkData: searchlist[index],
+                                        );
+                                      })
+                                  : _isSearching && isfirst
+                                      ? ListView.builder(
+                                          physics: BouncingScrollPhysics(),
+                                          // scrollDirection: Axis.horizontal,
+                                          itemCount: searchlist.length,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return NetworkComponent(
+                                              networkData: searchlist[index],
+                                            );
+                                          })
+                                      : ListView.builder(
+                                          physics: BouncingScrollPhysics(),
+                                          // scrollDirection: Axis.horizontal,
+                                          itemCount: networkList.length,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return NetworkComponent(
+                                              networkData: networkList[index],
+                                            );
+                                          })
+                              : Center(
+                                  child: Container(
+                                    //color: Color.fromRGBO(0, 0, 0, 0.6),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 10),
+                                    child: Text("No Data Available",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: appPrimaryMaterialColor)),
+                                  ),
+                                )),
             ),
           ],
         ));
@@ -157,5 +207,28 @@ class _HomeNetworkScreenState extends State<HomeNetworkScreen> {
     } on SocketException catch (_) {
       Fluttertoast.showToast(msg: "No Internet Connection.");
     }
+  }
+
+  void searchOperation(String searchText) {
+    log('===========0================');
+    searchlist.clear();
+    if (_isSearching != null) {
+      isfirst = true;
+      log('===========1================');
+      print(networkList[1]["name"]);
+      for (int i = 0; i < networkList.length; i++) {
+        print(networkList.length);
+        String name = networkList[i]["name"].toString();
+
+        String cmpName = networkList[i]["business_category"].toString();
+        log('===========2================');
+        if (name.toLowerCase().contains(searchText.toLowerCase()) ||
+            cmpName.toLowerCase().contains(searchText.toLowerCase())) {
+          searchlist.add(networkList[i]);
+          log('===========3================');
+        }
+      }
+    }
+    setState(() {});
   }
 }
