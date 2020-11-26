@@ -14,6 +14,7 @@ class _ProfileScreenState extends State<ProfileScreen>
   var _comp_name;
   var _mobileNo;
   var _email;
+  var img;
 
   @override
   void initState() {
@@ -32,6 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen>
       _name = prefs.getString(Session.CustomerName);
       _comp_name = prefs.getString(Session.CustomerCompanyName);
       _email = prefs.getString(Session.CustomerEmailId);
+      img = prefs.getString(Session.CustomerImage);
 
       _mobileNo = prefs.getString(Session.CustomerPhoneNo);
       // img = prefs.getString(Session.CustomerImage);
@@ -169,26 +171,50 @@ class _ProfileScreenState extends State<ProfileScreen>
                               left: 20.0, right: 20.0, top: 15.0, bottom: 25.0),
                           child: Column(
                             children: <Widget>[
-                              Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(80.0),
-                                    color: Colors.blue,
-                                    //shape: BoxShape.circle,
-                                    boxShadow: [
-                                      BoxShadow(
-                                          blurRadius: 2,
-                                          color: appPrimaryMaterialColor
-                                              .withOpacity(0.2),
-                                          spreadRadius: 2,
-                                          offset: Offset(3, 5)),
-                                    ],
-                                  ),
-                                  child: CircleAvatar(
-                                    radius: 80,
-                                    backgroundImage:
-                                        AssetImage("assets/z.jpeg"),
-                                    //child: Image.asset("assets/10.jpeg",fit: BoxFit.cover,),
-                                  )),
+                              img != ""
+                                  ? Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(80.0),
+                                        color: Colors.blue,
+                                        //shape: BoxShape.circle,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              blurRadius: 2,
+                                              color: appPrimaryMaterialColor
+                                                  .withOpacity(0.2),
+                                              spreadRadius: 2,
+                                              offset: Offset(3, 5)),
+                                        ],
+                                      ),
+                                      child: CircleAvatar(
+                                        radius: 80,
+                                        backgroundImage:
+                                            NetworkImage(Image_URL + img),
+                                        //child: Image.asset("assets/10.jpeg",fit: BoxFit.cover,),
+                                      ))
+                                  : Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(80.0),
+                                        color: Colors.blue,
+                                        //shape: BoxShape.circle,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              blurRadius: 2,
+                                              color: appPrimaryMaterialColor
+                                                  .withOpacity(0.2),
+                                              spreadRadius: 2,
+                                              offset: Offset(3, 5)),
+                                        ],
+                                      ),
+                                      child: CircleAvatar(
+                                        radius: 80,
+                                        backgroundImage: AssetImage(
+                                          "assets/051-user.png",
+                                        ),
+                                        //child: Image.asset("assets/10.jpeg",fit: BoxFit.cover,),
+                                      )),
                               SizedBox(
                                 height: 22,
                               ),

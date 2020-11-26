@@ -37,4 +37,5 @@ class Session {
   static const String CustomerEmailId = "CustomerEmailId";
   static const String CustomerPhoneNo = "CustomerPhoneNo";
   static const String CustomerCDT = "CustomerCDT";
+  static const String CustomerImage = "CustomerImage";
 }

@@ -3,6 +3,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:the_national_dawn/Screens/BookMarkDetailScreen.dart';
 import 'package:the_national_dawn/Screens/BookMarkScreen.dart';
 import 'package:the_national_dawn/Screens/BusinessCardScreen.dart';
+import 'package:the_national_dawn/Screens/CalendarDetailScreen.dart';
 import 'package:the_national_dawn/Screens/CalenderScreen.dart';
 import 'package:the_national_dawn/Screens/CategoryScreen.dart';
 import 'package:the_national_dawn/Screens/DailyNewScreen.dart';
@@ -69,6 +70,7 @@ class _MyAppState extends State<MyApp> {
         '/HomeNetworkScreen': (context) => HomeNetworkScreen(),
         '/BookMarkDetailScreen': (context) => BookMarkDetailScreen(),
         '/UpdateProfileScreen': (context) => UpdateProfileScreen(),
+        '/CalendarDetailScreen': (context) => CalendarDetailScreen(),
       },
       theme: ThemeData(
           //fontFamily: 'RobotoSlab',

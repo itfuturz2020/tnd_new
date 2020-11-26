@@ -1,6 +1,14 @@
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_image/flutter_native_image.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
+import 'package:the_national_dawn/Common/Services.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   @override
@@ -33,124 +41,127 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       txtEmail.text = prefs.getString(Session.CustomerEmailId);
       txtMobileNumber.text = prefs.getString(Session.CustomerPhoneNo);
       txtWNumber.text = prefs.getString(Session.CustomerPhoneNo);
-      //img = prefs.getString(Session.CustomerImage);
-      print(img);
+      img = prefs.getString(Session.CustomerImage);
+      log("======================");
+      log(img);
+//      print(img);
     });
   }
-//  File _Image;
-//
-//  Future getFromCamera() async {
-//    var image = await ImagePicker.pickImage(source: ImageSource.camera);
-//    if (image != null) {
-//      setState(() {
-//        _Image = image;
-//      });
-//    }
-//  }
-//
-//  Future getFromGallery() async {
-//    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-//    if (image != null) {
-//      setState(() {
-//        _Image = image;
-//      });
-//    }
-//  }
 
-//  void _settingModalBottomSheet() {
-//    showModalBottomSheet(
-//        context: context,
-//        builder: (BuildContext bc) {
-//          return Container(
-//            child: new Wrap(
-//              children: <Widget>[
-//                Column(
-//                  crossAxisAlignment: CrossAxisAlignment.start,
-//                  children: [
-//                    Padding(
-//                      padding: const EdgeInsets.only(
-//                          top: 15.0, left: 15, bottom: 10),
-//                      child: Text(
-//                        "Add Photo",
-//                        style: TextStyle(
-//                          fontSize: 22,
-//                          color: appPrimaryMaterialColor,
-//                          //fontWeight: FontWeight.bold
-//                        ),
-//                      ),
-//                    ),
-//                    GestureDetector(
-//                      onTap: () {
-//                        getFromCamera();
-//                        Navigator.of(context).pop();
-//                      },
-//                      child: ListTile(
-//                        leading: Padding(
-//                          padding: const EdgeInsets.only(right: 10.0, left: 15),
-//                          child: Container(
-//                              height: 20,
-//                              width: 20,
-//                              child: Image.asset(
-//                                "assets/camera.png",
-//                                color: appPrimaryMaterialColor,
-//                              )),
-//                        ),
-//                        title: Text(
-//                          "Take Photo",
-//                        ),
-//                      ),
-//                    ),
-//                    Padding(
-//                      padding: const EdgeInsets.only(left: 15, right: 15),
-//                      child: Divider(),
-//                    ),
-//                    GestureDetector(
-//                      onTap: () {
-//                        getFromGallery();
-//                        Navigator.of(context).pop();
-//                      },
-//                      child: ListTile(
-//                        leading: Padding(
-//                          padding: const EdgeInsets.only(right: 10.0, left: 15),
-//                          child: Container(
-//                              height: 20,
-//                              width: 20,
-//                              child: Image.asset(
-//                                "assets/gallery.png",
-//                                color: appPrimaryMaterialColor,
-//                              )),
-//                        ),
-//                        title: Text(
-//                          "Choose from Gallery",
-//                        ),
-//                      ),
-//                    ),
-//                    Align(
-//                      alignment: AlignmentDirectional.bottomEnd,
-//                      child: Padding(
-//                        padding: const EdgeInsets.only(right: 25.0, bottom: 5),
-//                        child: FlatButton(
-//                          onPressed: () {
-//                            Navigator.of(context).pop();
-//                          },
-//                          child: Text(
-//                            "Cancel",
-//                            style: TextStyle(
-//                              fontSize: 18,
-//                              color: appPrimaryMaterialColor,
-//                              //fontWeight: FontWeight.bold
-//                            ),
-//                          ),
-//                        ),
-//                      ),
-//                    ),
-//                  ],
-//                )
-//              ],
-//            ),
-//          );
-//        });
-//  }
+  File _Image;
+
+  Future getFromCamera() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+    if (image != null) {
+      setState(() {
+        _Image = image;
+      });
+    }
+  }
+
+  Future getFromGallery() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      setState(() {
+        _Image = image;
+      });
+    }
+  }
+
+  void _settingModalBottomSheet() {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return Container(
+            child: new Wrap(
+              children: <Widget>[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 15.0, left: 15, bottom: 10),
+                      child: Text(
+                        "Add Photo",
+                        style: TextStyle(
+                          fontSize: 22,
+                          color: appPrimaryMaterialColor,
+                          //fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        getFromCamera();
+                        Navigator.of(context).pop();
+                      },
+                      child: ListTile(
+                        leading: Padding(
+                          padding: const EdgeInsets.only(right: 10.0, left: 15),
+                          child: Container(
+                              height: 20,
+                              width: 20,
+                              child: Image.asset(
+                                "assets/camera.png",
+                                color: appPrimaryMaterialColor,
+                              )),
+                        ),
+                        title: Text(
+                          "Take Photo",
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15, right: 15),
+                      child: Divider(),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        getFromGallery();
+                        Navigator.of(context).pop();
+                      },
+                      child: ListTile(
+                        leading: Padding(
+                          padding: const EdgeInsets.only(right: 10.0, left: 15),
+                          child: Container(
+                              height: 20,
+                              width: 20,
+                              child: Image.asset(
+                                "assets/gallery.png",
+                                color: appPrimaryMaterialColor,
+                              )),
+                        ),
+                        title: Text(
+                          "Choose from Gallery",
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional.bottomEnd,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 25.0, bottom: 5),
+                        child: FlatButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(
+                            "Cancel",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: appPrimaryMaterialColor,
+                              //fontWeight: FontWeight.bold
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -208,28 +219,116 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                 left: 20.0, right: 20.0, top: 30.0, bottom: 25.0),
             child: Column(
               children: <Widget>[
-                Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(80.0),
-                      color: Colors.blue,
-                      //shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                            blurRadius: 2,
-                            color: appPrimaryMaterialColor.withOpacity(0.2),
-                            spreadRadius: 2,
-                            offset: Offset(3, 5)),
-                      ],
-                    ),
-                    child: CircleAvatar(
-                      radius: 80,
-                      backgroundImage:
+                GestureDetector(
+                  onTap: () {
+                    _settingModalBottomSheet();
+                  },
+                  child:
+//
+                      Image != null || img != ""
+                          ? _Image != null
+                              ? Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(80.0),
+                                    color: appPrimaryMaterialColor,
+                                    //shape: BoxShape.circle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          blurRadius: 2,
+                                          color: appPrimaryMaterialColor
+                                              .withOpacity(0.2),
+                                          spreadRadius: 2,
+                                          offset: Offset(3, 5)),
+                                    ],
+                                  ),
+                                  child: CircleAvatar(
+                                    radius: 80,
+                                    backgroundColor: appPrimaryMaterialColor,
+                                    backgroundImage:
 //                    NetworkImage(
 //                        Image_URL + "${widget.directoryData["img"]}"),
-                          AssetImage(
-                        "assets/10.jpeg",
-                      ),
-                    )),
+                                        FileImage(
+                                      _Image,
+                                    ),
+                                  ))
+                              : img != ""
+                                  ? Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(80.0),
+                                        color: appPrimaryMaterialColor,
+                                        //shape: BoxShape.circle,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              blurRadius: 2,
+                                              color: appPrimaryMaterialColor
+                                                  .withOpacity(0.2),
+                                              spreadRadius: 2,
+                                              offset: Offset(3, 5)),
+                                        ],
+                                      ),
+                                      child: CircleAvatar(
+                                        radius: 80,
+                                        backgroundColor:
+                                            appPrimaryMaterialColor,
+                                        backgroundImage:
+//                    NetworkImage(
+//                        Image_URL + "${widget.directoryData["img"]}"),
+                                            NetworkImage(
+                                          Image_URL + img,
+                                        ),
+                                      ))
+                                  : Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(80.0),
+                                        color: appPrimaryMaterialColor,
+                                        //shape: BoxShape.circle,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              blurRadius: 2,
+                                              color: appPrimaryMaterialColor
+                                                  .withOpacity(0.2),
+                                              spreadRadius: 2,
+                                              offset: Offset(3, 5)),
+                                        ],
+                                      ),
+                                      child: CircleAvatar(
+                                        radius: 80,
+                                        backgroundColor:
+                                            appPrimaryMaterialColor,
+                                        backgroundImage:
+//                    NetworkImage(
+//                        Image_URL + "${widget.directoryData["img"]}"),
+                                            FileImage(
+                                          _Image,
+                                        ),
+                                      ))
+                          : Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(80.0),
+
+                                //shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                      blurRadius: 2,
+                                      color: appPrimaryMaterialColor
+                                          .withOpacity(0.2),
+                                      spreadRadius: 2,
+                                      offset: Offset(3, 5)),
+                                ],
+                              ),
+                              child: CircleAvatar(
+                                radius: 80,
+                                backgroundColor: appPrimaryMaterialColor,
+                                backgroundImage:
+//                    NetworkImage(
+//                        Image_URL + "${widget.directoryData["img"]}"),
+                                    AssetImage(
+                                  "assets/051-user.png",
+                                ),
+                              )),
+                ),
                 SizedBox(
                   height: 22,
                 ),
@@ -329,12 +428,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         keyboardType: TextInputType.text,
                         style: TextStyle(fontSize: 15),
                         cursorColor: appPrimaryMaterialColor,
-                        validator: (position) {
-                          if (position.length == 0) {
-                            return 'Please enter your position';
-                          }
-                          return null;
-                        },
+//                        validator: (position) {
+//                          if (position.length == 0) {
+//                            return 'Please enter your position';
+//                          }
+//                          return null;
+//                        },
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(15),
                           fillColor: Colors.white,
@@ -640,13 +739,18 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 20.0),
-                      child: Container(
-                        height: 42,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          color: appPrimaryMaterialColor[500],
-                          //border: Border.all(color: Colors.grey[500], width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      child: GestureDetector(
+                        onTap: () {
+                          _updateProfile();
+                        },
+                        child: Container(
+                          height: 42,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            color: appPrimaryMaterialColor[500],
+                            //border: Border.all(color: Colors.grey[500], width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
 //                          boxShadow: [
 //                            BoxShadow(
 //                                color: appPrimaryMaterialColor.withOpacity(0.2),
@@ -654,13 +758,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 //                                spreadRadius: 2.0,
 //                                offset: Offset(3.0, 5.0))
 //                          ]
+                          ),
+                          child: Center(
+                              child: Text('Update Profile',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500))),
                         ),
-                        child: Center(
-                            child: Text('Update Profile',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500))),
                       ),
                     )
                   ],
@@ -671,5 +776,100 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
         ),
       ),
     );
+  }
+
+  _updateProfile() async {
+    if (_formkey.currentState.validate()) {
+      try {
+        final result = await InternetAddress.lookup('google.com');
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          setState(() {
+            isLoading = true;
+          });
+
+          String filename = "";
+          String filePath = "";
+          File compressedFile;
+          if (_Image != null) {
+            ImageProperties properties =
+                await FlutterNativeImage.getImageProperties(_Image.path);
+
+            compressedFile = await FlutterNativeImage.compressImage(
+              _Image.path,
+              quality: 80,
+              targetWidth: 600,
+              targetHeight:
+                  (properties.height * 600 / properties.width).round(),
+            );
+
+            filename = _Image.path.split('/').last;
+            filePath = compressedFile.path;
+          }
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+
+          FormData body = FormData.fromMap({
+            "id": prefs.getString(Session.CustomerId),
+            "name": txtName.text,
+            "mobile": txtMobileNumber.text,
+            "email": txtEmail.text,
+            "company_name": txtCName.text,
+            "referred_by": prefs.getString(Session.referred_by),
+            "date_of_birth ": "",
+            "gender": "",
+            "address": "",
+            "spouse_name": "",
+            "spouse_birth_date": "",
+            "achievement": "",
+            "number_of_child": "",
+            "keyword": "",
+            "experience": "",
+            "about_business": "",
+            "img": (filePath != null && filePath != '')
+                ? await MultipartFile.fromFile(filePath,
+                    filename: filename.toString())
+                : null,
+          }); //"key":"value"
+
+          Services.PostForList(
+                  api_name: 'api/registration/updatePersonal', body: body)
+              .then((responseList) async {
+            setState(() {
+              isLoading = false;
+            });
+            if (responseList.length > 0) {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+
+              setState(() {
+                prefs.setString(Session.CustomerName, txtName.text);
+                prefs.setString(Session.CustomerCompanyName, txtCName.text);
+                prefs.setString(Session.CustomerEmailId, txtEmail.text);
+
+                prefs.setString(Session.CustomerPhoneNo, txtMobileNumber.text);
+                prefs.setString(Session.CustomerImage, responseList[0]["img"]);
+              });
+              Navigator.of(context).pushNamed('/ProfileScreen');
+              Fluttertoast.showToast(
+                  msg: "Profile Updated Successfully",
+                  gravity: ToastGravity.BOTTOM);
+            }
+
+            setState(() {
+              isLoading = false;
+            });
+          }, onError: (e) {
+            setState(() {
+              isLoading = false;
+            });
+            print("error on call -> ${e.message}");
+            Fluttertoast.showToast(msg: "Something Went Wrong");
+            //showMsg("something went wrong");
+          });
+        }
+      } on SocketException catch (_) {
+        Fluttertoast.showToast(msg: "No Internet Connection.");
+      }
+    } else {
+      Fluttertoast.showToast(msg: "Please Fill the Field");
+    }
   }
 }

@@ -181,6 +181,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   Session.CustomerPhoneNo, responseList[0]["mobile"]);
               await prefs.setString(
                   Session.referred_by, responseList[0]["referred_by"]);
+              await prefs.setString(
+                  Session.CustomerImage, responseList[0]["img"]);
+
               Navigator.pushNamedAndRemoveUntil(
                   context, '/HomePage', (route) => false);
             } else {

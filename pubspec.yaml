@@ -33,12 +33,15 @@ dependencies:
   carousel_pro: ^1.0.0
   bubble_tab_indicator: ^0.1.4
   table_calendar: ^2.3.0
-  intl:
   simple_gesture_detector: ^0.1.4
   dio: ^3.0.10
   shared_preferences: ^0.5.8
   fluttertoast: ^3.1.3
   url_launcher: ^5.7.1
+  image_picker: ^0.6.7+2
+  flutter_native_image: ^0.0.5+2
+  flutter_calendar_carousel: ^1.5.1
+  intl: ^0.16.1
 
 
 
@@ -93,11 +96,14 @@ flutter:
     - assets/shake.png
     - assets/forward.png
     - assets/Home.png
+    - assets/gallery.png
+    - assets/camera.png
     - assets/unCalender.png
     - assets/unCategory.png
     - assets/scan.png
     - assets/unNetwork.png
     - assets/unSuccess.png
+    - assets/051-user.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

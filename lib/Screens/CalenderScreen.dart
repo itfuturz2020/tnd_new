@@ -2,7 +2,10 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_calendar_carousel/classes/event.dart';
+import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
@@ -21,6 +24,49 @@ class _CalenderScreenState extends State<CalenderScreen>
   int _currentIndex = 0;
   CalendarController _calendarController;
 
+  //=================================
+//  DateTime _currentDate = DateTime(2019, 2, 3);
+//  DateTime _currentDate2 = DateTime(2019, 2, 3);
+//  String _currentMonth = DateFormat.yMMM().format(DateTime(2019, 2, 3));
+//  DateTime _targetDateTime = DateTime(2019, 2, 3);
+
+  //==========================
+  DateTime _currentDate = new DateTime.now();
+  DateTime _currentDate2 = new DateTime.now();
+  //final now = new DateTime.now();
+  //String _currentMonth = DateFormat('yMd').format(DateTime.now());
+  String _currentMonth = DateFormat.yMMM().format(DateTime.now());
+  DateTime _targetDateTime = new DateTime.now();
+
+  CalendarCarousel _calendarCarouselNoHeader;
+
+  EventList<Event> _markedDateMap = new EventList<Event>(
+    events: {
+      new DateTime(2019, 2, 10): [
+        new Event(
+          date: new DateTime(2019, 2, 10),
+          title: 'Event 1',
+          //icon: _eventIcon,
+          dot: Container(
+            margin: EdgeInsets.symmetric(horizontal: 1.0),
+            color: Colors.red,
+            height: 5.0,
+            width: 5.0,
+          ),
+        ),
+        new Event(
+          date: new DateTime(2019, 2, 10),
+          title: 'Event 2',
+          //  icon: _eventIcon,
+        ),
+        new Event(
+          date: new DateTime(2019, 2, 10),
+          title: 'Event 3',
+          // icon: _eventIcon,
+        ),
+      ],
+    },
+  );
   @override
   void initState() {
     _visibleEvents = {};
@@ -151,6 +197,7 @@ class _CalenderScreenState extends State<CalenderScreen>
           borderRadius: BorderRadius.circular(16.0),
         ),
       ),
+
       onDaySelected: _onDaySelected,
       onVisibleDaysChanged: _onVisibleDaysChanged,
       calendarController: _calendarController,
@@ -234,36 +281,7 @@ class _CalenderScreenState extends State<CalenderScreen>
                   ),
                 ),
               ),
-//                  Container(
-//                decoration: BoxDecoration(
-//                  border: Border.all(width: 0.8),
-//                  borderRadius: BorderRadius.circular(12.0),
-//                ),
-//                margin:
-//                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-//                child: ListTile(
-//                  title: Column(
-//                    crossAxisAlignment: CrossAxisAlignment.start,
-//                    children: <Widget>[
-//                      Text(event["Name"]),
-//                      Text(event["Venue"]),
-//                    ],
-//                  ),
-//                  onTap: () {
-//                    String selectedDate =
-//                        _selectedDay.toString().substring(0, 10);
-////                      Navigator.push(
-////                        context,
-////                        MaterialPageRoute(
-////                          builder: (context) => EventDetailList(
-////                            date: selectedDate,
-////                            events: _selectedEvents,
-////                          ),
-////                        ),
-////                      );
-//                  },
-//                ),
-//              ),
+//
             )
             .toList(),
       ),
@@ -280,6 +298,74 @@ class _CalenderScreenState extends State<CalenderScreen>
 
   @override
   Widget build(BuildContext context) {
+    /// Example Calendar Carousel without header and custom prev & next button
+    _calendarCarouselNoHeader = CalendarCarousel<Event>(
+      todayBorderColor: appPrimaryMaterialColor,
+      // dayButtonColor: appPrimaryMaterialColor[300],
+      selectedDayBorderColor: appPrimaryMaterialColor,
+
+      onDayPressed: (DateTime date, List<Event> events) {
+        this.setState(() => _currentDate2 = date);
+        events.forEach((event) => print(event.title));
+      },
+      daysHaveCircularBorder: true,
+      showOnlyCurrentMonthDate: false,
+      weekendTextStyle: TextStyle(
+        color: Colors.red,
+      ),
+      thisMonthDayBorderColor: Colors.grey,
+      weekFormat: false,
+//      firstDayOfWeek: 4,
+      markedDatesMap: _markedDateMap,
+      height: 420.0,
+      selectedDateTime: _currentDate2,
+      targetDateTime: _targetDateTime,
+      customGridViewPhysics: NeverScrollableScrollPhysics(),
+      markedDateCustomShapeBorder:
+          CircleBorder(side: BorderSide(color: appPrimaryMaterialColor)),
+      markedDateCustomTextStyle: TextStyle(
+        fontSize: 18,
+        color: Colors.red,
+      ),
+      showHeader: false,
+      todayTextStyle: TextStyle(
+        color: appPrimaryMaterialColor,
+      ),
+      // markedDateShowIcon: true,
+      // markedDateIconMaxShown: 2,
+      // markedDateIconBuilder: (event) {
+      //   return event.icon;
+      // },
+      // markedDateMoreShowTotal:
+      //     true,
+      todayButtonColor: Colors.white,
+      selectedDayTextStyle: TextStyle(
+        color: Colors.white,
+      ),
+      minSelectedDate: _currentDate.subtract(Duration(days: 360)),
+      maxSelectedDate: _currentDate.add(Duration(days: 360)),
+      prevDaysTextStyle: TextStyle(
+        fontSize: 16,
+        color: Colors.grey,
+      ),
+      selectedDayButtonColor: appPrimaryMaterialColor,
+      inactiveDaysTextStyle: TextStyle(
+        color: Colors.tealAccent,
+        fontSize: 16,
+      ),
+      onCalendarChanged: (DateTime date) {
+        this.setState(() {
+          _targetDateTime = date;
+          _currentMonth = DateFormat.yMMM().format(_targetDateTime);
+          print("====================================");
+          print(_currentMonth);
+        });
+      },
+      onDayLongPressed: (DateTime date) {
+        print('long pressed date $date');
+      },
+    );
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -349,7 +435,52 @@ class _CalenderScreenState extends State<CalenderScreen>
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
-          _buildTableCalendar(),
+//          _buildTableCalendar(),
+
+          Container(
+            margin: EdgeInsets.only(
+              top: 30.0,
+              bottom: 16.0,
+              left: 16.0,
+              right: 16.0,
+            ),
+            child: new Row(
+              children: <Widget>[
+                FlatButton(
+                  child: Icon(Icons.arrow_back_ios),
+                  onPressed: () {
+                    setState(() {
+                      _targetDateTime = DateTime(
+                          _targetDateTime.year, _targetDateTime.month - 1);
+                      _currentMonth = DateFormat.yMMM().format(_targetDateTime);
+                    });
+                  },
+                ),
+                Expanded(
+                    child: Text(
+                  _currentMonth,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24.0,
+                  ),
+                )),
+                FlatButton(
+                  child: Icon(Icons.arrow_forward_ios),
+                  onPressed: () {
+                    setState(() {
+                      _targetDateTime = DateTime(
+                          _targetDateTime.year, _targetDateTime.month + 1);
+                      _currentMonth = DateFormat.yMMM().format(_targetDateTime);
+                    });
+                  },
+                )
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 16.0),
+            child: _calendarCarouselNoHeader,
+          ),
           Expanded(child: _buildEventList()),
 //
         ],
