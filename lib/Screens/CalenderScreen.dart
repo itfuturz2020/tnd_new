@@ -64,6 +64,11 @@ class _CalenderScreenState extends State<CalenderScreen>
           title: 'Event 3',
           // icon: _eventIcon,
         ),
+        new Event(
+          date: new DateTime(2019, 2, 10),
+          title: 'Event 4',
+          //  icon: _eventIcon,
+        ),
       ],
     },
   );
