@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 20, left: 25, right: 25),
         child: Container(
-          height: 62,
+          height: MediaQuery.of(context).size.height * 0.12,
           decoration: BoxDecoration(
             // boxShadow: <BoxShadow>[
             borderRadius: BorderRadius.circular(17),
@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                     ),
                     //   icon: Icon(Icons.home),
-                    title: Text('Home'),
+                    title: FittedBox(child: Text('Home')),
                   ),
                   BottomNavigationBarItem(
                     icon: Padding(
@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    title: Text('Calendar'),
+                    title: FittedBox(child: Text('Calendar')),
                   ),
                   BottomNavigationBarItem(
                     icon: Padding(
@@ -128,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    title: Text('Category'),
+                    title: FittedBox(child: Text('Category')),
                   ),
                   BottomNavigationBarItem(
                     icon: Padding(
@@ -143,7 +143,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    title: Text('Stories'),
+                    title: FittedBox(child: Text('Stories')),
                   ),
                   BottomNavigationBarItem(
                     icon: Padding(
@@ -159,7 +159,9 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    title: Text('1-2-1'),
+                    title: FittedBox(
+                      child: Text('1-2-1'),
+                    ),
                   ),
                 ],
                 currentIndex: _selectedIndex,

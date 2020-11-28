@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
 import 'package:the_national_dawn/Components/LoadingBlueComponent.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -93,33 +94,35 @@ class _HomeScreenState extends State<HomeScreen>
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Row(
-          children: [
-            Text(
-              "The",
-              style: TextStyle(
-                  color: appPrimaryMaterialColor,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 5.0, right: 5),
-              child: Text(
-                "National",
+        title: FittedBox(
+          child: Row(
+            children: [
+              Text(
+                "The",
                 style: TextStyle(
-                    color: Colors.black,
+                    color: appPrimaryMaterialColor,
                     fontSize: 18,
                     fontWeight: FontWeight.bold),
               ),
-            ),
-            Text(
-              "Dawn",
-              style: TextStyle(
-                  color: appPrimaryMaterialColor,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
-            ),
-          ],
+              Padding(
+                padding: const EdgeInsets.only(left: 5.0, right: 5),
+                child: Text(
+                  "National",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Text(
+                "Dawn",
+                style: TextStyle(
+                    color: appPrimaryMaterialColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
         ),
         actions: [
           Padding(
@@ -272,20 +275,34 @@ class _HomeScreenState extends State<HomeScreen>
             //   custombox(
             //       listB[i]["lable"], listB[i]["image"], listB[i]["screenName"]),
             // ],
-            GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                childAspectRatio: 1.1,
-              ),
+            // GridView.builder(
+            //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            //     crossAxisCount: 3,
+            //     childAspectRatio: 1.1,
+            //   ),
+            //   itemCount: listB.length,
+            //   shrinkWrap: true,
+            //   physics: NeverScrollableScrollPhysics(),
+            //   itemBuilder: (context, index) => custombox(
+            //     listB[index]["lable"],
+            //     listB[index]["image"],
+            //     listB[index]["screenName"],
+            //   ),
+            // ),
+            StaggeredGridView.countBuilder(
+              crossAxisCount: 3,
               itemCount: listB.length,
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) => custombox(
+              itemBuilder: (context, int index) => custombox(
                 listB[index]["lable"],
                 listB[index]["image"],
                 listB[index]["screenName"],
               ),
-            ),
+              staggeredTileBuilder: (int index) => new StaggeredTile.fit(1),
+              // mainAxisSpacing: 4.0,
+              // crossAxisSpacing: 4.0,
+            )
 //              Padding(
 //                padding: const EdgeInsets.only(left: 35.0, right: 35, top: 25),
 //                child: Container(
@@ -780,7 +797,7 @@ class _HomeScreenState extends State<HomeScreen>
           Navigator.of(context).pushNamed(screenName);
         },
         child: Container(
-          height: MediaQuery.of(context).size.height * 0.1,
+          height: MediaQuery.of(context).size.height * 0.13,
           width: MediaQuery.of(context).size.height * 0.1,
           decoration: BoxDecoration(
               color: Colors.white,
@@ -802,11 +819,17 @@ class _HomeScreenState extends State<HomeScreen>
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 5.0),
-                child: Text(
-                  lable,
-                  textAlign: TextAlign.center,
-                  style:
-                      TextStyle(color: appPrimaryMaterialColor, fontSize: 12),
+                child: FittedBox(
+                  // fit: BoxFit.contain,
+                  child: Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: Text(
+                      lable,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: appPrimaryMaterialColor, fontSize: 12),
+                    ),
+                  ),
                 ),
               ),
             ],

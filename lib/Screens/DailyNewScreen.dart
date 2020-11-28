@@ -54,33 +54,35 @@ class _DailyNewScreenState extends State<DailyNewScreen>
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Row(
-          children: [
-            Text(
-              "The",
-              style: TextStyle(
-                  color: appPrimaryMaterialColor,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 5.0, right: 5),
-              child: Text(
-                "National",
+        title: FittedBox(
+          child: Row(
+            children: [
+              Text(
+                "The",
                 style: TextStyle(
-                    color: Colors.black,
+                    color: appPrimaryMaterialColor,
                     fontSize: 18,
                     fontWeight: FontWeight.bold),
               ),
-            ),
-            Text(
-              "Dawn",
-              style: TextStyle(
-                  color: appPrimaryMaterialColor,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
-            ),
-          ],
+              Padding(
+                padding: const EdgeInsets.only(left: 5.0, right: 5),
+                child: Text(
+                  "National",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Text(
+                "Dawn",
+                style: TextStyle(
+                    color: appPrimaryMaterialColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
         ),
         leading: GestureDetector(
           onTap: () {

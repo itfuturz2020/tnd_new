@@ -86,30 +86,35 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
                               fontWeight: FontWeight.w400),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 15.0),
-                        child: Container(
-                          height: 25,
-                          width: 140,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                                color: appPrimaryMaterialColor[100], width: 1),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
-                          ),
-                          child: Row(
-                            // mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset('assets/videocall.png'),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 3.0),
-                                child: Text(
-                                  "Send 1-2-1 request",
-                                  style: TextStyle(fontSize: 12),
-                                ),
-                              )
-                            ],
+                      FittedBox(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 15.0),
+                          child: Container(
+                            height: 25,
+                            // width: 140,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(
+                                  color: appPrimaryMaterialColor[100],
+                                  width: 1),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                            ),
+                            child: Row(
+                              // mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset('assets/videocall.png'),
+                                FittedBox(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 3.0),
+                                    child: Text(
+                                      "Send 1-2-1 request",
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),

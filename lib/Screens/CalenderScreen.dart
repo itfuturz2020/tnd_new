@@ -213,6 +213,7 @@ class _CalenderScreenState extends State<CalenderScreen>
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: ListView(
+        shrinkWrap: true,
         children: _selectedEvents
             .map(
               (event) => Padding(
@@ -437,8 +438,7 @@ class _CalenderScreenState extends State<CalenderScreen>
           )
         ],
       ),
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
+      body: ListView(
         children: <Widget>[
 //          _buildTableCalendar(),
 
@@ -486,7 +486,7 @@ class _CalenderScreenState extends State<CalenderScreen>
             margin: EdgeInsets.symmetric(horizontal: 16.0),
             child: _calendarCarouselNoHeader,
           ),
-          Expanded(child: _buildEventList()),
+          _buildEventList(),
 //
         ],
       ),

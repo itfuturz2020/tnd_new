@@ -15,6 +15,7 @@ class _NetworkComponentState extends State<NetworkComponent> {
       padding: const EdgeInsets.only(top: 12, bottom: 22, left: 12, right: 12),
       child: Container(
         height: 150,
+        width: MediaQuery.of(context).size.width * 1,
         decoration: BoxDecoration(
             color: Colors.white,
             border: Border.all(color: Colors.grey[100], width: 1),
@@ -29,7 +30,7 @@ class _NetworkComponentState extends State<NetworkComponent> {
         child: Row(
           children: [
             Container(
-              width: 130,
+              width: MediaQuery.of(context).size.width * 0.4,
               height: 210,
               decoration: BoxDecoration(
                   // border: Border.all(color: Colors.grey[100]),
@@ -70,48 +71,53 @@ class _NetworkComponentState extends State<NetworkComponent> {
                             fontWeight: FontWeight.w400),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 5.0),
-                      child: Container(
-                        height: 25,
-                        width: 140,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(
-                              color: appPrimaryMaterialColor[100], width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        ),
-                        child: Row(
-                          // mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset('assets/videocall.png'),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 3.0),
-                              child: Text(
-                                "Open Zoom Meeting",
-                                style: TextStyle(fontSize: 12),
-                              ),
-                            )
-                          ],
+                    FittedBox(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 5.0),
+                        child: Container(
+                          height: 25,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(
+                                color: appPrimaryMaterialColor[100], width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                          ),
+                          child: Row(
+                            // mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset('assets/videocall.png'),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 3.0),
+                                child: Text(
+                                  "Open Zoom Meeting",
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 3.0),
-                      child: Row(
-                        //mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.timer,
-                            color: Colors.grey,
-                            size: 16,
-                          ),
-                          Text(
-                            "11 september 2020 12:40 pm",
-                            style: TextStyle(color: Colors.grey, fontSize: 10),
-                          )
-                        ],
+                    FittedBox(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 3.0),
+                        child: Row(
+                          //mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.timer,
+                              color: Colors.grey,
+                              size: 16,
+                            ),
+                            Text(
+                              "11 september 2020 12:40 pm",
+                              style:
+                                  TextStyle(color: Colors.grey, fontSize: 10),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     Padding(

@@ -26,7 +26,6 @@ class _BookMarkComponentState extends State<BookMarkComponent> {
                       )));
         },
         child: Container(
-          height: 150,
           decoration: BoxDecoration(
             //color: ColorUtils.buttonDarkBlueColor,
             boxShadow: [
@@ -92,23 +91,25 @@ class _BookMarkComponentState extends State<BookMarkComponent> {
                       SizedBox(
                         height: 8,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16.0),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Icon(
-                              Icons.timer,
-                              size: 16,
-                              color: Colors.grey,
-                            ),
-                            Text(
-                              "${widget.bookmarkData["newsDate"]}",
-                              style:
-                                  TextStyle(color: Colors.grey, fontSize: 12),
-                            )
-                          ],
+                      FittedBox(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 16.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Icon(
+                                Icons.timer,
+                                size: 16,
+                                color: Colors.grey,
+                              ),
+                              Text(
+                                "${widget.bookmarkData["newsDate"]}",
+                                style:
+                                    TextStyle(color: Colors.grey, fontSize: 12),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(

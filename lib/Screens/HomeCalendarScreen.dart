@@ -324,7 +324,7 @@ class _HomeCalendarScreenState extends State<HomeCalendarScreen>
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
           _buildTableCalendar(),
-          Expanded(child: _buildEventList()),
+          //_buildEventList(),
         ],
       ),
     );
