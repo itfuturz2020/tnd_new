@@ -8,20 +8,44 @@ class Services {
   static Future<List> PostForList({api_name, body}) async {
     String url = API_URL + '$api_name';
     print("$api_name url : " + url);
-    var response;
+    Response response = null;
     try {
       if (body == null) {
         response = await dio.post(url);
       } else {
         response = await dio.post(url, data: body);
       }
-
       if (response.statusCode == 200) {
         List list = [];
         print("$api_name Response: " + response.data.toString());
         var responseData = response.data;
         if (responseData["IsSuccess"] == true &&
             responseData["Data"].length > 0) {
+          print(responseData["Data"]);
+          list = responseData["Data"];
+        }
+        return list;
+      } else {
+        print("error ->" + response.data.toString());
+        throw Exception(response.data.toString());
+      }
+    } catch (e) {
+      print("error -> ${e.toString()}");
+      throw Exception(e.toString());
+    }
+  }
+
+  static Future<List> Login(body) async {
+    try {
+      Response response = await dio
+          .post("https://blogproject-33.herokuapp.com/api/login", data: body);
+      if (response.statusCode == 200) {
+        List list = [];
+        print("login Response: " + response.data.toString());
+        var responseData = response.data;
+        if (responseData["IsSuccess"] == true &&
+            responseData["Data"].length > 0) {
+          print(responseData["Data"]);
           list = responseData["Data"];
         }
         return list;

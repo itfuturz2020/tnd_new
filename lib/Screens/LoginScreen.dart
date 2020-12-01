@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
+import 'package:the_national_dawn/Screens/VerificationScreen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -16,6 +17,43 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController txtMobileNumber = TextEditingController();
   final _formkey = new GlobalKey<FormState>();
   bool isLoading = false;
+
+  saveDataToSession(var data) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(Session.CustomerId, data["_id"].toString());
+    await prefs.setString(Session.CustomerName, data["name"]);
+    await prefs.setString(Session.referred_by, data["referred_by"]);
+    await prefs.setString(Session.CustomerCompanyName, data["company_name"]);
+    await prefs.setString(Session.CustomerEmailId, data["email"]);
+    await prefs.setString(Session.CustomerPhoneNo, data["mobile"]);
+
+    Navigator.pushNamedAndRemoveUntil(context, '/HomeScreen', (route) => false);
+  }
+
+  _showDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: new Text(
+            "You are not register...",
+            style: TextStyle(fontSize: 16),
+          ),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text(
+                "Ok",
+                style: TextStyle(color: appPrimaryMaterialColor),
+              ),
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, '/RegisterScreen');
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     counterText: "",
                     contentPadding:
                         EdgeInsets.only(top: 1.0, bottom: 1, left: 1, right: 1),
-                    hintText: "Enter your No:",
+                    hintText: "Enter your mobile",
                     hintStyle: TextStyle(
                         color: Colors.grey[400], fontWeight: FontWeight.w500),
                     prefixIcon: Container(
@@ -156,54 +194,40 @@ class _LoginScreenState extends State<LoginScreen> {
           setState(() {
             isLoading = true;
           });
-          var body = {
-            "mobile": txtMobileNumber.text.toString(),
-          }; //"key":"value"
-          Services.PostForList(api_name: 'api/login', body: body).then(
-              (responseList) async {
-            setState(() {
-              isLoading = false;
-            });
-            if (responseList.length > 0) {
-//              rndNumber == txtOTP.text
-//                  ? ""
-//                  : Fluttertoast.showToast(msg: "OTP is wrong");
-
-              SharedPreferences prefs = await SharedPreferences.getInstance();
-              await prefs.setString(Session.CustomerId, responseList[0]["_id"]);
-              await prefs.setString(
-                  Session.CustomerName, responseList[0]["name"]);
-              await prefs.setString(
-                  Session.CustomerCompanyName, responseList[0]["company_name"]);
-              await prefs.setString(
-                  Session.CustomerEmailId, responseList[0]["email"]);
-              await prefs.setString(
-                  Session.CustomerPhoneNo, responseList[0]["mobile"]);
-              await prefs.setString(
-                  Session.referred_by, responseList[0]["referred_by"]);
-              await prefs.setString(
-                  Session.CustomerImage, responseList[0]["img"]);
-
-              Navigator.pushNamedAndRemoveUntil(
-                  context, '/HomePage', (route) => false);
+          var body = {"mobile": txtMobileNumber.text};
+          print(body);
+          Services.Login(body).then((responselist) async {
+            if (responselist.length > 0) {
+              setState(() {
+                isLoading = false;
+              });
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => VerificationScreen(
+                        mobile: txtMobileNumber.text,
+                        logindata: responselist[0],
+                        onLoginSuccess: () {
+                          saveDataToSession(responselist[0]);
+                        },
+                      )));
             } else {
-              Fluttertoast.showToast(msg: "Login Fail!!!!");
-              //showMsg(data.Message); //show "data not found" in dialog
+              setState(() {
+                isLoading = false;
+              });
+              _showDialog(context);
             }
           }, onError: (e) {
             setState(() {
               isLoading = false;
             });
             print("error on call -> ${e.message}");
-            Fluttertoast.showToast(msg: "Something Went Wrong");
-            //showMsg("something went wrong");
+            Fluttertoast.showToast(msg: "something went wrong");
           });
         }
       } on SocketException catch (_) {
-        Fluttertoast.showToast(msg: "No Internet Connection.");
+        Fluttertoast.showToast(msg: "No Internet Connection");
       }
     } else {
-      Fluttertoast.showToast(msg: "Please fill all the fields...");
+      Fluttertoast.showToast(msg: "Please fill mobile number");
     }
   }
 }

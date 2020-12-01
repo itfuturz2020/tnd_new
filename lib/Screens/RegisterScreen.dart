@@ -3,9 +3,12 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pin_code_text_field/pin_code_text_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
+
+import 'VerificationScreen.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -22,6 +25,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _formkey = new GlobalKey<FormState>();
   bool isLoading = false;
   String rndNumber;
+
+  saveDataToSession(var data) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(Session.CustomerId, data["_id"].toString());
+    await prefs.setString(Session.CustomerName, data["name"]);
+    await prefs.setString(Session.CustomerCompanyName, data["company_name"]);
+    await prefs.setString(Session.CustomerEmailId, data["email"]);
+    await prefs.setString(Session.CustomerPhoneNo, data["mobile"]);
+    await prefs.setString(Session.referred_by, data["referred_by"]);
+    Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route) => false);
+    Fluttertoast.showToast(msg: "Register Successfully!!!!");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +68,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     counterText: "",
                     contentPadding: EdgeInsets.only(
                         top: 1.0, bottom: 1, left: 10, right: 1),
-                    hintText: "Enter your Name:",
+                    hintText: "Enter your Name",
                     hintStyle: TextStyle(
                         color: Colors.grey[400], fontWeight: FontWeight.w500),
                     enabledBorder: OutlineInputBorder(
@@ -124,111 +139,111 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
               ),
-//              Padding(
-//                padding: const EdgeInsets.only(left: 30.0, right: 30, top: 10),
-//                child: Row(
-//                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                  children: [
-//                    Container(
-//                      width: MediaQuery.of(context).size.width / 1.5,
-//                      child: TextFormField(
-//                        keyboardType: TextInputType.phone,
-//                        controller: txtMobileNumber,
-//                        style: TextStyle(fontSize: 15),
-//                        cursorColor: appPrimaryMaterialColor,
-//                        maxLength: 10,
-//                        validator: (phone) {
-//                          Pattern pattern = r'(^(?:[+0]9)?[0-9]{10,}$)';
-//                          RegExp regExp = new RegExp(pattern);
-//                          if (phone.length == 0) {
-//                            return 'Please enter mobile number';
-//                          } else if (!regExp.hasMatch(phone)) {
-//                            return 'Please enter valid mobile number';
-//                          }
-//                          return null;
-//                        },
-//                        decoration: InputDecoration(
-//                          counterText: "",
-//                          contentPadding: EdgeInsets.only(
-//                              top: 1.0, bottom: 1, left: 10, right: 1),
-//                          hintText: "Enter Mobile No",
-//                          hintStyle: TextStyle(
-//                              color: Colors.grey[400],
-//                              fontWeight: FontWeight.w500),
-//                          enabledBorder: OutlineInputBorder(
-//                            borderRadius:
-//                                BorderRadius.all(Radius.circular(10.0)),
-//                            borderSide:
-//                                BorderSide(color: appPrimaryMaterialColor[400]),
-//                          ),
-//                          focusedBorder: OutlineInputBorder(
-//                            borderRadius:
-//                                BorderRadius.all(Radius.circular(10.0)),
-//                            borderSide:
-//                                BorderSide(color: appPrimaryMaterialColor),
-//                          ),
-//                          errorBorder: OutlineInputBorder(
-//                            borderRadius:
-//                                BorderRadius.all(Radius.circular(10.0)),
-//                            borderSide: BorderSide(color: Colors.red),
-//                          ),
-//                          focusedErrorBorder: OutlineInputBorder(
-//                            borderRadius:
-//                                BorderRadius.all(Radius.circular(10.0)),
-//                            borderSide: BorderSide(color: Colors.red),
-//                          ),
-//                        ),
-//                      ),
-//                    ),
-//                    GestureDetector(
-//                      onTap: () {
-//                        _sendOTP();
-//                      },
-//                      child: Container(
-//                          child: Icon(
-//                            Icons.arrow_forward,
-//                            color: appPrimaryMaterialColor,
-//                          ),
-//                          height: 45,
-//                          width: MediaQuery.of(context).size.width / 7,
-//                          decoration: new BoxDecoration(
-//                              border: Border.all(
-//                                  color: appPrimaryMaterialColor[400]),
-//                              //color: appPrimaryMaterialColor, // border color
-//                              // shape: BoxShape.circle,
-//                              borderRadius: BorderRadius.circular(10))),
-//                    )
-//                  ],
-//                ),
-//              ),
-//              Padding(
-//                padding: const EdgeInsets.only(left: 30.0, right: 30, top: 10),
-//                child: Container(
-//                    child: Center(
-//                      child: PinCodeTextField(
-//                        controller: txtOTP,
-//                        autofocus: false,
-//                        wrapAlignment: WrapAlignment.center,
-//                        highlight: true,
-//                        pinBoxHeight: 35,
-//                        pinBoxWidth: 45,
-//                        highlightColor: Colors.black,
-//                        defaultBorderColor: Colors.black,
-//                        hasTextBorderColor: appPrimaryMaterialColor,
-//                        maxLength: 4,
-//                        pinBoxDecoration:
-//                            ProvidedPinBoxDecoration.underlinedPinBoxDecoration,
-//                        pinTextStyle: TextStyle(fontSize: 15),
-//                      ),
-//                    ),
-//                    height: 45,
-//                    width: MediaQuery.of(context).size.width,
-//                    decoration: new BoxDecoration(
-//                        border: Border.all(color: appPrimaryMaterialColor[400]),
-//                        //color: appPrimaryMaterialColor, // border color
-//                        // shape: BoxShape.circle,
-//                        borderRadius: BorderRadius.circular(10))),
-//              ),
+              /* Padding(
+                padding: const EdgeInsets.only(left: 30.0, right: 30, top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width / 1.5,
+                      child: TextFormField(
+                        keyboardType: TextInputType.phone,
+                        controller: txtMobileNumber,
+                        style: TextStyle(fontSize: 15),
+                        cursorColor: appPrimaryMaterialColor,
+                        maxLength: 10,
+                        validator: (phone) {
+                          Pattern pattern = r'(^(?:[+0]9)?[0-9]{10,}$)';
+                          RegExp regExp = new RegExp(pattern);
+                          if (phone.length == 0) {
+                            return 'Please enter mobile number';
+                          } else if (!regExp.hasMatch(phone)) {
+                            return 'Please enter valid mobile number';
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          counterText: "",
+                          contentPadding: EdgeInsets.only(
+                              top: 1.0, bottom: 1, left: 10, right: 1),
+                          hintText: "Enter Mobile No",
+                          hintStyle: TextStyle(
+                              color: Colors.grey[400],
+                              fontWeight: FontWeight.w500),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                            borderSide:
+                                BorderSide(color: appPrimaryMaterialColor[400]),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                            borderSide:
+                                BorderSide(color: appPrimaryMaterialColor),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        _sendOTP();
+                      },
+                      child: Container(
+                          child: Icon(
+                            Icons.arrow_forward,
+                            color: appPrimaryMaterialColor,
+                          ),
+                          height: 45,
+                          width: MediaQuery.of(context).size.width / 7,
+                          decoration: new BoxDecoration(
+                              border: Border.all(
+                                  color: appPrimaryMaterialColor[400]),
+                              //color: appPrimaryMaterialColor, // border color
+                              // shape: BoxShape.circle,
+                              borderRadius: BorderRadius.circular(10))),
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 30.0, right: 30, top: 10),
+                child: Container(
+                    child: Center(
+                      child: PinCodeTextField(
+                        controller: txtOTP,
+                        autofocus: false,
+                        wrapAlignment: WrapAlignment.center,
+                        highlight: true,
+                        pinBoxHeight: 35,
+                        pinBoxWidth: 45,
+                        highlightColor: Colors.black,
+                        defaultBorderColor: Colors.black,
+                        hasTextBorderColor: appPrimaryMaterialColor,
+                        maxLength: 4,
+                        pinBoxDecoration:
+                            ProvidedPinBoxDecoration.underlinedPinBoxDecoration,
+                        pinTextStyle: TextStyle(fontSize: 15),
+                      ),
+                    ),
+                    height: 45,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: new BoxDecoration(
+                        border: Border.all(color: appPrimaryMaterialColor[400]),
+                        //color: appPrimaryMaterialColor, // border color
+                        // shape: BoxShape.circle,
+                        borderRadius: BorderRadius.circular(10))),
+              ),*/
               Padding(
                 padding: const EdgeInsets.only(left: 30.0, right: 30, top: 10),
                 child: TextFormField(
@@ -294,7 +309,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     counterText: "",
                     contentPadding: EdgeInsets.only(
                         top: 1.0, bottom: 1, left: 10, right: 1),
-                    hintText: "Enter Company Name:",
+                    hintText: "Enter Company Name",
                     hintStyle: TextStyle(
                         color: Colors.grey[400], fontWeight: FontWeight.w500),
                     enabledBorder: OutlineInputBorder(
@@ -393,7 +408,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  _sendOTP() async {
+  /* _sendOTP() async {
     var rnd = new Random();
     setState(() {
       rndNumber = "";
@@ -405,7 +420,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     print(rndNumber);
     Fluttertoast.showToast(
         msg: "OTP send successfully", gravity: ToastGravity.BOTTOM);
-  }
+  }*/
 
   _registration() async {
     if (_formkey.currentState.validate()) {
@@ -428,26 +443,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
               isLoading = false;
             });
             if (responseList.length > 0) {
-//              rndNumber == txtOTP.text
-//                  ? ""
-//                  : Fluttertoast.showToast(msg: "OTP is wrong");
-              SharedPreferences prefs = await SharedPreferences.getInstance();
-              await prefs.setString(Session.CustomerId, responseList[0]["_id"]);
-              await prefs.setString(
-                  Session.CustomerName, responseList[0]["name"]);
-              await prefs.setString(
-                  Session.CustomerCompanyName, responseList[0]["company_name"]);
-              await prefs.setString(
-                  Session.CustomerEmailId, responseList[0]["email"]);
-              await prefs.setString(
-                  Session.CustomerPhoneNo, responseList[0]["mobile"]);
-              await prefs.setString(
-                  Session.referred_by, responseList[0]["referred_by"]);
-              await prefs.setString(
-                  Session.CustomerImage, responseList[0]["img"]);
-              Navigator.pushNamedAndRemoveUntil(
-                  context, '/HomePage', (route) => false);
-              Fluttertoast.showToast(msg: "Register Successfully!!!!");
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => VerificationScreen(
+                        mobile: txtMobileNumber.text,
+                        logindata: responseList[0],
+                        onLoginSuccess: () {
+                          saveDataToSession(responseList[0]);
+                        },
+                      )));
             } else {
               Fluttertoast.showToast(msg: "Registration Fail!!!!");
               //showMsg(data.Message); //show "data not found" in dialog

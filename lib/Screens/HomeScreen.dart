@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -19,11 +20,24 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   TabController tabController;
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  String fcmToken = "";
 
   @override
   void initState() {
     super.initState();
     _bannerImage();
+
+    _firebaseMessaging.configure(onMessage: (Map<String, dynamic> message) {
+      print("onMessage");
+      print(message);
+    }, onResume: (Map<String, dynamic> message) {
+      print("onResume");
+      print(message);
+    }, onLaunch: (Map<String, dynamic> message) {
+      print("onLaunch");
+      print(message);
+    });
   }
 
   List listB = [

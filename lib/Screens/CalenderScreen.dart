@@ -178,7 +178,6 @@ class _CalenderScreenState extends State<CalenderScreen>
     return TableCalendar(
       locale: 'en_US',
       events: _visibleEvents,
-      //holidays: _visibleHolidays,
       initialCalendarFormat: CalendarFormat.month,
       formatAnimation: FormatAnimation.slide,
       startingDayOfWeek: StartingDayOfWeek.monday,
@@ -202,7 +201,6 @@ class _CalenderScreenState extends State<CalenderScreen>
           borderRadius: BorderRadius.circular(16.0),
         ),
       ),
-
       onDaySelected: _onDaySelected,
       onVisibleDaysChanged: _onVisibleDaysChanged,
       calendarController: _calendarController,

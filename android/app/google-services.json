@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1005606757963",
+    "firebase_url": "https://the-national-dawn-be102.firebaseio.com",
+    "project_id": "the-national-dawn-be102",
+    "storage_bucket": "the-national-dawn-be102.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1005606757963:android:927c821b9c0be44d540fce",
+        "android_client_info": {
+          "package_name": "com.example.the_national_dawn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1005606757963-luodv2tb52euaduaeqeinv0bs2je9f2v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.the_national_dawn",
+            "certificate_hash": "a04db47436f9f13e95d85aa24957d3188fd2e1de"
+          }
+        },
+        {
+          "client_id": "1005606757963-nlfa740kgoc4d9odogkolkc04e59ba82.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAv6e8vB-49MFrBEKfbuEHUIKbkiXD4lqE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1005606757963-nlfa740kgoc4d9odogkolkc04e59ba82.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
