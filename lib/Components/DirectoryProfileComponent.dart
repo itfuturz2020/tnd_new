@@ -80,8 +80,8 @@ class _DirectoryProfileComponentState extends State<DirectoryProfileComponent> {
                   ),
                   child: CircleAvatar(
                     radius: 80,
-                    backgroundImage: NetworkImage(
-                        Image_URL + "${widget.directoryData["img"]}"),
+                    backgroundImage:
+                        NetworkImage("${widget.directoryData["img"]}"),
                     //child: Image.asset("assets/10.jpeg",fit: BoxFit.cover,),
                   )),
               SizedBox(

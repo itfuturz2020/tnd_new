@@ -107,7 +107,7 @@ class _SubCategoryComponentState extends State<SubCategoryComponent> {
 //                                  fit: BoxFit.cover,
 //                                )
                                     Image.network(
-                                  Image_URL + "${catList[index]["img"]}",
+                                  "${catList[index]["img"]}",
                                   fit: BoxFit.cover,
                                 )),
                           ),

@@ -50,7 +50,7 @@ class _CategoryComponentState extends State<CategoryComponent> {
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Image.network(
-                      Image_URL + "${widget.CatData["categoryImage"]}",
+                      "${widget.CatData["categoryImage"]}",
                       fit: BoxFit.cover,
                     )),
               ),

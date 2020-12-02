@@ -39,3 +39,38 @@ class OfferClass {
         offerName: json['categoryName'] as String);
   }
 }
+
+class MemberCategoryData {
+  String Message;
+  bool IsSuccess;
+  List<CategoryData> Data;
+
+  MemberCategoryData({
+    this.Message,
+    this.IsSuccess,
+    this.Data,
+  });
+
+  factory MemberCategoryData.fromJson(Map<String, dynamic> json) {
+    return MemberCategoryData(
+        Message: json['Message'] as String,
+        IsSuccess: json['IsSuccess'] as bool,
+        Data: json['Data']
+            .map<CategoryData>(
+                (singleJson) => CategoryData.fromJson(singleJson))
+            .toList());
+  }
+}
+
+class CategoryData {
+  String Id;
+  String memberShipName;
+
+  CategoryData({this.Id, this.memberShipName});
+
+  factory CategoryData.fromJson(Map<String, dynamic> json) {
+    return CategoryData(
+        Id: json['_id'] as String,
+        memberShipName: json['memberShipName'] as String);
+  }
+}

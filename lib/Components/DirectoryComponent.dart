@@ -51,7 +51,7 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Image.network(
-                      Image_URL + "${widget.directoryData["img"]}",
+                      "${widget.directoryData["img"]}",
                       fit: BoxFit.cover,
                     )),
               ),

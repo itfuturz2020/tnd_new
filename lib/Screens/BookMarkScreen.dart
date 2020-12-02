@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
 import 'package:the_national_dawn/Components/BookMarkComponent.dart';
@@ -15,9 +16,18 @@ class BookMarkScreen extends StatefulWidget {
 class _BookMarkScreenState extends State<BookMarkScreen> {
   List bookmarkList = [];
   bool isLoading = true;
+  String CustomerId;
+
+  _profile() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      CustomerId = prefs.getString(Session.CustomerId);
+    });
+  }
 
   @override
   void initState() {
+    _profile();
     _getBookmark();
   }
 
@@ -112,10 +122,9 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-//        var body = {};
-        Services.PostForList(
-          api_name: 'admin/getAllBookMarkNews',
-        ).then((ResponseList) async {
+        var body = {"userId": CustomerId};
+        Services.PostForList(api_name: 'admin/getAllBookMarkNews', body: body)
+            .then((ResponseList) async {
           setState(() {
             isLoading = false;
           });

@@ -31,8 +31,7 @@ class _BookMarkDetailScreenState extends State<BookMarkDetailScreen> {
                       child: FadeInImage.assetNetwork(
                         placeholder: "assets/TND Logo_PNG_Newspaper.png",
                         fit: BoxFit.fill,
-                        image:
-                            Image_URL + "${widget.bookmarkData["newsImage"]}",
+                        image: "${widget.bookmarkData["newsImage"]}",
                       ),
                     ),
                   ),

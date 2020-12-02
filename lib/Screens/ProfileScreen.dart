@@ -188,7 +188,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                       child: CircleAvatar(
                                         radius: 80,
                                         backgroundImage: img != null
-                                            ? NetworkImage(Image_URL + img)
+                                            ? NetworkImage(img)
                                             : AssetImage('assets/user2.png'),
                                         //child: Image.asset("assets/10.jpeg",fit: BoxFit.cover,),
                                       ))

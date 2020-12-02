@@ -46,7 +46,7 @@ class _OfferComponentState extends State<OfferComponent> {
                 borderRadius: BorderRadius.circular(12),
                 child: Image.network(
                   //"assets/10.jpeg",
-                  Image_URL + "${widget.offerData["bannerImage"]}",
+                  "${widget.offerData["bannerImage"]}",
                   fit: BoxFit.cover,
                 ),
               ),

@@ -256,8 +256,7 @@ class _DailyNewScreenState extends State<DailyNewScreen>
                                                     FadeInImage.assetNetwork(
                                                       placeholder:
                                                           'assets/z.jpeg',
-                                                      image: Image_URL +
-                                                          link["newsImage"],
+                                                      image: link["newsImage"],
                                                     ),
 //                                                    Image.network(Image_URL +
 //                                                        link["newsImage"]),

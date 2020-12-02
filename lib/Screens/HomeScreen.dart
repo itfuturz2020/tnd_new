@@ -274,7 +274,7 @@ class _HomeScreenState extends State<HomeScreen>
                         return new ClipRRect(
                             // borderRadius: BorderRadius.circular(8.0),
                             child: Image.network(
-                          Image_URL + link["image"],
+                          link["image"],
                           width: MediaQuery.of(context).size.width,
                           height: 220,
                           fit: BoxFit.contain,

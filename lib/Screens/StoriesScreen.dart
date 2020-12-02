@@ -48,8 +48,7 @@ class _StoriesScreenState extends State<StoriesScreen> {
                                 height: 420,
                                 width: MediaQuery.of(context).size.width,
                                 child: Image.network(
-                                  Image_URL +
-                                      "${successStoriesList[index]["storyImage"]}",
+                                  "${successStoriesList[index]["storyImage"]}",
                                   fit: BoxFit.fitHeight,
                                 ),
                               ),
@@ -173,8 +172,7 @@ class _StoriesScreenState extends State<StoriesScreen> {
                                               borderRadius:
                                                   BorderRadius.circular(20),
                                               child: Image.network(
-                                                Image_URL +
-                                                    "${successStoriesList[index]["storyImage"]}",
+                                                "${successStoriesList[index]["storyImage"]}",
                                                 fit: BoxFit.cover,
                                               )),
                                         ),

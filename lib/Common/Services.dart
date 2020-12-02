@@ -132,4 +132,22 @@ class Services {
       throw Exception(e.toString());
     }
   }
+
+  static Future<List<CategoryData>> GetMemberType() async {
+    String url = API_URL + 'admin/getAllMemberCategory';
+    try {
+      Response response = await dio.post(url);
+      if (response.statusCode == 200) {
+        MemberCategoryData categoryData =
+            new MemberCategoryData.fromJson(response.data);
+        return categoryData.Data;
+      } else {
+        print("error ->" + response.data.toString());
+        throw Exception(response.data.toString());
+      }
+    } catch (e) {
+      print("error -> ${e.toString()}");
+      throw Exception(e.toString());
+    }
+  }
 }

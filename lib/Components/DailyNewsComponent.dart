@@ -136,7 +136,7 @@ class _DailyNewsComponentState extends State<DailyNewsComponent> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(14),
                           child: Image.network(
-                            Image_URL + "${widget.newsData["newsImage"]} ",
+                            "${widget.newsData["newsImage"]} ",
                             height: 91,
                             width: 95,
                             fit: BoxFit.contain,

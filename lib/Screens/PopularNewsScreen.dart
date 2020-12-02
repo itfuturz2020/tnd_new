@@ -1,5 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
+import 'package:the_national_dawn/Common/Services.dart';
 
 class PopularNewsScreen extends StatefulWidget {
   var newsData;
@@ -11,6 +16,22 @@ class PopularNewsScreen extends StatefulWidget {
 }
 
 class _PopularNewsScreenState extends State<PopularNewsScreen> {
+  bool isLoading = false;
+  List bookmarkList = [];
+  String CustomerId;
+
+  _profile() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      CustomerId = prefs.getString(Session.CustomerId);
+    });
+  }
+
+  @override
+  void initState() {
+    _profile();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +54,7 @@ class _PopularNewsScreenState extends State<PopularNewsScreen> {
                       child: FadeInImage.assetNetwork(
                         placeholder: "assets/TND Logo_PNG_Newspaper.png",
                         fit: BoxFit.fill,
-                        image: Image_URL + "${widget.newsData["newsImage"]}",
+                        image: "${widget.newsData["newsImage"]}",
                       ),
                     ),
                   ),
@@ -165,8 +186,13 @@ class _PopularNewsScreenState extends State<PopularNewsScreen> {
                           child: CircleAvatar(
                               radius: 30.0,
                               backgroundColor: Colors.white,
-                              child: Icon(Icons.favorite,
-                                  color: Colors.red, size: 45.0)
+                              child: GestureDetector(
+                                onTap: () {
+                                  addToBookmark();
+                                },
+                                child: Icon(Icons.favorite,
+                                    color: Colors.red, size: 45.0),
+                              )
 //                            Image.asset("assets/Lheart.png"),
                               //Icon(Icons.favorite,color: Colors.red,size: 45.0,),
                               ),
@@ -209,5 +235,41 @@ class _PopularNewsScreenState extends State<PopularNewsScreen> {
         ),
       ),
     );
+  }
+
+  addToBookmark() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        var body = {"userId": CustomerId, "newsId": widget.newsData["_id"]};
+        print(body);
+        Services.PostForList(api_name: 'admin/addToBookMark', body: body).then(
+            (ResponseList) async {
+          setState(() {
+            isLoading = false;
+          });
+          if (ResponseList.length > 0) {
+            setState(() {
+              bookmarkList = ResponseList;
+            });
+            Fluttertoast.showToast(msg: "Bookmarked Successfully!");
+          } else {
+            setState(() {
+              isLoading = false;
+            });
+            Fluttertoast.showToast(msg: "No Data Found");
+            //show "data not found" in dialog
+          }
+        }, onError: (e) {
+          setState(() {
+            isLoading = false;
+          });
+          print("error on call -> ${e.message}");
+          Fluttertoast.showToast(msg: "Something Went Wrong");
+        });
+      }
+    } on SocketException catch (_) {
+      Fluttertoast.showToast(msg: "No Internet Connection.");
+    }
   }
 }

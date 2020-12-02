@@ -79,8 +79,8 @@ class _NetworkingProfileState extends State<NetworkingProfile> {
                   ),
                   child: CircleAvatar(
                     radius: 80,
-                    backgroundImage: NetworkImage(
-                        Image_URL + "${widget.directoryData["img"]}"),
+                    backgroundImage:
+                        NetworkImage("${widget.directoryData["img"]}"),
                     //child: Image.asset("assets/10.jpeg",fit: BoxFit.cover,),
                   )),
               SizedBox(

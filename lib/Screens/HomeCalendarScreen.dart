@@ -227,8 +227,7 @@ class _HomeCalendarScreenState extends State<HomeCalendarScreen>
                         child: CircleAvatar(
                           radius: 49,
                           backgroundColor: Colors.grey,
-                          backgroundImage:
-                              NetworkImage(Image_URL + event["eventImage"]),
+                          backgroundImage: NetworkImage(event["eventImage"]),
                         ),
                       )
                     ],

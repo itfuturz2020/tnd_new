@@ -180,8 +180,8 @@ class _OfferScreenState extends State<OfferScreen> {
                                 onChanged: (value) {
                                   setState(() {
                                     selectedOfferCat = value;
-                                    // _getCity(selectedState.stateId);
                                   });
+                                  _getOffer(selectedOfferCat.offerId);
                                 },
                                 items: offerCatList.map(
                                   (OfferClass offer) {

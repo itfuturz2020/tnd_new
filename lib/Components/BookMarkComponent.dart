@@ -53,7 +53,7 @@ class _BookMarkComponentState extends State<BookMarkComponent> {
                       Padding(
                         padding: const EdgeInsets.only(left: 16.0, top: 15.0),
                         child: Text(
-                          "${widget.bookmarkData["headline"]}",
+                          "${widget.bookmarkData["newsId"]["headline"]}",
                           maxLines: 4,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
@@ -79,7 +79,7 @@ class _BookMarkComponentState extends State<BookMarkComponent> {
                           ),
                           child: Center(
                               child: Text(
-                            "Mr. Arpit Shah",
+                            "${widget.bookmarkData["userId"]["name"]}",
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 color: Colors.white,
@@ -104,7 +104,7 @@ class _BookMarkComponentState extends State<BookMarkComponent> {
                                 color: Colors.grey,
                               ),
                               Text(
-                                "${widget.bookmarkData["newsDate"]}",
+                                "${widget.bookmarkData["newsId"]["newsDate"] + widget.bookmarkData["newsId"]["newsTime"]}}",
                                 style:
                                     TextStyle(color: Colors.grey, fontSize: 12),
                               )
@@ -123,7 +123,7 @@ class _BookMarkComponentState extends State<BookMarkComponent> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(14),
                     child: Image.network(
-                      Image_URL + "${widget.bookmarkData["newsImage"]}",
+                      "${widget.bookmarkData["newsId"]["newsImage"]}",
                       height: 150,
                       width: 130,
                       fit: BoxFit.cover,

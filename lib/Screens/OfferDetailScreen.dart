@@ -73,7 +73,7 @@ class _OfferDetailScreenState extends State<OfferDetailScreen> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: Image.network(
-                    Image_URL + "${widget.offerData["bannerImage"]}",
+                    "${widget.offerData["bannerImage"]}",
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -136,7 +136,7 @@ class _OfferDetailScreenState extends State<OfferDetailScreen> {
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: Image.network(
-                              Image_URL + "${widget.offerData["bannerImage"]}",
+                              "${widget.offerData["bannerImage"]}",
                               fit: BoxFit.cover,
                             )),
                       ),

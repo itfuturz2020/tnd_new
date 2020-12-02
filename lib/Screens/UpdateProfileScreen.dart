@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
@@ -9,8 +8,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:the_national_dawn/Common/ClassList.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
+import 'package:the_national_dawn/Components/LoadingBlueComponent.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   @override
@@ -23,7 +24,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   TextEditingController txtSpouseName = TextEditingController();
   TextEditingController txtachievement = TextEditingController();
   TextEditingController txtCName = TextEditingController();
-  TextEditingController txtPosition = TextEditingController();
   TextEditingController txtChildrenCount = TextEditingController();
   TextEditingController txtExperience = TextEditingController();
   TextEditingController txtEmail = TextEditingController();
@@ -31,6 +31,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   TextEditingController txtMobileNumber = TextEditingController();
   TextEditingController txtWNumber = TextEditingController();
   TextEditingController txtGstNumber = TextEditingController();
+  TextEditingController facebook = TextEditingController();
+  TextEditingController instagram = TextEditingController();
+  TextEditingController linkedIn = TextEditingController();
+  TextEditingController twitter = TextEditingController();
+  TextEditingController youTube = TextEditingController();
+
   String img, userName = "";
   final _formkey = new GlobalKey<FormState>();
   bool isLoading = false;
@@ -39,10 +45,52 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   String _format = 'yyyy-MMMM-dd';
   DateTime _birthDate = DateTime.now();
   DateTime _spouseBirthDate = DateTime.now();
+  List<CategoryData> memberTypeList = [];
+  CategoryData selectedOfferCat;
+  bool isOfferLoading = false;
+  String MemberTypeId, BusinessCategory;
+
+  bool isCategoty = true;
+  List<OfferClass> offerCatList = [];
+  OfferClass selectedOfferCat2;
 
   @override
   void initState() {
     _profile();
+    getCategory();
+    getMemberType();
+  }
+
+  getMemberType() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        Services.GetMemberType().then((responseList) async {
+          setState(() {
+            isOfferLoading = true;
+          });
+          if (responseList.length > 0) {
+            setState(() {
+              isOfferLoading = false;
+              memberTypeList = responseList;
+            });
+          } else {
+            setState(() {
+              isOfferLoading = false;
+            });
+            Fluttertoast.showToast(msg: "Data Not Found");
+          }
+        }, onError: (e) {
+          setState(() {
+            isOfferLoading = false;
+          });
+          print("error on call -> ${e.message}");
+          Fluttertoast.showToast(msg: "Something Went Wrong");
+        });
+      }
+    } on SocketException catch (_) {
+      Fluttertoast.showToast(msg: "No Internet Connection.");
+    }
   }
 
   void _showBirthDate() {
@@ -96,7 +144,15 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       txtEmail.text = prefs.getString(Session.CustomerEmailId);
       txtMobileNumber.text = prefs.getString(Session.CustomerPhoneNo);
       txtWNumber.text = prefs.getString(Session.CustomerPhoneNo);
-      img = prefs.getString(Session.CustomerImage);
+      txtachievement.text = prefs.getString(Session.achievement);
+      txtAboutBusiness.text = prefs.getString(Session.about_business);
+      txtChildrenCount.text = prefs.getString(Session.number_of_child);
+      txtExperience.text = prefs.getString(Session.experience);
+      facebook.text = prefs.getString(Session.faceBook);
+      instagram.text = prefs.getString(Session.instagram);
+      youTube.text = prefs.getString(Session.youTube);
+      twitter.text = prefs.getString(Session.twitter);
+      linkedIn.text = prefs.getString(Session.linkedIn);
       log("======================");
 //      print(img);
     });
@@ -351,12 +407,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                         radius: 80,
                                         backgroundColor:
                                             appPrimaryMaterialColor,
-                                        backgroundImage:
-//                    NetworkImage(
-//                        Image_URL + "${widget.directoryData["img"]}"),
-                                            FileImage(
-                                          _Image,
-                                        ),
                                       ))
                           : Container(
                               decoration: BoxDecoration(
@@ -555,16 +605,10 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                 offset: Offset(3.0, 5.0))
                           ]),
                       child: TextFormField(
-                        controller: txtName,
+                        controller: txtAddress,
                         keyboardType: TextInputType.text,
                         style: TextStyle(fontSize: 15),
                         cursorColor: appPrimaryMaterialColor,
-                        validator: (name) {
-                          if (name.length == 0) {
-                            return 'Please enter address';
-                          }
-                          return null;
-                        },
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(15),
                           fillColor: Colors.white,
@@ -621,12 +665,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         keyboardType: TextInputType.text,
                         style: TextStyle(fontSize: 15),
                         cursorColor: appPrimaryMaterialColor,
-                        validator: (name) {
-                          if (name.length == 0) {
-                            return 'Please enter name';
-                          }
-                          return null;
-                        },
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(15),
                           fillColor: Colors.white,
@@ -691,7 +729,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         ),
                       ),
                     ),
-                    Padding(
+/*                    Padding(
                       padding:
                           const EdgeInsets.only(top: 20.0, left: 5, bottom: 5),
                       child: Text(
@@ -728,6 +766,63 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 //                          }
 //                          return null;
 //                        },
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.all(15),
+                          fillColor: Colors.white,
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                        ),
+                      ),
+                    ),*/
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 20.0, left: 5, bottom: 5),
+                      child: Text(
+                        "Achievement",
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.grey[700],
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    Container(
+                      height: 42,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          //border: Border.all(color: Colors.grey[500], width: 1),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          boxShadow: [
+                            BoxShadow(
+                                color: appPrimaryMaterialColor.withOpacity(0.2),
+                                blurRadius: 2.0,
+                                spreadRadius: 2.0,
+                                offset: Offset(3.0, 5.0))
+                          ]),
+                      child: TextFormField(
+                        //controller: txtName,
+                        controller: txtachievement,
+                        keyboardType: TextInputType.text,
+                        style: TextStyle(fontSize: 15),
+                        cursorColor: appPrimaryMaterialColor,
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(15),
                           fillColor: Colors.white,
@@ -1096,9 +1191,205 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     ),
                     Padding(
                       padding:
+                          const EdgeInsets.only(top: 15.0, left: 5, bottom: 5),
+                      child: Text(
+                        'Member Type',
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.grey[700],
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 15.0, top: 15),
+                      child: Container(
+                          height: 38,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              border:
+                                  Border.all(color: appPrimaryMaterialColor)),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: DropdownButtonHideUnderline(
+                              child: isOfferLoading
+                                  ? LoadingBlueComponent()
+                                  : DropdownButton<CategoryData>(
+//                                hint: dropdownValue == null
+//                                    ? Text(
+//                                        "Select category",
+//                                        style: TextStyle(
+//                                          color: Colors.black,
+//                                        ),
+//                                      )
+//                                    : Text(dropdownValue),
+                                      dropdownColor: Colors.white,
+                                      hint: Text("Select Member Type"),
+                                      icon: Icon(
+                                        Icons.arrow_drop_down,
+                                        size: 40,
+                                        color: Colors.black,
+                                      ),
+                                      isExpanded: true,
+                                      value: selectedOfferCat,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          selectedOfferCat = value;
+                                          MemberTypeId = selectedOfferCat.Id;
+                                        });
+                                      },
+                                      items: memberTypeList.map(
+                                        (CategoryData category) {
+                                          return DropdownMenuItem<CategoryData>(
+                                            child:
+                                                Text(category.memberShipName),
+                                            value: category,
+                                          );
+                                        },
+                                      ).toList(),
+                                    ),
+                            ),
+
+//                          DropdownButtonHideUnderline(
+//                        child: DropdownButton(
+//                          hint: dropdownValue == null
+//                              ? Text(
+//                                  "Select category",
+//                                  style: TextStyle(
+//                                    color: Colors.black,
+//                                  ),
+//                                )
+//                              : Text(dropdownValue),
+//                          dropdownColor: Colors.white,
+//                          icon: Icon(
+//                            Icons.arrow_drop_down,
+//                            size: 40,
+//                            color: Colors.black,
+//                          ),
+//                          isExpanded: true,
+//                          value: dropdownValue,
+//                          items: [
+//                            "Sports",
+//                            "Entertainment",
+//                            "Politics",
+//                            "Religion"
+//                          ].map((value) {
+//                            return DropdownMenuItem<String>(
+//                                value: value, child: Text(value));
+//                          }).toList(),
+//                          onChanged: (value) {
+//                            setState(() {
+//                              dropdownValue = value;
+//                            });
+//                          },
+//                        ),
+//                      ),
+                          )),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 15.0, left: 5, bottom: 5),
+                      child: Text(
+                        'Business Category',
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.grey[700],
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 15.0, top: 15),
+                      child: Container(
+                          height: 38,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              border:
+                                  Border.all(color: appPrimaryMaterialColor)),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: DropdownButtonHideUnderline(
+                              child: isCategoty
+                                  ? LoadingBlueComponent()
+                                  : DropdownButton<OfferClass>(
+//                                hint: dropdownValue == null
+//                                    ? Text(
+//                                        "Select category",
+//                                        style: TextStyle(
+//                                          color: Colors.black,
+//                                        ),
+//                                      )
+//                                    : Text(dropdownValue),
+                                      dropdownColor: Colors.white,
+                                      hint: Text("Select Business Category"),
+                                      icon: Icon(
+                                        Icons.arrow_drop_down,
+                                        size: 40,
+                                        color: Colors.black,
+                                      ),
+                                      isExpanded: true,
+                                      value: selectedOfferCat2,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          selectedOfferCat2 = value;
+                                          BusinessCategory =
+                                              selectedOfferCat2.offerId;
+                                        });
+                                      },
+                                      items: offerCatList.map(
+                                        (OfferClass category) {
+                                          return DropdownMenuItem<OfferClass>(
+                                            child: Text(category.offerName),
+                                            value: category,
+                                          );
+                                        },
+                                      ).toList(),
+                                    ),
+                            ),
+
+//                          DropdownButtonHideUnderline(
+//                        child: DropdownButton(
+//                          hint: dropdownValue == null
+//                              ? Text(
+//                                  "Select category",
+//                                  style: TextStyle(
+//                                    color: Colors.black,
+//                                  ),
+//                                )
+//                              : Text(dropdownValue),
+//                          dropdownColor: Colors.white,
+//                          icon: Icon(
+//                            Icons.arrow_drop_down,
+//                            size: 40,
+//                            color: Colors.black,
+//                          ),
+//                          isExpanded: true,
+//                          value: dropdownValue,
+//                          items: [
+//                            "Sports",
+//                            "Entertainment",
+//                            "Politics",
+//                            "Religion"
+//                          ].map((value) {
+//                            return DropdownMenuItem<String>(
+//                                value: value, child: Text(value));
+//                          }).toList(),
+//                          onChanged: (value) {
+//                            setState(() {
+//                              dropdownValue = value;
+//                            });
+//                          },
+//                        ),
+//                      ),
+                          )),
+                    ),
+                    Padding(
+                      padding:
                           const EdgeInsets.only(top: 20.0, left: 5, bottom: 5),
                       child: Text(
-                        'SpouseName',
+                        'About Business',
                         style: TextStyle(
                             fontSize: 15,
                             color: Colors.grey[700],
@@ -1121,17 +1412,10 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           ]),
                       child: TextFormField(
                         //controller: txtName,
-                        controller: txtWNumber,
-                        keyboardType: TextInputType.phone,
+                        controller: txtAboutBusiness,
+                        keyboardType: TextInputType.text,
                         style: TextStyle(fontSize: 15),
                         cursorColor: appPrimaryMaterialColor,
-                        maxLength: 10,
-                        validator: (wphone) {
-                          if (wphone.length == 0) {
-                            return 'Please enter mobile number';
-                          }
-                          return null;
-                        },
                         decoration: InputDecoration(
                           counterText: "",
                           contentPadding: const EdgeInsets.all(15),
@@ -1155,6 +1439,280 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20.0)),
                             borderSide: BorderSide(color: Colors.grey),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 20.0, left: 5, bottom: 5),
+                      child: Text(
+                        'Experience',
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.grey[700],
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    Container(
+                      height: 42,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          //border: Border.all(color: Colors.grey[500], width: 1),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          boxShadow: [
+                            BoxShadow(
+                                color: appPrimaryMaterialColor.withOpacity(0.2),
+                                blurRadius: 2.0,
+                                spreadRadius: 2.0,
+                                offset: Offset(3.0, 5.0))
+                          ]),
+                      child: TextFormField(
+                        //controller: txtName,
+                        controller: txtExperience,
+                        keyboardType: TextInputType.text,
+                        style: TextStyle(fontSize: 15),
+                        cursorColor: appPrimaryMaterialColor,
+                        decoration: InputDecoration(
+                          counterText: "",
+                          contentPadding: const EdgeInsets.all(15),
+                          fillColor: Colors.white,
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 20.0, left: 5, bottom: 5),
+                      child: Text(
+                        "Social Media Links",
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.grey[700],
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4.0),
+                      child: Container(
+                        height: 42,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            //border: Border.all(color: Colors.grey[500], width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            boxShadow: [
+                              BoxShadow(
+                                  color:
+                                      appPrimaryMaterialColor.withOpacity(0.2),
+                                  blurRadius: 2.0,
+                                  spreadRadius: 2.0,
+                                  offset: Offset(3.0, 5.0))
+                            ]),
+                        child: TextFormField(
+                          //controller: txtName,
+                          controller: facebook,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(fontSize: 15),
+                          cursorColor: appPrimaryMaterialColor,
+                          decoration: InputDecoration(
+                            hintText: "Facebook Link",
+                            contentPadding: const EdgeInsets.all(15),
+                            fillColor: Colors.white,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4.0),
+                      child: Container(
+                        height: 42,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            //border: Border.all(color: Colors.grey[500], width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            boxShadow: [
+                              BoxShadow(
+                                  color:
+                                      appPrimaryMaterialColor.withOpacity(0.2),
+                                  blurRadius: 2.0,
+                                  spreadRadius: 2.0,
+                                  offset: Offset(3.0, 5.0))
+                            ]),
+                        child: TextFormField(
+                          //controller: txtName,
+                          controller: instagram,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(fontSize: 15),
+                          cursorColor: appPrimaryMaterialColor,
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(15),
+                            fillColor: Colors.white,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4.0),
+                      child: Container(
+                        height: 42,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            //border: Border.all(color: Colors.grey[500], width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            boxShadow: [
+                              BoxShadow(
+                                  color:
+                                      appPrimaryMaterialColor.withOpacity(0.2),
+                                  blurRadius: 2.0,
+                                  spreadRadius: 2.0,
+                                  offset: Offset(3.0, 5.0))
+                            ]),
+                        child: TextFormField(
+                          //controller: txtName,
+                          controller: linkedIn,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(fontSize: 15),
+                          cursorColor: appPrimaryMaterialColor,
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(15),
+                            fillColor: Colors.white,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4.0),
+                      child: Container(
+                        height: 42,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            //border: Border.all(color: Colors.grey[500], width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            boxShadow: [
+                              BoxShadow(
+                                  color:
+                                      appPrimaryMaterialColor.withOpacity(0.2),
+                                  blurRadius: 2.0,
+                                  spreadRadius: 2.0,
+                                  offset: Offset(3.0, 5.0))
+                            ]),
+                        child: TextFormField(
+                          //controller: txtName,
+                          controller: instagram,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(fontSize: 15),
+                          cursorColor: appPrimaryMaterialColor,
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(15),
+                            fillColor: Colors.white,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
                           ),
                         ),
                       ),
@@ -1200,6 +1758,41 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     );
   }
 
+  getCategory() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        Services.getState().then((responseList) async {
+          setState(() {
+            isCategoty = true;
+          });
+          if (responseList.length > 0) {
+            setState(() {
+              isCategoty = false;
+              offerCatList = responseList;
+            });
+          } else {
+            setState(() {
+              isCategoty = false;
+            });
+            Fluttertoast.showToast(msg: "Data Not Found");
+          }
+        }, onError: (e) {
+          setState(() {
+            isCategoty = false;
+          });
+          print("error on call -> ${e.message}");
+          Fluttertoast.showToast(msg: "Something Went Wrong");
+        });
+      }
+    } on SocketException catch (_) {
+      setState(() {
+        isLoading = false;
+      });
+      Fluttertoast.showToast(msg: "No Internet Connection.");
+    }
+  }
+
   _updateProfile() async {
     if (_formkey.currentState.validate()) {
       try {
@@ -1243,17 +1836,23 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             "spouse_birth_date": _spouseBirthDate.toString().split(" ")[0],
             "achievement": txtachievement.text,
             "number_of_child": txtChildrenCount.text,
-            "keyword": "",
+            "memberOf": MemberTypeId,
             "experience": txtExperience.text,
             "about_business": txtAboutBusiness.text,
             "img": (filePath != null && filePath != '')
                 ? await MultipartFile.fromFile(filePath,
                     filename: filename.toString())
                 : null,
+            "faceBook": facebook.text,
+            "instagram": instagram.text,
+            "linkedIn": linkedIn.text,
+            "twitter": twitter.text,
+            "youTube": youTube.text,
+            "business_category": BusinessCategory
           });
           print(body.fields);
           //"key":"value"
-          /*Services.PostForList(
+          Services.PostForList(
                   api_name: 'api/registration/updatePersonal', body: body)
               .then((responseList) async {
             setState(() {
@@ -1266,7 +1865,21 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                 prefs.setString(Session.CustomerCompanyName, txtCName.text);
                 prefs.setString(Session.CustomerEmailId, txtEmail.text);
                 prefs.setString(Session.CustomerPhoneNo, txtMobileNumber.text);
-                prefs.setString(Session.CustomerImage, filename.toString());
+                prefs.setString(Session.spouse_name, txtSpouseName.text);
+                prefs.setString(Session.number_of_child, txtChildrenCount.text);
+                prefs.setString(Session.about_business, txtAboutBusiness.text);
+                prefs.setString(Session.experience, txtExperience.text);
+                prefs.setString(Session.achievement, txtachievement.text);
+                prefs.setString(Session.linkedIn, linkedIn.text);
+                prefs.setString(Session.faceBook, facebook.text);
+                prefs.setString(Session.youTube, youTube.text);
+                prefs.setString(Session.instagram, instagram.text);
+                prefs.setString(Session.twitter, twitter.text);
+                prefs.setString(Session.twitter, twitter.text);
+                prefs.setString(Session.gender, Gender);
+                prefs.setString(Session.spouse_birth_date,
+                    responseList[0]["spouse_birth_date"]);
+                prefs.setString(Session.CustomerImage, responseList[0]["img"]);
               });
               Navigator.of(context).pushNamed('/ProfileScreen');
               Fluttertoast.showToast(
@@ -1284,7 +1897,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             print("error on call -> ${e.message}");
             Fluttertoast.showToast(msg: "Something Went Wrong");
             //showMsg("something went wrong");
-          });*/
+          });
         }
       } on SocketException catch (_) {
         Fluttertoast.showToast(msg: "No Internet Connection.");

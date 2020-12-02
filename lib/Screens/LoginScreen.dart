@@ -27,6 +27,21 @@ class _LoginScreenState extends State<LoginScreen> {
     await prefs.setString(Session.CustomerEmailId, data["email"]);
     await prefs.setString(Session.CustomerPhoneNo, data["mobile"]);
     await prefs.setString(Session.CustomerImage, data["img"]);
+    await prefs.setString(Session.date_of_birth, data["date_of_birth"]);
+    await prefs.setString(Session.gender, data["gender"]);
+    await prefs.setString(Session.spouse_name, data["spouse_name"]);
+    await prefs.setString(Session.spouse_birth_date, data["spouse_birth_date"]);
+    await prefs.setString(Session.number_of_child, data["number_of_child"]);
+    await prefs.setString(Session.experience, data["experience"]);
+    await prefs.setString(Session.about_business, data["about_business"]);
+    await prefs.setString(Session.achievement, data["achievement"]);
+    await prefs.setString(Session.faceBook, data["faceBook"]);
+    await prefs.setString(Session.instagram, data["instagram"]);
+    await prefs.setString(Session.linkedIn, data["linkedIn"]);
+    await prefs.setString(Session.twitter, data["twitter"]);
+    await prefs.setString(Session.youTube, data["youTube"]);
+    await prefs.setString(Session.business_category, data["business_category"]);
+    await prefs.setString(Session.memberOf, data["memberOf"]);
 
     Navigator.pushNamedAndRemoveUntil(context, '/HomeScreen', (route) => false);
   }
@@ -202,7 +217,6 @@ class _LoginScreenState extends State<LoginScreen> {
               setState(() {
                 isLoading = false;
               });
-              saveDataToSession(responselist[0]);
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (BuildContext context) => VerificationScreen(
                         mobile: txtMobileNumber.text,
