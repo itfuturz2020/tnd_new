@@ -74,17 +74,19 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 3.0),
-                        child: Text(
-                          "${widget.directoryData["business_category"]}",
-                          //widget.directoryData["business_category"],
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                              color: Colors.grey[700],
-                              fontStyle: FontStyle.italic,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400),
-                        ),
+                        child: widget.directoryData["business_category"] == null
+                            ? Text("")
+                            : Text(
+                                "${widget.directoryData["business_category"]["categoryName"]}",
+                                //widget.directoryData["business_category"],
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    color: Colors.grey[700],
+                                    fontStyle: FontStyle.italic,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400),
+                              ),
                       ),
                       FittedBox(
                         child: Padding(
@@ -141,8 +143,6 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
                                   Icons.more_vert,
                                   color: appPrimaryMaterialColor,
                                 ),
-
-//
                                 Text(
                                   "View details",
                                   style: TextStyle(fontSize: 12),

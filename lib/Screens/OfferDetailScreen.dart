@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
+import 'package:the_national_dawn/Components/SocialMediaComponent.dart';
 
 class OfferDetailScreen extends StatefulWidget {
   var offerData;
@@ -77,6 +78,23 @@ class _OfferDetailScreenState extends State<OfferDetailScreen> {
                   ),
                 ),
               ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            SocialMediaComponent(
+              facebook: widget.offerData["faceBook"],
+              instagram: widget.offerData["instagram"],
+              linkedIn: widget.offerData["linkedIn"],
+              twitter: widget.offerData["twitter"],
+              whatsapp: widget.offerData["whatsApp"],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Social Media links",
+                    style: TextStyle(fontSize: 12, color: Colors.grey)),
+              ],
             ),
             SizedBox(
               height: 16,

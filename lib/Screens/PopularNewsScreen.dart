@@ -96,7 +96,7 @@ class _PopularNewsScreenState extends State<PopularNewsScreen> {
                                   color: Colors.grey,
                                 ),
                                 Text(
-                                  "12 september 2020",
+                                  "${widget.newsData["newsDate"] + widget.newsData["newsTime"]}",
                                   style: TextStyle(
                                       color: Colors.grey, fontSize: 8),
                                 )

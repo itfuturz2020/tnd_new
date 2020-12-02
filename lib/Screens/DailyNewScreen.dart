@@ -412,16 +412,17 @@ class _DailyNewScreenState extends State<DailyNewScreen>
                                                                     color: Colors
                                                                         .grey,
                                                                   ),
-                                                                  Text(
-                                                                    "11 september 2019",
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .white,
-                                                                        letterSpacing:
-                                                                            0.5,
-                                                                        fontSize:
-                                                                            8),
-                                                                  )
+                                                                  link["newsDate"] ==
+                                                                          null
+                                                                      ? Text("")
+                                                                      : Text(
+                                                                          "${link["newsDate"]}" +
+                                                                              "${link["newsTime"]}",
+                                                                          style: TextStyle(
+                                                                              color: Colors.white,
+                                                                              letterSpacing: 0.5,
+                                                                              fontSize: 8),
+                                                                        )
                                                                 ],
                                                               ),
                                                               SizedBox(

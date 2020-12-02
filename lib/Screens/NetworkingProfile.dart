@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Components/SocialMediaComponent.dart';
 
-class DirectoryProfileComponent extends StatefulWidget {
+class NetworkingProfile extends StatefulWidget {
   var directoryData;
-  DirectoryProfileComponent({this.directoryData});
+  NetworkingProfile({this.directoryData});
   @override
-  _DirectoryProfileComponentState createState() =>
-      _DirectoryProfileComponentState();
+  _NetworkingProfileState createState() => _NetworkingProfileState();
 }
 
-class _DirectoryProfileComponentState extends State<DirectoryProfileComponent> {
+class _NetworkingProfileState extends State<NetworkingProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

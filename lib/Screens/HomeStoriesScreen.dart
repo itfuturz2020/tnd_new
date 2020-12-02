@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
 import 'package:the_national_dawn/Components/LoadingBlueComponent.dart';
+import 'package:the_national_dawn/Components/SocialMediaComponent.dart';
 
 class HomeStoriesScreen extends StatefulWidget {
   @override
@@ -178,6 +179,23 @@ class _HomeStoriesScreenState extends State<HomeStoriesScreen> {
                               SizedBox(
                                 height: 10,
                               ),
+                              SocialMediaComponent(
+                                facebook: successStoriesList[index]["faceBook"],
+                                instagram: successStoriesList[index]
+                                    ["instagram"],
+                                linkedIn: successStoriesList[index]["linkedIn"],
+                                twitter: successStoriesList[index]["twitter"],
+                                whatsapp: successStoriesList[index]["whatsApp"],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Social Media links",
+                                      style: TextStyle(
+                                          fontSize: 12, color: Colors.grey)),
+                                ],
+                              ),
+                              Divider(),
                               Text(
                                   "${successStoriesList[index]["storyContent"]}",
                                   textAlign: TextAlign.justify,

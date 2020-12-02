@@ -26,6 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
     await prefs.setString(Session.CustomerCompanyName, data["company_name"]);
     await prefs.setString(Session.CustomerEmailId, data["email"]);
     await prefs.setString(Session.CustomerPhoneNo, data["mobile"]);
+    await prefs.setString(Session.CustomerImage, data["img"]);
 
     Navigator.pushNamedAndRemoveUntil(context, '/HomeScreen', (route) => false);
   }
@@ -201,6 +202,7 @@ class _LoginScreenState extends State<LoginScreen> {
               setState(() {
                 isLoading = false;
               });
+              saveDataToSession(responselist[0]);
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (BuildContext context) => VerificationScreen(
                         mobile: txtMobileNumber.text,

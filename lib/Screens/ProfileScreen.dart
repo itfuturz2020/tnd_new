@@ -34,10 +34,8 @@ class _ProfileScreenState extends State<ProfileScreen>
       _comp_name = prefs.getString(Session.CustomerCompanyName);
       _email = prefs.getString(Session.CustomerEmailId);
       img = prefs.getString(Session.CustomerImage);
-
       _mobileNo = prefs.getString(Session.CustomerPhoneNo);
-      // img = prefs.getString(Session.CustomerImage);
-      //  print(img);
+      print(img);
     });
   }
 
@@ -189,8 +187,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                                       ),
                                       child: CircleAvatar(
                                         radius: 80,
-                                        backgroundImage:
-                                            NetworkImage(Image_URL + img),
+                                        backgroundImage: img != null
+                                            ? NetworkImage(Image_URL + img)
+                                            : AssetImage('assets/user2.png'),
                                         //child: Image.asset("assets/10.jpeg",fit: BoxFit.cover,),
                                       ))
                                   : Container(

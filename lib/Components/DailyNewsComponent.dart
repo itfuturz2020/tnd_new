@@ -112,7 +112,7 @@ class _DailyNewsComponentState extends State<DailyNewsComponent> {
                               color: Colors.grey,
                             ),
                             Text(
-                              "${widget.newsData["newsDate"]} ",
+                              "${widget.newsData["newsDate"] + widget.newsData["newsTime"]}",
                               style: TextStyle(color: Colors.grey, fontSize: 8),
                             )
                           ],

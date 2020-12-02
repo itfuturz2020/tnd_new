@@ -3,9 +3,11 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:numberpicker/numberpicker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
@@ -17,19 +19,72 @@ class UpdateProfileScreen extends StatefulWidget {
 
 class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   TextEditingController txtName = TextEditingController();
+  TextEditingController txtAddress = TextEditingController();
+  TextEditingController txtSpouseName = TextEditingController();
+  TextEditingController txtachievement = TextEditingController();
   TextEditingController txtCName = TextEditingController();
   TextEditingController txtPosition = TextEditingController();
+  TextEditingController txtChildrenCount = TextEditingController();
+  TextEditingController txtExperience = TextEditingController();
   TextEditingController txtEmail = TextEditingController();
+  TextEditingController txtAboutBusiness = TextEditingController();
   TextEditingController txtMobileNumber = TextEditingController();
   TextEditingController txtWNumber = TextEditingController();
   TextEditingController txtGstNumber = TextEditingController();
   String img, userName = "";
   final _formkey = new GlobalKey<FormState>();
   bool isLoading = false;
+  String Gender;
+  DateTimePickerLocale _locale = DateTimePickerLocale.en_us;
+  String _format = 'yyyy-MMMM-dd';
+  DateTime _birthDate = DateTime.now();
+  DateTime _spouseBirthDate = DateTime.now();
 
   @override
   void initState() {
     _profile();
+  }
+
+  void _showBirthDate() {
+    DatePicker.showDatePicker(
+      context,
+      dateFormat: _format,
+      initialDateTime: _birthDate,
+      locale: _locale,
+      onCancel: () => print('onCancel'),
+      onChange: (dateTime, List<int> index) {
+        setState(() {
+          _birthDate = dateTime;
+        });
+      },
+      onConfirm: (dateTime, List<int> index) {
+        setState(() {
+          _birthDate = dateTime;
+        });
+        print(_birthDate);
+      },
+    );
+  }
+
+  void _showSpouseDatePicker() {
+    DatePicker.showDatePicker(
+      context,
+      dateFormat: _format,
+      initialDateTime: _spouseBirthDate,
+      locale: _locale,
+      onCancel: () => print('onCancel'),
+      onChange: (dateTime, List<int> index) {
+        setState(() {
+          _spouseBirthDate = dateTime;
+        });
+      },
+      onConfirm: (dateTime, List<int> index) {
+        setState(() {
+          _spouseBirthDate = dateTime;
+        });
+        print(_spouseBirthDate);
+      },
+    );
   }
 
   _profile() async {
@@ -43,7 +98,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       txtWNumber.text = prefs.getString(Session.CustomerPhoneNo);
       img = prefs.getString(Session.CustomerImage);
       log("======================");
-      log(img);
 //      print(img);
     });
   }
@@ -271,12 +325,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                         radius: 80,
                                         backgroundColor:
                                             appPrimaryMaterialColor,
-                                        backgroundImage:
+//                                        backgroundImage:
 //                    NetworkImage(
 //                        Image_URL + "${widget.directoryData["img"]}"),
-                                            NetworkImage(
+                                        /*  NetworkImage(
                                           Image_URL + img,
-                                        ),
+                                        ),*/
                                       ))
                                   : Container(
                                       decoration: BoxDecoration(
@@ -398,6 +452,246 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       ),
                     ),
                     Padding(
+                      padding: const EdgeInsets.only(top: 15.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Text("Gender",
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.grey[700],
+                                    fontWeight: FontWeight.w600)),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Radio(
+                            value: 'Male',
+                            groupValue: Gender,
+                            onChanged: (value) {
+                              setState(() {
+                                Gender = value;
+                                print(Gender);
+                              });
+                            }),
+                        Text("Male", style: TextStyle(fontSize: 13)),
+                        Radio(
+                            value: 'Female',
+                            groupValue: Gender,
+                            onChanged: (value) {
+                              setState(() {
+                                Gender = value;
+                                print(Gender);
+                              });
+                            }),
+                        Text("Female", style: TextStyle(fontSize: 13)),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Text("Date of Birth",
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.grey[700],
+                                    fontWeight: FontWeight.w600)),
+                          ),
+                        ],
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        _showBirthDate();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 40,
+                          decoration: BoxDecoration(
+                              border:
+                                  Border.all(width: 1, color: Colors.black54),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(4.0))),
+                          child: Center(
+                              child: Text(
+                            '${_birthDate.day}/${_birthDate.month}/${_birthDate.year}',
+                            style: TextStyle(fontSize: 17),
+                          )),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 10.0, left: 5, bottom: 5),
+                      child: Text(
+                        'Address',
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.grey[700],
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    Container(
+                      height: 42,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          //border: Border.all(color: Colors.grey[500], width: 1),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          boxShadow: [
+                            BoxShadow(
+                                color: appPrimaryMaterialColor.withOpacity(0.2),
+                                blurRadius: 2.0,
+                                spreadRadius: 2.0,
+                                offset: Offset(3.0, 5.0))
+                          ]),
+                      child: TextFormField(
+                        controller: txtName,
+                        keyboardType: TextInputType.text,
+                        style: TextStyle(fontSize: 15),
+                        cursorColor: appPrimaryMaterialColor,
+                        validator: (name) {
+                          if (name.length == 0) {
+                            return 'Please enter address';
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.all(15),
+                          fillColor: Colors.white,
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 10.0, left: 5, bottom: 5),
+                      child: Text(
+                        'Spouse Name',
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.grey[700],
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    Container(
+                      height: 42,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          //border: Border.all(color: Colors.grey[500], width: 1),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          boxShadow: [
+                            BoxShadow(
+                                color: appPrimaryMaterialColor.withOpacity(0.2),
+                                blurRadius: 2.0,
+                                spreadRadius: 2.0,
+                                offset: Offset(3.0, 5.0))
+                          ]),
+                      child: TextFormField(
+                        controller: txtSpouseName,
+                        keyboardType: TextInputType.text,
+                        style: TextStyle(fontSize: 15),
+                        cursorColor: appPrimaryMaterialColor,
+                        validator: (name) {
+                          if (name.length == 0) {
+                            return 'Please enter name';
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.all(15),
+                          fillColor: Colors.white,
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Text("Date of Birth",
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.grey[700],
+                                    fontWeight: FontWeight.w600)),
+                          ),
+                        ],
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        _showSpouseDatePicker();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 40,
+                          decoration: BoxDecoration(
+                              border:
+                                  Border.all(width: 1, color: Colors.black54),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(4.0))),
+                          child: Center(
+                              child: Text(
+                            '${_spouseBirthDate.day}/${_spouseBirthDate.month}/${_spouseBirthDate.year}',
+                            style: TextStyle(fontSize: 17),
+                          )),
+                        ),
+                      ),
+                    ),
+                    Padding(
                       padding:
                           const EdgeInsets.only(top: 20.0, left: 5, bottom: 5),
                       child: Text(
@@ -426,6 +720,69 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         //controller: txtName,
                         controller: txtPosition,
                         keyboardType: TextInputType.text,
+                        style: TextStyle(fontSize: 15),
+                        cursorColor: appPrimaryMaterialColor,
+//                        validator: (position) {
+//                          if (position.length == 0) {
+//                            return 'Please enter your position';
+//                          }
+//                          return null;
+//                        },
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.all(15),
+                          fillColor: Colors.white,
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 20.0, left: 5, bottom: 5),
+                      child: Text(
+                        'No Of Children',
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.grey[700],
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    Container(
+                      height: 42,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          //border: Border.all(color: Colors.grey[500], width: 1),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          boxShadow: [
+                            BoxShadow(
+                                color: appPrimaryMaterialColor.withOpacity(0.2),
+                                blurRadius: 2.0,
+                                spreadRadius: 2.0,
+                                offset: Offset(3.0, 5.0))
+                          ]),
+                      child: TextFormField(
+                        //controller: txtName,
+                        controller: txtChildrenCount,
+                        keyboardType: TextInputType.number,
                         style: TextStyle(fontSize: 15),
                         cursorColor: appPrimaryMaterialColor,
 //                        validator: (position) {
@@ -738,6 +1095,71 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       ),
                     ),
                     Padding(
+                      padding:
+                          const EdgeInsets.only(top: 20.0, left: 5, bottom: 5),
+                      child: Text(
+                        'SpouseName',
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.grey[700],
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    Container(
+                      height: 42,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          //border: Border.all(color: Colors.grey[500], width: 1),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          boxShadow: [
+                            BoxShadow(
+                                color: appPrimaryMaterialColor.withOpacity(0.2),
+                                blurRadius: 2.0,
+                                spreadRadius: 2.0,
+                                offset: Offset(3.0, 5.0))
+                          ]),
+                      child: TextFormField(
+                        //controller: txtName,
+                        controller: txtWNumber,
+                        keyboardType: TextInputType.phone,
+                        style: TextStyle(fontSize: 15),
+                        cursorColor: appPrimaryMaterialColor,
+                        maxLength: 10,
+                        validator: (wphone) {
+                          if (wphone.length == 0) {
+                            return 'Please enter mobile number';
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          counterText: "",
+                          contentPadding: const EdgeInsets.all(15),
+                          fillColor: Colors.white,
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
                       padding: const EdgeInsets.only(top: 20.0),
                       child: GestureDetector(
                         onTap: () {
@@ -814,23 +1236,24 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             "email": txtEmail.text,
             "company_name": txtCName.text,
             "referred_by": prefs.getString(Session.referred_by),
-            "date_of_birth ": "",
-            "gender": "",
-            "address": "",
-            "spouse_name": "",
-            "spouse_birth_date": "",
-            "achievement": "",
-            "number_of_child": "",
+            "date_of_birth": _birthDate.toString().split(" ")[0],
+            "gender": Gender,
+            "address": txtAddress.text,
+            "spouse_name": txtSpouseName.text,
+            "spouse_birth_date": _spouseBirthDate.toString().split(" ")[0],
+            "achievement": txtachievement.text,
+            "number_of_child": txtChildrenCount.text,
             "keyword": "",
-            "experience": "",
-            "about_business": "",
+            "experience": txtExperience.text,
+            "about_business": txtAboutBusiness.text,
             "img": (filePath != null && filePath != '')
                 ? await MultipartFile.fromFile(filePath,
                     filename: filename.toString())
                 : null,
-          }); //"key":"value"
-
-          Services.PostForList(
+          });
+          print(body.fields);
+          //"key":"value"
+          /*Services.PostForList(
                   api_name: 'api/registration/updatePersonal', body: body)
               .then((responseList) async {
             setState(() {
@@ -838,14 +1261,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             });
             if (responseList.length > 0) {
               SharedPreferences prefs = await SharedPreferences.getInstance();
-
               setState(() {
                 prefs.setString(Session.CustomerName, txtName.text);
                 prefs.setString(Session.CustomerCompanyName, txtCName.text);
                 prefs.setString(Session.CustomerEmailId, txtEmail.text);
-
                 prefs.setString(Session.CustomerPhoneNo, txtMobileNumber.text);
-                prefs.setString(Session.CustomerImage, responseList[0]["img"]);
+                prefs.setString(Session.CustomerImage, filename.toString());
               });
               Navigator.of(context).pushNamed('/ProfileScreen');
               Fluttertoast.showToast(
@@ -863,7 +1284,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             print("error on call -> ${e.message}");
             Fluttertoast.showToast(msg: "Something Went Wrong");
             //showMsg("something went wrong");
-          });
+          });*/
         }
       } on SocketException catch (_) {
         Fluttertoast.showToast(msg: "No Internet Connection.");

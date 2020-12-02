@@ -20,7 +20,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController txtName = TextEditingController();
   TextEditingController txtCName = TextEditingController();
   TextEditingController txtEmail = TextEditingController();
-  TextEditingController txtReferredBy = TextEditingController();
+  //TextEditingController txtReferredBy = TextEditingController();
   TextEditingController txtMobileNumber = TextEditingController();
   final _formkey = new GlobalKey<FormState>();
   bool isLoading = false;
@@ -332,6 +332,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
               ),
+/*
               Padding(
                 padding: const EdgeInsets.only(left: 30.0, right: 30, top: 10),
                 child: TextFormField(
@@ -373,6 +374,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
               ),
+*/
               Padding(
                 padding: const EdgeInsets.only(left: 30.0, right: 30, top: 30),
                 child: Container(
@@ -435,7 +437,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             "mobile": txtMobileNumber.text.toString(),
             "email": txtEmail.text,
             "company_name": txtCName.text,
-            "referred_by": txtReferredBy.text,
+            "referred_by": "",
           }; //"key":"value"
           Services.PostForList(api_name: 'api/registration', body: body).then(
               (responseList) async {
