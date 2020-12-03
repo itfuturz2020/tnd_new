@@ -6,7 +6,6 @@ import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart
 import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:numberpicker/numberpicker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/ClassList.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
@@ -1686,7 +1685,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             ]),
                         child: TextFormField(
                           //controller: txtName,
-                          controller: instagram,
+                          controller: twitter,
                           keyboardType: TextInputType.text,
                           style: TextStyle(fontSize: 15),
                           cursorColor: appPrimaryMaterialColor,
@@ -1874,7 +1873,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                 prefs.setString(Session.faceBook, facebook.text);
                 prefs.setString(Session.youTube, youTube.text);
                 prefs.setString(Session.instagram, instagram.text);
-                prefs.setString(Session.twitter, twitter.text);
                 prefs.setString(Session.twitter, twitter.text);
                 prefs.setString(Session.gender, Gender);
                 prefs.setString(Session.spouse_birth_date,

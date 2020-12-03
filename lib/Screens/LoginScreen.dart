@@ -31,7 +31,8 @@ class _LoginScreenState extends State<LoginScreen> {
     await prefs.setString(Session.gender, data["gender"]);
     await prefs.setString(Session.spouse_name, data["spouse_name"]);
     await prefs.setString(Session.spouse_birth_date, data["spouse_birth_date"]);
-    await prefs.setString(Session.number_of_child, data["number_of_child"]);
+    await prefs.setString(
+        Session.number_of_child, data["number_of_child"].toString());
     await prefs.setString(Session.experience, data["experience"]);
     await prefs.setString(Session.about_business, data["about_business"]);
     await prefs.setString(Session.achievement, data["achievement"]);
@@ -217,6 +218,7 @@ class _LoginScreenState extends State<LoginScreen> {
               setState(() {
                 isLoading = false;
               });
+              //saveDataToSession(responselist[0]);
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (BuildContext context) => VerificationScreen(
                         mobile: txtMobileNumber.text,

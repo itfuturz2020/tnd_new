@@ -36,9 +36,9 @@ class Services {
   }
 
   static Future<List> Login(body) async {
+    var url = API_URL + "api/login";
     try {
-      Response response = await dio
-          .post("https://blogproject-33.herokuapp.com/api/login", data: body);
+      Response response = await dio.post(url, data: body);
       if (response.statusCode == 200) {
         List list = [];
         print("login Response: " + response.data.toString());

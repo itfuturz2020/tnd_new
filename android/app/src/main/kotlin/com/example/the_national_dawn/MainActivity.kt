@@ -1,4 +1,4 @@
-package com.example.the_national_dawn
+package com.example1.the_national_dawn
 
 import io.flutter.embedding.android.FlutterActivity
 
