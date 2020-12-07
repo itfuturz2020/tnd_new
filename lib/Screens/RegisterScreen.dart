@@ -20,7 +20,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController txtName = TextEditingController();
   TextEditingController txtCName = TextEditingController();
   TextEditingController txtEmail = TextEditingController();
-  //TextEditingController txtReferredBy = TextEditingController();
+  TextEditingController txtReferredBy = TextEditingController();
   TextEditingController txtMobileNumber = TextEditingController();
   final _formkey = new GlobalKey<FormState>();
   bool isLoading = false;
@@ -332,49 +332,75 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
               ),
-/*
-              Padding(
-                padding: const EdgeInsets.only(left: 30.0, right: 30, top: 10),
-                child: TextFormField(
-                  keyboardType: TextInputType.text,
-                  controller: txtReferredBy,
-                  style: TextStyle(fontSize: 15),
-                  cursorColor: appPrimaryMaterialColor,
-                  // maxLength: 10,
-                  validator: (rname) {
-                    if (rname.length == 0) {
-                      return 'Please enter referred by';
-                    }
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                    counterText: "",
-                    contentPadding: EdgeInsets.only(
-                        top: 1.0, bottom: 1, left: 10, right: 1),
-                    hintText: "Referred By",
-                    hintStyle: TextStyle(
-                        color: Colors.grey[400], fontWeight: FontWeight.w500),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      borderSide:
-                          BorderSide(color: appPrimaryMaterialColor[400]),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      borderSide: BorderSide(color: appPrimaryMaterialColor),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      borderSide: BorderSide(color: Colors.red),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      borderSide: BorderSide(color: Colors.red),
+              Row(
+                children: [
+                  Flexible(
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(left: 30.0, right: 15, top: 10),
+                      child: TextFormField(
+                        keyboardType: TextInputType.text,
+                        controller: txtReferredBy,
+                        style: TextStyle(fontSize: 15),
+                        cursorColor: appPrimaryMaterialColor,
+                        decoration: InputDecoration(
+                          counterText: "",
+                          contentPadding: EdgeInsets.only(
+                              top: 1.0, bottom: 1, left: 10, right: 1),
+                          hintText: "Enter Referral Code",
+                          hintStyle: TextStyle(
+                              color: Colors.grey[400],
+                              fontWeight: FontWeight.w500),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                            borderSide:
+                                BorderSide(color: appPrimaryMaterialColor[400]),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                            borderSide:
+                                BorderSide(color: appPrimaryMaterialColor),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0, right: 30),
+                    child: SizedBox(
+                      width: 100,
+                      child: RaisedButton(
+                          color: appPrimaryMaterialColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          onPressed: () {},
+                          child: isLoading
+                              ? CircularProgressIndicator(
+                                  valueColor: new AlwaysStoppedAnimation<Color>(
+                                      Colors.white),
+                                )
+                              : Text("VERIFY",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16))),
+                    ),
+                  ),
+                ],
               ),
-*/
               Padding(
                 padding: const EdgeInsets.only(left: 30.0, right: 30, top: 30),
                 child: Container(

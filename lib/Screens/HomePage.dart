@@ -35,9 +35,9 @@ class _HomePageState extends State<HomePage> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 20, left: 25, right: 25),
+        padding: const EdgeInsets.only(bottom: 17, left: 25, right: 25, top: 8),
         child: Container(
-          height: MediaQuery.of(context).size.height * 0.12,
+          height: 70,
           decoration: BoxDecoration(
             // boxShadow: <BoxShadow>[
             borderRadius: BorderRadius.circular(17),

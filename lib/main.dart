@@ -23,12 +23,15 @@ import 'package:the_national_dawn/Screens/OfferScreen.dart';
 import 'package:the_national_dawn/Screens/OneTwoOneScreen.dart';
 import 'package:the_national_dawn/Screens/PopularNewsScreen.dart';
 import 'package:the_national_dawn/Screens/ProfileScreen.dart';
+import 'package:the_national_dawn/Screens/ReferEarnScreen.dart';
 import 'package:the_national_dawn/Screens/RegisterScreen.dart';
 import 'package:the_national_dawn/Screens/SplashScreen.dart';
 import 'package:the_national_dawn/Screens/StoriesScreen.dart';
 import 'package:the_national_dawn/Screens/UpdateProfileScreen.dart';
 import 'package:the_national_dawn/Screens/VerificationScreen.dart';
 import 'package:the_national_dawn/Screens/ViewDetailScreen.dart';
+
+import 'Screens/AddOfferScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -77,6 +80,8 @@ class _MyAppState extends State<MyApp> {
         '/BookMarkDetailScreen': (context) => BookMarkDetailScreen(),
         '/UpdateProfileScreen': (context) => UpdateProfileScreen(),
         '/CalendarDetailScreen': (context) => CalendarDetailScreen(),
+        '/AddOfferScreen': (context) => AddOfferScreen(),
+        '/ReferEarnScreen': (context) => ReferEarnScreen(),
       },
       theme: ThemeData(
           //fontFamily: 'RobotoSlab',

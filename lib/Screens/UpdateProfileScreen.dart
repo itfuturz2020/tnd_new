@@ -353,10 +353,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                   child: CircleAvatar(
                                     radius: 80,
                                     backgroundColor: appPrimaryMaterialColor,
-                                    backgroundImage:
-//                    NetworkImage(
-//                        Image_URL + "${widget.directoryData["img"]}"),
-                                        FileImage(
+                                    backgroundImage: FileImage(
                                       _Image,
                                     ),
                                   ))

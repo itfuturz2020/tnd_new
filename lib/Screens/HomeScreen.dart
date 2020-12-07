@@ -193,6 +193,31 @@ class _HomeScreenState extends State<HomeScreen>
               ),
               GestureDetector(
                 onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushNamed('/ReferEarnScreen');
+                },
+                child: ListTile(
+                  leading: Padding(
+                    padding: const EdgeInsets.only(right: 10.0, left: 4),
+                    child: Container(
+                        height: 26,
+                        width: 26,
+                        child: Image.asset(
+                          "assets/hand-shake.png",
+                          color: appPrimaryMaterialColor,
+                        )),
+                  ),
+                  title: Text(
+                    "Refer & Earn",
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15),
+                child: Divider(),
+              ),
+              GestureDetector(
+                onTap: () {
                   // Navigator.of(context).pop();
                   _showDialog(context);
                 },
@@ -804,12 +829,12 @@ class _HomeScreenState extends State<HomeScreen>
     String image,
     String screenName,
   ) {
-    return Padding(
-      padding: const EdgeInsets.all(12.0),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.of(context).pushNamed(screenName);
-        },
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).pushNamed(screenName);
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
         child: Container(
           height: MediaQuery.of(context).size.height * 0.13,
           width: MediaQuery.of(context).size.height * 0.1,
