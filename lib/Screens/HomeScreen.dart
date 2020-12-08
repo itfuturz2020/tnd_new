@@ -1,6 +1,8 @@
 import 'dart:io';
+import 'dart:math';
 import 'dart:ui';
 
+import 'package:barcode_scan/barcode_scan.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen>
   var _mobileNo;
   var _email;
   var img;
+  String barCode;
 
   _profile() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -43,6 +46,32 @@ class _HomeScreenState extends State<HomeScreen>
     });
   }
 
+  Future scanVisitor() async {
+    try {
+      String barCode = await BarcodeScanner.scan();
+      var qrtext = barCode.toString().split(",");
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Name : " + "${qrtext[0]}"),
+                Text("Company Name : " + "${qrtext[1]}"),
+                Text("Email : " + "${qrtext[2]}"),
+                Text("Image : " + "${qrtext[3]}"),
+                Text("Phone : " + "${qrtext[4]}"),
+              ],
+            ),
+          );
+        },
+      );
+    } catch (e) {
+      setState(() => this.barCode = 'Unknown error: $e');
+    }
+  }
 
   @override
   void initState() {
@@ -121,6 +150,8 @@ class _HomeScreenState extends State<HomeScreen>
       },
     );
   }
+
+  _scanDialog(var data) {}
 
   @override
   Widget build(BuildContext context) {
@@ -891,8 +922,8 @@ class _HomeScreenState extends State<HomeScreen>
                     child: MaterialButton(
                       color: appPrimaryMaterialColor,
                       onPressed: () {
-                        //Navigator.pop(context);
-                        //  scan();
+                        scanVisitor();
+                        Navigator.of(context).pop();
                       },
                       child: Text(
                         "Scan QRCode",
@@ -1140,6 +1171,27 @@ class _AlertboxLogoutState extends State<AlertboxLogout> {
           },
         ),
       ],
+    );
+  }
+}
+
+class ScanAlert extends StatefulWidget {
+  @override
+  _ScanAlertState createState() => _ScanAlertState();
+}
+
+class _ScanAlertState extends State<ScanAlert> {
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: new Text(
+        "Scan",
+        style: TextStyle(
+          fontSize: 22,
+          color: appPrimaryMaterialColor,
+          // fontWeight: FontWeight.bold
+        ),
+      ),
     );
   }
 }
