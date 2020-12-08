@@ -242,54 +242,65 @@ class _NetworkingProfileState extends State<NetworkingProfile> {
               SizedBox(
                 height: 25,
               ),
-              Container(
-                height: 42,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.grey[500], width: 1),
-                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                    boxShadow: [
-                      BoxShadow(
-                          color: appPrimaryMaterialColor.withOpacity(0.2),
-                          blurRadius: 2.0,
-                          spreadRadius: 2.0,
-                          offset: Offset(3.0, 5.0))
-                    ]),
-                child: Center(
-                    child: Text(
-                  "Share my details",
-                  style: TextStyle(
-                      color: Colors.grey[600],
-                      fontWeight: FontWeight.w600,
-                      fontSize: 21),
-                )),
-              ),
-              SizedBox(
-                height: 18,
-              ),
-              Container(
-                height: 42,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.grey[500], width: 1),
-                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                    boxShadow: [
-                      BoxShadow(
-                          color: appPrimaryMaterialColor.withOpacity(0.2),
-                          blurRadius: 2.0,
-                          spreadRadius: 2.0,
-                          offset: Offset(3.0, 5.0))
-                    ]),
-                child: Center(
-                    child: Text(
-                  "Share QR to scan",
-                  style: TextStyle(
-                      color: Colors.grey[600],
-                      fontWeight: FontWeight.w600,
-                      fontSize: 21),
-                )),
+              Row(
+                children: [
+                  Flexible(
+                    child: Container(
+                      height: 42,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(color: Colors.grey[500], width: 1),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          boxShadow: [
+                            BoxShadow(
+                                color: appPrimaryMaterialColor.withOpacity(0.2),
+                                blurRadius: 1.0,
+                                spreadRadius: 1.0,
+                                offset: Offset(2.0, 4.0))
+                          ]),
+                      child: Center(
+                          child: Text(
+                        "Share my details",
+                        style: TextStyle(
+                            color: Colors.grey[600],
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15),
+                      )),
+                    ),
+                  ),
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 5.0),
+                      child: Container(
+                        height: 42,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border:
+                                Border.all(color: Colors.grey[500], width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            boxShadow: [
+                              BoxShadow(
+                                  color:
+                                      appPrimaryMaterialColor.withOpacity(0.2),
+                                  blurRadius: 1.0,
+                                  spreadRadius: 1.0,
+                                  offset: Offset(2.0, 4.0))
+                            ]),
+                        child: Center(
+                            child: Text(
+                          "Share QR to scan",
+                          style: TextStyle(
+                              color: Colors.grey[600],
+                              fontWeight: FontWeight.w600,
+                              fontSize: 15),
+                        )),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

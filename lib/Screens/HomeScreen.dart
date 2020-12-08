@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_slider/image_slider.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
@@ -22,12 +23,31 @@ class _HomeScreenState extends State<HomeScreen>
   TabController tabController;
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   String fcmToken = "";
+  String qrData;
+  var _name;
+  var _comp_name;
+  var _mobileNo;
+  var _email;
+  var img;
+
+  _profile() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _name = prefs.getString(Session.CustomerName);
+      _comp_name = prefs.getString(Session.CustomerCompanyName);
+      _email = prefs.getString(Session.CustomerEmailId);
+      img = prefs.getString(Session.CustomerImage);
+      _mobileNo = prefs.getString(Session.CustomerPhoneNo);
+      qrData =
+          _name + "," + _comp_name + "," + _email + "," + img + "," + _mobileNo;
+    });
+  }
 
   @override
   void initState() {
     super.initState();
     _bannerImage();
-
+    _profile();
     _firebaseMessaging.configure(onMessage: (Map<String, dynamic> message) {
       print("onMessage");
       print(message);
@@ -139,9 +159,14 @@ class _HomeScreenState extends State<HomeScreen>
           ),
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0, top: 18, bottom: 19),
-            child: Image.asset("assets/scan.png"),
+          GestureDetector(
+            onTap: () {
+              _settingModalBottomSheet(context);
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0, top: 18, bottom: 19),
+              child: Image.asset("assets/scan.png"),
+            ),
           ),
           Image.asset("assets/bell.png"),
         ],
@@ -819,9 +844,161 @@ class _HomeScreenState extends State<HomeScreen>
         ),
       ),
     );
-    //     ],
-    //   ),
-    // ));
+  }
+
+  void _settingModalBottomSheet(context) {
+    showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: new Wrap(
+                children: <Widget>[
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: Container(
+                        padding: EdgeInsets.only(top: 20),
+                        color: Colors.white,
+                        child: QrImage(
+                          data: "${qrData}",
+                          size: 230.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: Container(
+                      margin: EdgeInsets.only(top: 15),
+                      padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                      child: Text(
+                        "Scan this QRCode to get contact information.",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 45,
+                    margin: EdgeInsets.only(bottom: 10, top: 5),
+                    child: MaterialButton(
+                      color: appPrimaryMaterialColor,
+                      onPressed: () {
+                        //Navigator.pop(context);
+                        //  scan();
+                      },
+                      child: Text(
+                        "Scan QRCode",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 17.0,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Container(
+                          width: MediaQuery.of(context).size.width / 2.3,
+                          child: RaisedButton(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              elevation: 5,
+                              textColor: Colors.white,
+                              color: appPrimaryMaterialColor,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.share,
+                                    color: Colors.white,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: Text("Share",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 15)),
+                                  )
+                                ],
+                              ),
+                              onPressed: () {
+                                //_getViewCardId("no");
+                                // bool val = true;
+                                /*  if (val != null && val == true)
+                                  Navigator.of(context).push(
+                                    PageRouteBuilder(
+                                      opaque: false,
+                                      pageBuilder:
+                                          (BuildContext context, _, __) =>
+                                              CardShareComponent(
+                                        memberId: cardData,
+                                        memberName: name,
+                                        isRegular: val,
+                                        memberType: MemberType,
+                                        shareMsg: ShareMsg,
+                                        IsActivePayment: IsActivePayment,
+                                      ),
+                                    ),
+                                  );
+                                else
+                                  showMsg(
+                                      'Your trial is expired please contact to digital card team for renewal.\n\nThank you,\nRegards\nDigital Card');
+
+                        },*/
+                              },
+                              shape: new RoundedRectangleBorder(
+                                  borderRadius:
+                                      new BorderRadius.circular(30.0))),
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width / 2.3,
+                          child: RaisedButton(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              elevation: 5,
+                              textColor: Colors.white,
+                              color: appPrimaryMaterialColor,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.remove_red_eye,
+                                    color: Colors.white,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: Text("View Card",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 15)),
+                                  )
+                                ],
+                              ),
+                              onPressed: () async {
+                                // _getViewCardId("yes");
+                              },
+                              shape: new RoundedRectangleBorder(
+                                  borderRadius:
+                                      new BorderRadius.circular(30.0))),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
 
   Widget custombox(

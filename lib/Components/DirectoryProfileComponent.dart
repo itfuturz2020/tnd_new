@@ -218,7 +218,6 @@ class _DirectoryProfileComponentState extends State<DirectoryProfileComponent> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-//                                              "+91-8488848476",
                               "${widget.directoryData["mobile"]}",
                               style: TextStyle(
                                   color: Colors.black,
@@ -226,9 +225,7 @@ class _DirectoryProfileComponentState extends State<DirectoryProfileComponent> {
                                   fontWeight: FontWeight.bold,
                                   letterSpacing: 1),
                             ),
-                            Text(
-//                                                "xsantosh7@gmail.com",
-                                "${widget.directoryData["email"]}",
+                            Text("${widget.directoryData["email"]}",
                                 style: TextStyle(
                                     color: Colors.grey[700],
                                     fontSize: 16,

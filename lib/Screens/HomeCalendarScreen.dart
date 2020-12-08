@@ -41,7 +41,6 @@ class _HomeCalendarScreenState extends State<HomeCalendarScreen>
           });
           Map<DateTime, List> temp = {};
           if (ResponseList.length > 0) {
-            log("===========================");
             for (var i = 0; i < ResponseList.length; i++) {
               List splitData =
                   ResponseList[i]["startDate"][0].toString().split("/");
@@ -162,6 +161,7 @@ class _HomeCalendarScreenState extends State<HomeCalendarScreen>
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: ListView(
+        shrinkWrap: true,
         children: _selectedEvents
             .map(
               (event) => Padding(
@@ -319,11 +319,10 @@ class _HomeCalendarScreenState extends State<HomeCalendarScreen>
           )
         ],
       ),
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
+      body: ListView(
         children: <Widget>[
           _buildTableCalendar(),
-          //_buildEventList(),
+          _buildEventList(),
         ],
       ),
     );

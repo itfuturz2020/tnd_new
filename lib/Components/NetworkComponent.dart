@@ -70,32 +70,38 @@ class _NetworkComponentState extends State<NetworkComponent> {
                             fontWeight: FontWeight.w600),
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 3.0),
-                            child:
-                                widget.networkData["business_category"] == null
-                                    ? Text("")
-                                    : Text(
-                                        "${widget.networkData["business_category"]["categoryName"]}",
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.start,
-                                        style: TextStyle(
-                                            color: Colors.grey[700],
-                                            fontStyle: FontStyle.italic,
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w400),
-                                      ),
+                          Flexible(
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 3.0),
+                              child: widget.networkData["business_category"] ==
+                                      null
+                                  ? Text("")
+                                  : Text(
+                                      "${widget.networkData["business_category"]["categoryName"]}",
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                          color: Colors.grey[700],
+                                          fontStyle: FontStyle.italic,
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                            ),
                           ),
-                          /* Text(
-                            "${widget.networkData["requestStatus"]}",
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600),
-                          ),*/
+                          Padding(
+                            padding: const EdgeInsets.only(right: 5.0),
+                            child: Text(
+                              "${widget.networkData["requestStatus"]}",
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
                         ],
                       ),
                       FittedBox(

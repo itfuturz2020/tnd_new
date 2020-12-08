@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 
@@ -15,6 +16,7 @@ class _ProfileScreenState extends State<ProfileScreen>
   var _mobileNo;
   var _email;
   var img;
+  String qrData;
 
   @override
   void initState() {
@@ -35,7 +37,8 @@ class _ProfileScreenState extends State<ProfileScreen>
       _email = prefs.getString(Session.CustomerEmailId);
       img = prefs.getString(Session.CustomerImage);
       _mobileNo = prefs.getString(Session.CustomerPhoneNo);
-      print(img);
+      qrData =
+          _name + "," + _comp_name + "," + _email + "," + img + "," + _mobileNo;
     });
   }
 
@@ -427,9 +430,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   height: 268,
                                   width: MediaQuery.of(context).size.width,
                                   child: Center(
-                                    child: Image.asset(
-                                      "assets/qr_code.png",
-                                      fit: BoxFit.fill,
+                                    child: QrImage(
+                                      data: qrData,
+                                      size: 250.0,
                                     ),
                                   ),
                                 ),
@@ -460,7 +463,6 @@ class _ProfileScreenState extends State<ProfileScreen>
                                           MainAxisAlignment.spaceAround,
                                       children: <Widget>[
                                         Text(
-//                                          "Mr. Natasha Goel",
                                           "${_name}",
                                           style: TextStyle(
                                               color: Colors.black,
