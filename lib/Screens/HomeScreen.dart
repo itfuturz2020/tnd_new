@@ -10,10 +10,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_slider/image_slider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:the_national_dawn/Common/ClassList.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
 import 'package:the_national_dawn/Components/LoadingBlueComponent.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:the_national_dawn/offlineDatabase/db_handler.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -32,6 +34,8 @@ class _HomeScreenState extends State<HomeScreen>
   var _email;
   var img;
   String barCode;
+  DBHelper dbHelper;
+  Future<List<Visitorclass>> visitor;
 
   _profile() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -50,11 +54,213 @@ class _HomeScreenState extends State<HomeScreen>
     try {
       String barCode = await BarcodeScanner.scan();
       var qrtext = barCode.toString().split(",");
+      print(qrtext[3]);
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return Dialog(
             child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Align(
+                    alignment: Alignment.topRight,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 9.0, top: 6),
+                        child: Icon(
+                          Icons.clear,
+                          size: 19,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    )),
+                Container(
+                    height: 80,
+                    width: 100,
+                    child: Image.network(Image_URL + "${qrtext[3]}")),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Name : ",
+                        style: TextStyle(
+                            color: Colors.black54,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      Text(
+                        "${qrtext[0]}",
+                        style: TextStyle(
+                            color: Colors.black54,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 7.0),
+                  child: Row(children: [
+                    Text(
+                      "Company Name : ",
+                      style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    Text(
+                      "${qrtext[1]}",
+                      style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ], mainAxisAlignment: MainAxisAlignment.center),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 7.0),
+                  child: Row(children: [
+                    Text(
+                      "Email : ",
+                      style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    Text(
+                      "${qrtext[2]}",
+                      style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ], mainAxisAlignment: MainAxisAlignment.center),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 7.0),
+                  child: Row(children: [
+                    Text(
+                      "Phone : ",
+                      /*"${widget.whtscall}",*/
+                      style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    Text(
+                      "${qrtext[4]}",
+                      /*"${widget.whtscall}",*/
+                      style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ], mainAxisAlignment: MainAxisAlignment.center),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 21.0, bottom: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          //launch(('mailto:// ${widget.emaildata}'));
+                        },
+                        child: CircleAvatar(
+                          child: Icon(
+                            Icons.mail,
+                            color: Colors.white,
+                            size: 19,
+                          ),
+                          backgroundColor: appPrimaryMaterialColor,
+                          radius: 19,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 12.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            // launch(('tel:// ${widget.phonedata}'));
+                          },
+                          child: CircleAvatar(
+                            child: Icon(
+                              Icons.call,
+                              color: Colors.white,
+                              size: 19,
+                            ),
+                            backgroundColor: appPrimaryMaterialColor,
+                            radius: 19,
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          /* launchwhatsapp(
+                              phone: "${widget.whtspdata}",
+                              message: "${widget.whtscall}");*/
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 12.0),
+                          child: CircleAvatar(
+                            child: Image.asset(
+                              "assets/whatsapp.png",
+                              width: 21,
+                              color: Colors.white,
+                            ),
+                            backgroundColor: appPrimaryMaterialColor,
+                            radius: 19,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    dbHelper.insertVisitor(Visitorclass(
+                        qrtext[0].toString(),
+                        qrtext[1].toString(),
+                        qrtext[2].toString(),
+                        qrtext[3].toString(),
+                        qrtext[4].toString()));
+                    Navigator.of(context).pop();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        top: 13.0, bottom: 25, left: 9, right: 9),
+                    child: Container(
+                      height: 35,
+                      width: MediaQuery.of(context).size.width / 2,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(
+                              color: appPrimaryMaterialColor, width: 1)),
+                      child: Center(
+                        child: Text(
+                          "Ok",
+                          // "${widget.contactdata}",
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 4,
+                  color: appPrimaryMaterialColor,
+                  width: MediaQuery.of(context).size.width,
+                ),
+              ],
+            ),
+            /*Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -63,8 +269,20 @@ class _HomeScreenState extends State<HomeScreen>
                 Text("Email : " + "${qrtext[2]}"),
                 Text("Image : " + "${qrtext[3]}"),
                 Text("Phone : " + "${qrtext[4]}"),
+                Center(
+                  child: RaisedButton(
+                      child: Text("ok"),
+                      onPressed: () {
+                        dbHelper.insertVisitor(Visitorclass(
+                            qrtext[0].toString(),
+                            qrtext[1].toString(),
+                            qrtext[2].toString(),
+                            qrtext[3].toString(),
+                            qrtext[4].toString()));
+                      }),
+                )
               ],
-            ),
+            ),*/
           );
         },
       );
@@ -76,6 +294,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
+    dbHelper = DBHelper();
     _bannerImage();
     _profile();
     _firebaseMessaging.configure(onMessage: (Map<String, dynamic> message) {
@@ -200,7 +419,11 @@ class _HomeScreenState extends State<HomeScreen>
               child: Image.asset("assets/scan.png"),
             ),
           ),
-          Image.asset("assets/bell.png"),
+          GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushNamed('/NotificationScreen');
+              },
+              child: Image.asset("assets/bell.png")),
         ],
         iconTheme: new IconThemeData(color: Colors.black),
       ),
@@ -266,6 +489,31 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                   title: Text(
                     "Refer & Earn",
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15),
+                child: Divider(),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushNamed('/MyEcardScreen');
+                },
+                child: ListTile(
+                  leading: Padding(
+                    padding: const EdgeInsets.only(right: 10.0, left: 4),
+                    child: Container(
+                        height: 26,
+                        width: 26,
+                        child: Image.asset(
+                          "assets/visitor-card.png",
+                          color: appPrimaryMaterialColor,
+                        )),
+                  ),
+                  title: Text(
+                    "My E-Card",
                   ),
                 ),
               ),
@@ -918,7 +1166,7 @@ class _HomeScreenState extends State<HomeScreen>
                   Container(
                     width: MediaQuery.of(context).size.width,
                     height: 45,
-                    margin: EdgeInsets.only(bottom: 10, top: 5),
+                    margin: EdgeInsets.only(bottom: 20, top: 5),
                     child: MaterialButton(
                       color: appPrimaryMaterialColor,
                       onPressed: () {
@@ -934,7 +1182,7 @@ class _HomeScreenState extends State<HomeScreen>
                       ),
                     ),
                   ),
-                  Container(
+                  /*Container(
                     margin: const EdgeInsets.only(bottom: 8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -966,7 +1214,7 @@ class _HomeScreenState extends State<HomeScreen>
                               onPressed: () {
                                 //_getViewCardId("no");
                                 // bool val = true;
-                                /*  if (val != null && val == true)
+                                */ /*  if (val != null && val == true)
                                   Navigator.of(context).push(
                                     PageRouteBuilder(
                                       opaque: false,
@@ -986,7 +1234,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   showMsg(
                                       'Your trial is expired please contact to digital card team for renewal.\n\nThank you,\nRegards\nDigital Card');
 
-                        },*/
+                        },*/ /*
                               },
                               shape: new RoundedRectangleBorder(
                                   borderRadius:
@@ -1025,7 +1273,7 @@ class _HomeScreenState extends State<HomeScreen>
                         )
                       ],
                     ),
-                  ),
+                  ),*/
                 ],
               ),
             ),

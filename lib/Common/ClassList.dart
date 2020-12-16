@@ -27,6 +27,39 @@ class OfferClassData {
   }
 }
 
+class Visitorclass {
+  int id;
+  String Name;
+  String Company_Name;
+  String Email;
+  String Image;
+  String Phone;
+
+  Visitorclass(
+      this.Name, this.Company_Name, this.Email, this.Image, this.Phone);
+
+  Map<String, dynamic> toMap() {
+    var map = <String, dynamic>{
+      'id': id,
+      'Name': Name,
+      'Company_Name': Company_Name,
+      'Email': Email,
+      'Image': Image,
+      'Phone': Phone,
+    };
+    return map;
+  }
+
+  Visitorclass.fromMap(Map<String, dynamic> map) {
+    id = map['id'];
+    Name = map['Name'];
+    Company_Name = map['Company_Name'];
+    Email = map['Email'];
+    Image = map['Image'];
+    Phone = map['Phone'];
+  }
+}
+
 class OfferClass {
   String offerId;
   String offerName;

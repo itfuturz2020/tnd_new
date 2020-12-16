@@ -97,9 +97,12 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
                                 width: MediaQuery.of(context).size.width - 35),
                           ),
                         ),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(
-                              top: 14.0, left: 10, right: 10),
+                              top: 10.0, left: 10, right: 10),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -107,14 +110,14 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
                                 "To refer your friends ,",
                                 textAlign: TextAlign.justify,
                                 style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 16,
+                                    color: Colors.black54,
+                                    fontSize: 17,
                                     fontWeight: FontWeight.w500),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(top: 2.0),
+                                padding: const EdgeInsets.only(top: 6.0),
                                 child: Text(
-                                  "you must be a Registered Customer on the Netmeds.com & the friends you refer must be NEW to Netmeds.com. So, login now (or create a new account if you don't already have one!) to Refer & Earn Rs. 150 NMS SuperCash your next purchase.",
+                                  "login now to Refer & Earn SuperCash your next purchase.",
                                   textAlign: TextAlign.justify,
                                   style: TextStyle(
                                       color: Colors.grey,
@@ -123,6 +126,9 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
                               ),
                             ],
                           ),
+                        ),
+                        SizedBox(
+                          height: 30,
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 20.0),
@@ -162,12 +168,15 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
                             ),
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 40.0),
+                        Expanded(
+                          child: SizedBox(),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 12.0),
+                          child: GestureDetector(
+                            onTap: () {},
                             child: Container(
-                              width: 120,
+                              width: MediaQuery.of(context).size.width / 1.5,
                               height: 40,
                               child: RaisedButton(
                                   color: appPrimaryMaterialColor,
@@ -178,8 +187,7 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
                                     share();
                                   },
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Icon(
                                         Icons.share,
@@ -187,7 +195,7 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
                                       ),
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(left: 9.0),
+                                            const EdgeInsets.only(left: 15.0),
                                         child: Text("Share",
                                             style: TextStyle(
                                                 color: Colors.white,
@@ -203,16 +211,15 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(
-                        top: 5.0, bottom: 5, left: 8, right: 8),
-                    child: ListView.separated(
-                      itemCount: 4,
+                    padding: const EdgeInsets.only(left: 5.0, right: 5, top: 5),
+                    child: ListView.builder(
+                      itemCount: 5,
                       itemBuilder: (BuildContext context, int index) {
                         return SizedBox(
-                          height: 75,
+                          height: 85,
                           child: Card(
                             child: Padding(
-                              padding: const EdgeInsets.all(7.0),
+                              padding: const EdgeInsets.all(9.0),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -220,52 +227,82 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(left: 5.0),
+                                            const EdgeInsets.only(top: 5.0),
                                         child: Text(
-                                          "solanki Meghana",
-                                          style: TextStyle(fontSize: 16),
+                                          "12 Jan 2020",
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400),
                                         ),
                                       ),
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(top: 7.0),
-                                        child: Row(
-                                          children: [
-                                            Image.asset(
-                                              "assets/coins.png",
-                                              width: 22,
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 6.0),
-                                              child: Text("200"),
-                                            ),
-                                          ],
+                                            const EdgeInsets.only(top: 6.0),
+                                        child: Text(
+                                          "solanki Meghana",
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400),
                                         ),
                                       ),
                                     ],
                                   ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "12/07/2020",
-                                        style: TextStyle(fontSize: 16),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 7.0),
-                                        child: Text(
-                                          "Earning",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w400),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 4.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 5.0),
+                                          child: Text(
+                                            "Earning",
+                                            style: TextStyle(
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.w400),
+                                          ),
                                         ),
-                                      )
-                                    ],
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 5.0),
+                                          child: Row(
+                                            children: [
+                                              Image.asset(
+                                                "assets/coins.png",
+                                                width: 22,
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 4.0),
+                                                child: Text(
+                                                  "₹",
+                                                  style: TextStyle(
+                                                      color: Colors.green,
+                                                      fontSize: 19),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 2.0, right: 4),
+                                                child: Text(
+                                                  "200",
+                                                  style: TextStyle(
+                                                      color: Colors.green,
+                                                      fontSize: 19),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
@@ -273,11 +310,11 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
                           ),
                         );
                       },
-                      separatorBuilder: (BuildContext context, int index) =>
+                      /* separatorBuilder: (BuildContext context, int index) =>
                           Divider(
                         thickness: 0.5,
                         color: Colors.grey,
-                      ),
+                      ),*/
                     ),
                   ),
                 ],

@@ -9,6 +9,7 @@ import 'package:the_national_dawn/Screens/CalendarDetailScreen.dart';
 import 'package:the_national_dawn/Screens/CalenderScreen.dart';
 import 'package:the_national_dawn/Screens/CategoryScreen.dart';
 import 'package:the_national_dawn/Screens/DailyNewScreen.dart';
+import 'package:the_national_dawn/Screens/Demobottombar.dart';
 import 'package:the_national_dawn/Screens/DirectoryScreen.dart';
 import 'package:the_national_dawn/Screens/HomeCalendarScreen.dart';
 import 'package:the_national_dawn/Screens/HomeCategoryScreen.dart';
@@ -17,7 +18,9 @@ import 'package:the_national_dawn/Screens/HomePage.dart';
 import 'package:the_national_dawn/Screens/HomeScreen.dart';
 import 'package:the_national_dawn/Screens/HomeStoriesScreen.dart';
 import 'package:the_national_dawn/Screens/LoginScreen.dart';
+import 'package:the_national_dawn/Screens/MyEcardScreen.dart';
 import 'package:the_national_dawn/Screens/NetworkScreen.dart';
+import 'package:the_national_dawn/Screens/NotificationScreen.dart';
 import 'package:the_national_dawn/Screens/OfferDetailScreen.dart';
 import 'package:the_national_dawn/Screens/OfferScreen.dart';
 import 'package:the_national_dawn/Screens/OneTwoOneScreen.dart';
@@ -82,6 +85,9 @@ class _MyAppState extends State<MyApp> {
         '/CalendarDetailScreen': (context) => CalendarDetailScreen(),
         '/AddOfferScreen': (context) => AddOfferScreen(),
         '/ReferEarnScreen': (context) => ReferEarnScreen(),
+        '/MyEcardScreen': (context) => MyEcardScreen(),
+        '/NotificationScreen': (context) => NotificationScreen(),
+        '/Home': (context) => Home(),
       },
       theme: ThemeData(
           //fontFamily: 'RobotoSlab',
