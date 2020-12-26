@@ -11,6 +11,8 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
 import 'package:the_national_dawn/Components/LoadingComponent.dart';
+import 'package:the_national_dawn/Components/SocialMediaComponent.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeCalendarScreen extends StatefulWidget {
   @override
@@ -736,6 +738,33 @@ class Eventdailog extends StatefulWidget {
 }
 
 class _EventdailogState extends State<Eventdailog> {
+  void launchwhatsapp({
+    @required String phone,
+    @required String message,
+  }) async {
+    String url() {
+      if (Platform.isIOS) {
+        return "whatsapp://wa.me/$phone/?text=${Uri.parse(message)}";
+      } else {
+        return "whatsapp://send?phone=$phone&text=${Uri.parse(message)}";
+      }
+    }
+
+    if (await canLaunch(url())) {
+      await launch(url());
+    } else {
+      throw 'Could not launch ${url()}';
+    }
+  }
+
+  launchSocialMediaUrl(var url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch ${url}';
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -881,8 +910,15 @@ class _EventdailogState extends State<Eventdailog> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 22.0),
-                child: Row(
+                padding: const EdgeInsets.only(top: 12.0, left: 20, right: 20),
+                child: SocialMediaComponent(
+                  facebook: widget.eventData["faceBook"],
+                  instagram: widget.eventData["instagram"],
+                  linkedIn: widget.eventData["linkedIn"],
+                  twitter: widget.eventData["twitter"],
+                  whatsapp: widget.eventData["whatsApp"],
+                ),
+                /*Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
@@ -1000,7 +1036,7 @@ class _EventdailogState extends State<Eventdailog> {
                       ),
                     ),
                   ],
-                ),
+                ),*/
               ),
             ],
           ),

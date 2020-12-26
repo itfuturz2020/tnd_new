@@ -1,19 +1,47 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Screens/PopularNewsScreen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DailyNewsComponent extends StatefulWidget {
   var newsData;
-
-  DailyNewsComponent({this.newsData});
+  String instagram, facebook, linkedIn, twitter, whatsapp;
+  DailyNewsComponent(
+      {this.instagram,
+      this.facebook,
+      this.linkedIn,
+      this.twitter,
+      this.whatsapp,
+      this.newsData});
 
   @override
   _DailyNewsComponentState createState() => _DailyNewsComponentState();
 }
 
 class _DailyNewsComponentState extends State<DailyNewsComponent> {
+  void launchwhatsapp({
+    @required String phone,
+    @required String message,
+  }) async {
+    String url() {
+      if (Platform.isIOS) {
+        return "whatsapp://wa.me/$phone/?text=${Uri.parse(message)}";
+      } else {
+        return "whatsapp://send?phone=$phone&text=${Uri.parse(message)}";
+      }
+    }
+
+    if (await canLaunch(url())) {
+      await launch(url());
+    } else {
+      throw 'Could not launch ${url()}';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -149,9 +177,16 @@ class _DailyNewsComponentState extends State<DailyNewsComponent> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Container(
-                                height: 13,
-                                child: Image.asset("assets/whatsapp.png")),
+                            GestureDetector(
+                              child: Container(
+                                  height: 14,
+                                  child: Image.asset("assets/whatsapp.png")),
+                              onTap: () {
+                                launchwhatsapp(
+                                    phone: "+91" + widget.newsData[""],
+                                    message: "");
+                              },
+                            ),
                             SizedBox(
                               width: 20,
                             ),

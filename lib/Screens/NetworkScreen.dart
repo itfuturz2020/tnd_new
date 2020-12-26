@@ -10,6 +10,8 @@ import 'package:the_national_dawn/Components/LoadingBlueComponent.dart';
 import 'package:the_national_dawn/Components/NetworkComponent.dart';
 
 class NetworkScreen extends StatefulWidget {
+  String instagram, facebook, linkedIn, twitter, whatsapp;
+
   @override
   _NetworkScreenState createState() => _NetworkScreenState();
 }
@@ -97,136 +99,96 @@ class _NetworkScreenState extends State<NetworkScreen> {
             )
           ],
         ),
-        body: DefaultTabController(
-          length: 2,
-          child: Column(
-            children: [
-              Container(
-                color: Colors.white,
-                height: 5,
-              ),
-              Material(
-                color: Colors.white,
-                child: TabBar(
-                    labelColor: Colors.white,
-                    unselectedLabelColor: Colors.black,
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    indicator: new BubbleTabIndicator(
-                      indicatorHeight: 38,
-                      indicatorRadius: 9,
-                      indicatorColor: appPrimaryMaterialColor,
-                      tabBarIndicatorSize: TabBarIndicatorSize.tab,
+        body: Column(
+          children: [
+            Container(
+              color: Colors.white,
+              height: 5,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 35.0, right: 35, top: 25),
+              child: Container(
+                height: 35,
+                child: TextFormField(
+                  keyboardType: TextInputType.text,
+                  controller: _controller,
+                  style: TextStyle(fontSize: 15),
+                  cursorColor: appPrimaryMaterialColor,
+                  onChanged: searchOperation,
+                  decoration: InputDecoration(
+                    suffixIcon: Icon(
+                      Icons.search,
+                      size: 25,
+                      color: Colors.black,
                     ),
-                    tabs: [
-                      Tab(
-                        child: Text(
-                          "Network",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16),
-                        ),
-                      ),
-                      Tab(
-                          child: Text("Request",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600, fontSize: 16))),
-                    ]),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 35.0, right: 35, top: 25),
-                child: Container(
-                  height: 35,
-                  child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    controller: _controller,
-                    style: TextStyle(fontSize: 15),
-                    cursorColor: appPrimaryMaterialColor,
-                    onChanged: searchOperation,
-                    decoration: InputDecoration(
-                      suffixIcon: Icon(
-                        Icons.search,
-                        size: 25,
-                        color: Colors.black,
-                      ),
-                      counterText: "",
-                      contentPadding: EdgeInsets.only(
-                          top: 0.0, bottom: 0, left: 15, right: 5),
-                      hintText: "Type to Search...",
-                      hintStyle: TextStyle(
-                          color: Colors.grey[400], fontWeight: FontWeight.w500),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(25.0)),
-                        borderSide: BorderSide(color: Colors.black),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(25.0)),
-                        borderSide: BorderSide(color: Colors.black),
-                      ),
+                    counterText: "",
+                    contentPadding: EdgeInsets.only(
+                        top: 0.0, bottom: 0, left: 15, right: 5),
+                    hintText: "Type to Search...",
+                    hintStyle: TextStyle(
+                        color: Colors.grey[400], fontWeight: FontWeight.w500),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                      borderSide: BorderSide(color: Colors.black),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                      borderSide: BorderSide(color: Colors.black),
                     ),
                   ),
                 ),
               ),
-              Expanded(
-                child: TabBarView(children: [
-                  Padding(
-                      padding: const EdgeInsets.only(top: 10.0),
-                      child:
-//
-                          isLoading
-                              ? Center(child: LoadingBlueComponent())
-                              : networkList.length > 0 && networkList != null
-                                  ? searchlist.length != 0
-                                      ? ListView.builder(
-                                          physics: BouncingScrollPhysics(),
-                                          // scrollDirection: Axis.horizontal,
-                                          itemCount: searchlist.length,
-                                          itemBuilder: (BuildContext context,
-                                              int index) {
-                                            return NetworkComponent(
-                                              networkData: searchlist[index],
-                                            );
-                                          })
-                                      : _isSearching && isfirst
-                                          ? ListView.builder(
-                                              physics: BouncingScrollPhysics(),
-                                              // scrollDirection: Axis.horizontal,
-                                              itemCount: searchlist.length,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                return NetworkComponent(
-                                                  networkData:
-                                                      searchlist[index],
-                                                );
-                                              })
-                                          : ListView.builder(
-                                              physics: BouncingScrollPhysics(),
-                                              // scrollDirection: Axis.horizontal,
-                                              itemCount: networkList.length,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                return NetworkComponent(
-                                                  networkData:
-                                                      networkList[index],
-                                                );
-                                              })
-                                  : Center(
-                                      child: Container(
-                                        //color: Color.fromRGBO(0, 0, 0, 0.6),
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 20, vertical: 10),
-                                        child: Text("No Data Available",
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                color:
-                                                    appPrimaryMaterialColor)),
-                                      ),
-                                    )),
-                  Container(
-                    child: Text("data"),
-                  ),
-                ]),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: isLoading
+                    ? Center(child: LoadingBlueComponent())
+                    : networkList.length > 0 && networkList != null
+                        ? searchlist.length != 0
+                            ? ListView.builder(
+                                physics: BouncingScrollPhysics(),
+                                // scrollDirection: Axis.horizontal,
+                                itemCount: searchlist.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return NetworkComponent(
+                                    networkData: searchlist[index],
+                                  );
+                                })
+                            : _isSearching && isfirst
+                                ? ListView.builder(
+                                    physics: BouncingScrollPhysics(),
+                                    // scrollDirection: Axis.horizontal,
+                                    itemCount: searchlist.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return NetworkComponent(
+                                        networkData: searchlist[index],
+                                      );
+                                    })
+                                : ListView.builder(
+                                    physics: BouncingScrollPhysics(),
+                                    // scrollDirection: Axis.horizontal,
+                                    itemCount: networkList.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return NetworkComponent(
+                                        networkData: networkList[index],
+                                      );
+                                    })
+                        : Center(
+                            child: Container(
+                              //color: Color.fromRGBO(0, 0, 0, 0.6),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 10),
+                              child: Text("No Data Available",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color: appPrimaryMaterialColor)),
+                            ),
+                          ),
               ),
+            ),
 //               Expanded(
 //                 child: Padding(
 //                     padding: const EdgeInsets.only(top: 10.0),
@@ -279,8 +241,7 @@ class _NetworkScreenState extends State<NetworkScreen> {
 //                                     ),
 //                                   )),
 //               ),
-            ],
-          ),
+          ],
         ));
   }
 

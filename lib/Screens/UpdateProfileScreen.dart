@@ -1876,7 +1876,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     responseList[0]["spouse_birth_date"]);
                 prefs.setString(Session.CustomerImage, responseList[0]["img"]);
               });
-              Navigator.of(context).pushNamed('/ProfileScreen');
+              Navigator.of(context).pushNamed('/HomeScreen');
               Fluttertoast.showToast(
                   msg: "Profile Updated Successfully",
                   gravity: ToastGravity.BOTTOM);

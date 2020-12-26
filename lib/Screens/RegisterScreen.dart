@@ -34,7 +34,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     await prefs.setString(Session.CustomerEmailId, data["email"]);
     await prefs.setString(Session.CustomerPhoneNo, data["mobile"]);
     await prefs.setString(Session.referred_by, data["referred_by"]);
-    Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route) => false);
+    Navigator.pushNamedAndRemoveUntil(
+        context, '/UpdateProfileScreen', (route) => false);
     Fluttertoast.showToast(msg: "Register Successfully!!!!");
   }
 

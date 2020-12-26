@@ -19,7 +19,7 @@ class _NetworkingProfileState extends State<NetworkingProfile> {
         elevation: 0,
         title: Center(
           child: Text(
-            "My Profile",
+            "Profile",
             style: TextStyle(
               color: appPrimaryMaterialColor,
               fontSize: 18,

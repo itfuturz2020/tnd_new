@@ -93,13 +93,6 @@ class _DailyNewScreenState extends State<DailyNewScreen>
             color: Colors.black,
           ),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0, top: 18, bottom: 19),
-            child: Image.asset("assets/scan.png"),
-          ),
-          Image.asset("assets/bell.png"),
-        ],
         iconTheme: new IconThemeData(color: Colors.black),
       ),
       body: isLoadingCat

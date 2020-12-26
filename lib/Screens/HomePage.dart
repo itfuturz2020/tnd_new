@@ -11,6 +11,7 @@ import 'package:the_national_dawn/Screens/HomeCategoryScreen.dart';
 import 'package:the_national_dawn/Screens/HomeNetworkScreen.dart';
 import 'package:the_national_dawn/Screens/HomeScreen.dart';
 import 'package:the_national_dawn/Screens/HomeStoriesScreen.dart';
+import 'package:the_national_dawn/Screens/OfferScreen.dart';
 import 'package:the_national_dawn/offlineDatabase/db_handler.dart';
 
 class HomePage extends StatefulWidget {
@@ -294,7 +295,7 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
     HomeCalendarScreen(),
-    HomeCategoryScreen(),
+    HomeScreen(),
     HomeStoriesScreen(),
     HomeNetworkScreen()
   ];
@@ -328,9 +329,13 @@ class _HomePageState extends State<HomePage> {
           top: -30,
           curveSize: 100,
           onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
+            if (index == 2) {
+              _settingModalBottomSheet(context);
+            } else {
+              setState(() {
+                _currentIndex = index;
+              });
+            }
             print(_currentIndex);
           },
           items: [
@@ -351,9 +356,7 @@ class _HomePageState extends State<HomePage> {
             TabItem(
                 icon: Image.asset(
               "assets/scan.png",
-              color: _currentIndex == 2
-                  ? Colors.white
-                  : appPrimaryMaterialColor[300],
+              color: Colors.white,
             )),
             TabItem(
                 icon: Image.asset(
