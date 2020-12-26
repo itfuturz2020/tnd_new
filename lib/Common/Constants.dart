@@ -41,18 +41,20 @@ class Session {
   static const String CustomerImage = "CustomerImage";
   static const String DOB = "date_of_birth";
   static const String experience = "experience";
-  static const String about_business = "about_business";
+
   static const String achievement = "achievement";
   static const String faceBook = "faceBook";
   static const String instagram = "instagram";
   static const String linkedIn = "linkedIn";
   static const String twitter = "twitter";
   static const String youTube = "youTube";
-  static const String business_category = "business_category";
   static const String memberOf = "memberOf";
   static const String gender = "gender";
   static const String spouse_name = "spouse_name";
   static const String spouse_birth_date = "spouse_birth_date";
   static const String number_of_child = "number_of_child";
   static const String date_of_birth = "date_of_birth";
+  static const String business_category = "business_category";
+  static const String address = "address";
+  static const String about_business = "about_business";
 }

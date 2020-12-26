@@ -18,7 +18,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
   DateTime _date = DateTime.now();
   TextEditingController title = TextEditingController();
   TextEditingController date = TextEditingController();
-  TextEditingController discription = TextEditingController();
+  TextEditingController description = TextEditingController();
 
   void _showBirthDate() {
     DatePicker.showDatePicker(
@@ -261,9 +261,10 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                       child: SizedBox(
                         height: 50,
                         child: Padding(
-                          padding: const EdgeInsets.only(left: 20.0),
+                          padding: const EdgeInsets.only(left: 20.0, right: 20),
                           child: TextFormField(
                             controller: date,
+                            readOnly: true,
                             keyboardType: TextInputType.text,
                             style: TextStyle(fontSize: 16),
                             cursorColor: appPrimaryMaterialColor,
@@ -274,6 +275,16 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                               hintStyle: TextStyle(
                                   color: Colors.grey[400],
                                   fontWeight: FontWeight.w500),
+                              prefixIcon: GestureDetector(
+                                onTap: () {
+                                  _showBirthDate();
+                                },
+                                child: Container(
+                                  child: Icon(
+                                    Icons.date_range,
+                                  ),
+                                ),
+                              ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10.0)),
@@ -301,22 +312,6 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                         ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        _showBirthDate();
-                      },
-                      child: Container(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 12.0, bottom: 12, left: 12, right: 12),
-                          child: Icon(
-                            Icons.date_range,
-                            color: Colors.grey,
-                            size: 30,
-                          ),
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
@@ -325,7 +320,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20.0, right: 20),
                   child: TextFormField(
-                    controller: discription,
+                    controller: description,
                     maxLines: 5,
                     maxLength: 400,
                     maxLengthEnforced: true,
@@ -336,17 +331,11 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                     decoration: InputDecoration(
                       alignLabelWithHint: true,
                       contentPadding: EdgeInsets.only(
-                          top: 15.0, bottom: 1, left: 1, right: 1),
-                      hintText: "Discription",
+                          top: 15, bottom: 1, left: 1, right: 1),
+                      hintText: "Description",
                       hintStyle: TextStyle(
                           color: Colors.grey[400], fontWeight: FontWeight.w500),
-                      prefixIcon: Container(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              bottom: 15, left: 15, right: 15),
-                          child: Icon(Icons.sticky_note_2_outlined),
-                        ),
-                      ),
+                      prefixIcon: Icon(Icons.sticky_note_2_outlined),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
                         borderSide:
@@ -371,28 +360,8 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 25.0),
                 child: Container(
-                  width: 140,
-                  height: 40,
-                  child: RaisedButton(
-                      color: appPrimaryMaterialColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      onPressed: () {
-                        _settingModalBottomSheet();
-                      },
-                      child: Text("Select Image",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 17))),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 25.0),
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.15,
-                  width: MediaQuery.of(context).size.height * 0.15,
+                  height: MediaQuery.of(context).size.height * 0.17,
+                  width: MediaQuery.of(context).size.height * 0.17,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       border: Border.all(color: Color(0xff16B8FF), width: 1),
@@ -410,7 +379,30 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                 ),
               ),
               SizedBox(
-                height: MediaQuery.of(context).padding.top + 30,
+                height: MediaQuery.of(context).padding.top + 5,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 30.0, left: 25, right: 25),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 40,
+                  child: RaisedButton(
+                      color: appPrimaryMaterialColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      onPressed: () {
+                        _settingModalBottomSheet();
+                      },
+                      child: Text("Upload Offer",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 17))),
+                ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).padding.top + 5,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 25, right: 25),

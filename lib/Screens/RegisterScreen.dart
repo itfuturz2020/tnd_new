@@ -332,7 +332,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
               ),
-              Row(
+              /* Row(
                 children: [
                   Flexible(
                     child: Padding(
@@ -400,7 +400,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                 ],
-              ),
+              ),*/
               Padding(
                 padding: const EdgeInsets.only(left: 30.0, right: 30, top: 30),
                 child: Container(
@@ -463,7 +463,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             "mobile": txtMobileNumber.text.toString(),
             "email": txtEmail.text,
             "company_name": txtCName.text,
-            "referred_by": "",
+            //"referred_by": "",
           }; //"key":"value"
           Services.PostForList(api_name: 'api/registration', body: body).then(
               (responseList) async {

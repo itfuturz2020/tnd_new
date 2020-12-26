@@ -20,7 +20,7 @@ class _DirectoryProfileComponentState extends State<DirectoryProfileComponent> {
         elevation: 0,
         title: Center(
           child: Text(
-            "My Profile",
+            "Profile",
             style: TextStyle(
               color: appPrimaryMaterialColor,
               fontSize: 18,
@@ -170,7 +170,67 @@ class _DirectoryProfileComponentState extends State<DirectoryProfileComponent> {
                           linkedIn: widget.directoryData["linkedIn"],
                           twitter: widget.directoryData["twitter"],
                           whatsapp: widget.directoryData["whatsApp"],
+                          mail: widget.directoryData["email"],
                         ),
+                      ],
+                    )),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0, bottom: 20.0),
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(
+                            color: appPrimaryMaterialColor[50], width: 1),
+                        borderRadius: BorderRadius.all(Radius.circular(22.0)),
+                        boxShadow: [
+                          BoxShadow(
+                              color: appPrimaryMaterialColor.withOpacity(0.2),
+                              blurRadius: 2.0,
+                              spreadRadius: 2.0,
+                              offset: Offset(3.0, 4.0))
+                        ]),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Member Type",
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.grey)),
+
+                              SizedBox(
+                                height: 60,
+                                width: MediaQuery.of(context).size.width,
+                                child: ListView.builder(
+                                    physics: BouncingScrollPhysics(),
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: 5,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Container(
+                                          child: Column(
+
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(top:5.0),
+                                                child: Icon(Icons.ac_unit),
+                                              ),
+                                              Text("abbdjh"),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    }),
+                              )
+                            ],
+                          ),
+                        ),
+
                       ],
                     )),
               ),

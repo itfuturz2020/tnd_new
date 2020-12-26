@@ -71,7 +71,7 @@ class _BusinessCardScreenState extends State<BusinessCardScreen> {
             ),
           ),
           actions: [
-            Padding(
+            /* Padding(
               padding: const EdgeInsets.only(
                   top: 8.0, right: 18, left: 10, bottom: 8),
               child: Container(
@@ -90,7 +90,7 @@ class _BusinessCardScreenState extends State<BusinessCardScreen> {
                     ]),
                 child: Image.asset('assets/scan.png'),
               ),
-            )
+            )*/
           ],
         ),
         body: Column(

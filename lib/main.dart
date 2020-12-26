@@ -9,7 +9,6 @@ import 'package:the_national_dawn/Screens/CalendarDetailScreen.dart';
 import 'package:the_national_dawn/Screens/CalenderScreen.dart';
 import 'package:the_national_dawn/Screens/CategoryScreen.dart';
 import 'package:the_national_dawn/Screens/DailyNewScreen.dart';
-import 'package:the_national_dawn/Screens/Demobottombar.dart';
 import 'package:the_national_dawn/Screens/DirectoryScreen.dart';
 import 'package:the_national_dawn/Screens/HomeCalendarScreen.dart';
 import 'package:the_national_dawn/Screens/HomeCategoryScreen.dart';
@@ -18,6 +17,7 @@ import 'package:the_national_dawn/Screens/HomePage.dart';
 import 'package:the_national_dawn/Screens/HomeScreen.dart';
 import 'package:the_national_dawn/Screens/HomeStoriesScreen.dart';
 import 'package:the_national_dawn/Screens/LoginScreen.dart';
+import 'package:the_national_dawn/Screens/MemberDetailScreen.dart';
 import 'package:the_national_dawn/Screens/MyEcardScreen.dart';
 import 'package:the_national_dawn/Screens/NetworkScreen.dart';
 import 'package:the_national_dawn/Screens/NotificationScreen.dart';
@@ -35,6 +35,7 @@ import 'package:the_national_dawn/Screens/VerificationScreen.dart';
 import 'package:the_national_dawn/Screens/ViewDetailScreen.dart';
 
 import 'Screens/AddOfferScreen.dart';
+import 'Screens/MyOfferScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -87,7 +88,8 @@ class _MyAppState extends State<MyApp> {
         '/ReferEarnScreen': (context) => ReferEarnScreen(),
         '/MyEcardScreen': (context) => MyEcardScreen(),
         '/NotificationScreen': (context) => NotificationScreen(),
-        '/Home': (context) => Home(),
+        '/MyOfferScreen': (context) => MyOfferScreen(),
+        '/MemberDetailScreen': (context) => MemberDetailScreen(),
       },
       theme: ThemeData(
           //fontFamily: 'RobotoSlab',

@@ -33,6 +33,7 @@ class _CalenderScreenState extends State<CalenderScreen>
   //==========================
   DateTime _currentDate = new DateTime.now();
   DateTime _currentDate2 = new DateTime.now();
+
   //final now = new DateTime.now();
   //String _currentMonth = DateFormat('yMd').format(DateTime.now());
   String _currentMonth = DateFormat.yMMM().format(DateTime.now());
@@ -42,9 +43,9 @@ class _CalenderScreenState extends State<CalenderScreen>
 
   EventList<Event> _markedDateMap = new EventList<Event>(
     events: {
-      new DateTime(2019, 2, 10): [
+      new DateTime(2020, 12, 19): [
         new Event(
-          date: new DateTime(2019, 2, 10),
+          date: new DateTime(2020, 12, 19),
           title: 'Event 1',
           //icon: _eventIcon,
           dot: Container(
@@ -55,23 +56,37 @@ class _CalenderScreenState extends State<CalenderScreen>
           ),
         ),
         new Event(
-          date: new DateTime(2019, 2, 10),
+          date: new DateTime(2020, 12, 19),
           title: 'Event 2',
           //  icon: _eventIcon,
         ),
         new Event(
-          date: new DateTime(2019, 2, 10),
+          date: new DateTime(2020, 12, 19),
           title: 'Event 3',
           // icon: _eventIcon,
         ),
         new Event(
-          date: new DateTime(2019, 2, 10),
+          date: new DateTime(2020, 12, 19),
           title: 'Event 4',
           //  icon: _eventIcon,
         ),
       ],
+      DateTime(2020, 12, 22): [
+        Event(
+          date: new DateTime(2020, 12, 22),
+          title: 'Event 1',
+          //icon: _eventIcon,
+          dot: Container(
+            margin: EdgeInsets.symmetric(horizontal: 1.0),
+            color: Colors.red,
+            height: 5.0,
+            width: 5.0,
+          ),
+        ),
+      ]
     },
   );
+
   @override
   void initState() {
     _visibleEvents = {};
@@ -360,7 +375,6 @@ class _CalenderScreenState extends State<CalenderScreen>
         this.setState(() {
           _targetDateTime = date;
           _currentMonth = DateFormat.yMMM().format(_targetDateTime);
-          print("====================================");
           print(_currentMonth);
         });
       },
@@ -412,33 +426,9 @@ class _CalenderScreenState extends State<CalenderScreen>
             ),
           ),
         ),
-        actions: [
-          Padding(
-            padding:
-                const EdgeInsets.only(top: 8.0, right: 18, left: 10, bottom: 8),
-            child: Container(
-              height: 20,
-              width: 40,
-              decoration: BoxDecoration(
-                  color: Colors.grey[100],
-                  border: Border.all(color: Colors.grey[200], width: 1),
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey[600].withOpacity(0.2),
-                        blurRadius: 1.0,
-                        spreadRadius: 1.0,
-                        offset: Offset(3.0, 5.0))
-                  ]),
-              child: Image.asset('assets/scan.png'),
-            ),
-          )
-        ],
       ),
       body: ListView(
         children: <Widget>[
-//          _buildTableCalendar(),
-
           Container(
             margin: EdgeInsets.only(
               top: 30.0,
@@ -484,7 +474,6 @@ class _CalenderScreenState extends State<CalenderScreen>
             child: _calendarCarouselNoHeader,
           ),
           _buildEventList(),
-//
         ],
       ),
     );

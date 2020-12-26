@@ -76,7 +76,7 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
               ),
             ),
           ),
-          actions: [
+          /* actions: [
             Padding(
               padding: const EdgeInsets.only(
                   top: 8.0, right: 18, left: 10, bottom: 8),
@@ -97,7 +97,7 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
                 child: Image.asset('assets/scan.png'),
               ),
             )
-          ],
+          ],*/
         ),
         body: Padding(
           padding: const EdgeInsets.only(right: 15.0, left: 15, top: 15),
@@ -105,15 +105,17 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
             height: MediaQuery.of(context).size.height,
             child: isLoading == true
                 ? LoadingBlueComponent()
-                : ListView.builder(
-                    physics: BouncingScrollPhysics(),
-                    // scrollDirection: Axis.horizontal,
-                    itemCount: bookmarkList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return BookMarkComponent(
-                        bookmarkData: bookmarkList[index],
-                      );
-                    }),
+                : bookmarkList.length < 0
+                    ? ListView.builder(
+                        physics: BouncingScrollPhysics(),
+                        // scrollDirection: Axis.horizontal,
+                        itemCount: bookmarkList.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return BookMarkComponent(
+                            bookmarkData: bookmarkList[index],
+                          );
+                        })
+                    : Center(child: Text("No Data Found...!")),
           ),
         ));
   }
@@ -136,7 +138,6 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
             setState(() {
               isLoading = false;
             });
-            Fluttertoast.showToast(msg: "No Data Found");
             //show "data not found" in dialog
           }
         }, onError: (e) {

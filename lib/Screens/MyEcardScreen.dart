@@ -45,7 +45,7 @@ class _MyEcardScreenState extends State<MyEcardScreen> {
         backgroundColor: Colors.white,
         title: Center(
           child: Text(
-            "My E-Card",
+            "My Scan Card",
             style: TextStyle(
               color: appPrimaryMaterialColor,
               fontSize: 18,

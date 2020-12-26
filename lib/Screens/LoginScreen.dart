@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
     await prefs.setString(Session.business_category, data["business_category"]);
     await prefs.setString(Session.memberOf, data["memberOf"]);
 
-    Navigator.pushNamedAndRemoveUntil(context, '/Home', (route) => false);
+    Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route) => false);
   }
 
   _showDialog(BuildContext context) {
@@ -227,6 +227,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           saveDataToSession(responselist[0]);
                         },
                       )));
+              /*  Navigator.of(context).pushNamed('/HomePage');*/
             } else {
               setState(() {
                 isLoading = false;

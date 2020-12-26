@@ -18,6 +18,13 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:the_national_dawn/offlineDatabase/db_handler.dart';
 
 class HomeScreen extends StatefulWidget {
+  String instagram, facebook, linkedIn, twitter, whatsapp;
+  HomeScreen(
+      {this.instagram,
+      this.facebook,
+      this.linkedIn,
+      this.twitter,
+      this.whatsapp});
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -449,7 +456,7 @@ class _HomeScreenState extends State<HomeScreen>
               GestureDetector(
                 onTap: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).pushNamed('/ProfileScreen');
+                  Navigator.of(context).pushNamed('/MemberDetailScreen');
                 },
                 child: ListTile(
                   leading: Padding(
@@ -513,7 +520,7 @@ class _HomeScreenState extends State<HomeScreen>
                         )),
                   ),
                   title: Text(
-                    "My E-Card",
+                    "My Scan Card",
                   ),
                 ),
               ),
@@ -523,7 +530,31 @@ class _HomeScreenState extends State<HomeScreen>
               ),
               GestureDetector(
                 onTap: () {
-                  // Navigator.of(context).pop();
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushNamed('/MyOfferScreen');
+                },
+                child: ListTile(
+                  leading: Padding(
+                    padding: const EdgeInsets.only(right: 10.0, left: 4),
+                    child: Container(
+                        height: 26,
+                        width: 26,
+                        child: Image.asset(
+                          "assets/my_offer.png",
+                          color: appPrimaryMaterialColor,
+                        )),
+                  ),
+                  title: Text(
+                    "My Offers",
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15),
+                child: Divider(),
+              ),
+              GestureDetector(
+                onTap: () {
                   _showDialog(context);
                 },
                 child: ListTile(

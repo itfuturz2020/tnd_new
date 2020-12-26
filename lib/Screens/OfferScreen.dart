@@ -142,16 +142,6 @@ class _OfferScreenState extends State<OfferScreen> {
             ),
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: appPrimaryMaterialColor,
-          child: Icon(
-            Icons.add,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Navigator.pushNamed(context, '/AddOfferScreen');
-          },
-        ),
         body: Padding(
           padding: const EdgeInsets.only(right: 15.0, left: 15, top: 15),
           child: Column(
