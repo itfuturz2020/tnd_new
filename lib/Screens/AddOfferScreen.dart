@@ -340,10 +340,22 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 50,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20.0, right: 20),
+              Padding(
+                padding: const EdgeInsets.only(left: 20.0, right: 20),
+                child: Container(
+                  height: 42,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                     // border: Border.all(color: appPrimaryMaterialColor[400], width: 1),
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      boxShadow: [
+                        BoxShadow(
+                            color: appPrimaryMaterialColor.withOpacity(0.2),
+                            blurRadius: 2.0,
+                            spreadRadius: 2.0,
+                            offset: Offset(3.0, 5.0))
+                      ]),
                   child: TextFormField(
                     controller: title,
                     keyboardType: TextInputType.text,
@@ -358,25 +370,25 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                       prefixIcon: Container(
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              top: 15.0, bottom: 15, left: 15, right: 15),
-                          child: Icon(Icons.title),
+                              top: 2.0, left: 10, right: 10),
+                          child: Icon(Icons.title,color: appPrimaryMaterialColor,),
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
                         borderSide:
                             BorderSide(color: appPrimaryMaterialColor[400]),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
                         borderSide: BorderSide(color: appPrimaryMaterialColor),
                       ),
                       errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
                         borderSide: BorderSide(color: Colors.red),
                       ),
                       focusedErrorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
                         borderSide: BorderSide(color: Colors.red),
                       ),
                     ),
@@ -430,14 +442,26 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
               //   ),
               // ),
               Padding(
-                padding: const EdgeInsets.only(top: 17.0),
+                padding: const EdgeInsets.only(top: 20.0),
                 child: Row(
                   children: [
                     Flexible(
-                      child: Container(
-                        height: 50,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 20.0, right: 20),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20.0, right: 20),
+                        child: Container(
+                          height: 42,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              // border: Border.all(color: appPrimaryMaterialColor[400], width: 1),
+                              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: appPrimaryMaterialColor.withOpacity(0.2),
+                                    blurRadius: 2.0,
+                                    spreadRadius: 2.0,
+                                    offset: Offset(3.0, 5.0))
+                              ]),
                           child: TextFormField(
                             controller: date,
                             readOnly: true,
@@ -458,29 +482,30 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                                 child: Container(
                                   child: Icon(
                                     Icons.date_range,
+                                    color: appPrimaryMaterialColor,
                                   ),
                                 ),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
+                                    BorderRadius.all(Radius.circular(20.0)),
                                 borderSide: BorderSide(
                                     color: appPrimaryMaterialColor[400]),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
+                                    BorderRadius.all(Radius.circular(20.0)),
                                 borderSide:
                                     BorderSide(color: appPrimaryMaterialColor),
                               ),
                               errorBorder: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
+                                    BorderRadius.all(Radius.circular(20.0)),
                                 borderSide: BorderSide(color: Colors.red),
                               ),
                               focusedErrorBorder: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
+                                    BorderRadius.all(Radius.circular(20.0)),
                                 borderSide: BorderSide(color: Colors.red),
                               ),
                             ),
@@ -492,14 +517,26 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 17.0),
+                padding: const EdgeInsets.only(top: 20.0),
                 child: Row(
                   children: [
                     Flexible(
-                      child: Container(
-                        height: 50,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 20.0, right: 20),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20.0, right: 20),
+                        child: Container(
+                          height: 42,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              // border: Border.all(color: appPrimaryMaterialColor[400], width: 1),
+                              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: appPrimaryMaterialColor.withOpacity(0.2),
+                                    blurRadius: 2.0,
+                                    spreadRadius: 2.0,
+                                    offset: Offset(3.0, 5.0))
+                              ]),
                           child: TextFormField(
                             controller: expiryDate,
                             readOnly: true,
@@ -520,29 +557,30 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                                 child: Container(
                                   child: Icon(
                                     Icons.date_range,
+                                    color: appPrimaryMaterialColor,
                                   ),
                                 ),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
+                                    BorderRadius.all(Radius.circular(20.0)),
                                 borderSide: BorderSide(
                                     color: appPrimaryMaterialColor[400]),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
+                                    BorderRadius.all(Radius.circular(20.0)),
                                 borderSide:
                                     BorderSide(color: appPrimaryMaterialColor),
                               ),
                               errorBorder: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
+                                    BorderRadius.all(Radius.circular(20.0)),
                                 borderSide: BorderSide(color: Colors.red),
                               ),
                               focusedErrorBorder: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
+                                    BorderRadius.all(Radius.circular(20.0)),
                                 borderSide: BorderSide(color: Colors.red),
                               ),
                             ),
@@ -554,345 +592,420 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 17.0),
-                child: SizedBox(
-                  height: 50,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20.0, right: 20),
-                    child: TextFormField(
-                      controller: instaLink,
-                      keyboardType: TextInputType.text,
-                      style: TextStyle(fontSize: 16),
-                      cursorColor: appPrimaryMaterialColor,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(
-                            top: 15.0, bottom: 1, left: 1, right: 1),
-                        hintText: "Enter Instagram link",
-                        hintStyle: TextStyle(
-                            color: Colors.grey[400],
-                            fontWeight: FontWeight.w500),
-                        prefixIcon: Container(
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 15.0, bottom: 15, left: 15, right: 15),
-                            child: Icon(Icons.title),
-                          ),
+                padding: const EdgeInsets.only(top: 20.0,left: 20,right: 20),
+                child: Container(
+                  height: 42,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      // border: Border.all(color: appPrimaryMaterialColor[400], width: 1),
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      boxShadow: [
+                        BoxShadow(
+                            color: appPrimaryMaterialColor.withOpacity(0.2),
+                            blurRadius: 2.0,
+                            spreadRadius: 2.0,
+                            offset: Offset(3.0, 5.0))
+                      ]),
+                  child: TextFormField(
+                    controller: instaLink,
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(fontSize: 16),
+                    cursorColor: appPrimaryMaterialColor,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(
+                          top: 15.0, bottom: 1, left: 1, right: 1),
+                      hintText: "Enter Instagram link",
+                      hintStyle: TextStyle(
+                          color: Colors.grey[400],
+                          fontWeight: FontWeight.w500),
+                      prefixIcon: Container(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 10.0, bottom: 10, left: 10, right: 10),
+                          child:  Image.asset('assets/instagram.png', width: 30, height: 30),
                         ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide:
-                              BorderSide(color: appPrimaryMaterialColor[400]),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide:
-                              BorderSide(color: appPrimaryMaterialColor),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: Colors.red),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: Colors.red),
-                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide:
+                            BorderSide(color: appPrimaryMaterialColor[400]),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide:
+                            BorderSide(color: appPrimaryMaterialColor),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide: BorderSide(color: Colors.red),
                       ),
                     ),
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 17.0),
-                child: SizedBox(
-                  height: 50,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20.0, right: 20),
-                    child: TextFormField(
-                      controller: fbLink,
-                      keyboardType: TextInputType.text,
-                      style: TextStyle(fontSize: 16),
-                      cursorColor: appPrimaryMaterialColor,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(
-                            top: 15.0, bottom: 1, left: 1, right: 1),
-                        hintText: "Enter Facebook link",
-                        hintStyle: TextStyle(
-                            color: Colors.grey[400],
-                            fontWeight: FontWeight.w500),
-                        prefixIcon: Container(
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 15.0, bottom: 15, left: 15, right: 15),
-                            child: Icon(Icons.title),
-                          ),
+                padding: const EdgeInsets.only(top: 20.0,left: 20,right: 20),
+                child: Container(
+                  height: 42,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      // border: Border.all(color: appPrimaryMaterialColor[400], width: 1),
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      boxShadow: [
+                        BoxShadow(
+                            color: appPrimaryMaterialColor.withOpacity(0.2),
+                            blurRadius: 2.0,
+                            spreadRadius: 2.0,
+                            offset: Offset(3.0, 5.0))
+                      ]),
+                  child: TextFormField(
+                    controller: fbLink,
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(fontSize: 16),
+                    cursorColor: appPrimaryMaterialColor,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(
+                          top: 15.0, bottom: 1, left: 1, right: 1),
+                      hintText: "Enter Facebook link",
+                      hintStyle: TextStyle(
+                          color: Colors.grey[400],
+                          fontWeight: FontWeight.w500),
+                      prefixIcon: Container(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 10.0, bottom: 10, left: 10, right: 10),
+                          child: Image.asset('assets/facebook.png', width: 30, height: 30),
                         ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide:
-                              BorderSide(color: appPrimaryMaterialColor[400]),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide:
-                              BorderSide(color: appPrimaryMaterialColor),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: Colors.red),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: Colors.red),
-                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide:
+                            BorderSide(color: appPrimaryMaterialColor[400]),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide:
+                            BorderSide(color: appPrimaryMaterialColor),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide: BorderSide(color: Colors.red),
                       ),
                     ),
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 17.0),
-                child: SizedBox(
-                  height: 50,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20.0, right: 20),
-                    child: TextFormField(
-                      controller: linkinLink,
-                      keyboardType: TextInputType.text,
-                      style: TextStyle(fontSize: 16),
-                      cursorColor: appPrimaryMaterialColor,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(
-                            top: 15.0, bottom: 1, left: 1, right: 1),
-                        hintText: "Enter LinkedIn link",
-                        hintStyle: TextStyle(
-                            color: Colors.grey[400],
-                            fontWeight: FontWeight.w500),
-                        prefixIcon: Container(
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 15.0, bottom: 15, left: 15, right: 15),
-                            child: Icon(Icons.title),
-                          ),
+                padding: const EdgeInsets.only(top: 20.0,left: 20,right: 20),
+                child: Container(
+                  height: 42,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      // border: Border.all(color: appPrimaryMaterialColor[400], width: 1),
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      boxShadow: [
+                        BoxShadow(
+                            color: appPrimaryMaterialColor.withOpacity(0.2),
+                            blurRadius: 2.0,
+                            spreadRadius: 2.0,
+                            offset: Offset(3.0, 5.0))
+                      ]),
+                  child: TextFormField(
+                    controller: linkinLink,
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(fontSize: 16),
+                    cursorColor: appPrimaryMaterialColor,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(
+                          top: 15.0, bottom: 1, left: 1, right: 1),
+                      hintText: "Enter LinkedIn link",
+                      hintStyle: TextStyle(
+                          color: Colors.grey[400],
+                          fontWeight: FontWeight.w500),
+                      prefixIcon: Container(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 10.0, bottom: 10, left: 10, right: 10),
+                          child: Image.asset('assets/linkedin.png', width: 30, height: 30),
                         ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide:
-                              BorderSide(color: appPrimaryMaterialColor[400]),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide:
-                              BorderSide(color: appPrimaryMaterialColor),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: Colors.red),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: Colors.red),
-                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide:
+                            BorderSide(color: appPrimaryMaterialColor[400]),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide:
+                            BorderSide(color: appPrimaryMaterialColor),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide: BorderSide(color: Colors.red),
                       ),
                     ),
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 17.0),
-                child: SizedBox(
-                  height: 50,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20.0, right: 20),
-                    child: TextFormField(
-                      controller: twitterLink,
-                      keyboardType: TextInputType.text,
-                      style: TextStyle(fontSize: 16),
-                      cursorColor: appPrimaryMaterialColor,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(
-                            top: 15.0, bottom: 1, left: 1, right: 1),
-                        hintText: "Enter Twitter link",
-                        hintStyle: TextStyle(
-                            color: Colors.grey[400],
-                            fontWeight: FontWeight.w500),
-                        prefixIcon: Container(
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 15.0, bottom: 15, left: 15, right: 15),
-                            child: Icon(Icons.title),
-                          ),
+                padding: const EdgeInsets.only(top: 20.0,left: 20,right: 20),
+                child: Container(
+                  height: 42,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      // border: Border.all(color: appPrimaryMaterialColor[400], width: 1),
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      boxShadow: [
+                        BoxShadow(
+                            color: appPrimaryMaterialColor.withOpacity(0.2),
+                            blurRadius: 2.0,
+                            spreadRadius: 2.0,
+                            offset: Offset(3.0, 5.0))
+                      ]),
+                  child: TextFormField(
+                    controller: twitterLink,
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(fontSize: 16),
+                    cursorColor: appPrimaryMaterialColor,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(
+                          top: 15.0, bottom: 1, left: 1, right: 1),
+                      hintText: "Enter Twitter link",
+                      hintStyle: TextStyle(
+                          color: Colors.grey[400],
+                          fontWeight: FontWeight.w500),
+                      prefixIcon: Container(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 10.0, bottom: 10, left: 10, right: 10),
+                          child: Image.asset('assets/twitter.png', width: 30, height: 30),
                         ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide:
-                              BorderSide(color: appPrimaryMaterialColor[400]),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide:
-                              BorderSide(color: appPrimaryMaterialColor),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: Colors.red),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: Colors.red),
-                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide:
+                            BorderSide(color: appPrimaryMaterialColor[400]),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide:
+                            BorderSide(color: appPrimaryMaterialColor),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide: BorderSide(color: Colors.red),
                       ),
                     ),
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 17.0),
-                child: SizedBox(
-                  height: 50,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20.0, right: 20),
-                    child: TextFormField(
-                      controller: whatsappLink,
-                      keyboardType: TextInputType.text,
-                      style: TextStyle(fontSize: 16),
-                      cursorColor: appPrimaryMaterialColor,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(
-                            top: 15.0, bottom: 1, left: 1, right: 1),
-                        hintText: "Enter Whatsapp link",
-                        hintStyle: TextStyle(
-                            color: Colors.grey[400],
-                            fontWeight: FontWeight.w500),
-                        prefixIcon: Container(
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 15.0, bottom: 15, left: 15, right: 15),
-                            child: Icon(Icons.title),
-                          ),
+                padding: const EdgeInsets.only(top: 20.0,left: 20,right: 20),
+                child: Container(
+                  height: 42,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      // border: Border.all(color: appPrimaryMaterialColor[400], width: 1),
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      boxShadow: [
+                        BoxShadow(
+                            color: appPrimaryMaterialColor.withOpacity(0.2),
+                            blurRadius: 2.0,
+                            spreadRadius: 2.0,
+                            offset: Offset(3.0, 5.0))
+                      ]),
+                  child: TextFormField(
+                    controller: whatsappLink,
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(fontSize: 16),
+                    cursorColor: appPrimaryMaterialColor,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(
+                          top: 15.0, bottom: 1, left: 1, right: 1),
+                      hintText: "Enter Whatsapp link",
+                      hintStyle: TextStyle(
+                          color: Colors.grey[400],
+                          fontWeight: FontWeight.w500),
+                      prefixIcon: Container(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 10.0, bottom: 10, left: 10, right: 10),
+                          child: Image.asset('assets/whatsapp2.png', width: 30, height: 30),
                         ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide:
-                              BorderSide(color: appPrimaryMaterialColor[400]),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide:
-                              BorderSide(color: appPrimaryMaterialColor),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: Colors.red),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: Colors.red),
-                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide:
+                            BorderSide(color: appPrimaryMaterialColor[400]),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide:
+                            BorderSide(color: appPrimaryMaterialColor),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide: BorderSide(color: Colors.red),
                       ),
                     ),
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 17.0),
-                child: SizedBox(
-                  height: 50,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20.0, right: 20),
-                    child: TextFormField(
-                      controller: mailLink,
-                      keyboardType: TextInputType.text,
-                      style: TextStyle(fontSize: 16),
-                      cursorColor: appPrimaryMaterialColor,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(
-                            top: 15.0, bottom: 1, left: 1, right: 1),
-                        hintText: "Enter Mail link",
-                        hintStyle: TextStyle(
-                            color: Colors.grey[400],
-                            fontWeight: FontWeight.w500),
-                        prefixIcon: Container(
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 15.0, bottom: 15, left: 15, right: 15),
-                            child: Icon(Icons.title),
-                          ),
+                padding: const EdgeInsets.only(top: 20.0,left: 20,right: 20),
+                child: Container(
+                  height: 42,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      // border: Border.all(color: appPrimaryMaterialColor[400], width: 1),
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      boxShadow: [
+                        BoxShadow(
+                            color: appPrimaryMaterialColor.withOpacity(0.2),
+                            blurRadius: 2.0,
+                            spreadRadius: 2.0,
+                            offset: Offset(3.0, 5.0))
+                      ]),
+                  child: TextFormField(
+                    controller: mailLink,
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(fontSize: 16),
+                    cursorColor: appPrimaryMaterialColor,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(
+                          top: 15.0, bottom: 1, left: 1, right: 1),
+                      hintText: "Enter Mail link",
+                      hintStyle: TextStyle(
+                          color: Colors.grey[400],
+                          fontWeight: FontWeight.w500),
+                      prefixIcon: Container(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 10.0, bottom: 10, left: 10, right: 10),
+                          child: Image.asset('assets/gmail.png', width: 30, height: 30),
                         ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide:
-                              BorderSide(color: appPrimaryMaterialColor[400]),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide:
-                              BorderSide(color: appPrimaryMaterialColor),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: Colors.red),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: Colors.red),
-                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide:
+                            BorderSide(color: appPrimaryMaterialColor[400]),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide:
+                            BorderSide(color: appPrimaryMaterialColor),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide: BorderSide(color: Colors.red),
                       ),
                     ),
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 17.0),
-                child: SizedBox(
-                  height: 50,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20.0, right: 20),
-                    child: TextFormField(
-                      controller: youtubeLink,
-                      keyboardType: TextInputType.text,
-                      style: TextStyle(fontSize: 16),
-                      cursorColor: appPrimaryMaterialColor,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(
-                            top: 15.0, bottom: 1, left: 1, right: 1),
-                        hintText: "Enter Youtube link",
-                        hintStyle: TextStyle(
-                            color: Colors.grey[400],
-                            fontWeight: FontWeight.w500),
-                        prefixIcon: Container(
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 15.0, bottom: 15, left: 15, right: 15),
-                            child: Icon(Icons.title),
-                          ),
+                padding: const EdgeInsets.only(top: 20.0,left: 20,right: 20),
+                child: Container(
+                  height: 42,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      // border: Border.all(color: appPrimaryMaterialColor[400], width: 1),
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      boxShadow: [
+                        BoxShadow(
+                            color: appPrimaryMaterialColor.withOpacity(0.2),
+                            blurRadius: 2.0,
+                            spreadRadius: 2.0,
+                            offset: Offset(3.0, 5.0))
+                      ]),
+                  child: TextFormField(
+                    controller: youtubeLink,
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(fontSize: 16),
+                    cursorColor: appPrimaryMaterialColor,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(
+                          top: 15.0, bottom: 1, left: 1, right: 1),
+                      hintText: "Enter Youtube link",
+                      hintStyle: TextStyle(
+                          color: Colors.grey[400],
+                          fontWeight: FontWeight.w500),
+                      prefixIcon: Container(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 10.0, bottom: 10, left: 10, right: 10),
+                          child: Image.asset('assets/youtu.png', width: 30, height: 30),
                         ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide:
-                              BorderSide(color: appPrimaryMaterialColor[400]),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide:
-                              BorderSide(color: appPrimaryMaterialColor),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: Colors.red),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: Colors.red),
-                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide:
+                            BorderSide(color: appPrimaryMaterialColor[400]),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide:
+                            BorderSide(color: appPrimaryMaterialColor),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderSide: BorderSide(color: Colors.red),
                       ),
                     ),
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 17.0),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20.0, right: 20),
+                padding: const EdgeInsets.only(top: 20.0,left: 20,right: 20),
+                child: Container(
+                  //height: 130,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      // border: Border.all(color: appPrimaryMaterialColor[400], width: 1),
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      boxShadow: [
+                        BoxShadow(
+                            color: appPrimaryMaterialColor.withOpacity(0.2),
+                            blurRadius: 2.0,
+                            spreadRadius: 2.0,
+                            offset: Offset(3.0, 5.0))
+                      ]),
                   child: TextFormField(
                     controller: description,
                     maxLines: 5,
@@ -904,27 +1017,28 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                     cursorColor: appPrimaryMaterialColor,
                     decoration: InputDecoration(
                       alignLabelWithHint: true,
+                      counterText: "",
                       contentPadding: EdgeInsets.only(
                           top: 15, bottom: 1, left: 1, right: 1),
                       hintText: "Description",
                       hintStyle: TextStyle(
                           color: Colors.grey[400], fontWeight: FontWeight.w500),
-                      prefixIcon: Icon(Icons.sticky_note_2_outlined),
+                      prefixIcon: Icon(Icons.sticky_note_2_outlined,color: appPrimaryMaterialColor,),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
                         borderSide:
                             BorderSide(color: appPrimaryMaterialColor[400]),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
                         borderSide: BorderSide(color: appPrimaryMaterialColor),
                       ),
                       errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
                         borderSide: BorderSide(color: Colors.red),
                       ),
                       focusedErrorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
                         borderSide: BorderSide(color: Colors.red),
                       ),
                     ),
@@ -976,10 +1090,10 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                 ),
               ),
               SizedBox(
-                height: MediaQuery.of(context).padding.top + 5,
+                height: MediaQuery.of(context).padding.top ,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 25, right: 25),
+                padding: const EdgeInsets.only(left: 25, right: 25,bottom: 25),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: 40,
