@@ -52,8 +52,8 @@ class _HomeScreenState extends State<HomeScreen>
       _email = prefs.getString(Session.CustomerEmailId);
       img = prefs.getString(Session.CustomerImage);
       _mobileNo = prefs.getString(Session.CustomerPhoneNo);
-      qrData =
-          _name + "," + _comp_name + "," + _email + "," + img + "," + _mobileNo;
+      /* qrData =
+          _name + "," + _comp_name + "," + _email + "," + img + "," + _mobileNo;*/
     });
   }
 
@@ -323,9 +323,9 @@ class _HomeScreenState extends State<HomeScreen>
       "screenName": "/DailyNewScreen",
     },
     {
-      "lable": "Networking",
-      "image": "assets/network.png",
-      "screenName": "/NetworkScreen",
+      "lable": "Business Stories",
+      "image": "assets/bussiness.png",
+      "screenName": "/BussinessStoryScreen",
     },
     {
       "lable": " Directory",
@@ -495,7 +495,7 @@ class _HomeScreenState extends State<HomeScreen>
                         )),
                   ),
                   title: Text(
-                    "Refer & Earn",
+                    "Refer",
                   ),
                 ),
               ),

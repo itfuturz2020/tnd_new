@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:share/share.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Screens/PopularNewsScreen.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -153,7 +154,7 @@ class _DailyNewsComponentState extends State<DailyNewsComponent> {
                   ),
                 ),
                 Container(
-                  height: 121,
+                  height: 140,
                   child: Padding(
                     padding:
                         const EdgeInsets.only(right: 8.0, bottom: 3, top: 3),
@@ -190,9 +191,16 @@ class _DailyNewsComponentState extends State<DailyNewsComponent> {
                             SizedBox(
                               width: 20,
                             ),
-                            Container(
-                                height: 13,
-                                child: Image.asset("assets/share.png")),
+                            GestureDetector(
+                              onTap: () {
+                                Share.share(
+                                    'check out my website https://example.com',
+                                    subject: 'Look what I made!');
+                              },
+                              child: Container(
+                                  height: 13,
+                                  child: Image.asset("assets/share.png")),
+                            ),
                             SizedBox(
                               width: 20,
                             ),

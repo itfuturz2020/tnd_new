@@ -58,6 +58,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     _profile();
     getCategory();
     getMemberType();
+    print(Session.CustomerId);
   }
 
   getMemberType() async {
@@ -375,14 +376,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                       ),
                                       child: CircleAvatar(
                                         radius: 80,
-                                        backgroundColor:
-                                            appPrimaryMaterialColor,
-//                                        backgroundImage:
-//                    NetworkImage(
-//                        Image_URL + "${widget.directoryData["img"]}"),
-                                        /*  NetworkImage(
-                                          Image_URL + img,
-                                        ),*/
+                                        backgroundImage: AssetImage(
+                                          'assets/user.png',
+                                        ),
                                       ))
                                   : Container(
                                       decoration: BoxDecoration(
@@ -401,8 +397,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                       ),
                                       child: CircleAvatar(
                                         radius: 80,
-                                        backgroundColor:
-                                            appPrimaryMaterialColor,
+                                        backgroundImage:
+                                            AssetImage('assets/user.png'),
                                       ))
                           : Container(
                               decoration: BoxDecoration(
@@ -421,12 +417,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               child: CircleAvatar(
                                 radius: 80,
                                 backgroundColor: appPrimaryMaterialColor,
-                                backgroundImage:
-//                    NetworkImage(
-//                        Image_URL + "${widget.directoryData["img"]}"),
-                                    AssetImage(
-                                  "assets/051-user.png",
-                                ),
+                                backgroundImage: AssetImage('assets/user.png'),
                               )),
                 ),
                 SizedBox(
@@ -687,44 +678,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Text("Date of Birth",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    color: Colors.grey[700],
-                                    fontWeight: FontWeight.w600)),
-                          ),
-                        ],
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        _showSpouseDatePicker();
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 40,
-                          decoration: BoxDecoration(
-                              border:
-                                  Border.all(width: 1, color: Colors.black54),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(4.0))),
-                          child: Center(
-                              child: Text(
-                            '${_spouseBirthDate.day}/${_spouseBirthDate.month}/${_spouseBirthDate.year}',
-                            style: TextStyle(fontSize: 17),
-                          )),
-                        ),
-                      ),
-                    ),
+
 /*                    Padding(
                       padding:
                           const EdgeInsets.only(top: 20.0, left: 5, bottom: 5),

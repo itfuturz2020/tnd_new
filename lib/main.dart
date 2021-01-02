@@ -5,6 +5,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:the_national_dawn/Screens/BookMarkDetailScreen.dart';
 import 'package:the_national_dawn/Screens/BookMarkScreen.dart';
 import 'package:the_national_dawn/Screens/BusinessCardScreen.dart';
+import 'package:the_national_dawn/Screens/BussinessStoryScreen.dart';
 import 'package:the_national_dawn/Screens/CalendarDetailScreen.dart';
 import 'package:the_national_dawn/Screens/CalenderScreen.dart';
 import 'package:the_national_dawn/Screens/CategoryScreen.dart';
@@ -90,6 +91,7 @@ class _MyAppState extends State<MyApp> {
         '/NotificationScreen': (context) => NotificationScreen(),
         '/MyOfferScreen': (context) => MyOfferScreen(),
         '/MemberDetailScreen': (context) => MemberDetailScreen(),
+        '/BussinessStoryScreen': (context) => BussinessStoryScreen(),
       },
       theme: ThemeData(
           //fontFamily: 'RobotoSlab',

@@ -17,6 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController txtMobileNumber = TextEditingController();
   final _formkey = new GlobalKey<FormState>();
   bool isLoading = false;
+  List<String> memberOf = [];
 
   saveDataToSession(var data) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -42,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
     await prefs.setString(Session.twitter, data["twitter"]);
     await prefs.setString(Session.youTube, data["youTube"]);
     await prefs.setString(Session.business_category, data["business_category"]);
-    await prefs.setString(Session.memberOf, data["memberOf"]);
+    //await prefs.setStringList(Session.memberOf,data ),
 
     Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route) => false);
   }

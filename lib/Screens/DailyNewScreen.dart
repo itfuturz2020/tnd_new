@@ -206,7 +206,7 @@ class _DailyNewScreenState extends State<DailyNewScreen>
                                             ),
                                           ),
                                           Container(
-                                            height: 170,
+                                            height: 190,
                                             decoration: BoxDecoration(
                                               //color: Colors.grey[100],
                                               border: Border.all(
@@ -215,11 +215,8 @@ class _DailyNewScreenState extends State<DailyNewScreen>
 //                                                borderRadius: BorderRadius.all(
 //                                                    Radius.circular(10.0)),
                                             ),
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
                                             child: Carousel(
-                                              boxFit: BoxFit.cover,
+                                              boxFit: BoxFit.contain,
                                               autoplay: true,
                                               animationCurve:
                                                   Curves.fastOutSlowIn,
@@ -250,6 +247,7 @@ class _DailyNewScreenState extends State<DailyNewScreen>
                                                       placeholder:
                                                           'assets/z.jpeg',
                                                       image: link["newsImage"],
+                                                      // width: 300,
                                                     ),
 //                                                    Image.network(Image_URL +
 //                                                        link["newsImage"]),
@@ -376,20 +374,26 @@ class _DailyNewScreenState extends State<DailyNewScreen>
                                                                 height: 5,
                                                               ),
                                                               Container(
-                                                                child: Text(
-                                                                  link[
-                                                                      "content"],
-                                                                  maxLines: 2,
-                                                                  overflow:
-                                                                      TextOverflow
-                                                                          .ellipsis,
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          11,
-                                                                      letterSpacing:
-                                                                          0.1),
+                                                                child: Padding(
+                                                                  padding: const EdgeInsets
+                                                                          .only(
+                                                                      right:
+                                                                          8.0),
+                                                                  child: Text(
+                                                                    link[
+                                                                        "content"],
+                                                                    maxLines: 2,
+                                                                    overflow:
+                                                                        TextOverflow
+                                                                            .ellipsis,
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            11,
+                                                                        letterSpacing:
+                                                                            0.1),
+                                                                  ),
                                                                 ),
                                                               ),
                                                               SizedBox(

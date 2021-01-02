@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -106,142 +107,138 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 25, left: 10, right: 10),
-              child: Row(
-                children: [
-                  Flexible(
-                    child: Container(
-                      height: 45,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(
-                              color: appPrimaryMaterialColor[100], width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                          boxShadow: [
-                            BoxShadow(
-                                color: appPrimaryMaterialColor.withOpacity(0.2),
-                                blurRadius: 2.0,
-                                spreadRadius: 2.0,
-                                offset: Offset(3.0, 5.0))
-                          ]),
-                      child: TextFormField(
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(fontSize: 15),
-                        cursorColor: appPrimaryMaterialColor,
-                        onChanged: searchOperation,
-                        decoration: InputDecoration(
-                          suffixIcon: Icon(
-                            Icons.search,
-                            size: 25,
-                            color: Colors.black,
-                          ),
+              child: Container(
+                height: 40,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(
+                    color: Colors.black,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  /*boxShadow: [
+                      BoxShadow(
+                          color: appPrimaryMaterialColor.withOpacity(0.2),
+                          blurRadius: 2.0,
+                          spreadRadius: 2.0,
+                          offset: Offset(3.0, 5.0))
+                    ]*/
+                ),
+                child: TextFormField(
+                  keyboardType: TextInputType.text,
+                  style: TextStyle(fontSize: 15),
+                  cursorColor: appPrimaryMaterialColor,
+                  onChanged: searchOperation,
+                  decoration: InputDecoration(
+                    suffixIcon: Icon(
+                      Icons.search,
+                      size: 25,
+                      color: Colors.black,
+                    ),
 
 //                    Padding(
 //                      padding: const EdgeInsets.only(right: 5.0, top: 0),
 //                      child: Image.asset("assets/search.png"),
 //                    ),
-                          counterText: "",
-                          contentPadding: EdgeInsets.only(
-                              top: 10.0, bottom: 0, left: 15, right: 5),
-                          hintText: "Type to Search...",
-                          hintStyle: TextStyle(
-                              color: Colors.grey[400],
-                              fontWeight: FontWeight.w500),
-                          border: InputBorder.none,
-                          // enabledBorder: OutlineInputBorder(
-                          //   borderRadius: BorderRadius.all(Radius.circular(25.0)),
-                          //   borderSide: BorderSide(color:appPrimaryMaterialColor[100]),
-                          // ),
-                          // focusedBorder: OutlineInputBorder(
-                          //   borderRadius: BorderRadius.all(Radius.circular(25.0)),
-                          //   borderSide: BorderSide(color: appPrimaryMaterialColor[100]),
-                          // ),
-                        ),
-                      ),
-                    ),
+                    counterText: "",
+                    contentPadding: EdgeInsets.only(
+                        top: 5.0, bottom: 0, left: 15, right: 5),
+                    hintText: "Type to Search...",
+                    hintStyle: TextStyle(
+                        color: Colors.grey[400], fontWeight: FontWeight.w500),
+                    border: InputBorder.none,
+                    // enabledBorder: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                    //   borderSide: BorderSide(color:appPrimaryMaterialColor[100]),
+                    // ),
+                    // focusedBorder: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                    //   borderSide: BorderSide(color: appPrimaryMaterialColor[100]),
+                    // ),
                   ),
-                  Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Container(
-                        height: 45,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                                color: appPrimaryMaterialColor[100], width: 1),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(16.0)),
-                            boxShadow: [
-                              BoxShadow(
-                                  color:
-                                      appPrimaryMaterialColor.withOpacity(0.2),
-                                  blurRadius: 2.0,
-                                  spreadRadius: 2.0,
-                                  offset: Offset(3.0, 5.0))
-                            ]),
-                        child: DropdownButtonHideUnderline(
-                          child: isOfferLoading
-                              ? LoadingBlueComponent()
-                              : DropdownButton<OfferClass>(
-                                  hint: Text("select"),
-                                  // selectedOfferCat == null
-                                  //                               //     ?
-                                  // Text(
-                                  //                                       "Select category",
-                                  //                                       style: TextStyle(
-                                  //                                         color: Colors.black,
-                                  //                                       ),
-                                  //                                     ),
-                                  // : Text(selectedOfferCat.offerName),
-                                  dropdownColor: Colors.white,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10, top: 15),
+              child: Container(
+                height: 40,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.black, width: 1),
+                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  /*boxShadow: [
+                      BoxShadow(
+                          color: appPrimaryMaterialColor.withOpacity(0.2),
+                          blurRadius: 2.0,
+                          spreadRadius: 2.0,
+                          offset: Offset(3.0, 5.0))
+                    ]*/
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: isOfferLoading
+                      ? LoadingBlueComponent()
+                      : DropdownButton<OfferClass>(
+                          // hint: Text("select"),
+                          // selectedOfferCat == null
+                          //                               //     ?
+                          // Text(
+                          //                                       "Select category",
+                          //                                       style: TextStyle(
+                          //                                         color: Colors.black,
+                          //                                       ),
+                          //                                     ),
+                          // : Text(selectedOfferCat.offerName),
+                          dropdownColor: Colors.white,
 
-                                  icon: isfirst == true
-                                      ? Icon(
-                                          Icons.arrow_drop_down,
-                                          size: 40,
-                                          color: Colors.black,
-                                        )
-                                      : GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              searchlist.clear();
-                                              isfirst = true;
-                                            });
-                                          },
-                                          child: Icon(
-                                            Icons.close,
-                                            size: 20,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                  isExpanded: true,
-                                  value: selectedOfferCat,
-                                  onChanged: (value) {
+                          icon: isfirst == true
+                              ? Icon(
+                                  Icons.arrow_drop_down,
+                                  size: 40,
+                                  color: Colors.black,
+                                )
+                              : GestureDetector(
+                                  onTap: () {
                                     setState(() {
-                                      selectedOfferCat = value;
-                                      searchOperation1(
-                                          selectedOfferCat.offerName);
+                                      searchlist.clear();
+                                      isfirst = true;
                                     });
-                                    // _getOffer(selectedOfferCat.offerId);
                                   },
-                                  items: offerCatList.map(
-                                    (OfferClass offer) {
-                                      return DropdownMenuItem<OfferClass>(
-                                        child: Text(
-                                          " " + offer.offerName,
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                          ),
-                                        ),
-                                        value: offer,
-                                      );
-                                    },
-                                  ).toList(),
+                                  child: Icon(
+                                    Icons.close,
+                                    size: 20,
+                                    color: Colors.black,
+                                  ),
                                 ),
+                          isExpanded: true,
+                          value: selectedOfferCat,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedOfferCat = value;
+                              searchOperation1(selectedOfferCat.offerName);
+                            });
+                          },
+                          hint: Padding(
+                            padding: const EdgeInsets.only(left: 10.0),
+                            child: Text('Select Categories'),
+                          ),
+                          items: offerCatList.map(
+                            (OfferClass offer) {
+                              return DropdownMenuItem<OfferClass>(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 10.0),
+                                  child: Text(
+                                    offer.offerName,
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ),
+                                value: offer,
+                              );
+                            },
+                          ).toList(),
                         ),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
 //             Expanded(
@@ -382,7 +379,7 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
           if (responseList.length > 0) {
             setState(() {
               offerCatList = responseList;
-              selectedOfferCat = responseList[0];
+              // selectedOfferCat = responseList[0];
             });
             //_getOffer(selectedOfferCat.offerId);
             // _getOffer(responseList[0].offerId);
@@ -417,6 +414,7 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
             setState(() {
               directoryList = ResponseList;
             });
+            print(ResponseList);
           } else {
             setState(() {
               isLoading = false;
@@ -438,48 +436,48 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
   }
 
   void searchOperation(String searchText) {
-    log('===========0================');
+    /*  log('===========0================');*/
     setState(() {
       searchlist.clear();
       isfirst = false;
     });
-    log('===========1================');
+    // log('===========1================');
     print(directoryList[1]["name"]);
     for (int i = 0; i < directoryList.length; i++) {
       print(directoryList.length);
       String name = directoryList[i]["name"].toString();
 
       String cmpName = directoryList[i]["business_category"].toString();
-      log('===========2================');
+      // log('===========2================');
       if (name.toLowerCase().contains(searchText.toLowerCase()) ||
           cmpName.toLowerCase().contains(searchText.toLowerCase())) {
         searchlist.add(directoryList[i]);
-        log('===========3================');
+        //  log('===========3================');
       }
     }
     setState(() {});
   }
 
   void searchOperation1(String searchText) {
-    log('===========0================');
+    // log('===========0================');
     setState(() {
       searchlist.clear();
       isfirst = false;
     });
-    log('===========1================');
+    // log('===========1================');
     print(directoryList[1]["name"]);
     for (int i = 0; i < directoryList.length; i++) {
       print(directoryList.length);
       String name = directoryList[i]["name"].toString();
 
       String cmpName = directoryList[i]["business_category"].toString();
-      log('===========2================');
+      //   log('===========2================');
       if (cmpName.toLowerCase().contains(searchText.toLowerCase()))
       // ||
       // cmpName.toLowerCase().contains(searchText.toLowerCase())
       {
         searchlist.add(directoryList[i]);
-        log('===========3================');
+        // log('===========3================');
       }
     }
   }
@@ -493,10 +491,13 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
       );
       isfirst = false;
     } else {
-      Icon(
-        Icons.close,
-        size: 40,
-        color: Colors.black,
+      Padding(
+        padding: const EdgeInsets.only(right: 40.0),
+        child: Icon(
+          Icons.close,
+          size: 35,
+          color: Colors.black,
+        ),
       );
     }
   }
