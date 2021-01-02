@@ -10,6 +10,7 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
 import 'package:the_national_dawn/Components/SocialMediaComponent.dart';
+import 'package:the_national_dawn/Screens/CalendarDetailScreen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CalenderScreen extends StatefulWidget {
@@ -208,7 +209,14 @@ class _CalenderScreenState extends State<CalenderScreen>
                                 BorderRadius.all(Radius.circular(16))),
                         child: GestureDetector(
                           onTap: () {
-                            _showDialog(context, event);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CalendarDetailScreen(
+                                        eventData: event,
+                                      )),
+                            );
+                            //_showDialog(context, event);
                           },
                           child: Container(
                             child: Column(
@@ -586,6 +594,34 @@ class _CalenderScreenState extends State<CalenderScreen>
               color: appPrimaryMaterialColor,
               fontSize: 18,
               //fontWeight: FontWeight.bold
+            ),
+          ),
+        ),
+        leading: Padding(
+          padding:
+              const EdgeInsets.only(top: 8.0, right: 0, left: 10, bottom: 8),
+          child: GestureDetector(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: Container(
+              height: 20,
+              width: 40,
+              decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  border: Border.all(color: Colors.grey[200], width: 1),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey[600].withOpacity(0.2),
+                        blurRadius: 1.0,
+                        spreadRadius: 1.0,
+                        offset: Offset(3.0, 5.0))
+                  ]),
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+              ),
             ),
           ),
         ),

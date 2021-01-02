@@ -1234,10 +1234,10 @@ class _DirectoryProfileComponentState extends State<DirectoryProfileComponent> {
                                           padding: const EdgeInsets.only(
                                               left: 20,
                                               right: 20,
-                                              top: 10,
+                                              top: 5,
                                               bottom: 10),
                                           child: Container(
-                                              height: 70,
+                                              height: 75,
                                               width: MediaQuery.of(context)
                                                   .size
                                                   .width,
