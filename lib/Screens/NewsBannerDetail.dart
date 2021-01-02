@@ -1,38 +1,15 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:share/share.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:the_national_dawn/Common/Constants.dart';
-import 'package:the_national_dawn/Common/Services.dart';
 
-class PopularNewsScreen extends StatefulWidget {
+class NewsBannerDetail extends StatefulWidget {
   var newsData;
-
-  PopularNewsScreen({this.newsData});
-
+  NewsBannerDetail({this.newsData});
   @override
-  _PopularNewsScreenState createState() => _PopularNewsScreenState();
+  _NewsBannerDetailState createState() => _NewsBannerDetailState();
 }
 
-class _PopularNewsScreenState extends State<PopularNewsScreen> {
-  bool isLoading = false;
-  List bookmarkList = [];
-  String CustomerId;
-
-  _profile() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      CustomerId = prefs.getString(Session.CustomerId);
-    });
-  }
-
-  @override
-  void initState() {
-    _profile();
-  }
-
+class _NewsBannerDetailState extends State<NewsBannerDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +34,7 @@ class _PopularNewsScreenState extends State<PopularNewsScreen> {
                         child: FadeInImage.assetNetwork(
                           placeholder: "assets/TND Logo_PNG_Newspaper.png",
                           fit: BoxFit.contain,
-                          image: "${widget.newsData["featured_img_src"]}",
+                          image: "${widget.newsData["newsImage"]}",
                         ),
                       ),
                     ),
@@ -121,7 +98,7 @@ class _PopularNewsScreenState extends State<PopularNewsScreen> {
                                   color: Colors.grey,
                                 ),
                                 Text(
-                                  "${widget.newsData["newsDate"] + "  " + widget.newsData["newsTime"]}",
+                                  "${widget.newsData["newsDate"] + widget.newsData["newsTime"]}",
                                   style: TextStyle(
                                       color: Colors.grey, fontSize: 8),
                                 )
@@ -154,28 +131,18 @@ class _PopularNewsScreenState extends State<PopularNewsScreen> {
                   Positioned(
                       top: 8.0,
                       right: 8.0,
-                      child: GestureDetector(
-                        onTap: () {
-                          Share.share(
-                            "http://www.thenationaldawn.in/${widget.newsData["slug"]}",
-                            // subject: subject,
-                            // sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size
-                          );
-                        },
-                        child: Container(
-                            height: 44,
-                            width: 44,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12)),
-                              color: Colors.grey[100],
-                            ),
-                            child: Icon(
-                              Icons.share,
-                              color: Colors.black,
-                              size: 30.0,
-                            )),
-                      )),
+                      child: Container(
+                          height: 44,
+                          width: 44,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(12)),
+                            color: Colors.grey[100],
+                          ),
+                          child: Icon(
+                            Icons.share,
+                            color: Colors.black,
+                            size: 30.0,
+                          ))),
                   Positioned(
                       bottom: 30.0,
                       right: 10.0,
@@ -202,7 +169,7 @@ class _PopularNewsScreenState extends State<PopularNewsScreen> {
                               backgroundColor: Colors.white,
                               child: GestureDetector(
                                 onTap: () {
-                                  addToBookmark();
+                                  // addToBookmark();
                                 },
                                 child: Icon(Icons.favorite,
                                     color: Colors.red, size: 45.0),
@@ -226,7 +193,7 @@ class _PopularNewsScreenState extends State<PopularNewsScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text("${widget.newsData["title"]}",
+                    Text("${widget.newsData["headline"]}",
                         textAlign: TextAlign.justify,
                         style: TextStyle(
                             color: Colors.black,
@@ -250,40 +217,39 @@ class _PopularNewsScreenState extends State<PopularNewsScreen> {
       ),
     );
   }
-
-  addToBookmark() async {
-    try {
-      final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        var body = {"userId": CustomerId, "newsId": widget.newsData["_id"]};
-        print(body);
-        Services.PostForList(api_name: 'admin/addToBookMark', body: body).then(
-            (ResponseList) async {
-          setState(() {
-            isLoading = false;
-          });
-          if (ResponseList.length > 0) {
-            setState(() {
-              bookmarkList = ResponseList;
-            });
-            Fluttertoast.showToast(msg: "Bookmarked Successfully!");
-          } else {
-            setState(() {
-              isLoading = false;
-            });
-            Fluttertoast.showToast(msg: "No Data Found");
-            //show "data not found" in dialog
-          }
-        }, onError: (e) {
-          setState(() {
-            isLoading = false;
-          });
-          print("error on call -> ${e.message}");
-          Fluttertoast.showToast(msg: "Something Went Wrong");
-        });
-      }
-    } on SocketException catch (_) {
-      Fluttertoast.showToast(msg: "No Internet Connection.");
-    }
-  }
+  // addToBookmark() async {
+  //   try {
+  //     final result = await InternetAddress.lookup('google.com');
+  //     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+  //       var body = {"userId": CustomerId, "newsId": widget.newsData["_id"]};
+  //       print(body);
+  //       Services.PostForList(api_name: 'admin/addToBookMark', body: body).then(
+  //               (ResponseList) async {
+  //             setState(() {
+  //               isLoading = false;
+  //             });
+  //             if (ResponseList.length > 0) {
+  //               setState(() {
+  //                 bookmarkList = ResponseList;
+  //               });
+  //               Fluttertoast.showToast(msg: "Bookmarked Successfully!");
+  //             } else {
+  //               setState(() {
+  //                 isLoading = false;
+  //               });
+  //               Fluttertoast.showToast(msg: "No Data Found");
+  //               //show "data not found" in dialog
+  //             }
+  //           }, onError: (e) {
+  //         setState(() {
+  //           isLoading = false;
+  //         });
+  //         print("error on call -> ${e.message}");
+  //         Fluttertoast.showToast(msg: "Something Went Wrong");
+  //       });
+  //     }
+  //   } on SocketException catch (_) {
+  //     Fluttertoast.showToast(msg: "No Internet Connection.");
+  //   }
+  // }
 }

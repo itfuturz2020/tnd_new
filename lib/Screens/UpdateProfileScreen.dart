@@ -11,6 +11,7 @@ import 'package:the_national_dawn/Common/ClassList.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
 import 'package:the_national_dawn/Components/LoadingBlueComponent.dart';
+import 'package:the_national_dawn/Components/LoadingComponent.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   @override
@@ -139,15 +140,20 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       txtName.text = prefs.getString(Session.CustomerName);
-      userName = prefs.getString(Session.CustomerName);
+      Gender = prefs.getString(Session.gender);
+      txtAddress.text = prefs.getString(Session.address);
+      txtSpouseName.text = prefs.getString(Session.spouse_name);
+      txtachievement.text = prefs.getString(Session.achievement);
+
+      txtChildrenCount.text = prefs.getString(Session.number_of_child);
       txtCName.text = prefs.getString(Session.CustomerCompanyName);
       txtEmail.text = prefs.getString(Session.CustomerEmailId);
       txtMobileNumber.text = prefs.getString(Session.CustomerPhoneNo);
       txtWNumber.text = prefs.getString(Session.CustomerPhoneNo);
-      txtachievement.text = prefs.getString(Session.achievement);
       txtAboutBusiness.text = prefs.getString(Session.about_business);
-      txtChildrenCount.text = prefs.getString(Session.number_of_child);
       txtExperience.text = prefs.getString(Session.experience);
+      // = prefs.getString(Session.gender);
+
       facebook.text = prefs.getString(Session.faceBook);
       instagram.text = prefs.getString(Session.instagram);
       youTube.text = prefs.getString(Session.youTube);
@@ -1539,6 +1545,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           style: TextStyle(fontSize: 15),
                           cursorColor: appPrimaryMaterialColor,
                           decoration: InputDecoration(
+                            hintText: "Instagram Link",
                             contentPadding: const EdgeInsets.all(15),
                             fillColor: Colors.white,
                             enabledBorder: OutlineInputBorder(
@@ -1590,6 +1597,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           style: TextStyle(fontSize: 15),
                           cursorColor: appPrimaryMaterialColor,
                           decoration: InputDecoration(
+                            hintText: "LinkedIn Link",
                             contentPadding: const EdgeInsets.all(15),
                             fillColor: Colors.white,
                             enabledBorder: OutlineInputBorder(
@@ -1641,6 +1649,59 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           style: TextStyle(fontSize: 15),
                           cursorColor: appPrimaryMaterialColor,
                           decoration: InputDecoration(
+                            hintText: "Twitter Link",
+                            contentPadding: const EdgeInsets.all(15),
+                            fillColor: Colors.white,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4.0),
+                      child: Container(
+                        height: 42,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            //border: Border.all(color: Colors.grey[500], width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            boxShadow: [
+                              BoxShadow(
+                                  color:
+                                      appPrimaryMaterialColor.withOpacity(0.2),
+                                  blurRadius: 2.0,
+                                  spreadRadius: 2.0,
+                                  offset: Offset(3.0, 5.0))
+                            ]),
+                        child: TextFormField(
+                          //controller: txtName,
+                          controller: youTube,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(fontSize: 15),
+                          cursorColor: appPrimaryMaterialColor,
+                          decoration: InputDecoration(
+                            hintText: "Youtube Link",
                             contentPadding: const EdgeInsets.all(15),
                             fillColor: Colors.white,
                             enabledBorder: OutlineInputBorder(
@@ -1689,12 +1750,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 //                                offset: Offset(3.0, 5.0))
 //                          ]
                           ),
-                          child: Center(
-                              child: Text('Update Profile',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500))),
+                          child: isLoading == true
+                              ? Center(child: LoadingComponent())
+                              : Center(
+                                  child: Text('Update Profile',
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500))),
                         ),
                       ),
                     )
@@ -1825,6 +1888,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                 prefs.setString(Session.youTube, youTube.text);
                 prefs.setString(Session.instagram, instagram.text);
                 prefs.setString(Session.twitter, twitter.text);
+                prefs.setString(Session.address, txtAddress.text);
                 prefs.setString(Session.gender, Gender);
                 prefs.setString(Session.spouse_birth_date,
                     responseList[0]["spouse_birth_date"]);

@@ -9,7 +9,7 @@ import 'package:the_national_dawn/Screens/PopularNewsScreen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DailyNewsComponent extends StatefulWidget {
-  var newsData;
+  var newsData, newsType;
   String instagram, facebook, linkedIn, twitter, whatsapp;
   DailyNewsComponent(
       {this.instagram,
@@ -17,7 +17,8 @@ class DailyNewsComponent extends StatefulWidget {
       this.linkedIn,
       this.twitter,
       this.whatsapp,
-      this.newsData});
+      this.newsData,
+      this.newsType});
 
   @override
   _DailyNewsComponentState createState() => _DailyNewsComponentState();
@@ -59,7 +60,7 @@ class _DailyNewsComponentState extends State<DailyNewsComponent> {
           );
         },
         child: Container(
-          height: 121,
+          height: 135,
           decoration: BoxDecoration(
             //color: ColorUtils.buttonDarkBlueColor,
             boxShadow: [
@@ -88,7 +89,7 @@ class _DailyNewsComponentState extends State<DailyNewsComponent> {
                         padding: const EdgeInsets.only(
                             left: 16.0, top: 10.0, right: 5),
                         child: Text(
-                          "${widget.newsData["headline"]} ",
+                          "${widget.newsData["title"]} ",
                           overflow: TextOverflow.ellipsis,
                           maxLines: 3,
                           style: TextStyle(
@@ -99,30 +100,31 @@ class _DailyNewsComponentState extends State<DailyNewsComponent> {
                         ),
                       ),
                       SizedBox(
-                        height: 8,
+                        height: 5,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 13.0, right: 0),
-                        child: Container(
-                          height: 22,
-                          width: 120,
-                          decoration: BoxDecoration(
-                            //color: Color(0xff4B4B4BE6),
-                            color: Colors.grey[600],
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(14.0)),
-                          ),
-                          child: Center(
-                              child: Text(
-                            "${widget.newsData["newsType"]["newsType"]} ",
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold),
-                          )),
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(left: 13.0, right: 0),
+                      //   child: Container(
+                      //     height: 22,
+                      //     width: 120,
+                      //     decoration: BoxDecoration(
+                      //       //color: Color(0xff4B4B4BE6),
+                      //       color: Colors.grey[600],
+                      //       borderRadius:
+                      //           BorderRadius.all(Radius.circular(14.0)),
+                      //     ),
+                      //     child: Center(
+                      //         child: Text(
+                      //       //"${widget.newsData["newsType"]["newsType"]} ",
+                      //       "av",
+                      //       overflow: TextOverflow.ellipsis,
+                      //       style: TextStyle(
+                      //           color: Colors.white,
+                      //           fontSize: 12,
+                      //           fontWeight: FontWeight.bold),
+                      //     )),
+                      //   ),
+                      // ),
 //                                    SizedBox(
 //                                      height: 8,
 //                                    ),
@@ -141,9 +143,59 @@ class _DailyNewsComponentState extends State<DailyNewsComponent> {
                               color: Colors.grey,
                             ),
                             Text(
-                              "${widget.newsData["newsDate"] + widget.newsData["newsTime"]}",
+                              "${widget.newsData["newsDate"] + "  " + widget.newsData["newsTime"]}",
+                              // "",
                               style: TextStyle(color: Colors.grey, fontSize: 8),
                             )
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 13.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            GestureDetector(
+                              child: Container(
+                                  height: 25,
+                                  child: Image.asset(
+                                    "assets/whats.png",
+                                    height: 25,
+                                  )),
+                              onTap: () {
+                                launchwhatsapp(phone: "", message: "");
+                              },
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Share.share(
+                                  "http://www.thenationaldawn.in/${widget.newsData["slug"]}",
+                                  // subject: subject,
+                                  // sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size
+                                );
+                              },
+                              child: Container(
+                                  height: 25,
+                                  child: Image.asset(
+                                    "assets/shares.png",
+                                    height: 25,
+                                    color: appPrimaryMaterialColor,
+                                  )),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Container(
+                                height: 25,
+                                child: Icon(
+                                  Icons.favorite,
+                                  size: 25,
+                                  color: Colors.red,
+                                )),
                           ],
                         ),
                       ),
@@ -154,66 +206,18 @@ class _DailyNewsComponentState extends State<DailyNewsComponent> {
                   ),
                 ),
                 Container(
-                  height: 140,
+                  height: 300,
                   child: Padding(
                     padding:
-                        const EdgeInsets.only(right: 8.0, bottom: 3, top: 3),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(14),
-                          child: Image.network(
-                            "${widget.newsData["newsImage"]} ",
-                            height: 91,
-                            width: 95,
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 1,
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            GestureDetector(
-                              child: Container(
-                                  height: 14,
-                                  child: Image.asset("assets/whatsapp.png")),
-                              onTap: () {
-                                launchwhatsapp(
-                                    phone: "+91" + widget.newsData[""],
-                                    message: "");
-                              },
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Share.share(
-                                    'check out my website https://example.com',
-                                    subject: 'Look what I made!');
-                              },
-                              child: Container(
-                                  height: 13,
-                                  child: Image.asset("assets/share.png")),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Container(
-                                height: 15,
-                                child: Icon(
-                                  Icons.favorite,
-                                  size: 14,
-                                  color: Colors.red,
-                                )),
-                          ],
-                        ),
-                      ],
+                        const EdgeInsets.only(right: 0.0, bottom: 0, top: 0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(14),
+                      child: Image.network(
+                        "${widget.newsData["featured_img_src"]} ",
+                        //height: 91,
+                        width: 95,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 )

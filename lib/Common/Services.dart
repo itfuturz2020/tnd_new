@@ -35,6 +35,36 @@ class Services {
     }
   }
 
+  static Future<List> PostForList1({api_name, body}) async {
+    String url = API_URL1 + '$api_name';
+    print("$api_name url : " + url);
+    Response response = null;
+    try {
+      if (body == null) {
+        response = await dio.post(url);
+      } else {
+        response = await dio.post(url, data: body);
+      }
+      if (response.statusCode == 200) {
+        List list = [];
+        print("$api_name Response: " + response.data.toString());
+        var responseData = response.data;
+        if (responseData["IsSuccess"] == true &&
+            responseData["Data"].length > 0) {
+          print(responseData["Data"]);
+          list = responseData["Data"];
+        }
+        return list;
+      } else {
+        print("error ->" + response.data.toString());
+        throw Exception(response.data.toString());
+      }
+    } catch (e) {
+      print("error -> ${e.toString()}");
+      throw Exception(e.toString());
+    }
+  }
+
   static Future<List> Login(body) async {
     var url = API_URL + "api/login";
     try {

@@ -21,6 +21,7 @@ import 'package:the_national_dawn/Screens/LoginScreen.dart';
 import 'package:the_national_dawn/Screens/MemberDetailScreen.dart';
 import 'package:the_national_dawn/Screens/MyEcardScreen.dart';
 import 'package:the_national_dawn/Screens/NetworkScreen.dart';
+import 'package:the_national_dawn/Screens/NewsBannerDetail.dart';
 import 'package:the_national_dawn/Screens/NotificationScreen.dart';
 import 'package:the_national_dawn/Screens/OfferDetailScreen.dart';
 import 'package:the_national_dawn/Screens/OfferScreen.dart';
@@ -92,6 +93,7 @@ class _MyAppState extends State<MyApp> {
         '/MyOfferScreen': (context) => MyOfferScreen(),
         '/MemberDetailScreen': (context) => MemberDetailScreen(),
         '/BussinessStoryScreen': (context) => BussinessStoryScreen(),
+        '/NewsBannerDetail': (context) => NewsBannerDetail(),
       },
       theme: ThemeData(
           //fontFamily: 'RobotoSlab',
