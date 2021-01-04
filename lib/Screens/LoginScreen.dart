@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -16,9 +18,21 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController txtMobileNumber = TextEditingController();
   final _formkey = new GlobalKey<FormState>();
+  List memberOf = [
+    {
+      "_id": "5fc763fae47d7d695ca827fc",
+      "memberShipName": "BNI",
+      "logo":
+          "https: //res.cloudinary.com/dckj2yfap/image/upload/v1601267438/blog/memberShip/2020-12-29T12: 03: 14.373Z",
+    },
+    {
+      "_id": "5fc763fae47d7d695ca827fc",
+      "memberShipName": "BNI",
+      "logo":
+          "https: //res.cloudinary.com/dckj2yfap/image/upload/v1601267438/blog/memberShip/2020-12-29T12: 03: 14.373Z",
+    }
+  ];
   bool isLoading = false;
-  List<String> memberOf = [];
-
   saveDataToSession(var data) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(Session.CustomerId, data["_id"].toString());
@@ -42,7 +56,9 @@ class _LoginScreenState extends State<LoginScreen> {
     await prefs.setString(Session.linkedIn, data["linkedIn"]);
     await prefs.setString(Session.twitter, data["twitter"]);
     await prefs.setString(Session.youTube, data["youTube"]);
-    await prefs.setString(Session.business_category, data["business_category"]);
+    await prefs.setString(Session.memberOf, json.encode(data["memberOf"]));
+    //log(json.decode(prefs.getString(Session.memberOf)).toString());
+    //await prefs.setString(Session.business_category, data["business_category"]);
     //await prefs.setStringList(Session.memberOf,data ),
 
     Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route) => false);
@@ -219,15 +235,15 @@ class _LoginScreenState extends State<LoginScreen> {
               setState(() {
                 isLoading = false;
               });
-              //saveDataToSession(responselist[0]);
-              Navigator.of(context).push(MaterialPageRoute(
+              saveDataToSession(responselist[0]);
+              /* Navigator.of(context).push(MaterialPageRoute(
                   builder: (BuildContext context) => VerificationScreen(
                         mobile: txtMobileNumber.text,
                         logindata: responselist[0],
                         onLoginSuccess: () {
                           saveDataToSession(responselist[0]);
                         },
-                      )));
+                      )));*/
               /*  Navigator.of(context).pushNamed('/HomePage');*/
             } else {
               setState(() {

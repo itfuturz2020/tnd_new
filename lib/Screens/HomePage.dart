@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +31,7 @@ class _HomePageState extends State<HomePage> {
   var img;
   String barCode;
   DBHelper dbHelper;
+  List memberOf = [];
   Future<List<Visitorclass>> visitor;
 
   @override
@@ -43,6 +47,7 @@ class _HomePageState extends State<HomePage> {
       _email = prefs.getString(Session.CustomerEmailId);
       img = prefs.getString(Session.CustomerImage);
       _mobileNo = prefs.getString(Session.CustomerPhoneNo);
+      memberOf = json.decode(prefs.getString(Session.memberOf));
       qrData =
           _name + "," + _comp_name + "," + _email + "," + img + "," + _mobileNo;
     });
