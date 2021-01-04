@@ -11,6 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 class DailyNewsComponent extends StatefulWidget {
   var newsData, newsType;
   String instagram, facebook, linkedIn, twitter, whatsapp;
+
   DailyNewsComponent(
       {this.instagram,
       this.facebook,
@@ -156,20 +157,20 @@ class _DailyNewsComponentState extends State<DailyNewsComponent> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            GestureDetector(
-                              child: Container(
-                                  height: 25,
-                                  child: Image.asset(
-                                    "assets/whats.png",
-                                    height: 25,
-                                  )),
-                              onTap: () {
-                                launchwhatsapp(phone: "", message: "");
-                              },
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
+                            // GestureDetector(
+                            //   child: Container(
+                            //       height: 25,
+                            //       child: Image.asset(
+                            //         "assets/whats.png",
+                            //         height: 25,
+                            //       )),
+                            //   onTap: () {
+                            //     launchwhatsapp(phone: "", message: "");
+                            //   },
+                            // ),
+                            // SizedBox(
+                            //   width: 20,
+                            // ),
                             GestureDetector(
                               onTap: () {
                                 Share.share(
@@ -180,11 +181,18 @@ class _DailyNewsComponentState extends State<DailyNewsComponent> {
                               },
                               child: Container(
                                   height: 25,
-                                  child: Image.asset(
-                                    "assets/shares.png",
-                                    height: 25,
-                                    color: appPrimaryMaterialColor,
-                                  )),
+                                  child: Icon(
+                                    Icons.share,
+                                    color: Colors.black,
+                                    size: 25.0,
+                                  )
+
+                                  // Image.asset(
+                                  //   "assets/shares.png",
+                                  //   height: 25,
+                                  //   color: appPrimaryMaterialColor,
+                                  // ),
+                                  ),
                             ),
                             SizedBox(
                               width: 20,

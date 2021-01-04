@@ -14,6 +14,10 @@ import 'package:the_national_dawn/Components/LoadingBlueComponent.dart';
 import 'package:the_national_dawn/Components/LoadingComponent.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
+  var updatedProfileData;
+
+  UpdateProfileScreen({this.updatedProfileData});
+
   @override
   _UpdateProfileScreenState createState() => _UpdateProfileScreenState();
 }
@@ -40,26 +44,30 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   String img, userName = "";
   final _formkey = new GlobalKey<FormState>();
   bool isLoading = false;
-  String Gender;
+  String Gender, dob;
   DateTimePickerLocale _locale = DateTimePickerLocale.en_us;
   String _format = 'yyyy-MMMM-dd';
-  DateTime _birthDate = DateTime.now();
+  DateTime _birthDate;
   DateTime _spouseBirthDate = DateTime.now();
   List<CategoryData> memberTypeList = [];
   CategoryData selectedOfferCat;
   bool isOfferLoading = false;
   String MemberTypeId, BusinessCategory;
-
   bool isCategoty = true;
   List<OfferClass> offerCatList = [];
   OfferClass selectedOfferCat2;
+
+  bool isMemberLoading = true;
+  List memberList = [];
+  List selectedList = [];
 
   @override
   void initState() {
     _profile();
     getCategory();
     getMemberType();
-    print(Session.CustomerId);
+    print("=========================${widget.updatedProfileData} ");
+    _getMember();
   }
 
   getMemberType() async {
@@ -138,30 +146,55 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
   _profile() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    print("==============${widget.updatedProfileData["memberOf"]}");
     setState(() {
-      txtName.text = prefs.getString(Session.CustomerName);
-      Gender = prefs.getString(Session.gender);
-      txtAddress.text = prefs.getString(Session.address);
-      txtSpouseName.text = prefs.getString(Session.spouse_name);
-      txtachievement.text = prefs.getString(Session.achievement);
+      txtName.text = "${widget.updatedProfileData["name"]}";
+      Gender = "${widget.updatedProfileData["gender"]}";
+      txtAddress.text = "${widget.updatedProfileData["address"]}";
+      txtSpouseName.text = "${widget.updatedProfileData["spouse_name"]}";
+      txtachievement.text = "${widget.updatedProfileData["achievement"]}";
 
-      txtChildrenCount.text = prefs.getString(Session.number_of_child);
-      txtCName.text = prefs.getString(Session.CustomerCompanyName);
-      txtEmail.text = prefs.getString(Session.CustomerEmailId);
-      txtMobileNumber.text = prefs.getString(Session.CustomerPhoneNo);
-      txtWNumber.text = prefs.getString(Session.CustomerPhoneNo);
-      txtAboutBusiness.text = prefs.getString(Session.about_business);
-      txtExperience.text = prefs.getString(Session.experience);
+      // if (widget.updatedProfileData["business_category"] != "") {
+      //   selectedOfferCat2.offerId =
+      //       widget.updatedProfileData["business_category"];
+      // }
+
+      if (widget.updatedProfileData["memberOf"] != null) {
+        selectedList = widget.updatedProfileData["memberOf"];
+      }
+
+      //img = prefs.getString(Session.CustomerImage);
+
+      dob = "${widget.updatedProfileData["date_of_birth"]}";
+      // dob = prefs.getString(Session.date_of_birth);
+      if (dob != "null") {
+        _birthDate = DateTime.parse(dob);
+      }
+
+      print("========================bdob");
+      //print(_birthDate);
+
+      txtChildrenCount.text = "${widget.updatedProfileData["number_of_child"]}";
+      // selectedList = prefs.getStringList(Session.memberOf);
+      txtCName.text = "${widget.updatedProfileData["company_name"]}";
+      txtEmail.text = "${widget.updatedProfileData["email"]}";
+      txtMobileNumber.text = "${widget.updatedProfileData["mobile"]}";
+      txtWNumber.text = "${widget.updatedProfileData["whatsApp"]}";
+      txtAboutBusiness.text = "${widget.updatedProfileData["about_business"]}";
+      txtExperience.text = "${widget.updatedProfileData["experience"]}";
       // = prefs.getString(Session.gender);
 
-      facebook.text = prefs.getString(Session.faceBook);
-      instagram.text = prefs.getString(Session.instagram);
-      youTube.text = prefs.getString(Session.youTube);
-      twitter.text = prefs.getString(Session.twitter);
-      linkedIn.text = prefs.getString(Session.linkedIn);
-      log("======================");
+      facebook.text = "${widget.updatedProfileData["faceBook"]}";
+      instagram.text = "${widget.updatedProfileData["instagram"]}";
+      youTube.text = "${widget.updatedProfileData["youTube"]}";
+      twitter.text = "${widget.updatedProfileData["twitter"]}";
+      linkedIn.text = "${widget.updatedProfileData["linkedIn"]}";
+      log("====================== img");
+      //  print(Image_URL + img.toString());
 //      print(img);
     });
+    print("=================dob");
+    print(dob);
   }
 
   File _Image;
@@ -341,12 +374,15 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   },
                   child:
 //
-                      Image != null || img != ""
+                      _Image != null ||
+                              "${widget.updatedProfileData["img"]}" != ""
                           ? _Image != null
                               ? Container(
+                                  height: 150,
+                                  width: 150,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(80.0),
-                                    color: appPrimaryMaterialColor,
+                                    //  color: appPrimaryMaterialColor,
                                     //shape: BoxShape.circle,
                                     boxShadow: [
                                       BoxShadow(
@@ -356,57 +392,38 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                           spreadRadius: 2,
                                           offset: Offset(3, 5)),
                                     ],
-                                  ),
-                                  child: CircleAvatar(
-                                    radius: 80,
-                                    backgroundColor: appPrimaryMaterialColor,
-                                    backgroundImage: FileImage(
-                                      _Image,
-                                    ),
-                                  ))
-                              : img != ""
-                                  ? Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(80.0),
-                                        color: appPrimaryMaterialColor,
-                                        //shape: BoxShape.circle,
-                                        boxShadow: [
-                                          BoxShadow(
-                                              blurRadius: 2,
-                                              color: appPrimaryMaterialColor
-                                                  .withOpacity(0.2),
-                                              spreadRadius: 2,
-                                              offset: Offset(3, 5)),
-                                        ],
-                                      ),
-                                      child: CircleAvatar(
-                                        radius: 80,
-                                        backgroundImage: AssetImage(
-                                          'assets/user.png',
+                                    image: DecorationImage(
+                                        image: FileImage(
+                                          _Image,
                                         ),
-                                      ))
-                                  : Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(80.0),
-                                        color: appPrimaryMaterialColor,
-                                        //shape: BoxShape.circle,
-                                        boxShadow: [
-                                          BoxShadow(
-                                              blurRadius: 2,
-                                              color: appPrimaryMaterialColor
-                                                  .withOpacity(0.2),
-                                              spreadRadius: 2,
-                                              offset: Offset(3, 5)),
-                                        ],
-                                      ),
-                                      child: CircleAvatar(
-                                        radius: 80,
-                                        backgroundImage:
-                                            AssetImage('assets/user.png'),
-                                      ))
+                                        fit: BoxFit.cover),
+                                  ),
+                                )
+                              : Container(
+                                  height: 150,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(80.0),
+                                    //color: appPrimaryMaterialColor,
+                                    //shape: BoxShape.circle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          blurRadius: 2,
+                                          color: appPrimaryMaterialColor
+                                              .withOpacity(0.2),
+                                          spreadRadius: 2,
+                                          offset: Offset(3, 5)),
+                                    ],
+                                    image: DecorationImage(
+                                        image: NetworkImage(
+                                          "${widget.updatedProfileData["img"]}",
+                                        ),
+                                        fit: BoxFit.cover),
+                                  ),
+                                )
                           : Container(
+                              height: 150,
+                              width: 150,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(80.0),
 
@@ -420,11 +437,15 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                       offset: Offset(3, 5)),
                                 ],
                               ),
-                              child: CircleAvatar(
-                                radius: 80,
-                                backgroundColor: appPrimaryMaterialColor,
-                                backgroundImage: AssetImage('assets/user.png'),
-                              )),
+                              child: Center(
+                                widthFactor: 40.0,
+                                heightFactor: 40.0,
+                                child: Image.asset("assets/051-user.png",
+                                    color: Colors.white,
+                                    width: 80.0,
+                                    height: 80.0),
+                              ),
+                            ),
                 ),
                 SizedBox(
                   height: 22,
@@ -557,19 +578,24 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 40,
-                          decoration: BoxDecoration(
-                              border:
-                                  Border.all(width: 1, color: Colors.black54),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(4.0))),
-                          child: Center(
-                              child: Text(
-                            '${_birthDate.day}/${_birthDate.month}/${_birthDate.year}',
-                            style: TextStyle(fontSize: 17),
-                          )),
-                        ),
+                            width: MediaQuery.of(context).size.width,
+                            height: 40,
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(width: 1, color: Colors.black54),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(4.0))),
+                            child: _birthDate == null
+                                ? Center(
+                                    child: Text(
+                                    'Select Date of Birth',
+                                    style: TextStyle(fontSize: 17),
+                                  ))
+                                : Center(
+                                    child: Text(
+                                    '${_birthDate.day}/${_birthDate.month}/${_birthDate.year}',
+                                    style: TextStyle(fontSize: 17),
+                                  ))),
                       ),
                     ),
                     Padding(
@@ -1156,93 +1182,127 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             fontWeight: FontWeight.w600),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 15.0, top: 15),
-                      child: Container(
-                          height: 38,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              border:
-                                  Border.all(color: appPrimaryMaterialColor)),
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: DropdownButtonHideUnderline(
-                              child: isOfferLoading
-                                  ? LoadingBlueComponent()
-                                  : DropdownButton<CategoryData>(
-//                                hint: dropdownValue == null
-//                                    ? Text(
-//                                        "Select category",
-//                                        style: TextStyle(
-//                                          color: Colors.black,
-//                                        ),
-//                                      )
-//                                    : Text(dropdownValue),
-                                      dropdownColor: Colors.white,
-                                      hint: Text("Select Member Type"),
-                                      icon: Icon(
-                                        Icons.arrow_drop_down,
-                                        size: 40,
-                                        color: Colors.black,
-                                      ),
-                                      isExpanded: true,
-                                      value: selectedOfferCat,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          selectedOfferCat = value;
-                                          MemberTypeId = selectedOfferCat.Id;
-                                        });
-                                      },
-                                      items: memberTypeList.map(
-                                        (CategoryData category) {
-                                          return DropdownMenuItem<CategoryData>(
-                                            child:
-                                                Text(category.memberShipName),
-                                            value: category,
-                                          );
-                                        },
-                                      ).toList(),
-                                    ),
+                    ListView.builder(
+                        itemCount: memberList.length,
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            height: 40,
+                            child: CheckboxListTile(
+                              controlAffinity: ListTileControlAffinity.leading,
+                              title: Text(
+                                memberList[index]["memberShipName"],
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              value: selectedList
+                                  .contains(memberList[index]["_id"]),
+                              //value: true,
+                              activeColor: appPrimaryMaterialColor,
+                              onChanged: (bool val1) {
+                                setState(() {
+                                  String value = memberList[index]["_id"];
+                                  if (val1) {
+                                    selectedList.add(value);
+                                  } else {
+                                    selectedList.remove(value);
+                                  }
+                                });
+                                print(selectedList);
+                              },
                             ),
-
-//                          DropdownButtonHideUnderline(
-//                        child: DropdownButton(
-//                          hint: dropdownValue == null
-//                              ? Text(
-//                                  "Select category",
-//                                  style: TextStyle(
-//                                    color: Colors.black,
-//                                  ),
-//                                )
-//                              : Text(dropdownValue),
-//                          dropdownColor: Colors.white,
-//                          icon: Icon(
-//                            Icons.arrow_drop_down,
-//                            size: 40,
-//                            color: Colors.black,
-//                          ),
-//                          isExpanded: true,
-//                          value: dropdownValue,
-//                          items: [
-//                            "Sports",
-//                            "Entertainment",
-//                            "Politics",
-//                            "Religion"
-//                          ].map((value) {
-//                            return DropdownMenuItem<String>(
-//                                value: value, child: Text(value));
-//                          }).toList(),
-//                          onChanged: (value) {
-//                            setState(() {
-//                              dropdownValue = value;
-//                            });
-//                          },
-//                        ),
-//                      ),
-                          )),
-                    ),
+                          );
+                        }),
+//                     Padding(
+//                       padding: const EdgeInsets.only(bottom: 15.0, top: 15),
+//                       child: Container(
+//                           height: 38,
+//                           width: MediaQuery.of(context).size.width,
+//                           decoration: BoxDecoration(
+//                               color: Colors.white,
+//                               borderRadius: BorderRadius.circular(10),
+//                               border:
+//                                   Border.all(color: appPrimaryMaterialColor)),
+//                           child: Padding(
+//                             padding: const EdgeInsets.only(left: 8.0),
+//                             child: DropdownButtonHideUnderline(
+//                               child: isOfferLoading
+//                                   ? LoadingBlueComponent()
+//                                   : DropdownButton<CategoryData>(
+// //                                hint: dropdownValue == null
+// //                                    ? Text(
+// //                                        "Select category",
+// //                                        style: TextStyle(
+// //                                          color: Colors.black,
+// //                                        ),
+// //                                      )
+// //                                    : Text(dropdownValue),
+//                                       dropdownColor: Colors.white,
+//                                       hint: Text("Select Member Type"),
+//                                       icon: Icon(
+//                                         Icons.arrow_drop_down,
+//                                         size: 40,
+//                                         color: Colors.black,
+//                                       ),
+//                                       isExpanded: true,
+//                                       value: selectedOfferCat,
+//                                       onChanged: (value) {
+//                                         setState(() {
+//                                           selectedOfferCat = value;
+//                                           MemberTypeId = selectedOfferCat.Id;
+//                                         });
+//                                       },
+//                                       items: memberTypeList.map(
+//                                         (CategoryData category) {
+//                                           return DropdownMenuItem<CategoryData>(
+//                                             child:
+//                                                 Text(category.memberShipName),
+//                                             value: category,
+//                                           );
+//                                         },
+//                                       ).toList(),
+//                                     ),
+//                             ),
+//
+// //                          DropdownButtonHideUnderline(
+// //                        child: DropdownButton(
+// //                          hint: dropdownValue == null
+// //                              ? Text(
+// //                                  "Select category",
+// //                                  style: TextStyle(
+// //                                    color: Colors.black,
+// //                                  ),
+// //                                )
+// //                              : Text(dropdownValue),
+// //                          dropdownColor: Colors.white,
+// //                          icon: Icon(
+// //                            Icons.arrow_drop_down,
+// //                            size: 40,
+// //                            color: Colors.black,
+// //                          ),
+// //                          isExpanded: true,
+// //                          value: dropdownValue,
+// //                          items: [
+// //                            "Sports",
+// //                            "Entertainment",
+// //                            "Politics",
+// //                            "Religion"
+// //                          ].map((value) {
+// //                            return DropdownMenuItem<String>(
+// //                                value: value, child: Text(value));
+// //                          }).toList(),
+// //                          onChanged: (value) {
+// //                            setState(() {
+// //                              dropdownValue = value;
+// //                            });
+// //                          },
+// //                        ),
+// //                      ),
+//                           )),
+//                     ),
                     Padding(
                       padding:
                           const EdgeInsets.only(top: 15.0, left: 5, bottom: 5),
@@ -1784,7 +1844,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               isCategoty = false;
               offerCatList = responseList;
             });
-          } else {
+          } e[]lse {
             setState(() {
               isCategoty = false;
             });
@@ -1806,117 +1866,155 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     }
   }
 
-  _updateProfile() async {
-    if (_formkey.currentState.validate()) {
-      try {
-        final result = await InternetAddress.lookup('google.com');
-        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+  _getMember() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        //FormData body = FormData.fromMap({"categoryId": widget.catId});
+        Services.PostForList(api_name: 'admin/getAllMemberCategory').then(
+            (ResponseList) async {
           setState(() {
-            isLoading = true;
+            isMemberLoading = false;
           });
-
-          String filename = "";
-          String filePath = "";
-          File compressedFile;
-          if (_Image != null) {
-            ImageProperties properties =
-                await FlutterNativeImage.getImageProperties(_Image.path);
-
-            compressedFile = await FlutterNativeImage.compressImage(
-              _Image.path,
-              quality: 80,
-              targetWidth: 600,
-              targetHeight:
-                  (properties.height * 600 / properties.width).round(),
-            );
-
-            filename = _Image.path.split('/').last;
-            filePath = compressedFile.path;
+          if (ResponseList.length > 0) {
+            //print("anirudh");
+            setState(() {
+              memberList = ResponseList;
+              //set "data" here to your variable
+            });
+          } else {
+            setState(() {
+              isMemberLoading = false;
+            });
+            Fluttertoast.showToast(msg: "Product Not Found");
+            //show "data not found" in dialog
           }
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-
-          FormData body = FormData.fromMap({
-            "id": prefs.getString(Session.CustomerId),
-            "name": txtName.text,
-            "mobile": txtMobileNumber.text,
-            "email": txtEmail.text,
-            "company_name": txtCName.text,
-            "referred_by": prefs.getString(Session.referred_by),
-            "date_of_birth": _birthDate.toString().split(" ")[0],
-            "gender": Gender,
-            "address": txtAddress.text,
-            "spouse_name": txtSpouseName.text,
-            "spouse_birth_date": _spouseBirthDate.toString().split(" ")[0],
-            "achievement": txtachievement.text,
-            "number_of_child": txtChildrenCount.text,
-            "memberOf": MemberTypeId,
-            "experience": txtExperience.text,
-            "about_business": txtAboutBusiness.text,
-            "img": (filePath != null && filePath != '')
-                ? await MultipartFile.fromFile(filePath,
-                    filename: filename.toString())
-                : null,
-            "faceBook": facebook.text,
-            "instagram": instagram.text,
-            "linkedIn": linkedIn.text,
-            "twitter": twitter.text,
-            "youTube": youTube.text,
-            "business_category": BusinessCategory
+        }, onError: (e) {
+          setState(() {
+            isMemberLoading = false;
           });
-          print(body.fields);
-          //"key":"value"
-          Services.PostForList(
-                  api_name: 'api/registration/updatePersonal', body: body)
-              .then((responseList) async {
-            setState(() {
-              isLoading = false;
-            });
-            if (responseList.length > 0) {
-              SharedPreferences prefs = await SharedPreferences.getInstance();
-              setState(() {
-                prefs.setString(Session.CustomerName, txtName.text);
-                prefs.setString(Session.CustomerCompanyName, txtCName.text);
-                prefs.setString(Session.CustomerEmailId, txtEmail.text);
-                prefs.setString(Session.CustomerPhoneNo, txtMobileNumber.text);
-                prefs.setString(Session.spouse_name, txtSpouseName.text);
-                prefs.setString(Session.number_of_child, txtChildrenCount.text);
-                prefs.setString(Session.about_business, txtAboutBusiness.text);
-                prefs.setString(Session.experience, txtExperience.text);
-                prefs.setString(Session.achievement, txtachievement.text);
-                prefs.setString(Session.linkedIn, linkedIn.text);
-                prefs.setString(Session.faceBook, facebook.text);
-                prefs.setString(Session.youTube, youTube.text);
-                prefs.setString(Session.instagram, instagram.text);
-                prefs.setString(Session.twitter, twitter.text);
-                prefs.setString(Session.address, txtAddress.text);
-                prefs.setString(Session.gender, Gender);
-                prefs.setString(Session.spouse_birth_date,
-                    responseList[0]["spouse_birth_date"]);
-                prefs.setString(Session.CustomerImage, responseList[0]["img"]);
-              });
-              Navigator.of(context).pushNamed('/HomeScreen');
-              Fluttertoast.showToast(
-                  msg: "Profile Updated Successfully",
-                  gravity: ToastGravity.BOTTOM);
-            }
-
-            setState(() {
-              isLoading = false;
-            });
-          }, onError: (e) {
-            setState(() {
-              isLoading = false;
-            });
-            print("error on call -> ${e.message}");
-            Fluttertoast.showToast(msg: "Something Went Wrong");
-            //showMsg("something went wrong");
-          });
-        }
-      } on SocketException catch (_) {
-        Fluttertoast.showToast(msg: "No Internet Connection.");
+          print("error on call -> ${e.message}");
+          Fluttertoast.showToast(msg: "Something Went Wrong");
+        });
       }
-    } else {
-      Fluttertoast.showToast(msg: "Please Fill the Field");
+    } on SocketException catch (_) {
+      Fluttertoast.showToast(msg: "No Internet Connection.");
     }
+  }
+
+  _updateProfile() async {
+    // if (_formkey.currentState.validate()) {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        setState(() {
+          isLoading = true;
+        });
+
+        String filename = "";
+        String filePath = "";
+        File compressedFile;
+        if (_Image != null) {
+          ImageProperties properties =
+              await FlutterNativeImage.getImageProperties(_Image.path);
+
+          compressedFile = await FlutterNativeImage.compressImage(
+            _Image.path,
+            quality: 80,
+            targetWidth: 600,
+            targetHeight: (properties.height * 600 / properties.width).round(),
+          );
+
+          filename = _Image.path.split('/').last;
+          filePath = compressedFile.path;
+        }
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+
+        FormData body = FormData.fromMap({
+          "id": prefs.getString(Session.CustomerId),
+          "name": txtName.text,
+          "mobile": txtMobileNumber.text,
+          "email": txtEmail.text,
+          "company_name": txtCName.text,
+          "referred_by": prefs.getString(Session.referred_by),
+          "date_of_birth": _birthDate.toString().split(" ")[0],
+          "gender": Gender,
+          "address": txtAddress.text,
+          "spouse_name": txtSpouseName.text,
+          "spouse_birth_date": _spouseBirthDate.toString().split(" ")[0],
+          "achievement": txtachievement.text,
+          "number_of_child": txtChildrenCount.text,
+          "memberOf": selectedList,
+          "experience": txtExperience.text,
+          "about_business": txtAboutBusiness.text,
+          "img": (filePath != null && filePath != '')
+              ? await MultipartFile.fromFile(filePath,
+                  filename: filename.toString())
+              : null,
+          "faceBook": facebook.text,
+          "whatsApp": txtWNumber.text,
+          "instagram": instagram.text,
+          "linkedIn": linkedIn.text,
+          "twitter": twitter.text,
+          "youTube": youTube.text,
+          "business_category": BusinessCategory
+        });
+        print(body.fields);
+        //"key":"value"
+        Services.PostForList(
+                api_name: 'api/registration/updatePersonal', body: body)
+            .then((responseList) async {
+          setState(() {
+            isLoading = false;
+          });
+          if (responseList.length > 0) {
+            // SharedPreferences prefs = await SharedPreferences.getInstance();
+            // setState(() {
+            //   prefs.setString(Session.CustomerName, txtName.text);
+            //   prefs.setString(Session.CustomerCompanyName, txtCName.text);
+            //   prefs.setString(Session.CustomerEmailId, txtEmail.text);
+            //   prefs.setString(Session.CustomerPhoneNo, txtMobileNumber.text);
+            //   prefs.setString(Session.spouse_name, txtSpouseName.text);
+            //   prefs.setString(Session.number_of_child, txtChildrenCount.text);
+            //   prefs.setString(Session.about_business, txtAboutBusiness.text);
+            //   prefs.setString(Session.experience, txtExperience.text);
+            //   prefs.setString(Session.achievement, txtachievement.text);
+            //   prefs.setString(Session.linkedIn, linkedIn.text);
+            //   prefs.setString(Session.faceBook, facebook.text);
+            //   prefs.setString(Session.youTube, youTube.text);
+            //   prefs.setString(Session.instagram, instagram.text);
+            //   prefs.setString(Session.twitter, twitter.text);
+            //   prefs.setString(Session.address, txtAddress.text);
+            //   prefs.setString(Session.gender, Gender);
+            //   prefs.setString(Session.gender, Gender);
+            //   //prefs.setStringList(Session.memberOf, selectedList);
+            //   prefs.setString(
+            //       Session.date_of_birth, responseList[0]["date_of_birth"]);
+            //   prefs.setString(Session.CustomerImage, responseList[0]["img"]);
+            // });
+            Navigator.of(context).pushNamed('/HomeScreen');
+            Fluttertoast.showToast(
+                msg: "Profile Updated Successfully",
+                gravity: ToastGravity.BOTTOM);
+          }
+
+          setState(() {
+            isLoading = false;
+          });
+        }, onError: (e) {
+          setState(() {
+            isLoading = false;
+          });
+          print("error on call -> ${e.message}");
+          Fluttertoast.showToast(msg: "Something Went Wrong");
+          //showMsg("something went wrong");
+        });
+      }
+    } on SocketException catch (_) {
+      Fluttertoast.showToast(msg: "No Internet Connection.");
+    }
+    // } else {
+    //   Fluttertoast.showToast(msg: "Please Fill the Field");
+    // }
   }
 }
