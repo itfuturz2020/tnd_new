@@ -1844,7 +1844,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               isCategoty = false;
               offerCatList = responseList;
             });
-          } e[]lse {
+          } else {
             setState(() {
               isCategoty = false;
             });

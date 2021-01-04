@@ -11,6 +11,7 @@ import 'package:the_national_dawn/Screens/CalenderScreen.dart';
 import 'package:the_national_dawn/Screens/CategoryScreen.dart';
 import 'package:the_national_dawn/Screens/DailyNewScreen.dart';
 import 'package:the_national_dawn/Screens/DirectoryScreen.dart';
+import 'package:the_national_dawn/Screens/EventTicketScreen.dart';
 import 'package:the_national_dawn/Screens/HomeCalendarScreen.dart';
 import 'package:the_national_dawn/Screens/HomeCategoryScreen.dart';
 import 'package:the_national_dawn/Screens/HomeNetworkScreen.dart';
@@ -30,6 +31,7 @@ import 'package:the_national_dawn/Screens/PopularNewsScreen.dart';
 import 'package:the_national_dawn/Screens/ProfileScreen.dart';
 import 'package:the_national_dawn/Screens/ReferEarnScreen.dart';
 import 'package:the_national_dawn/Screens/RegisterScreen.dart';
+import 'package:the_national_dawn/Screens/RequestScreen.dart';
 import 'package:the_national_dawn/Screens/SplashScreen.dart';
 import 'package:the_national_dawn/Screens/StoriesScreen.dart';
 import 'package:the_national_dawn/Screens/UpdateProfileScreen.dart';
@@ -94,6 +96,8 @@ class _MyAppState extends State<MyApp> {
         '/MemberDetailScreen': (context) => MemberDetailScreen(),
         '/BussinessStoryScreen': (context) => BussinessStoryScreen(),
         '/NewsBannerDetail': (context) => NewsBannerDetail(),
+        '/EventTicketScreen': (context) => EventTicketScreen(),
+        '/RequestScreen': (context) => RequestScreen(),
       },
       theme: ThemeData(
           //fontFamily: 'RobotoSlab',

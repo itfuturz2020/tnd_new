@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Components/SocialMediaComponent.dart';
+import 'package:the_national_dawn/Screens/EventTicketScreen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CalendarDetailScreen extends StatefulWidget {
@@ -173,6 +174,30 @@ class _CalendarDetailScreenState extends State<CalendarDetailScreen> {
             ),
           ),
           Padding(
+            padding: const EdgeInsets.only(top: 4.0, left: 20),
+            child: Row(
+              children: [
+                Text(
+                  "City : ",
+                  style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w400),
+                ),
+                Text(
+                  "Surat",
+                  style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Padding(
             padding: const EdgeInsets.only(top: 20.0, left: 15, right: 15),
             child: Image.network(
               "${widget.eventData['eventImage']}",
@@ -192,9 +217,9 @@ class _CalendarDetailScreenState extends State<CalendarDetailScreen> {
                 ),
               ),*/
           Padding(
-            padding: const EdgeInsets.only(left: 20.0, right: 20, top: 10),
+            padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
             child: Text(
-              "Event Information : ",
+              "Event Description : ",
               style: TextStyle(
                   fontSize: 15,
                   color: Colors.grey,
@@ -216,7 +241,7 @@ class _CalendarDetailScreenState extends State<CalendarDetailScreen> {
             height: 20,
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 12.0, left: 20, right: 20),
+            padding: const EdgeInsets.only(top: 35.0, left: 20, right: 20),
             child: SocialMediaComponent(
               facebook: widget.eventData["faceBook"],
               instagram: widget.eventData["instagram"],
@@ -353,17 +378,25 @@ class _CalendarDetailScreenState extends State<CalendarDetailScreen> {
               onTap: () {},
               child: Center(
                 child: Container(
-                  width: MediaQuery.of(context).size.width / 1.3,
+                  width: MediaQuery.of(context).size.width / 1.1,
                   height: 40,
                   child: RaisedButton(
                       color: appPrimaryMaterialColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EventTicketScreen(
+                                    ticketdata: widget.eventData,
+                                  )),
+                        );
+                      },
                       child: Padding(
                         padding: const EdgeInsets.only(left: 15.0),
-                        child: Text("Registration",
+                        child: Text("Register",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500,

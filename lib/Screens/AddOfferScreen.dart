@@ -347,7 +347,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                       color: Colors.white,
-                     // border: Border.all(color: appPrimaryMaterialColor[400], width: 1),
+                      // border: Border.all(color: appPrimaryMaterialColor[400], width: 1),
                       borderRadius: BorderRadius.all(Radius.circular(20.0)),
                       boxShadow: [
                         BoxShadow(
@@ -371,7 +371,10 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                         child: Padding(
                           padding: const EdgeInsets.only(
                               top: 2.0, left: 10, right: 10),
-                          child: Icon(Icons.title,color: appPrimaryMaterialColor,),
+                          child: Icon(
+                            Icons.title,
+                            color: appPrimaryMaterialColor,
+                          ),
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
@@ -454,10 +457,12 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                           decoration: BoxDecoration(
                               color: Colors.white,
                               // border: Border.all(color: appPrimaryMaterialColor[400], width: 1),
-                              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
                               boxShadow: [
                                 BoxShadow(
-                                    color: appPrimaryMaterialColor.withOpacity(0.2),
+                                    color: appPrimaryMaterialColor
+                                        .withOpacity(0.2),
                                     blurRadius: 2.0,
                                     spreadRadius: 2.0,
                                     offset: Offset(3.0, 5.0))
@@ -529,10 +534,12 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                           decoration: BoxDecoration(
                               color: Colors.white,
                               // border: Border.all(color: appPrimaryMaterialColor[400], width: 1),
-                              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
                               boxShadow: [
                                 BoxShadow(
-                                    color: appPrimaryMaterialColor.withOpacity(0.2),
+                                    color: appPrimaryMaterialColor
+                                        .withOpacity(0.2),
                                     blurRadius: 2.0,
                                     spreadRadius: 2.0,
                                     offset: Offset(3.0, 5.0))
@@ -592,7 +599,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 20.0,left: 20,right: 20),
+                padding: const EdgeInsets.only(top: 20.0, left: 20, right: 20),
                 child: Container(
                   height: 42,
                   width: MediaQuery.of(context).size.width,
@@ -617,13 +624,13 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                           top: 15.0, bottom: 1, left: 1, right: 1),
                       hintText: "Enter Instagram link",
                       hintStyle: TextStyle(
-                          color: Colors.grey[400],
-                          fontWeight: FontWeight.w500),
+                          color: Colors.grey[400], fontWeight: FontWeight.w500),
                       prefixIcon: Container(
                         child: Padding(
                           padding: const EdgeInsets.only(
                               top: 10.0, bottom: 10, left: 10, right: 10),
-                          child:  Image.asset('assets/instagram.png', width: 30, height: 30),
+                          child: Image.asset('assets/instagram.png',
+                              width: 30, height: 30),
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
@@ -633,8 +640,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                        borderSide:
-                            BorderSide(color: appPrimaryMaterialColor),
+                        borderSide: BorderSide(color: appPrimaryMaterialColor),
                       ),
                       errorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
@@ -649,7 +655,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 20.0,left: 20,right: 20),
+                padding: const EdgeInsets.only(top: 20.0, left: 20, right: 20),
                 child: Container(
                   height: 42,
                   width: MediaQuery.of(context).size.width,
@@ -674,13 +680,13 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                           top: 15.0, bottom: 1, left: 1, right: 1),
                       hintText: "Enter Facebook link",
                       hintStyle: TextStyle(
-                          color: Colors.grey[400],
-                          fontWeight: FontWeight.w500),
+                          color: Colors.grey[400], fontWeight: FontWeight.w500),
                       prefixIcon: Container(
                         child: Padding(
                           padding: const EdgeInsets.only(
                               top: 10.0, bottom: 10, left: 10, right: 10),
-                          child: Image.asset('assets/facebook.png', width: 30, height: 30),
+                          child: Image.asset('assets/facebook.png',
+                              width: 30, height: 30),
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
@@ -690,8 +696,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                        borderSide:
-                            BorderSide(color: appPrimaryMaterialColor),
+                        borderSide: BorderSide(color: appPrimaryMaterialColor),
                       ),
                       errorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
@@ -706,7 +711,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 20.0,left: 20,right: 20),
+                padding: const EdgeInsets.only(top: 20.0, left: 20, right: 20),
                 child: Container(
                   height: 42,
                   width: MediaQuery.of(context).size.width,
@@ -731,13 +736,13 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                           top: 15.0, bottom: 1, left: 1, right: 1),
                       hintText: "Enter LinkedIn link",
                       hintStyle: TextStyle(
-                          color: Colors.grey[400],
-                          fontWeight: FontWeight.w500),
+                          color: Colors.grey[400], fontWeight: FontWeight.w500),
                       prefixIcon: Container(
                         child: Padding(
                           padding: const EdgeInsets.only(
                               top: 10.0, bottom: 10, left: 10, right: 10),
-                          child: Image.asset('assets/linkedin.png', width: 30, height: 30),
+                          child: Image.asset('assets/linkedin.png',
+                              width: 30, height: 30),
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
@@ -747,8 +752,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                        borderSide:
-                            BorderSide(color: appPrimaryMaterialColor),
+                        borderSide: BorderSide(color: appPrimaryMaterialColor),
                       ),
                       errorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
@@ -763,7 +767,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 20.0,left: 20,right: 20),
+                padding: const EdgeInsets.only(top: 20.0, left: 20, right: 20),
                 child: Container(
                   height: 42,
                   width: MediaQuery.of(context).size.width,
@@ -788,13 +792,13 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                           top: 15.0, bottom: 1, left: 1, right: 1),
                       hintText: "Enter Twitter link",
                       hintStyle: TextStyle(
-                          color: Colors.grey[400],
-                          fontWeight: FontWeight.w500),
+                          color: Colors.grey[400], fontWeight: FontWeight.w500),
                       prefixIcon: Container(
                         child: Padding(
                           padding: const EdgeInsets.only(
                               top: 10.0, bottom: 10, left: 10, right: 10),
-                          child: Image.asset('assets/twitter.png', width: 30, height: 30),
+                          child: Image.asset('assets/twitter.png',
+                              width: 30, height: 30),
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
@@ -804,8 +808,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                        borderSide:
-                            BorderSide(color: appPrimaryMaterialColor),
+                        borderSide: BorderSide(color: appPrimaryMaterialColor),
                       ),
                       errorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
@@ -820,7 +823,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 20.0,left: 20,right: 20),
+                padding: const EdgeInsets.only(top: 20.0, left: 20, right: 20),
                 child: Container(
                   height: 42,
                   width: MediaQuery.of(context).size.width,
@@ -845,13 +848,13 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                           top: 15.0, bottom: 1, left: 1, right: 1),
                       hintText: "Enter Whatsapp link",
                       hintStyle: TextStyle(
-                          color: Colors.grey[400],
-                          fontWeight: FontWeight.w500),
+                          color: Colors.grey[400], fontWeight: FontWeight.w500),
                       prefixIcon: Container(
                         child: Padding(
                           padding: const EdgeInsets.only(
                               top: 10.0, bottom: 10, left: 10, right: 10),
-                          child: Image.asset('assets/whatsapp2.png', width: 30, height: 30),
+                          child: Image.asset('assets/whatsapp2.png',
+                              width: 30, height: 30),
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
@@ -861,8 +864,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                        borderSide:
-                            BorderSide(color: appPrimaryMaterialColor),
+                        borderSide: BorderSide(color: appPrimaryMaterialColor),
                       ),
                       errorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
@@ -877,7 +879,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 20.0,left: 20,right: 20),
+                padding: const EdgeInsets.only(top: 20.0, left: 20, right: 20),
                 child: Container(
                   height: 42,
                   width: MediaQuery.of(context).size.width,
@@ -902,13 +904,13 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                           top: 15.0, bottom: 1, left: 1, right: 1),
                       hintText: "Enter Mail link",
                       hintStyle: TextStyle(
-                          color: Colors.grey[400],
-                          fontWeight: FontWeight.w500),
+                          color: Colors.grey[400], fontWeight: FontWeight.w500),
                       prefixIcon: Container(
                         child: Padding(
                           padding: const EdgeInsets.only(
                               top: 10.0, bottom: 10, left: 10, right: 10),
-                          child: Image.asset('assets/gmail.png', width: 30, height: 30),
+                          child: Image.asset('assets/gmail.png',
+                              width: 30, height: 30),
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
@@ -918,8 +920,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                        borderSide:
-                            BorderSide(color: appPrimaryMaterialColor),
+                        borderSide: BorderSide(color: appPrimaryMaterialColor),
                       ),
                       errorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
@@ -934,7 +935,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 20.0,left: 20,right: 20),
+                padding: const EdgeInsets.only(top: 20.0, left: 20, right: 20),
                 child: Container(
                   height: 42,
                   width: MediaQuery.of(context).size.width,
@@ -959,13 +960,13 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                           top: 15.0, bottom: 1, left: 1, right: 1),
                       hintText: "Enter Youtube link",
                       hintStyle: TextStyle(
-                          color: Colors.grey[400],
-                          fontWeight: FontWeight.w500),
+                          color: Colors.grey[400], fontWeight: FontWeight.w500),
                       prefixIcon: Container(
                         child: Padding(
                           padding: const EdgeInsets.only(
                               top: 10.0, bottom: 10, left: 10, right: 10),
-                          child: Image.asset('assets/youtu.png', width: 30, height: 30),
+                          child: Image.asset('assets/youtu.png',
+                              width: 30, height: 30),
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
@@ -975,8 +976,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                        borderSide:
-                            BorderSide(color: appPrimaryMaterialColor),
+                        borderSide: BorderSide(color: appPrimaryMaterialColor),
                       ),
                       errorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
@@ -991,7 +991,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 20.0,left: 20,right: 20),
+                padding: const EdgeInsets.only(top: 20.0, left: 20, right: 20),
                 child: Container(
                   //height: 130,
                   width: MediaQuery.of(context).size.width,
@@ -1023,7 +1023,10 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                       hintText: "Description",
                       hintStyle: TextStyle(
                           color: Colors.grey[400], fontWeight: FontWeight.w500),
-                      prefixIcon: Icon(Icons.sticky_note_2_outlined,color: appPrimaryMaterialColor,),
+                      prefixIcon: Icon(
+                        Icons.sticky_note_2_outlined,
+                        color: appPrimaryMaterialColor,
+                      ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
                         borderSide:
@@ -1090,10 +1093,10 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                 ),
               ),
               SizedBox(
-                height: MediaQuery.of(context).padding.top ,
+                height: MediaQuery.of(context).padding.top,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 25, right: 25,bottom: 25),
+                padding: const EdgeInsets.only(left: 25, right: 25, bottom: 25),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: 40,
@@ -1164,7 +1167,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
           "business_category": selectedOfferCat.offerId
         });
         print(body.fields);
-        //"key":"value"
+
         Services.PostForList(api_name: 'admin/offer', body: body).then(
             (responseList) async {
           setState(() {

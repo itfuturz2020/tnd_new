@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
 import 'package:the_national_dawn/Components/MyOfferComponent.dart';
@@ -14,11 +15,20 @@ class MyOfferScreen extends StatefulWidget {
 class _MyOfferScreenState extends State<MyOfferScreen> {
   List getOfferList = [];
   bool isLoading = true;
+  String customerId;
 
-  // @override
-  // void initState() {
-  //   _getoffer();
-  // }
+  @override
+  void initState() {
+    _getoffer();
+    _profile();
+  }
+
+  _profile() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      customerId = prefs.getString(Session.CustomerId);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,14 +76,14 @@ class _MyOfferScreenState extends State<MyOfferScreen> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(top:10.0),
+        padding: const EdgeInsets.only(top: 10.0),
         child: ListView.builder(
             physics: BouncingScrollPhysics(),
             itemCount: 3,
             itemBuilder: (BuildContext context, int index) {
               return MyOfferComponent(
-                // offerData: getOfferList[index],
-              );
+                  // offerData: getOfferList[index],
+                  );
             }),
       ),
       floatingActionButton: FloatingActionButton(
@@ -88,14 +98,14 @@ class _MyOfferScreenState extends State<MyOfferScreen> {
       ),
     );
   }
+
   _getoffer() async {
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-//        var body = {};
-        Services.PostForList(
-          api_name: 'admin/businessCategory',
-        ).then((ResponseList) async {
+        var body = {"id": "${customerId}"};
+        Services.PostForList(api_name: 'getOfferbyUser', body: body).then(
+            (ResponseList) async {
           setState(() {
             isLoading = false;
           });

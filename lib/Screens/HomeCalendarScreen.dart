@@ -12,6 +12,7 @@ import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
 import 'package:the_national_dawn/Components/LoadingComponent.dart';
 import 'package:the_national_dawn/Components/SocialMediaComponent.dart';
+import 'package:the_national_dawn/Screens/CalendarDetailScreen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeCalendarScreen extends StatefulWidget {
@@ -210,7 +211,14 @@ class _HomeCalendarScreenState extends State<HomeCalendarScreen>
                                 BorderRadius.all(Radius.circular(16))),
                         child: GestureDetector(
                           onTap: () {
-                            _showDialog(context, event);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CalendarDetailScreen(
+                                        eventData: event,
+                                      )),
+                            );
+                            // _showDialog(context, event);
                           },
                           child: Container(
                             child: Column(

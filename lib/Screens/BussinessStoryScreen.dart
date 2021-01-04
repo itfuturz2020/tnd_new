@@ -84,33 +84,9 @@ class _BussinessStoryScreenState extends State<BussinessStoryScreen> {
             ),
           ),
         ),
-        actions: [
-          Padding(
-            padding:
-                const EdgeInsets.only(top: 8.0, right: 18, left: 10, bottom: 8),
-            child: Container(
-              height: 20,
-              width: 40,
-              decoration: BoxDecoration(
-                  color: Colors.grey[100],
-                  border: Border.all(color: Colors.grey[200], width: 1),
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey[600].withOpacity(0.2),
-                        blurRadius: 1.0,
-                        spreadRadius: 1.0,
-                        offset: Offset(3.0, 5.0))
-                  ]),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Image.asset('assets/circle.png'),
-              ),
-            ),
-          )
-        ],
       ),
-      body: DefaultTabController(
+      body: Center(child: Text("Business Story coming soon...!")),
+      /*DefaultTabController(
         length: 3,
         child: Column(
           children: [
@@ -197,7 +173,7 @@ class _BussinessStoryScreenState extends State<BussinessStoryScreen> {
                             mail: "",
                           ),
                         ),
-                        /*Row(
+                        */ /*Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             GestureDetector(
@@ -231,8 +207,8 @@ class _BussinessStoryScreenState extends State<BussinessStoryScreen> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                */ /*  _launchURL(
-                                    widget.directoryData["email"], '', '');*/ /*
+                                */ /* */ /*  _launchURL(
+                                    widget.directoryData["email"], '', '');*/ /* */ /*
                               },
                               child: Padding(
                                 padding: const EdgeInsets.only(right: 15.0),
@@ -256,8 +232,8 @@ class _BussinessStoryScreenState extends State<BussinessStoryScreen> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                */ /*   launch(
-                                    ('tel:// ${widget.directoryData["mobile"]}'));*/ /*
+                                */ /* */ /*   launch(
+                                    ('tel:// ${widget.directoryData["mobile"]}'));*/ /* */ /*
                               },
                               child: Container(
                                 height: 40,
@@ -287,7 +263,7 @@ class _BussinessStoryScreenState extends State<BussinessStoryScreen> {
                               ),
                             ),
                           ],
-                        ),*/
+                        ),*/ /*
                       ],
                     ),
                   ),
@@ -298,7 +274,7 @@ class _BussinessStoryScreenState extends State<BussinessStoryScreen> {
             ),
           ],
         ),
-      ),
+      ),*/
     );
   }
 }

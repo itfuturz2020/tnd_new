@@ -187,9 +187,7 @@ class _HomePageState extends State<HomePage> {
                       Padding(
                         padding: const EdgeInsets.only(left: 12.0),
                         child: GestureDetector(
-                          onTap: () {
-                            // launch(('tel:// ${widget.phonedata}'));
-                          },
+                          onTap: () {},
                           child: CircleAvatar(
                             child: Icon(
                               Icons.call,

@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Components/DirectoryProfileComponent.dart';
+import 'package:the_national_dawn/Screens/RequestScreen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DirectoryComponent extends StatefulWidget {
@@ -147,38 +148,47 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
                           ),
                         ),
                       ),*/
-                      FittedBox(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 10.0),
-                          child: Container(
-                            height: 25,
-                            // width: 140,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(
-                                  color: appPrimaryMaterialColor[100],
-                                  width: 1),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                            ),
-                            child: Row(
-                              // mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  'assets/hand-shake.png',
-                                  color: appPrimaryMaterialColor,
-                                ),
-                                FittedBox(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 5.0, right: 3),
-                                    child: Text(
-                                      "Send 1-2-1 request",
-                                      style: TextStyle(fontSize: 12),
-                                    ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RequestScreen()),
+                          );
+                        },
+                        child: FittedBox(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 10.0),
+                            child: Container(
+                              height: 25,
+                              // width: 140,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(
+                                    color: appPrimaryMaterialColor[100],
+                                    width: 1),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
+                              ),
+                              child: Row(
+                                // mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    'assets/hand-shake.png',
+                                    color: appPrimaryMaterialColor,
                                   ),
-                                )
-                              ],
+                                  FittedBox(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 5.0, right: 3),
+                                      child: Text(
+                                        "Send 1-2-1 request",
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),

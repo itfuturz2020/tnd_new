@@ -189,115 +189,141 @@ class _CalenderScreenState extends State<CalenderScreen>
   Widget _buildEventList() {
     return ListView(
       shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       children: _currentMonthEventList
           .map(
-            (event) => Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Container(
-                child: Stack(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(left: 75.0),
-                      child: Container(
-                        padding: const EdgeInsets.only(left: 30.0, right: 8.0),
-                        height: 107,
-                        //width: 250,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            color: Colors.grey[100],
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(16))),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => CalendarDetailScreen(
-                                        eventData: event,
-                                      )),
-                            );
-                            //_showDialog(context, event);
-                          },
-                          child: Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Text(
-                                  event["eventOrganiseBy"],
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      color: Color(0xff4B4B4B),
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                  event["eventName"],
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                                SizedBox(
-                                  height: 6,
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      "Time : ",
-                                      style: TextStyle(
-                                          fontSize: 14,
-                                          color: appPrimaryMaterialColor,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    Text(
-                                      event["startTime"] +
-                                          "-" +
-                                          event["endTime"],
-                                      style: TextStyle(
-                                          fontSize: 14,
-                                          color: appPrimaryMaterialColor,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 6,
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      "Date : ",
-                                      style: TextStyle(
-                                          fontSize: 14,
-                                          color: appPrimaryMaterialColor,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    Text(
-                                      "${event["startDate"][0] + "-" + event["endDate"][0]}",
-                                      style: TextStyle(
-                                          fontSize: 14,
-                                          color: appPrimaryMaterialColor,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ],
-                                ),
-                              ],
+            (event) => GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CalendarDetailScreen(
+                            eventData: event,
+                          )),
+                );
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Container(
+                  child: Stack(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(left: 75.0),
+                        child: Container(
+                          padding:
+                              const EdgeInsets.only(left: 30.0, right: 8.0),
+                          height: 125,
+                          //width: 250,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              color: Colors.grey[100],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16))),
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
+                                    event["eventOrganiseBy"],
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color: Color(0xff4B4B4B),
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  SizedBox(
+                                    height: 8,
+                                  ),
+                                  Text(
+                                    event["eventName"],
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                  SizedBox(
+                                    height: 6,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "City : ",
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            color: Color(0xff4B4B4B),
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      Text(
+                                        "Surat",
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            color: Color(0xff4B4B4B),
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 6,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Time : ",
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            color: appPrimaryMaterialColor,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      Text(
+                                        event["startTime"] +
+                                            "-" +
+                                            event["endTime"],
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            color: appPrimaryMaterialColor,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 6,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Date : ",
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            color: appPrimaryMaterialColor,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      Text(
+                                        "${event["startDate"][0] + " To " + event["endDate"][0]}",
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            color: appPrimaryMaterialColor,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    Positioned(
-                      child: CircleAvatar(
-                        radius: 49,
-                        backgroundColor: Colors.grey,
-                        backgroundImage: NetworkImage(event["eventImage"]),
-                      ),
-                    )
-                  ],
+                      Positioned(
+                        top: 15,
+                        child: CircleAvatar(
+                          radius: 50,
+                          backgroundColor: Colors.grey,
+                          backgroundImage: NetworkImage(event["eventImage"]),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
