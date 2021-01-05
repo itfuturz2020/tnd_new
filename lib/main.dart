@@ -2,6 +2,20 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:the_national_dawn/DigitalScreens/AddCard.dart';
+import 'package:the_national_dawn/DigitalScreens/AddOffer.dart';
+import 'package:the_national_dawn/DigitalScreens/AddService.dart';
+import 'package:the_national_dawn/DigitalScreens/ChangeTheme.dart';
+import 'package:the_national_dawn/DigitalScreens/DashBoard.dart';
+import 'package:the_national_dawn/DigitalScreens/EditOffer.dart';
+import 'package:the_national_dawn/DigitalScreens/EditService.dart';
+import 'package:the_national_dawn/DigitalScreens/Home.dart';
+import 'package:the_national_dawn/DigitalScreens/More.dart';
+import 'package:the_national_dawn/DigitalScreens/OfferDetail.dart';
+import 'package:the_national_dawn/DigitalScreens/Offers.dart';
+import 'package:the_national_dawn/DigitalScreens/ProfileDetail.dart';
+import 'package:the_national_dawn/DigitalScreens/Services.dart';
+import 'package:the_national_dawn/DigitalScreens/ShareHistory.dart';
 import 'package:the_national_dawn/Screens/BookMarkDetailScreen.dart';
 import 'package:the_national_dawn/Screens/BookMarkScreen.dart';
 import 'package:the_national_dawn/Screens/BusinessCardScreen.dart';
@@ -98,6 +112,22 @@ class _MyAppState extends State<MyApp> {
         '/NewsBannerDetail': (context) => NewsBannerDetail(),
         '/EventTicketScreen': (context) => EventTicketScreen(),
         '/RequestScreen': (context) => RequestScreen(),
+
+        //===============digital card screen=============
+        '/AddCard': (context) => AddCard(),
+        '/ChangeTheme': (context) => ChangeTheme(),
+        '/Dashboard': (context) => Dashboard(),
+        '/EditOffer': (context) => EditOffer(),
+        '/EditService': (context) => EditService(),
+        '/Home': (context) => Home(),
+        '/More': (context) => More(),
+        '/OfferDetail': (context) => OfferDetail(),
+        '/Offers': (context) => Offers(),
+        '/MemberServices': (context) => MemberServices(),
+        '/ShareHistory': (context) => ShareHistory(),
+        '/ProfileDetail': (context) => ProfileDetail(),
+        '/AddService': (context) => AddService(),
+        '/AddOffer': (context) => AddOffer(),
       },
       theme: ThemeData(
           //fontFamily: 'RobotoSlab',

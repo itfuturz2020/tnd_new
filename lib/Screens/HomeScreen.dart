@@ -350,7 +350,8 @@ class _HomeScreenState extends State<HomeScreen>
     {
       "lable": "Business Card",
       "image": "assets/news.png",
-      "screenName": "/BusinessCardScreen",
+      //"screenName": "/BusinessCardScreen",
+      "screenName": "/Dashboard",
     },
     {
       "lable": "Bookmark",

@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
+import 'package:the_national_dawn/Components/LoadingBlueComponent.dart';
 import 'package:the_national_dawn/Components/MyOfferComponent.dart';
 
 class MyOfferScreen extends StatefulWidget {
@@ -20,7 +21,7 @@ class _MyOfferScreenState extends State<MyOfferScreen> {
   @override
   void initState() {
     _getoffer();
-    _profile();
+    // _profile();
   }
 
   _profile() async {
@@ -75,17 +76,19 @@ class _MyOfferScreenState extends State<MyOfferScreen> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 10.0),
-        child: ListView.builder(
-            physics: BouncingScrollPhysics(),
-            itemCount: 3,
-            itemBuilder: (BuildContext context, int index) {
-              return MyOfferComponent(
-                  // offerData: getOfferList[index],
-                  );
-            }),
-      ),
+      body: isLoading == true
+          ? LoadingBlueComponent()
+          : Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: ListView.builder(
+                  physics: BouncingScrollPhysics(),
+                  itemCount: getOfferList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return MyOfferComponent(
+                      offerData: getOfferList[index],
+                    );
+                  }),
+            ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: appPrimaryMaterialColor,
         child: Icon(
@@ -103,8 +106,11 @@ class _MyOfferScreenState extends State<MyOfferScreen> {
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        var body = {"id": "${customerId}"};
-        Services.PostForList(api_name: 'getOfferbyUser', body: body).then(
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        var body = {"id": prefs.getString(Session.CustomerId)};
+        print(
+            "+===========================${prefs.getString(Session.CustomerId)}");
+        Services.PostForList(api_name: 'admin/getOfferbyUser', body: body).then(
             (ResponseList) async {
           setState(() {
             isLoading = false;

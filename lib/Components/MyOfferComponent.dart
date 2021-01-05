@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 
 class MyOfferComponent extends StatefulWidget {
-  // var offerData;
-  // MyOfferComponent({this.offerData});
+  var offerData;
+  MyOfferComponent({this.offerData});
   @override
   _MyOfferComponentState createState() => _MyOfferComponentState();
 }
@@ -42,8 +42,8 @@ class _MyOfferComponentState extends State<MyOfferComponent> {
                 borderRadius: BorderRadius.circular(12),
                 child: Image.network(
                   //"assets/10.jpeg",
-                  //"${widget.offerData["bannerImage"]}",
-                  "assets/offer2.jpg",
+                  "${widget.offerData["bannerImage"]}",
+                  //"assets/offer2.jpg",
                   fit: BoxFit.cover,
                 ),
               ),
@@ -64,16 +64,16 @@ class _MyOfferComponentState extends State<MyOfferComponent> {
               ),
               child: Center(
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 3.0),
-                    child: Text(
-                      //"Category",
-                     // "${widget.offerData["title"]}",
-                      "Category",
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  )),
+                padding: const EdgeInsets.only(left: 3.0),
+                child: Text(
+                  //"Category",
+                  "${widget.offerData["title"]}",
+                  // "Category",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(color: Colors.white),
+                ),
+              )),
             ),
           ),
           Positioned(
@@ -91,10 +91,10 @@ class _MyOfferComponentState extends State<MyOfferComponent> {
               ),
               child: Center(
                   child: Text(
-                    //"Expires on: " + "${widget.offerData["offerExpire"]}",
-                    "Expires on: " + "12/05/2020",
-                    style: TextStyle(color: Colors.white),
-                  )),
+                "Expires on: " + "${widget.offerData["offerExpire"]}",
+                //"Expires on: " + "12/05/2020",
+                style: TextStyle(color: Colors.white),
+              )),
             ),
           ),
         ],
