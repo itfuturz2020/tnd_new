@@ -65,6 +65,42 @@ class LoginClass {
   }
 }
 
+class DigitalDataClass {
+  String MESSAGE;
+  String ORIGINAL_ERROR;
+  bool ERROR_STATUS;
+  bool RECORDS;
+  List<LoginClass> Data;
+
+  DigitalDataClass(
+      {this.MESSAGE,
+      this.ORIGINAL_ERROR,
+      this.ERROR_STATUS,
+      this.RECORDS,
+      this.Data});
+
+  factory DigitalDataClass.fromJson(Map<String, dynamic> json) {
+    return DigitalDataClass(
+        MESSAGE: json['MESSAGE'] as String,
+        ORIGINAL_ERROR: json['ORIGINAL_ERROR'] as String,
+        ERROR_STATUS: json['ERROR_STATUS'] as bool,
+        RECORDS: json['RECORDS'] as bool,
+        Data: json['Data']
+            .map<DigitalClass>((json) => DigitalClass.fromJson(json))
+            .toList());
+  }
+}
+
+class DigitalClass {
+  String Id;
+
+  DigitalClass({this.Id});
+
+  factory DigitalClass.fromJson(Map<String, dynamic> json) {
+    return DigitalClass(Id: json['Id'] as String);
+  }
+}
+
 class DashboardCountDataClass {
   String MESSAGE;
   String ORIGINAL_ERROR;
