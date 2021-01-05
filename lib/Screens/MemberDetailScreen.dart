@@ -210,7 +210,9 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                           backgroundImage: profileList["img"] !=
                                                   null
                                               ? NetworkImage(profileList["img"])
-                                              : AssetImage('assets/user2.png'),
+                                              : AssetImage(
+                                                  'assets/user2.png',
+                                                ),
                                           //child: Image.asset("assets/10.jpeg",fit: BoxFit.cover,),
                                         ))
                                     : Container(
@@ -230,6 +232,8 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                         ),
                                         child: CircleAvatar(
                                           radius: 80,
+                                          backgroundColor:
+                                              appPrimaryMaterialColor,
                                           backgroundImage: AssetImage(
                                             "assets/051-user.png",
                                           ),
@@ -261,26 +265,32 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
                                       children: <Widget>[
-                                        Text(
-                                          // "Mr. Natasha Goel",
-                                          "${profileList["name"]}",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold),
+                                        Flexible(
+                                          child: Text(
+                                            // "Mr. Natasha Goel",
+                                            "${profileList["name"]}",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold),
+                                          ),
                                         ),
-                                        Text("Manager",
-                                            style: TextStyle(
-                                                color: Colors.grey[700],
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w500)),
-                                        Text(
+                                        Flexible(
+                                          child: Text("Manager",
+                                              style: TextStyle(
+                                                  color: Colors.grey[700],
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w500)),
+                                        ),
+                                        Flexible(
+                                          child: Text(
 //                                          "Future Group Info Soft",
-                                            "${profileList["company_name"]}",
-                                            style: TextStyle(
-                                                color: Colors.grey[700],
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500))
+                                              "${profileList["company_name"]}",
+                                              style: TextStyle(
+                                                  color: Colors.grey[700],
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w500)),
+                                        )
                                       ],
                                     ),
                                   ),
@@ -334,40 +344,48 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                           SizedBox(
                                             width: 20,
                                           ),
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Text(
+                                          Expanded(
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Flexible(
+                                                  child: Text(
 //                                              "+91-8488848476",
-                                                "${profileList["mobile"]}",
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.bold,
-                                                    letterSpacing: 1),
-                                              ),
-                                              Text(
-//                                                "+91-9723131314",
-                                                  "${profileList["whatsApp"]}",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 20,
-                                                      fontWeight:
-                                                          FontWeight.bold)),
-                                              Flexible(
-                                                child: Text(
-//                                                "xsantosh7@gmail.com",
-                                                    "${profileList["email"]}",
+                                                    "${profileList["mobile"]}",
                                                     style: TextStyle(
-                                                        color: Colors.grey[700],
-                                                        fontSize: 16,
+                                                        color: Colors.black,
+                                                        fontSize: 20,
                                                         fontWeight:
-                                                            FontWeight.w500)),
-                                              )
-                                            ],
+                                                            FontWeight.bold,
+                                                        letterSpacing: 1),
+                                                  ),
+                                                ),
+                                                Flexible(
+                                                  child: Text(
+//                                                "+91-9723131314",
+                                                      "${profileList["whatsApp"]}",
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold)),
+                                                ),
+                                                Flexible(
+                                                  child: Text(
+//                                                "xsantosh7@gmail.com",
+                                                      "${profileList["email"]}",
+                                                      style: TextStyle(
+                                                          color:
+                                                              Colors.grey[700],
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w500)),
+                                                )
+                                              ],
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -486,17 +504,20 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                           FontWeight.w500),
                                                 ),
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 8.0, top: 12),
-                                                child: Text(
-                                                  // "Mr. Natasha Goel",
-                                                  "${profileList["company_name"] ?? "-"}",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 20,
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                              Flexible(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 8.0, top: 12),
+                                                  child: Text(
+                                                    // "Mr. Natasha Goel",
+                                                    "${profileList["company_name"] ?? "-"}",
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
                                                 ),
                                               ),
                                             ],
@@ -518,16 +539,20 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                           FontWeight.w500),
                                                 ),
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 8.0),
-                                                child: Text(
-                                                    "${profileList["about_business"] ?? "-"}",
-                                                    style: TextStyle(
-                                                        color: Colors.grey[700],
-                                                        fontSize: 18,
-                                                        fontWeight:
-                                                            FontWeight.w500)),
+                                              Flexible(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 8.0),
+                                                  child: Text(
+                                                      "${profileList["about_business"] ?? "-"}",
+                                                      style: TextStyle(
+                                                          color:
+                                                              Colors.grey[700],
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.w500)),
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -548,16 +573,20 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                           FontWeight.w500),
                                                 ),
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 8.0),
-                                                child: Text(
-                                                    "${business_category ?? "-"}",
-                                                    style: TextStyle(
-                                                        color: Colors.grey[700],
-                                                        fontSize: 18,
-                                                        fontWeight:
-                                                            FontWeight.w500)),
+                                              Flexible(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 8.0),
+                                                  child: Text(
+                                                      "${business_category ?? "-"}",
+                                                      style: TextStyle(
+                                                          color:
+                                                              Colors.grey[700],
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.w500)),
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -578,17 +607,21 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                           FontWeight.w500),
                                                 ),
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 8.0),
-                                                child: Text(
+                                              Flexible(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 8.0),
+                                                  child: Text(
 //                                          "Future Group Info Soft",
-                                                    "${profileList["address"] ?? "-"}",
-                                                    style: TextStyle(
-                                                        color: Colors.grey[700],
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500)),
+                                                      "${profileList["address"] ?? "-"}",
+                                                      style: TextStyle(
+                                                          color:
+                                                              Colors.grey[700],
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w500)),
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -683,17 +716,20 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                           FontWeight.w500),
                                                 ),
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 8.0, top: 12),
-                                                child: Text(
-                                                  // "Mr. Natasha Goel",
-                                                  "${profileList["achievement"] ?? "-"}",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 20,
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                              Flexible(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 8.0, top: 12),
+                                                  child: Text(
+                                                    // "Mr. Natasha Goel",
+                                                    "${profileList["achievement"] ?? "-"}",
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
                                                 ),
                                               ),
                                             ],

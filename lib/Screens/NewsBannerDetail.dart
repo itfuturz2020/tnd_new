@@ -34,7 +34,7 @@ class _NewsBannerDetailState extends State<NewsBannerDetail> {
                         child: FadeInImage.assetNetwork(
                           placeholder: "assets/TND Logo_PNG_Newspaper.png",
                           fit: BoxFit.contain,
-                          image: "${widget.newsData["newsImage"]}",
+                          image: "${widget.newsData["featured_img_src"]}",
                         ),
                       ),
                     ),
@@ -193,7 +193,7 @@ class _NewsBannerDetailState extends State<NewsBannerDetail> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text("${widget.newsData["headline"]}",
+                    Text("${widget.newsData["title"]}",
                         textAlign: TextAlign.justify,
                         style: TextStyle(
                             color: Colors.black,

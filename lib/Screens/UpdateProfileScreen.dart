@@ -490,6 +490,10 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           return null;
                         },
                         decoration: InputDecoration(
+                          // contentPadding: EdgeInsets.symmetric(
+                          //     vertical: 0.0, horizontal: 0.0),
+
+                          errorStyle: TextStyle(height: 0),
                           contentPadding: const EdgeInsets.all(15),
                           fillColor: Colors.white,
                           enabledBorder: OutlineInputBorder(
@@ -628,7 +632,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         keyboardType: TextInputType.text,
                         style: TextStyle(fontSize: 15),
                         cursorColor: appPrimaryMaterialColor,
+                        validator: (address) {
+                          if (address.length == 0) {
+                            return 'Please enter address';
+                          }
+                          return null;
+                        },
                         decoration: InputDecoration(
+                          errorStyle: TextStyle(height: 0),
                           contentPadding: const EdgeInsets.all(15),
                           fillColor: Colors.white,
                           enabledBorder: OutlineInputBorder(
@@ -684,8 +695,15 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         keyboardType: TextInputType.text,
                         style: TextStyle(fontSize: 15),
                         cursorColor: appPrimaryMaterialColor,
+                        validator: (sname) {
+                          if (sname.length == 0) {
+                            return 'Please enter spouse name';
+                          }
+                          return null;
+                        },
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(15),
+                          errorStyle: TextStyle(height: 0),
                           fillColor: Colors.white,
                           enabledBorder: OutlineInputBorder(
                             borderRadius:
@@ -803,9 +821,16 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         //controller: txtName,
                         controller: txtachievement,
                         keyboardType: TextInputType.text,
+                        validator: (ach) {
+                          if (ach.length == 0) {
+                            return 'Please enter your achievement';
+                          }
+                          return null;
+                        },
                         style: TextStyle(fontSize: 15),
                         cursorColor: appPrimaryMaterialColor,
                         decoration: InputDecoration(
+                          errorStyle: TextStyle(height: 0),
                           contentPadding: const EdgeInsets.all(15),
                           fillColor: Colors.white,
                           enabledBorder: OutlineInputBorder(
@@ -862,13 +887,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         keyboardType: TextInputType.number,
                         style: TextStyle(fontSize: 15),
                         cursorColor: appPrimaryMaterialColor,
-//                        validator: (position) {
-//                          if (position.length == 0) {
-//                            return 'Please enter your position';
-//                          }
-//                          return null;
-//                        },
+                        validator: (child) {
+                          if (child.length == 0) {
+                            return 'Please enter your No. of child';
+                          }
+                          return null;
+                        },
                         decoration: InputDecoration(
+                          errorStyle: TextStyle(height: 0),
                           contentPadding: const EdgeInsets.all(15),
                           fillColor: Colors.white,
                           enabledBorder: OutlineInputBorder(
@@ -932,6 +958,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           return null;
                         },
                         decoration: InputDecoration(
+                          errorStyle: TextStyle(height: 0),
                           contentPadding: const EdgeInsets.all(15),
                           fillColor: Colors.white,
                           enabledBorder: OutlineInputBorder(
@@ -1001,6 +1028,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         },
                         decoration: InputDecoration(
                           counterText: "",
+                          errorStyle: TextStyle(height: 0),
                           contentPadding: const EdgeInsets.all(15),
                           fillColor: Colors.white,
                           enabledBorder: OutlineInputBorder(
@@ -1070,6 +1098,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         },
                         decoration: InputDecoration(
                           counterText: "",
+                          errorStyle: TextStyle(height: 0),
                           contentPadding: const EdgeInsets.all(15),
                           fillColor: Colors.white,
                           enabledBorder: OutlineInputBorder(
@@ -1145,6 +1174,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             }
                           },
                           decoration: InputDecoration(
+                            errorStyle: TextStyle(height: 0),
                             contentPadding: const EdgeInsets.all(15),
                             fillColor: Colors.white,
                             enabledBorder: OutlineInputBorder(
@@ -1182,6 +1212,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             fontWeight: FontWeight.w600),
                       ),
                     ),
+                    //''''''''''''''''''''''''''''
+
+                    //=======================
                     ListView.builder(
                         itemCount: memberList.length,
                         physics: NeverScrollableScrollPhysics(),
@@ -1191,6 +1224,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             height: 40,
                             child: CheckboxListTile(
                               controlAffinity: ListTileControlAffinity.leading,
+
                               title: Text(
                                 memberList[index]["memberShipName"],
                                 style: TextStyle(
@@ -1198,6 +1232,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                   fontSize: 16,
                                 ),
                               ),
+
                               value: selectedList
                                   .contains(memberList[index]["_id"]),
                               //value: true,
@@ -1216,93 +1251,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             ),
                           );
                         }),
-//                     Padding(
-//                       padding: const EdgeInsets.only(bottom: 15.0, top: 15),
-//                       child: Container(
-//                           height: 38,
-//                           width: MediaQuery.of(context).size.width,
-//                           decoration: BoxDecoration(
-//                               color: Colors.white,
-//                               borderRadius: BorderRadius.circular(10),
-//                               border:
-//                                   Border.all(color: appPrimaryMaterialColor)),
-//                           child: Padding(
-//                             padding: const EdgeInsets.only(left: 8.0),
-//                             child: DropdownButtonHideUnderline(
-//                               child: isOfferLoading
-//                                   ? LoadingBlueComponent()
-//                                   : DropdownButton<CategoryData>(
-// //                                hint: dropdownValue == null
-// //                                    ? Text(
-// //                                        "Select category",
-// //                                        style: TextStyle(
-// //                                          color: Colors.black,
-// //                                        ),
-// //                                      )
-// //                                    : Text(dropdownValue),
-//                                       dropdownColor: Colors.white,
-//                                       hint: Text("Select Member Type"),
-//                                       icon: Icon(
-//                                         Icons.arrow_drop_down,
-//                                         size: 40,
-//                                         color: Colors.black,
-//                                       ),
-//                                       isExpanded: true,
-//                                       value: selectedOfferCat,
-//                                       onChanged: (value) {
-//                                         setState(() {
-//                                           selectedOfferCat = value;
-//                                           MemberTypeId = selectedOfferCat.Id;
-//                                         });
-//                                       },
-//                                       items: memberTypeList.map(
-//                                         (CategoryData category) {
-//                                           return DropdownMenuItem<CategoryData>(
-//                                             child:
-//                                                 Text(category.memberShipName),
-//                                             value: category,
-//                                           );
-//                                         },
-//                                       ).toList(),
-//                                     ),
-//                             ),
-//
-// //                          DropdownButtonHideUnderline(
-// //                        child: DropdownButton(
-// //                          hint: dropdownValue == null
-// //                              ? Text(
-// //                                  "Select category",
-// //                                  style: TextStyle(
-// //                                    color: Colors.black,
-// //                                  ),
-// //                                )
-// //                              : Text(dropdownValue),
-// //                          dropdownColor: Colors.white,
-// //                          icon: Icon(
-// //                            Icons.arrow_drop_down,
-// //                            size: 40,
-// //                            color: Colors.black,
-// //                          ),
-// //                          isExpanded: true,
-// //                          value: dropdownValue,
-// //                          items: [
-// //                            "Sports",
-// //                            "Entertainment",
-// //                            "Politics",
-// //                            "Religion"
-// //                          ].map((value) {
-// //                            return DropdownMenuItem<String>(
-// //                                value: value, child: Text(value));
-// //                          }).toList(),
-// //                          onChanged: (value) {
-// //                            setState(() {
-// //                              dropdownValue = value;
-// //                            });
-// //                          },
-// //                        ),
-// //                      ),
-//                           )),
-//                     ),
+
                     Padding(
                       padding:
                           const EdgeInsets.only(top: 15.0, left: 5, bottom: 5),
@@ -1432,8 +1381,15 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         keyboardType: TextInputType.text,
                         style: TextStyle(fontSize: 15),
                         cursorColor: appPrimaryMaterialColor,
+                        validator: (business) {
+                          if (business.length == 0) {
+                            return 'Please enter about business';
+                          }
+                          return null;
+                        },
                         decoration: InputDecoration(
                           counterText: "",
+                          errorStyle: TextStyle(height: 0),
                           contentPadding: const EdgeInsets.all(15),
                           fillColor: Colors.white,
                           enabledBorder: OutlineInputBorder(
@@ -1487,10 +1443,17 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       child: TextFormField(
                         //controller: txtName,
                         controller: txtExperience,
+                        validator: (exp) {
+                          if (exp.length == 0) {
+                            return 'Please enter your experience';
+                          }
+                          return null;
+                        },
                         keyboardType: TextInputType.text,
                         style: TextStyle(fontSize: 15),
                         cursorColor: appPrimaryMaterialColor,
                         decoration: InputDecoration(
+                          errorStyle: TextStyle(height: 0),
                           counterText: "",
                           contentPadding: const EdgeInsets.all(15),
                           fillColor: Colors.white,
@@ -1552,7 +1515,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           keyboardType: TextInputType.text,
                           style: TextStyle(fontSize: 15),
                           cursorColor: appPrimaryMaterialColor,
+                          validator: (fb) {
+                            if (fb.length == 0) {
+                              return 'Please enter your facebook Link';
+                            }
+                            return null;
+                          },
                           decoration: InputDecoration(
+                            errorStyle: TextStyle(height: 0),
                             hintText: "Facebook Link",
                             contentPadding: const EdgeInsets.all(15),
                             fillColor: Colors.white,
@@ -1603,9 +1573,16 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           controller: instagram,
                           keyboardType: TextInputType.text,
                           style: TextStyle(fontSize: 15),
+                          validator: (insta) {
+                            if (insta.length == 0) {
+                              return 'Please enter your instagram link';
+                            }
+                            return null;
+                          },
                           cursorColor: appPrimaryMaterialColor,
                           decoration: InputDecoration(
                             hintText: "Instagram Link",
+                            errorStyle: TextStyle(height: 0),
                             contentPadding: const EdgeInsets.all(15),
                             fillColor: Colors.white,
                             enabledBorder: OutlineInputBorder(
@@ -1656,7 +1633,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           keyboardType: TextInputType.text,
                           style: TextStyle(fontSize: 15),
                           cursorColor: appPrimaryMaterialColor,
+                          validator: (linkin) {
+                            if (linkin.length == 0) {
+                              return 'Please enter your linkedin link';
+                            }
+                            return null;
+                          },
                           decoration: InputDecoration(
+                            errorStyle: TextStyle(height: 0),
                             hintText: "LinkedIn Link",
                             contentPadding: const EdgeInsets.all(15),
                             fillColor: Colors.white,
@@ -1708,7 +1692,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           keyboardType: TextInputType.text,
                           style: TextStyle(fontSize: 15),
                           cursorColor: appPrimaryMaterialColor,
+                          validator: (twitter) {
+                            if (twitter.length == 0) {
+                              return 'Please enter your twitter link';
+                            }
+                            return null;
+                          },
                           decoration: InputDecoration(
+                            errorStyle: TextStyle(height: 0),
                             hintText: "Twitter Link",
                             contentPadding: const EdgeInsets.all(15),
                             fillColor: Colors.white,
@@ -1760,7 +1751,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           keyboardType: TextInputType.text,
                           style: TextStyle(fontSize: 15),
                           cursorColor: appPrimaryMaterialColor,
+                          validator: (youtube) {
+                            if (youtube.length == 0) {
+                              return 'Please enter your youtube link';
+                            }
+                            return null;
+                          },
                           decoration: InputDecoration(
+                            errorStyle: TextStyle(height: 0),
                             hintText: "Youtube Link",
                             contentPadding: const EdgeInsets.all(15),
                             fillColor: Colors.white,
@@ -1844,6 +1842,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               isCategoty = false;
               offerCatList = responseList;
             });
+
+            for (int i = 0; i < responseList.length; i++) {
+              if (responseList[i].offerId ==
+                  widget.updatedProfileData["business_category"]) {
+                selectedOfferCat2 = responseList[i];
+              }
+            }
           } else {
             setState(() {
               isCategoty = false;
@@ -1903,118 +1908,119 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   }
 
   _updateProfile() async {
-    // if (_formkey.currentState.validate()) {
-    try {
-      final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        setState(() {
-          isLoading = true;
-        });
-
-        String filename = "";
-        String filePath = "";
-        File compressedFile;
-        if (_Image != null) {
-          ImageProperties properties =
-              await FlutterNativeImage.getImageProperties(_Image.path);
-
-          compressedFile = await FlutterNativeImage.compressImage(
-            _Image.path,
-            quality: 80,
-            targetWidth: 600,
-            targetHeight: (properties.height * 600 / properties.width).round(),
-          );
-
-          filename = _Image.path.split('/').last;
-          filePath = compressedFile.path;
-        }
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-
-        FormData body = FormData.fromMap({
-          "id": prefs.getString(Session.CustomerId),
-          "name": txtName.text,
-          "mobile": txtMobileNumber.text,
-          "email": txtEmail.text,
-          "company_name": txtCName.text,
-          "referred_by": prefs.getString(Session.referred_by),
-          "date_of_birth": _birthDate.toString().split(" ")[0],
-          "gender": Gender,
-          "address": txtAddress.text,
-          "spouse_name": txtSpouseName.text,
-          "spouse_birth_date": _spouseBirthDate.toString().split(" ")[0],
-          "achievement": txtachievement.text,
-          "number_of_child": txtChildrenCount.text,
-          "memberOf": selectedList,
-          "experience": txtExperience.text,
-          "about_business": txtAboutBusiness.text,
-          "img": (filePath != null && filePath != '')
-              ? await MultipartFile.fromFile(filePath,
-                  filename: filename.toString())
-              : null,
-          "faceBook": facebook.text,
-          "whatsApp": txtWNumber.text,
-          "instagram": instagram.text,
-          "linkedIn": linkedIn.text,
-          "twitter": twitter.text,
-          "youTube": youTube.text,
-          "business_category": BusinessCategory
-        });
-        print(body.fields);
-        //"key":"value"
-        Services.PostForList(
-                api_name: 'api/registration/updatePersonal', body: body)
-            .then((responseList) async {
+    if (_formkey.currentState.validate()) {
+      try {
+        final result = await InternetAddress.lookup('google.com');
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
           setState(() {
-            isLoading = false;
+            isLoading = true;
           });
-          if (responseList.length > 0) {
-            // SharedPreferences prefs = await SharedPreferences.getInstance();
-            // setState(() {
-            //   prefs.setString(Session.CustomerName, txtName.text);
-            //   prefs.setString(Session.CustomerCompanyName, txtCName.text);
-            //   prefs.setString(Session.CustomerEmailId, txtEmail.text);
-            //   prefs.setString(Session.CustomerPhoneNo, txtMobileNumber.text);
-            //   prefs.setString(Session.spouse_name, txtSpouseName.text);
-            //   prefs.setString(Session.number_of_child, txtChildrenCount.text);
-            //   prefs.setString(Session.about_business, txtAboutBusiness.text);
-            //   prefs.setString(Session.experience, txtExperience.text);
-            //   prefs.setString(Session.achievement, txtachievement.text);
-            //   prefs.setString(Session.linkedIn, linkedIn.text);
-            //   prefs.setString(Session.faceBook, facebook.text);
-            //   prefs.setString(Session.youTube, youTube.text);
-            //   prefs.setString(Session.instagram, instagram.text);
-            //   prefs.setString(Session.twitter, twitter.text);
-            //   prefs.setString(Session.address, txtAddress.text);
-            //   prefs.setString(Session.gender, Gender);
-            //   prefs.setString(Session.gender, Gender);
-            //   //prefs.setStringList(Session.memberOf, selectedList);
-            //   prefs.setString(
-            //       Session.date_of_birth, responseList[0]["date_of_birth"]);
-            //   prefs.setString(Session.CustomerImage, responseList[0]["img"]);
-            // });
-            Navigator.of(context).pushNamed('/HomeScreen');
-            Fluttertoast.showToast(
-                msg: "Profile Updated Successfully",
-                gravity: ToastGravity.BOTTOM);
+
+          String filename = "";
+          String filePath = "";
+          File compressedFile;
+          if (_Image != null) {
+            ImageProperties properties =
+                await FlutterNativeImage.getImageProperties(_Image.path);
+
+            compressedFile = await FlutterNativeImage.compressImage(
+              _Image.path,
+              quality: 80,
+              targetWidth: 600,
+              targetHeight:
+                  (properties.height * 600 / properties.width).round(),
+            );
+
+            filename = _Image.path.split('/').last;
+            filePath = compressedFile.path;
           }
+          SharedPreferences prefs = await SharedPreferences.getInstance();
 
-          setState(() {
-            isLoading = false;
+          FormData body = FormData.fromMap({
+            "id": prefs.getString(Session.CustomerId),
+            "name": txtName.text,
+            "mobile": txtMobileNumber.text,
+            "email": txtEmail.text,
+            "company_name": txtCName.text,
+            "referred_by": prefs.getString(Session.referred_by),
+            "date_of_birth": _birthDate.toString().split(" ")[0],
+            "gender": Gender,
+            "address": txtAddress.text,
+            "spouse_name": txtSpouseName.text,
+            "spouse_birth_date": _spouseBirthDate.toString().split(" ")[0],
+            "achievement": txtachievement.text,
+            "number_of_child": txtChildrenCount.text,
+            "memberOf": selectedList,
+            "experience": txtExperience.text,
+            "about_business": txtAboutBusiness.text,
+            "img": (filePath != null && filePath != '')
+                ? await MultipartFile.fromFile(filePath,
+                    filename: filename.toString())
+                : null,
+            "faceBook": facebook.text,
+            "whatsApp": txtWNumber.text,
+            "instagram": instagram.text,
+            "linkedIn": linkedIn.text,
+            "twitter": twitter.text,
+            "youTube": youTube.text,
+            "business_category": BusinessCategory
           });
-        }, onError: (e) {
-          setState(() {
-            isLoading = false;
+          print(body.fields);
+          //"key":"value"
+          Services.PostForList(
+                  api_name: 'api/registration/updatePersonal', body: body)
+              .then((responseList) async {
+            setState(() {
+              isLoading = false;
+            });
+            if (responseList.length > 0) {
+              // SharedPreferences prefs = await SharedPreferences.getInstance();
+              // setState(() {
+              //   prefs.setString(Session.CustomerName, txtName.text);
+              //   prefs.setString(Session.CustomerCompanyName, txtCName.text);
+              //   prefs.setString(Session.CustomerEmailId, txtEmail.text);
+              //   prefs.setString(Session.CustomerPhoneNo, txtMobileNumber.text);
+              //   prefs.setString(Session.spouse_name, txtSpouseName.text);
+              //   prefs.setString(Session.number_of_child, txtChildrenCount.text);
+              //   prefs.setString(Session.about_business, txtAboutBusiness.text);
+              //   prefs.setString(Session.experience, txtExperience.text);
+              //   prefs.setString(Session.achievement, txtachievement.text);
+              //   prefs.setString(Session.linkedIn, linkedIn.text);
+              //   prefs.setString(Session.faceBook, facebook.text);
+              //   prefs.setString(Session.youTube, youTube.text);
+              //   prefs.setString(Session.instagram, instagram.text);
+              //   prefs.setString(Session.twitter, twitter.text);
+              //   prefs.setString(Session.address, txtAddress.text);
+              //   prefs.setString(Session.gender, Gender);
+              //   prefs.setString(Session.gender, Gender);
+              //   //prefs.setStringList(Session.memberOf, selectedList);
+              //   prefs.setString(
+              //       Session.date_of_birth, responseList[0]["date_of_birth"]);
+              //   prefs.setString(Session.CustomerImage, responseList[0]["img"]);
+              // });
+              Navigator.of(context).pushNamed('/HomeScreen');
+              Fluttertoast.showToast(
+                  msg: "Profile Updated Successfully",
+                  gravity: ToastGravity.BOTTOM);
+            }
+
+            setState(() {
+              isLoading = false;
+            });
+          }, onError: (e) {
+            setState(() {
+              isLoading = false;
+            });
+            print("error on call -> ${e.message}");
+            Fluttertoast.showToast(msg: "Something Went Wrong");
+            //showMsg("something went wrong");
           });
-          print("error on call -> ${e.message}");
-          Fluttertoast.showToast(msg: "Something Went Wrong");
-          //showMsg("something went wrong");
-        });
+        }
+      } on SocketException catch (_) {
+        Fluttertoast.showToast(msg: "No Internet Connection.");
       }
-    } on SocketException catch (_) {
-      Fluttertoast.showToast(msg: "No Internet Connection.");
+    } else {
+      Fluttertoast.showToast(msg: "Please Fill the Field");
     }
-    // } else {
-    //   Fluttertoast.showToast(msg: "Please Fill the Field");
-    // }
   }
 }
