@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 
 //const String SOAP_API_URL = "http://pmc.studyfield.com/Service.asmx/";
 
+const String API_URL = "http://15.207.46.236/";
+//const String API_URL = "https://tnd-tmp.herokuapp.com/admin/";
+//const String API_URL = "https://blogproject-33.herokuapp.com/";
 //const String API_URL = "http://15.207.46.236/";
 //const String API_URL = "https://blogproject-33.herokuapp.com/";
-const String API_URL = "https://tnd-tmp.herokuapp.com/";
+//const String API_URL = "https://tnd-tmp.herokuapp.com/";
 const String API_URL1 = "http://www.thenationaldawn.in/wp-json/";
 const String Image_URL = "http://15.207.46.236/";
 
@@ -43,7 +46,6 @@ class Session {
   static const String CustomerImage = "CustomerImage";
   static const String DOB = "date_of_birth";
   static const String experience = "experience";
-
   static const String achievement = "achievement";
   static const String faceBook = "faceBook";
   static const String instagram = "instagram";
@@ -58,5 +60,8 @@ class Session {
   static const String date_of_birth = "date_of_birth";
   static const String business_category = "business_category";
   static const String address = "address";
+  static const String isVerified = "isVerified";
   static const String about_business = "about_business";
+
+  // static const Bool('option', true);
 }

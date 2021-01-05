@@ -56,8 +56,10 @@ class _LoginScreenState extends State<LoginScreen> {
     await prefs.setString(Session.linkedIn, data["linkedIn"]);
     await prefs.setString(Session.twitter, data["twitter"]);
     await prefs.setString(Session.youTube, data["youTube"]);
+    await prefs.setBool(Session.isVerified, data["isVerified"]);
     await prefs.setString(Session.business_category, data["business_category"]);
     await prefs.setString(Session.memberOf, json.encode(data["memberOf"]));
+
     //log(json.decode(prefs.getString(Session.memberOf)).toString());
     //await prefs.setString(Session.business_category, data["business_category"]);
     //await prefs.setStringList(Session.memberOf,data ),

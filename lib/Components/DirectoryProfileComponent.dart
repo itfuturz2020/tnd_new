@@ -5,7 +5,9 @@ import 'package:the_national_dawn/Components/SocialMediaComponent.dart';
 
 class DirectoryProfileComponent extends StatefulWidget {
   var directoryData;
+
   DirectoryProfileComponent({this.directoryData});
+
   @override
   _DirectoryProfileComponentState createState() =>
       _DirectoryProfileComponentState();
@@ -474,12 +476,14 @@ class _DirectoryProfileComponentState extends State<DirectoryProfileComponent> {
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.w500),
                                           ),
-                                          Text(
-                                            "${widget.directoryData["company_name"]}",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w600),
+                                          FittedBox(
+                                            child: Text(
+                                              "${widget.directoryData["company_name"]}",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -495,13 +499,25 @@ class _DirectoryProfileComponentState extends State<DirectoryProfileComponent> {
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.w500),
                                           ),
-                                          Text(
-                                            "${widget.directoryData["company_website"]}",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w600),
-                                          ),
+                                          widget.directoryData[
+                                                      "company_website"] !=
+                                                  null
+                                              ? Text(
+                                                  "${widget.directoryData["company_website"]}",
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                )
+                                              : Text(
+                                                  "-",
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
                                         ],
                                       ),
                                     ),
@@ -732,30 +748,32 @@ class _DirectoryProfileComponentState extends State<DirectoryProfileComponent> {
                                             ],
                                           ),
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 8.0, left: 20),
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                "Email : ",
-                                                style: TextStyle(
-                                                  color: Colors.grey[500],
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                              Text(
-                                                  "${widget.directoryData["email"]}",
+                                        FittedBox(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 8.0, left: 20),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  "Email : ",
                                                   style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.w500))
-                                            ],
+                                                    color: Colors.grey[500],
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                                Text(
+                                                    "${widget.directoryData["email"]}",
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.w500))
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                        Padding(
+                                        /*  Padding(
                                           padding: const EdgeInsets.only(
                                               left: 20.0, top: 8),
                                           child: Text("Member Type : ",
@@ -838,7 +856,7 @@ class _DirectoryProfileComponentState extends State<DirectoryProfileComponent> {
                                                         })
                                                     : SizedBox(),
                                               )),
-                                        ),
+                                        ),*/
                                         Padding(
                                           padding: const EdgeInsets.only(
                                               left: 20.0, top: 8),

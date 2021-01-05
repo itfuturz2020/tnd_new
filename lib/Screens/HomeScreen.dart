@@ -19,12 +19,14 @@ import 'package:the_national_dawn/offlineDatabase/db_handler.dart';
 
 class HomeScreen extends StatefulWidget {
   String instagram, facebook, linkedIn, twitter, whatsapp;
+
   HomeScreen(
       {this.instagram,
       this.facebook,
       this.linkedIn,
       this.twitter,
       this.whatsapp});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -39,6 +41,7 @@ class _HomeScreenState extends State<HomeScreen>
   var _comp_name;
   var _mobileNo;
   var _email;
+  bool isVerified;
   var img;
   String barCode;
   DBHelper dbHelper;
@@ -52,6 +55,7 @@ class _HomeScreenState extends State<HomeScreen>
       _email = prefs.getString(Session.CustomerEmailId);
       img = prefs.getString(Session.CustomerImage);
       _mobileNo = prefs.getString(Session.CustomerPhoneNo);
+      isVerified = prefs.getBool(Session.isVerified);
       /* qrData =
           _name + "," + _comp_name + "," + _email + "," + img + "," + _mobileNo;*/
     });
@@ -418,7 +422,7 @@ class _HomeScreenState extends State<HomeScreen>
           ),
         ),
         actions: [
-          GestureDetector(
+          /*GestureDetector(
             onTap: () {
               _settingModalBottomSheet(context);
             },
@@ -426,7 +430,7 @@ class _HomeScreenState extends State<HomeScreen>
               padding: const EdgeInsets.only(left: 8.0, top: 18, bottom: 19),
               child: Image.asset("assets/scan.png"),
             ),
-          ),
+          ),*/
           GestureDetector(
               onTap: () {
                 Navigator.of(context).pushNamed('/NotificationScreen');
@@ -574,6 +578,30 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15),
+                child: Divider(),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushNamed('/EnquiryForm');
+                },
+                child: ListTile(
+                  leading: Padding(
+                    padding: const EdgeInsets.only(right: 10.0, left: 4),
+                    child: Container(
+                        height: 20,
+                        width: 20,
+                        child: Image.asset(
+                          "assets/logout.png",
+                          color: appPrimaryMaterialColor,
+                        )),
+                  ),
+                  title: Text(
+                    "EnquiryForm",
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -670,488 +698,79 @@ class _HomeScreenState extends State<HomeScreen>
               itemCount: listB.length,
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (context, int index) => custombox(
-                listB[index]["lable"],
-                listB[index]["image"],
-                listB[index]["screenName"],
-              ),
+              itemBuilder: (context, int index) {
+                if (index == 2) {
+                  if (isVerified == true) {
+                    return custombox(
+                      listB[index]["lable"],
+                      listB[index]["image"],
+                      listB[index]["screenName"],
+                    );
+                  } else
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/EnquiryForm');
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 0.13,
+                          width: MediaQuery.of(context).size.height * 0.1,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(
+                                  color: Color(0xff16B8FF), width: 1),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16.0)),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: appPrimaryMaterialColor
+                                        .withOpacity(0.2),
+                                    blurRadius: 2.0,
+                                    spreadRadius: 2.0,
+                                    offset: Offset(3.0, 5.0))
+                              ]),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.info_outline_rounded,
+                                color: appPrimaryMaterialColor,
+                                size: 50,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 5.0),
+                                child: FittedBox(
+                                  // fit: BoxFit.contain,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(3.0),
+                                    child: Text(
+                                      "Enquiry",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: appPrimaryMaterialColor,
+                                          fontSize: 12),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                } else {
+                  return custombox(
+                    listB[index]["lable"],
+                    listB[index]["image"],
+                    listB[index]["screenName"],
+                  );
+                }
+              },
               staggeredTileBuilder: (int index) => new StaggeredTile.fit(1),
               // mainAxisSpacing: 4.0,
               // crossAxisSpacing: 4.0,
             )
-//              Padding(
-//                padding: const EdgeInsets.only(left: 35.0, right: 35, top: 25),
-//                child: Container(
-//                  height: 35,
-//                  child: TextFormField(
-//                    keyboardType: TextInputType.text,
-//                    style: TextStyle(fontSize: 15),
-//                    cursorColor: appPrimaryMaterialColor,
-//                    decoration: InputDecoration(
-//                      suffixIcon: Icon(
-//                        Icons.search,
-//                        size: 25,
-//                        color: Colors.black,
-//                      ),
-//
-////                    Padding(
-////                      padding: const EdgeInsets.only(right: 5.0, top: 0),
-////                      child: Image.asset("assets/search.png"),
-////                    ),
-//                      counterText: "",
-//                      contentPadding: EdgeInsets.only(
-//                          top: 0.0, bottom: 0, left: 15, right: 5),
-//                      hintText: "Type to Search...",
-//                      hintStyle: TextStyle(
-//                          color: Colors.grey[400], fontWeight: FontWeight.w500),
-//                      enabledBorder: OutlineInputBorder(
-//                        borderRadius: BorderRadius.all(Radius.circular(25.0)),
-//                        borderSide: BorderSide(color: Colors.black),
-//                      ),
-//                      focusedBorder: OutlineInputBorder(
-//                        borderRadius: BorderRadius.all(Radius.circular(25.0)),
-//                        borderSide: BorderSide(color: Colors.black),
-//                      ),
-//                    ),
-//                  ),
-//                ),
-//              ),
-
-//               Padding(
-//                 padding: const EdgeInsets.only(left: 25.0, right: 25, top: 35),
-//                 child: Row(
-//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                   children: [
-//                     Padding(
-//                       padding: const EdgeInsets.all(12.0),
-//                       child: GestureDetector(
-//                         onTap: () {
-//                           Navigator.of(context).pushNamed('/DailyNewScreen');
-//                         },
-//                         child: Container(
-//                           height: 72,
-//                           width: 72,
-//                           decoration: BoxDecoration(
-//                               color: Colors.white,
-//                               border: Border.all(
-//                                   color: Color(0xff16B8FF), width: 1),
-//                               borderRadius:
-//                                   BorderRadius.all(Radius.circular(16.0)),
-//                               boxShadow: [
-//                                 BoxShadow(
-//                                     color: appPrimaryMaterialColor
-//                                         .withOpacity(0.2),
-//                                     blurRadius: 2.0,
-//                                     spreadRadius: 2.0,
-//                                     offset: Offset(3.0, 5.0))
-//                               ]),
-//                           child: Column(
-//                             mainAxisAlignment: MainAxisAlignment.center,
-//                             children: [
-//                               Image.asset(
-//                                 "assets/news.png",
-//                                 // color: appPrimaryMaterialColor,
-//                               ),
-//                               Padding(
-//                                 padding: const EdgeInsets.only(top: 5.0),
-//                                 child: Text(
-//                                   "Daily News",
-//                                   textAlign: TextAlign.center,
-//                                   style: TextStyle(
-//                                       color: appPrimaryMaterialColor,
-//                                       fontSize: 12),
-//                                 ),
-//                               ),
-//                             ],
-//                           ),
-//                         ),
-//                       ),
-//                     ),
-
-//                     Padding(
-//                       padding: const EdgeInsets.all(12.0),
-//                       child: GestureDetector(
-//                         onTap: () {
-//                           Navigator.of(context).pushNamed('/NetworkScreen');
-//                         },
-//                         child: Container(
-//                           height: 72,
-//                           width: 72,
-//                           decoration: BoxDecoration(
-//                               color: Colors.white,
-//                               border: Border.all(
-//                                   color: Color(0xff16B8FF), width: 1),
-//                               borderRadius:
-//                                   BorderRadius.all(Radius.circular(16.0)),
-//                               boxShadow: [
-//                                 BoxShadow(
-//                                     color: appPrimaryMaterialColor
-//                                         .withOpacity(0.2),
-//                                     blurRadius: 2.0,
-//                                     spreadRadius: 2.0,
-//                                     offset: Offset(3.0, 5.0))
-//                               ]),
-//                           child: Column(
-//                             mainAxisAlignment: MainAxisAlignment.center,
-//                             children: [
-//                               Image.asset(
-//                                 "assets/network.png",
-//                                 // color: appPrimaryMaterialColor,
-//                               ),
-//                               Padding(
-//                                 padding: const EdgeInsets.only(top: 5.0),
-//                                 child: Text(
-//                                   "Networking",
-//                                   textAlign: TextAlign.center,
-//                                   style: TextStyle(
-//                                       color: appPrimaryMaterialColor,
-//                                       fontSize: 12),
-//                                 ),
-//                               ),
-//                             ],
-//                           ),
-//                         ),
-//                       ),
-//                     ),
-
-//                     Padding(
-//                       padding: const EdgeInsets.all(12.0),
-//                       child: GestureDetector(
-//                         onTap: () {
-//                           Navigator.of(context).pushNamed('/DirectoryScreen');
-//                         },
-//                         child: Container(
-//                           height: 72,
-//                           width: 72,
-//                           decoration: BoxDecoration(
-//                               color: Colors.white,
-//                               border: Border.all(
-//                                   color: Color(0xff16B8FF), width: 1),
-//                               borderRadius:
-//                                   BorderRadius.all(Radius.circular(16.0)),
-//                               boxShadow: [
-//                                 BoxShadow(
-//                                     color: appPrimaryMaterialColor
-//                                         .withOpacity(0.2),
-//                                     blurRadius: 2.0,
-//                                     spreadRadius: 2.0,
-//                                     offset: Offset(3.0, 5.0))
-//                               ]),
-//                           child: Column(
-//                             mainAxisAlignment: MainAxisAlignment.center,
-//                             children: [
-//                               Image.asset(
-//                                 "assets/directory.png",
-//                                 // color: appPrimaryMaterialColor,
-//                               ),
-//                               Padding(
-//                                 padding: const EdgeInsets.only(top: 5.0),
-//                                 child: Text(
-//                                   "Directory",
-//                                   textAlign: TextAlign.center,
-//                                   style: TextStyle(
-//                                       color: appPrimaryMaterialColor,
-//                                       fontSize: 12),
-//                                 ),
-//                               ),
-//                             ],
-//                           ),
-//                         ),
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-
-//               Padding(
-//                 padding: const EdgeInsets.only(left: 25.0, right: 25, top: 5),
-//                 child: Row(
-//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                   children: [
-//                     Padding(
-//                       padding: const EdgeInsets.all(12.0),
-//                       child: GestureDetector(
-//                         onTap: () {
-//                           Navigator.of(context).pushNamed('/OfferScreen');
-//                         },
-//                         child: Container(
-//                           height: 72,
-//                           width: 72,
-//                           decoration: BoxDecoration(
-//                               color: Colors.white,
-//                               border: Border.all(
-//                                   color: Color(0xff16B8FF), width: 1),
-//                               borderRadius:
-//                                   BorderRadius.all(Radius.circular(16.0)),
-//                               boxShadow: [
-//                                 BoxShadow(
-//                                     color: appPrimaryMaterialColor
-//                                         .withOpacity(0.2),
-//                                     blurRadius: 2.0,
-//                                     spreadRadius: 2.0,
-//                                     offset: Offset(3.0, 5.0))
-//                               ]),
-//                           child: Column(
-//                             mainAxisAlignment: MainAxisAlignment.center,
-//                             children: [
-//                               Image.asset(
-//                                 "assets/offers.png",
-//                                 // color: appPrimaryMaterialColor,
-//                               ),
-//                               Padding(
-//                                 padding: const EdgeInsets.only(top: 5.0),
-//                                 child: Text(
-//                                   "Offers",
-//                                   textAlign: TextAlign.center,
-//                                   style: TextStyle(
-//                                       color: appPrimaryMaterialColor,
-//                                       fontSize: 12),
-//                                 ),
-//                               ),
-//                             ],
-//                           ),
-//                         ),
-//                       ),
-//                     ),
-//                     Padding(
-//                       padding: const EdgeInsets.all(12.0),
-//                       child: GestureDetector(
-//                         onTap: () {
-//                           Navigator.of(context).pushNamed('/StoriesScreen');
-//                         },
-//                         child: Container(
-//                           height: 72,
-//                           width: 72,
-//                           decoration: BoxDecoration(
-//                               color: Colors.white,
-//                               border: Border.all(
-//                                   color: Color(0xff16B8FF), width: 1),
-//                               borderRadius:
-//                                   BorderRadius.all(Radius.circular(16.0)),
-//                               boxShadow: [
-//                                 BoxShadow(
-//                                     color: appPrimaryMaterialColor
-//                                         .withOpacity(0.2),
-//                                     blurRadius: 2.0,
-//                                     spreadRadius: 2.0,
-//                                     offset: Offset(3.0, 5.0))
-//                               ]),
-//                           child: Column(
-//                             mainAxisAlignment: MainAxisAlignment.center,
-//                             children: [
-//                               Image.asset(
-//                                 "assets/success.png",
-//                                 // color: appPrimaryMaterialColor,
-//                               ),
-//                               Padding(
-//                                 padding: const EdgeInsets.only(top: 2.0),
-//                                 child: Text(
-//                                   "Success Stories",
-//                                   textAlign: TextAlign.center,
-//                                   style: TextStyle(
-//                                       color: appPrimaryMaterialColor,
-//                                       fontSize: 12),
-//                                 ),
-//                               ),
-//                             ],
-//                           ),
-//                         ),
-//                       ),
-//                     ),
-
-//                     Padding(
-//                       padding: const EdgeInsets.all(12.0),
-//                       child: GestureDetector(
-//                         onTap: () {
-//                           Navigator.of(context).pushNamed('/CalenderScreen');
-//                         },
-//                         child: Container(
-//                           height: 72,
-//                           width: 72,
-//                           decoration: BoxDecoration(
-//                               color: Colors.white,
-//                               border: Border.all(
-//                                   color: Color(0xff16B8FF), width: 1),
-//                               borderRadius:
-//                                   BorderRadius.all(Radius.circular(16.0)),
-//                               boxShadow: [
-//                                 BoxShadow(
-//                                     color: appPrimaryMaterialColor
-//                                         .withOpacity(0.2),
-//                                     blurRadius: 2.0,
-//                                     spreadRadius: 2.0,
-//                                     offset: Offset(3.0, 5.0))
-//                               ]),
-//                           child: Column(
-//                             mainAxisAlignment: MainAxisAlignment.center,
-//                             children: [
-//                               Image.asset(
-//                                 "assets/calender.png",
-//                                 // color: appPrimaryMaterialColor,
-//                               ),
-//                               Padding(
-//                                 padding: const EdgeInsets.only(top: 5.0),
-//                                 child: Text(
-//                                   "Calendar",
-//                                   textAlign: TextAlign.center,
-//                                   style: TextStyle(
-//                                       color: appPrimaryMaterialColor,
-//                                       fontSize: 12),
-//                                 ),
-//                               ),
-//                             ],
-//                           ),
-//                         ),
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-
-//               Padding(
-//                 padding: const EdgeInsets.only(
-//                     left: 25.0, right: 25, top: 5, bottom: 10),
-//                 child: Row(
-//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                   children: [
-//                     Padding(
-//                       padding: const EdgeInsets.all(12.0),
-//                       child: GestureDetector(
-//                         onTap: () {
-//                           Navigator.of(context)
-//                               .pushNamed('/BusinessCardScreen');
-//                         },
-//                         child: Container(
-//                           height: 72,
-//                           width: 72,
-//                           decoration: BoxDecoration(
-//                               color: Colors.white,
-//                               border: Border.all(
-//                                   color: Color(0xff16B8FF), width: 1),
-//                               borderRadius:
-//                                   BorderRadius.all(Radius.circular(16.0)),
-//                               boxShadow: [
-//                                 BoxShadow(
-//                                     color: appPrimaryMaterialColor
-//                                         .withOpacity(0.2),
-//                                     blurRadius: 2.0,
-//                                     spreadRadius: 2.0,
-//                                     offset: Offset(3.0, 5.0))
-//                               ]),
-//                           child: Column(
-//                             mainAxisAlignment: MainAxisAlignment.center,
-//                             children: [
-//                               Image.asset(
-//                                 "assets/news.png",
-//                                 // color: appPrimaryMaterialColor,
-//                               ),
-//                               Padding(
-//                                 padding: const EdgeInsets.only(top: 2.0),
-//                                 child: Text(
-//                                   "Business Card",
-//                                   textAlign: TextAlign.center,
-//                                   style: TextStyle(
-//                                       color: appPrimaryMaterialColor,
-//                                       fontSize: 12),
-//                                 ),
-//                               ),
-//                             ],
-//                           ),
-//                         ),
-//                       ),
-//                     ),
-
-//                     Padding(
-//                       padding: const EdgeInsets.all(12.0),
-//                       child: GestureDetector(
-//                         onTap: () {
-//                           Navigator.of(context).pushNamed('/BookMarkScreen');
-//                         },
-//                         child: Container(
-//                           height: 72,
-//                           width: 72,
-//                           decoration: BoxDecoration(
-//                               color: Colors.white,
-//                               border: Border.all(
-//                                   color: Color(0xff16B8FF), width: 1),
-//                               borderRadius:
-//                                   BorderRadius.all(Radius.circular(16.0)),
-//                               boxShadow: [
-//                                 BoxShadow(
-//                                     color: appPrimaryMaterialColor
-//                                         .withOpacity(0.2),
-//                                     blurRadius: 2.0,
-//                                     spreadRadius: 2.0,
-//                                     offset: Offset(3.0, 5.0))
-//                               ]),
-//                           child: Column(
-//                             mainAxisAlignment: MainAxisAlignment.center,
-//                             children: [
-//                               Image.asset(
-//                                 "assets/bookmark.png",
-//                                 // color: appPrimaryMaterialColor,
-//                               ),
-//                               Padding(
-//                                 padding: const EdgeInsets.only(top: 5.0),
-//                                 child: Text(
-//                                   "Bookmark",
-//                                   textAlign: TextAlign.center,
-//                                   style: TextStyle(
-//                                       color: appPrimaryMaterialColor,
-//                                       fontSize: 12),
-//                                 ),
-//                               ),
-//                             ],
-//                           ),
-//                         ),
-//                       ),
-//                     ),
-
-//                     Padding(
-//                       padding: const EdgeInsets.all(12.0),
-//                       child: GestureDetector(
-//                         onTap: () {
-//                           Navigator.of(context).pushNamed('/CategoryScreen');
-//                         },
-//                         child: Container(
-//                           height: 72,
-//                           width: 72,
-//                           decoration: BoxDecoration(
-//                               color: Colors.white,
-//                               border: Border.all(
-//                                   color: Color(0xff16B8FF), width: 1),
-//                               borderRadius:
-//                                   BorderRadius.all(Radius.circular(16.0)),
-//                               boxShadow: [
-//                                 BoxShadow(
-//                                     color: appPrimaryMaterialColor
-//                                         .withOpacity(0.2),
-//                                     blurRadius: 2.0,
-//                                     spreadRadius: 2.0,
-//                                     offset: Offset(3.0, 5.0))
-//                               ]),
-//                           child: Column(
-//                             mainAxisAlignment: MainAxisAlignment.center,
-//                             children: [
-//                               Image.asset(
-//                                 "assets/category.png",
-//                                 // color: appPrimaryMaterialColor,
-//                               ),
-//                               Padding(
-//                                 padding: const EdgeInsets.only(top: 5.0),
-//                                 child: Text(
-//                                   "Category",
-//                                   textAlign: TextAlign.center,
-//                                   style: TextStyle(
-//                                       color: appPrimaryMaterialColor,
-//                                       fontSize: 12),
-//                                 ),
-//                               ),
-//                             ],
-//                           ),
-//                         ),
-//                       ),
-//                     ),
           ],
         ),
       ),

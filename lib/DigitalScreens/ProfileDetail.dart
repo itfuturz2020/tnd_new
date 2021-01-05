@@ -4,8 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/services.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'file:///G:/Keval%20Work/Flutter%20Projects/the_national_dawn/lib/DigitalCommon/Constants.dart'
-    as cnst;
+import 'package:the_national_dawn/DigitalCommon/Constants.dart' as cnst;
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:geocoder/geocoder.dart';

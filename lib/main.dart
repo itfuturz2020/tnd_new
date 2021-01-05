@@ -53,6 +53,7 @@ import 'package:the_national_dawn/Screens/VerificationScreen.dart';
 import 'package:the_national_dawn/Screens/ViewDetailScreen.dart';
 
 import 'Screens/AddOfferScreen.dart';
+import 'Screens/EnquiryForm.dart';
 import 'Screens/MyOfferScreen.dart';
 
 void main() async {
@@ -128,6 +129,7 @@ class _MyAppState extends State<MyApp> {
         '/ProfileDetail': (context) => ProfileDetail(),
         '/AddService': (context) => AddService(),
         '/AddOffer': (context) => AddOffer(),
+        '/EnquiryForm': (context) => EnquiryForm(),
       },
       theme: ThemeData(
           //fontFamily: 'RobotoSlab',

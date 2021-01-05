@@ -5,13 +5,14 @@ import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/DigitalCommon/ClassList.dart';
+import 'package:the_national_dawn/DigitalCommon/Constants.dart';
 import 'package:xml2json/xml2json.dart';
 
 //Custom Files
 
-import 'file:///G:/Keval%20Work/Flutter%20Projects/the_national_dawn/lib/DigitalCommon/Constants.dart';
-import 'file:///G:/Keval%20Work/Flutter%20Projects/the_national_dawn/lib/DigitalCommon/Constants.dart'
-    as cnst;
+import 'package:the_national_dawn/DigitalCommon/Constants.dart' as cnst;
+
+import 'package:the_national_dawn/DigitalCommon/Constants.dart' as cnst;
 
 Dio dio = new Dio();
 Xml2Json xml2json = new Xml2Json();

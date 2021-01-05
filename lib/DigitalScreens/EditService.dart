@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'file:///G:/Keval%20Work/Flutter%20Projects/the_national_dawn/lib/DigitalCommon/Constants.dart'
-    as cnst;
+import 'package:the_national_dawn/DigitalCommon/Constants.dart' as cnst;
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:the_national_dawn/DigitalCommon/ClassList.dart';

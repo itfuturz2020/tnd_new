@@ -148,7 +148,7 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
                           ),
                         ),
                       ),*/
-                      GestureDetector(
+                      /* GestureDetector(
                         onTap: () {
                           Navigator.push(
                             context,
@@ -192,7 +192,7 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
                             ),
                           ),
                         ),
-                      ),
+                      ),*/
                       Padding(
                         padding: const EdgeInsets.only(top: 10.0),
                         child: Row(

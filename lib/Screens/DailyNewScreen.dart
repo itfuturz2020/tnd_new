@@ -843,8 +843,6 @@ class _DailyNewScreenState extends State<DailyNewScreen>
         });
 
         FormData body = FormData.fromMap({"news_category": "${subcatName}"});
-
-        // print(body.fields);
         Services.PostForList1(api_name: 'custom/slider_news', body: body).then(
             (subCatResponseList) async {
           setState(() {

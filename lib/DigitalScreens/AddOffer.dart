@@ -2,12 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'file:///G:/Keval%20Work/Flutter%20Projects/the_national_dawn/lib/DigitalCommon/Constants.dart'
-    as cnst;
+
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/DigitalCommon/Services.dart';
+import 'package:the_national_dawn/DigitalCommon/Constants.dart' as cnst;
 import 'package:the_national_dawn/DigitalComponent/ImagePickerHandlerComponent.dart';
 
 class AddOffer extends StatefulWidget {

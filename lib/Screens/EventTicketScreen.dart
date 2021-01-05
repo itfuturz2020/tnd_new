@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
+import 'package:the_national_dawn/Common/Services.dart';
 
 class EventTicketScreen extends StatefulWidget {
   var ticketdata;
@@ -13,7 +18,23 @@ class EventTicketScreen extends StatefulWidget {
 }
 
 class _EventTicketScreenState extends State<EventTicketScreen> {
-  String detail = "Hello";
+  String detail;
+  bool isTicketLoading = false;
+  String customerId;
+  List ticketList = [];
+
+  @override
+  void initState() {
+    _profile();
+    _eventTicket();
+  }
+
+  _profile() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      customerId = prefs.getString(Session.CustomerId);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +147,7 @@ class _EventTicketScreenState extends State<EventTicketScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 20.0, top: 20),
+                        padding: const EdgeInsets.only(left: 23.0, top: 20),
                         child: Text(
                           "${widget.ticketdata["eventName"]}",
                           style: TextStyle(
@@ -144,13 +165,14 @@ class _EventTicketScreenState extends State<EventTicketScreen> {
                               size: 18,
                               color: appPrimaryMaterialColor,
                             ),
-                            Text(
-                              "103/104,Raghuveer Symphony , Althan , Surat",
-                              //  "${widget.ticketdata["eventName"]}",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400),
+                            Expanded(
+                              child: Text(
+                                "${widget.ticketdata["eventaddress"]}",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400),
+                              ),
                             ),
                           ],
                         ),
@@ -173,10 +195,12 @@ class _EventTicketScreenState extends State<EventTicketScreen> {
                                 Padding(
                                   padding: const EdgeInsets.only(top: 8.0),
                                   child: Text(
-                                    "28th March",
+                                    "${widget.ticketdata["startDate"][0]}" +
+                                        " To " +
+                                        "${widget.ticketdata["endDate"][0]}",
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 15,
+                                        fontSize: 12,
                                         fontWeight: FontWeight.w600),
                                   ),
                                 ),
@@ -186,7 +210,7 @@ class _EventTicketScreenState extends State<EventTicketScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Time",
+                                  "City",
                                   style: TextStyle(
                                       color: Colors.grey[500],
                                       fontSize: 14,
@@ -195,10 +219,10 @@ class _EventTicketScreenState extends State<EventTicketScreen> {
                                 Padding(
                                   padding: const EdgeInsets.only(top: 8.0),
                                   child: Text(
-                                    "22:00 To 04:00",
+                                    "${widget.ticketdata["city"]["City"]}",
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 15,
+                                        fontSize: 12,
                                         fontWeight: FontWeight.w600),
                                   ),
                                 ),
@@ -216,21 +240,20 @@ class _EventTicketScreenState extends State<EventTicketScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "City",
+                                  "Time",
                                   style: TextStyle(
                                       color: Colors.grey[500],
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 8.0),
-                                  child: Text(
-                                    "Ahemedabad",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w600),
-                                  ),
+                                Text(
+                                  "${widget.ticketdata["startTime"]}" +
+                                      " To " +
+                                      "${widget.ticketdata["endTime"]}",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600),
                                 ),
                               ],
                             ),
@@ -238,7 +261,7 @@ class _EventTicketScreenState extends State<EventTicketScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Ticket Amount",
+                                  "Amount",
                                   style: TextStyle(
                                       color: Colors.grey[500],
                                       fontSize: 14,
@@ -247,7 +270,7 @@ class _EventTicketScreenState extends State<EventTicketScreen> {
                                 Padding(
                                   padding: const EdgeInsets.only(top: 8.0),
                                   child: Text(
-                                    " ₹ 500",
+                                    " - ",
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 15,
@@ -264,7 +287,7 @@ class _EventTicketScreenState extends State<EventTicketScreen> {
                       ),
                       Center(
                         child: Text(
-                          "Show the QR code at counter",
+                          "Show the QR code at register counter",
                           style: TextStyle(
                               color: Colors.grey,
                               fontSize: 14,
@@ -274,12 +297,18 @@ class _EventTicketScreenState extends State<EventTicketScreen> {
                       SizedBox(
                         height: 15,
                       ),
-                      Center(
-                        child: QrImage(
-                          data: detail,
-                          size: 180.0,
-                        ),
-                      ),
+                      isTicketLoading
+                          ? Center(
+                              child: CircularProgressIndicator(
+                              valueColor: new AlwaysStoppedAnimation<Color>(
+                                  appPrimaryMaterialColor),
+                            ))
+                          : Center(
+                              child: QrImage(
+                                data: detail,
+                                size: 180.0,
+                              ),
+                            ),
                     ],
                   ),
                 ),
@@ -289,5 +318,43 @@ class _EventTicketScreenState extends State<EventTicketScreen> {
         ],
       ),
     );
+  }
+
+  _eventTicket() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        setState(() {
+          isTicketLoading = true;
+        });
+        var body = {
+          "eventid": widget.ticketdata["_id"],
+          "userid": "${customerId}"
+        };
+        Services.PostForList(api_name: 'eventicket', body: body).then(
+            (responseList) async {
+          setState(() {
+            isTicketLoading = false;
+          });
+          if (responseList.length > 0) {
+            setState(() {
+              ticketList = responseList;
+              detail = "${responseList[0]["_id"]}" + "," + "${customerId}";
+            });
+          } else {
+            Fluttertoast.showToast(msg: "data Not Found");
+            //show "data not found" in dialog
+          }
+        }, onError: (e) {
+          setState(() {
+            isTicketLoading = false;
+          });
+          print("error on call -> ${e.message}");
+          Fluttertoast.showToast(msg: "Something Went Wrong");
+        });
+      }
+    } on SocketException catch (_) {
+      Fluttertoast.showToast(msg: "No Internet Connection.");
+    }
   }
 }

@@ -48,7 +48,7 @@ class _BussinessStoryScreenState extends State<BussinessStoryScreen> {
         backgroundColor: Colors.white,
         title: Center(
           child: Text(
-            "Business Story",
+            "Business Stories",
             style: TextStyle(
               color: appPrimaryMaterialColor,
               fontSize: 18,
@@ -85,7 +85,7 @@ class _BussinessStoryScreenState extends State<BussinessStoryScreen> {
           ),
         ),
       ),
-      body: Center(child: Text("Business Story coming soon...!")),
+      body: Center(child: Text("Business Stories coming soon...!")),
       /*DefaultTabController(
         length: 3,
         child: Column(

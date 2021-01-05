@@ -6,6 +6,7 @@ import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
@@ -21,6 +22,7 @@ class CalenderScreen extends StatefulWidget {
 class _CalenderScreenState extends State<CalenderScreen>
     with TickerProviderStateMixin {
   bool isLoading = true;
+  String customerId;
   Map<DateTime, List<Event>> _visibleEvents;
   CalendarController _calendarController;
 
@@ -187,149 +189,153 @@ class _CalenderScreenState extends State<CalenderScreen>
   }
 
   Widget _buildEventList() {
-    return ListView(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      children: _currentMonthEventList
-          .map(
-            (event) => GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => CalendarDetailScreen(
-                            eventData: event,
-                          )),
-                );
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Container(
-                  child: Stack(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(left: 75.0),
-                        child: Container(
-                          padding:
-                              const EdgeInsets.only(left: 30.0, right: 8.0),
-                          height: 125,
-                          //width: 250,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                              color: Colors.grey[100],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(16))),
-                          child: GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Text(
-                                    event["eventOrganiseBy"],
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        color: Color(0xff4B4B4B),
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
-                                  Text(
-                                    event["eventName"],
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                  SizedBox(
-                                    height: 6,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "City : ",
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            color: Color(0xff4B4B4B),
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                      Text(
-                                        "Surat",
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            color: Color(0xff4B4B4B),
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 6,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "Time : ",
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            color: appPrimaryMaterialColor,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                      Text(
-                                        event["startTime"] +
-                                            "-" +
-                                            event["endTime"],
-                                        style: TextStyle(
-                                            fontSize: 13,
-                                            color: appPrimaryMaterialColor,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 6,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "Date : ",
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            color: appPrimaryMaterialColor,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                      Text(
-                                        "${event["startDate"][0] + " To " + event["endDate"][0]}",
-                                        style: TextStyle(
-                                            fontSize: 13,
-                                            color: appPrimaryMaterialColor,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15.0),
+      child: ListView(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        children: _currentMonthEventList
+            .map(
+              (event) => GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => CalendarDetailScreen(
+                              eventData: event,
+                            )),
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Container(
+                    child: Stack(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(left: 75.0),
+                          child: Container(
+                            padding:
+                                const EdgeInsets.only(left: 30.0, right: 8.0),
+                            height: 125,
+                            //width: 250,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                                color: Colors.grey[100],
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(16))),
+                            child: GestureDetector(
+                              onTap: () {},
+                              child: Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text(
+                                      event["eventOrganiseBy"],
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          color: Color(0xff4B4B4B),
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    SizedBox(
+                                      height: 8,
+                                    ),
+                                    Text(
+                                      event["eventName"],
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    SizedBox(
+                                      height: 6,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "City : ",
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xff4B4B4B),
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                        Text(
+                                          "surat",
+                                          //  "${event["city"]["City"]}",
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xff4B4B4B),
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 6,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Time : ",
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color: appPrimaryMaterialColor,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                        Text(
+                                          event["startTime"] +
+                                              "-" +
+                                              event["endTime"],
+                                          style: TextStyle(
+                                              fontSize: 13,
+                                              color: appPrimaryMaterialColor,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 6,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Date : ",
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color: appPrimaryMaterialColor,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                        Text(
+                                          "${event["startDate"][0] + " To " + event["endDate"][0]}",
+                                          style: TextStyle(
+                                              fontSize: 13,
+                                              color: appPrimaryMaterialColor,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        top: 15,
-                        child: CircleAvatar(
-                          radius: 50,
-                          backgroundColor: Colors.grey,
-                          backgroundImage: NetworkImage(event["eventImage"]),
-                        ),
-                      )
-                    ],
+                        Positioned(
+                          top: 15,
+                          child: CircleAvatar(
+                            radius: 50,
+                            backgroundColor: Colors.grey,
+                            backgroundImage: NetworkImage(event["eventImage"]),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
 //
-          )
-          .toList(),
+            )
+            .toList(),
+      ),
     );
   }
 
@@ -702,69 +708,72 @@ class _CalenderScreenState extends State<CalenderScreen>
                       ],
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 16.0),
-                    child: CalendarCarousel<Event>(
-                      todayBorderColor: appPrimaryMaterialColor,
-                      // dayButtonColor: appPrimaryMaterialColor[300],
-                      selectedDayBorderColor: appPrimaryMaterialColor,
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 16.0),
+                      child: CalendarCarousel<Event>(
+                        todayBorderColor: appPrimaryMaterialColor,
+                        // dayButtonColor: appPrimaryMaterialColor[300],
+                        selectedDayBorderColor: appPrimaryMaterialColor,
 
-                      onDayPressed: (DateTime date, List<Event> events) {
-                        this.setState(() => _currentDate2 = date);
-                        events.forEach((event) => print(event.title));
-                      },
-                      daysHaveCircularBorder: true,
-                      showOnlyCurrentMonthDate: false,
-                      weekendTextStyle: TextStyle(
-                        color: Colors.red,
-                      ),
-                      thisMonthDayBorderColor: Colors.grey,
-                      weekFormat: false,
+                        onDayPressed: (DateTime date, List<Event> events) {
+                          this.setState(() => _currentDate2 = date);
+                          events.forEach((event) => print(event.title));
+                        },
+                        daysHaveCircularBorder: true,
+                        showOnlyCurrentMonthDate: false,
+                        weekendTextStyle: TextStyle(
+                          color: Colors.red,
+                        ),
+                        thisMonthDayBorderColor: Colors.grey,
+                        weekFormat: false,
 //      firstDayOfWeek: 4,
-                      markedDatesMap: EventList<Event>(
-                        events: _visibleEvents,
+                        markedDatesMap: EventList<Event>(
+                          events: _visibleEvents,
+                        ),
+                        height: 300.0,
+                        selectedDateTime: _currentDate2,
+                        targetDateTime: _targetDateTime,
+                        customGridViewPhysics: NeverScrollableScrollPhysics(),
+                        markedDateCustomShapeBorder: CircleBorder(
+                            side: BorderSide(color: appPrimaryMaterialColor)),
+                        markedDateCustomTextStyle: TextStyle(
+                          fontSize: 18,
+                          color: Colors.red,
+                        ),
+                        showHeader: false,
+                        todayTextStyle: TextStyle(
+                          color: appPrimaryMaterialColor,
+                        ),
+                        todayButtonColor: Colors.white,
+                        selectedDayTextStyle: TextStyle(
+                          color: Colors.white,
+                        ),
+                        minSelectedDate:
+                            _currentDate.subtract(Duration(days: 360)),
+                        maxSelectedDate: _currentDate.add(Duration(days: 360)),
+                        prevDaysTextStyle: TextStyle(
+                          fontSize: 16,
+                          color: Colors.grey,
+                        ),
+                        selectedDayButtonColor: appPrimaryMaterialColor,
+                        inactiveDaysTextStyle: TextStyle(
+                          color: Colors.tealAccent,
+                          fontSize: 16,
+                        ),
+                        onCalendarChanged: (DateTime date) {
+                          this.setState(() {
+                            _targetDateTime = date;
+                            _currentMonth = _targetDateTime;
+                            print(_currentMonth);
+                          });
+                          _monthEventData();
+                        },
+                        onDayLongPressed: (DateTime date) {
+                          print('long pressed date $date');
+                        },
                       ),
-                      height: 300.0,
-                      selectedDateTime: _currentDate2,
-                      targetDateTime: _targetDateTime,
-                      customGridViewPhysics: NeverScrollableScrollPhysics(),
-                      markedDateCustomShapeBorder: CircleBorder(
-                          side: BorderSide(color: appPrimaryMaterialColor)),
-                      markedDateCustomTextStyle: TextStyle(
-                        fontSize: 18,
-                        color: Colors.red,
-                      ),
-                      showHeader: false,
-                      todayTextStyle: TextStyle(
-                        color: appPrimaryMaterialColor,
-                      ),
-                      todayButtonColor: Colors.white,
-                      selectedDayTextStyle: TextStyle(
-                        color: Colors.white,
-                      ),
-                      minSelectedDate:
-                          _currentDate.subtract(Duration(days: 360)),
-                      maxSelectedDate: _currentDate.add(Duration(days: 360)),
-                      prevDaysTextStyle: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey,
-                      ),
-                      selectedDayButtonColor: appPrimaryMaterialColor,
-                      inactiveDaysTextStyle: TextStyle(
-                        color: Colors.tealAccent,
-                        fontSize: 16,
-                      ),
-                      onCalendarChanged: (DateTime date) {
-                        this.setState(() {
-                          _targetDateTime = date;
-                          _currentMonth = _targetDateTime;
-                          print(_currentMonth);
-                        });
-                        _monthEventData();
-                      },
-                      onDayLongPressed: (DateTime date) {
-                        print('long pressed date $date');
-                      },
                     ),
                   ),
                   _buildEventList(),

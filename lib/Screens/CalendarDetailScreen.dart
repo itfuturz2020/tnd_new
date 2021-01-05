@@ -1,7 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
+import 'package:the_national_dawn/Common/Services.dart';
+import 'package:the_national_dawn/Components/LoadingComponent.dart';
 import 'package:the_national_dawn/Components/SocialMediaComponent.dart';
 import 'package:the_national_dawn/Screens/EventTicketScreen.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -16,6 +20,23 @@ class CalendarDetailScreen extends StatefulWidget {
 }
 
 class _CalendarDetailScreenState extends State<CalendarDetailScreen> {
+  String customerId;
+
+  @override
+  void initState() {
+    _profile();
+  }
+
+  _profile() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      customerId = prefs.getString(Session.CustomerId);
+    });
+  }
+
+  bool isregister = false;
+  List eventRegisterList = [];
+
   void launchwhatsapp({
     @required String phone,
     @required String message,
@@ -185,7 +206,7 @@ class _CalendarDetailScreenState extends State<CalendarDetailScreen> {
                       fontWeight: FontWeight.w400),
                 ),
                 Text(
-                  "Surat",
+                  "${widget.eventData["city"]["City"]}",
                   style: TextStyle(
                       fontSize: 16,
                       color: Colors.black,
@@ -386,26 +407,74 @@ class _CalendarDetailScreenState extends State<CalendarDetailScreen> {
                         borderRadius: BorderRadius.circular(5),
                       ),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => EventTicketScreen(
-                                    ticketdata: widget.eventData,
-                                  )),
-                        );
+                        _registerEvent();
                       },
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 15.0),
-                        child: Text("Register",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 17)),
-                      )),
+                      child: isregister
+                          ? LoadingComponent()
+                          : Padding(
+                              padding: const EdgeInsets.only(left: 15.0),
+                              child: Text("Register",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 17)),
+                            )),
                 ),
               ),
             ),
           ),
         ]));
   }
+
+  _registerEvent() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        setState(() {
+          isregister = true;
+        });
+        var body = {
+          "eventid": widget.eventData["_id"],
+          "userid": "${customerId}"
+        };
+        Services.PostForList(api_name: 'eventRegister', body: body).then(
+            (responseList) async {
+          setState(() {
+            isregister = false;
+          });
+          if (responseList.length > 0) {
+            setState(() {
+              eventRegisterList = responseList;
+            });
+            Fluttertoast.showToast(msg: "You are register successfully...!");
+          } else {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => EventTicketScreen(
+                        ticketdata: widget.eventData,
+                      )),
+            );
+            Fluttertoast.showToast(msg: "Already Register");
+            //show "data not found" in dialog
+          }
+        }, onError: (e) {
+          setState(() {
+            isregister = false;
+          });
+          print("error on call -> ${e.message}");
+          Fluttertoast.showToast(msg: "Something Went Wrong");
+        });
+      }
+    } on SocketException catch (_) {
+      Fluttertoast.showToast(msg: "No Internet Connection.");
+    }
+  }
 }
+//  Navigator.push(
+//                 context,
+//                 MaterialPageRoute(
+//                     builder: (context) => EventTicketScreen(
+//                           ticketdata: widget.eventData,
+//                         )),
+//               );

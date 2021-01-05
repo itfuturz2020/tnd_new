@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'file:///G:/Keval%20Work/Flutter%20Projects/the_national_dawn/lib/DigitalCommon/Constants.dart' as cnst;
+import 'package:the_national_dawn/DigitalCommon/Constants.dart' as cnst;
 
 class HeaderComponent extends StatelessWidget {
-
   final String title;
   final String image;
   final double boxheight;
 
-  const HeaderComponent({this.title,this.image = "images/header/moreheader.jpg",this.boxheight = 100.00});
+  const HeaderComponent(
+      {this.title,
+      this.image = "images/header/moreheader.jpg",
+      this.boxheight = 100.00});
 
   @override
   Widget build(BuildContext context) {
@@ -22,17 +24,17 @@ class HeaderComponent extends StatelessWidget {
                   height: boxheight,
                   fit: BoxFit.cover),
               Container(
-                margin: EdgeInsets.only(top: 40,left: 20),
-                padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                margin: EdgeInsets.only(top: 40, left: 20),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
                     color: Color.fromRGBO(255, 255, 255, 0.8),
-                    borderRadius: BorderRadius.all(Radius.circular(30))
-                ),
-                child: Text(title, style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600)),
+                    borderRadius: BorderRadius.all(Radius.circular(30))),
+                child: Text(title,
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
               ),
             ],
-          )
-      ),
+          )),
       clipper: headerClipper(),
     );
   }
