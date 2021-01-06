@@ -63,6 +63,7 @@ class Session {
   static const String isVerified = "isVerified";
   static const String about_business = "about_business";
   static const String digital_Id = "digital_Id";
+  static const String forFirstTime = "forFirstTime";
 
   // static const Bool('option', true);
 }

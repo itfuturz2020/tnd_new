@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/DigitalCommon/ClassList.dart';
 import 'package:the_national_dawn/DigitalCommon/Constants.dart';
-import 'package:the_national_dawn/Common/Constants.dart' as serv ;
+import 'package:the_national_dawn/Common/Constants.dart' as serv;
 import 'package:xml2json/xml2json.dart';
 
 //Custom Files
@@ -677,6 +677,65 @@ class Services {
       }
     } else
       return list;
+  }
+
+  static Future<String> UpdateDigitalProfileMember(
+    String Image,
+    String CoverImage,
+    String Name,
+    String Mobile,
+    String Email,
+    String website,
+    String Whatsappno,
+    String PersonalPAN,
+    String Facebooklink,
+    String Twitter,
+    String Google,
+    String Linkedin,
+    String YouTube,
+    String Instagram,
+    String About,
+    String Company,
+    String Role,
+    String CompanyPhone,
+    String CompanyPAN,
+    String GstNo,
+    String Map,
+    String CompanyEmail,
+    String CompanyUrl,
+    String CompanyAddress,
+    String AboutCompany,
+    String ShareMsg,
+    String memberid,
+  ) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String memberId = prefs.getString(serv.Session.digital_Id);
+
+    String message = "";
+
+    String url = APIURL.API_URL +
+        'UpdateMemberProfile?type=profile&Image=$Image&CoverImage=$CoverImage&Name=$Name&Mobile=$Mobile&Email=$Email&website=$website&Whatsappno=$Whatsappno&PersonalPAN=$PersonalPAN&Facebooklink=$Facebooklink&Twitter=$Twitter&Google=$Google&Linkedin=$Linkedin&YouTube=$YouTube&Instagram=$Instagram&About=$About&Company=$Company&Role=$Role&CompanyPhone=$CompanyPhone&CompanyPAN=$CompanyPAN&GstNo=$GstNo&Map=$Map&CompanyEmail=$CompanyEmail&CompanyUrl=$CompanyUrl&CompanyAddress=$CompanyAddress&AboutCompany=$AboutCompany&ShareMsg=$ShareMsg&memberid=$memberid';
+    print("UpdateMemberProfile URL: " + url);
+    final response = await http.get(url);
+    try {
+      if (response.statusCode == 200) {
+        print("UpdateMemberProfile Response: " + response.body);
+
+        final jsonResponse = json.decode(response.body);
+        UpdateDigitalProfile updateTheme =
+            new UpdateDigitalProfile.fromJson(jsonResponse);
+
+        if (updateTheme.ERROR_STATUS == false)
+          message = "Successfully Inserted!";
+
+        return message;
+      } else {
+        throw Exception(MESSAGES.INTERNET_ERROR);
+      }
+    } catch (e) {
+      print("Check Login Erorr : " + e.toString());
+      throw Exception(MESSAGES.INTERNET_ERROR);
+    }
   }
 
   static Future<String> UpdateTheme(String memberid, String themeid) async {

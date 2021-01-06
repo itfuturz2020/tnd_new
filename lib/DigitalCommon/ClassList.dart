@@ -28,6 +28,29 @@ class PaymentDataClass {
   }
 }
 
+class UpdateDigitalProfile {
+  String MESSAGE;
+  String ORIGINAL_ERROR;
+  bool ERROR_STATUS;
+  bool RECORDS;
+
+  UpdateDigitalProfile({
+    this.MESSAGE,
+    this.ORIGINAL_ERROR,
+    this.ERROR_STATUS,
+    this.RECORDS,
+  });
+
+  factory UpdateDigitalProfile.fromJson(Map<String, dynamic> json) {
+    return UpdateDigitalProfile(
+      MESSAGE: json['MESSAGE'] as String,
+      ORIGINAL_ERROR: json['ORIGINAL_ERROR'] as String,
+      ERROR_STATUS: json['ERROR_STATUS'] as bool,
+      RECORDS: json['RECORDS'] as bool,
+    );
+  }
+}
+
 class LoginDataClass {
   String MESSAGE;
   String ORIGINAL_ERROR;
@@ -37,10 +60,10 @@ class LoginDataClass {
 
   LoginDataClass(
       {this.MESSAGE,
-        this.ORIGINAL_ERROR,
-        this.ERROR_STATUS,
-        this.RECORDS,
-        this.Data});
+      this.ORIGINAL_ERROR,
+      this.ERROR_STATUS,
+      this.RECORDS,
+      this.Data});
 
   factory LoginDataClass.fromJson(Map<String, dynamic> json) {
     return LoginDataClass(
@@ -74,10 +97,10 @@ class DigitalDataClass {
 
   DigitalDataClass(
       {this.MESSAGE,
-        this.ORIGINAL_ERROR,
-        this.ERROR_STATUS,
-        this.RECORDS,
-        this.Data});
+      this.ORIGINAL_ERROR,
+      this.ERROR_STATUS,
+      this.RECORDS,
+      this.Data});
 
   factory DigitalDataClass.fromJson(Map<String, dynamic> json) {
     return DigitalDataClass(
@@ -110,10 +133,10 @@ class DashboardCountDataClass {
 
   DashboardCountDataClass(
       {this.MESSAGE,
-        this.ORIGINAL_ERROR,
-        this.ERROR_STATUS,
-        this.RECORDS,
-        this.Data});
+      this.ORIGINAL_ERROR,
+      this.ERROR_STATUS,
+      this.RECORDS,
+      this.Data});
 
   factory DashboardCountDataClass.fromJson(Map<String, dynamic> json) {
     return DashboardCountDataClass(
@@ -154,10 +177,10 @@ class ShareDataClass {
 
   ShareDataClass(
       {this.MESSAGE,
-        this.ORIGINAL_ERROR,
-        this.ERROR_STATUS,
-        this.RECORDS,
-        this.Data});
+      this.ORIGINAL_ERROR,
+      this.ERROR_STATUS,
+      this.RECORDS,
+      this.Data});
 
   factory ShareDataClass.fromJson(Map<String, dynamic> json) {
     return ShareDataClass(
@@ -195,10 +218,10 @@ class ChangeThemeData {
 
   ChangeThemeData(
       {this.MESSAGE,
-        this.ORIGINAL_ERROR,
-        this.ERROR_STATUS,
-        this.RECORDS,
-        this.Data});
+      this.ORIGINAL_ERROR,
+      this.ERROR_STATUS,
+      this.RECORDS,
+      this.Data});
 
   factory ChangeThemeData.fromJson(Map<String, dynamic> json) {
     return ChangeThemeData(
@@ -253,10 +276,10 @@ class OfferDataClass {
 
   OfferDataClass(
       {this.MESSAGE,
-        this.ORIGINAL_ERROR,
-        this.ERROR_STATUS,
-        this.RECORDS,
-        this.Data});
+      this.ORIGINAL_ERROR,
+      this.ERROR_STATUS,
+      this.RECORDS,
+      this.Data});
 
   factory OfferDataClass.fromJson(Map<String, dynamic> json) {
     return OfferDataClass(
@@ -280,11 +303,11 @@ class OfferClass {
 
   OfferClass(
       {this.Id,
-        this.Title,
-        this.Descri,
-        this.Image,
-        this.Date,
-        this.ValidTill});
+      this.Title,
+      this.Descri,
+      this.Image,
+      this.Date,
+      this.ValidTill});
 
   factory OfferClass.fromJson(Map<String, dynamic> json) {
     return OfferClass(
@@ -306,10 +329,10 @@ class ServicesDataClass {
 
   ServicesDataClass(
       {this.MESSAGE,
-        this.ORIGINAL_ERROR,
-        this.ERROR_STATUS,
-        this.RECORDS,
-        this.Data});
+      this.ORIGINAL_ERROR,
+      this.ERROR_STATUS,
+      this.RECORDS,
+      this.Data});
 
   factory ServicesDataClass.fromJson(Map<String, dynamic> json) {
     return ServicesDataClass(
@@ -347,10 +370,10 @@ class ServiceDigitalClass {
 
   ServiceDigitalClass(
       {this.MESSAGE,
-        this.ORIGINAL_ERROR,
-        this.ERROR_STATUS,
-        this.RECORDS,
-        this.Data});
+      this.ORIGINAL_ERROR,
+      this.ERROR_STATUS,
+      this.RECORDS,
+      this.Data});
 
   factory ServiceDigitalClass.fromJson(Map<String, dynamic> json) {
     return ServiceDigitalClass(
@@ -383,10 +406,10 @@ class MemberDataClass {
 
   MemberDataClass(
       {this.MESSAGE,
-        this.ORIGINAL_ERROR,
-        this.ERROR_STATUS,
-        this.RECORDS,
-        this.Data});
+      this.ORIGINAL_ERROR,
+      this.ERROR_STATUS,
+      this.RECORDS,
+      this.Data});
 
   factory MemberDataClass.fromJson(Map<String, dynamic> json) {
     return MemberDataClass(
@@ -522,10 +545,10 @@ class OfferInterestedDataClass {
 
   OfferInterestedDataClass(
       {this.MESSAGE,
-        this.ORIGINAL_ERROR,
-        this.ERROR_STATUS,
-        this.RECORDS,
-        this.Data});
+      this.ORIGINAL_ERROR,
+      this.ERROR_STATUS,
+      this.RECORDS,
+      this.Data});
 
   factory OfferInterestedDataClass.fromJson(Map<String, dynamic> json) {
     return OfferInterestedDataClass(
@@ -574,12 +597,12 @@ class OfferInterestedClass {
 
   OfferInterestedClass(
       {this.Id,
-        this.InterestedMemberId,
-        this.Name,
-        this.Company,
-        this.Image,
-        this.Mobileno,
-        this.Date});
+      this.InterestedMemberId,
+      this.Name,
+      this.Company,
+      this.Image,
+      this.Mobileno,
+      this.Date});
 
   factory OfferInterestedClass.fromJson(Map<String, dynamic> json) {
     return OfferInterestedClass(
@@ -602,10 +625,10 @@ class EarnHistoryDataClass {
 
   EarnHistoryDataClass(
       {this.MESSAGE,
-        this.ORIGINAL_ERROR,
-        this.ERROR_STATUS,
-        this.RECORDS,
-        this.Data});
+      this.ORIGINAL_ERROR,
+      this.ERROR_STATUS,
+      this.RECORDS,
+      this.Data});
 
   factory EarnHistoryDataClass.fromJson(Map<String, dynamic> json) {
     return EarnHistoryDataClass(
@@ -648,10 +671,10 @@ class RedeemHistoryDataClass {
 
   RedeemHistoryDataClass(
       {this.MESSAGE,
-        this.ORIGINAL_ERROR,
-        this.ERROR_STATUS,
-        this.RECORDS,
-        this.Data});
+      this.ORIGINAL_ERROR,
+      this.ERROR_STATUS,
+      this.RECORDS,
+      this.Data});
 
   factory RedeemHistoryDataClass.fromJson(Map<String, dynamic> json) {
     return RedeemHistoryDataClass(
@@ -695,10 +718,10 @@ class EarnRedeemCountDataClass {
 
   EarnRedeemCountDataClass(
       {this.MESSAGE,
-        this.ORIGINAL_ERROR,
-        this.ERROR_STATUS,
-        this.RECORDS,
-        this.Data});
+      this.ORIGINAL_ERROR,
+      this.ERROR_STATUS,
+      this.RECORDS,
+      this.Data});
 
   factory EarnRedeemCountDataClass.fromJson(Map<String, dynamic> json) {
     return EarnRedeemCountDataClass(
@@ -735,10 +758,10 @@ class CouponDataClass {
 
   CouponDataClass(
       {this.MESSAGE,
-        this.ORIGINAL_ERROR,
-        this.ERROR_STATUS,
-        this.RECORDS,
-        this.Data});
+      this.ORIGINAL_ERROR,
+      this.ERROR_STATUS,
+      this.RECORDS,
+      this.Data});
 
   factory CouponDataClass.fromJson(Map<String, dynamic> json) {
     return CouponDataClass(
@@ -838,10 +861,10 @@ class PaymentOrderIdClass {
 
   PaymentOrderIdClass(
       {this.MESSAGE,
-        this.ORIGINAL_ERROR,
-        this.ERROR_STATUS,
-        this.RECORDS,
-        this.Data});
+      this.ORIGINAL_ERROR,
+      this.ERROR_STATUS,
+      this.RECORDS,
+      this.Data});
 
   factory PaymentOrderIdClass.fromJson(Map<String, dynamic> json) {
     return PaymentOrderIdClass(
