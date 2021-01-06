@@ -146,7 +146,7 @@ class _PopularNewsScreenState extends State<PopularNewsScreen> {
                               color: Colors.grey[100],
                             ),
                             child: Icon(
-                              Icons.arrow_back_ios,
+                              Icons.arrow_back_ios_outlined,
                               color: Colors.black,
                               size: 30.0,
                             )),

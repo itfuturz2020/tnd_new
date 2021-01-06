@@ -578,30 +578,6 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15, right: 15),
-                child: Divider(),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pushNamed('/EnquiryForm');
-                },
-                child: ListTile(
-                  leading: Padding(
-                    padding: const EdgeInsets.only(right: 10.0, left: 4),
-                    child: Container(
-                        height: 20,
-                        width: 20,
-                        child: Image.asset(
-                          "assets/logout.png",
-                          color: appPrimaryMaterialColor,
-                        )),
-                  ),
-                  title: Text(
-                    "EnquiryForm",
-                  ),
-                ),
-              ),
             ],
           ),
         ),

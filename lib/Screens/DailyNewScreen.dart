@@ -92,7 +92,7 @@ class _DailyNewScreenState extends State<DailyNewScreen>
             Navigator.of(context).pop();
           },
           child: Icon(
-            Icons.arrow_back_ios,
+            Icons.arrow_back_ios_outlined,
             color: Colors.black,
           ),
         ),

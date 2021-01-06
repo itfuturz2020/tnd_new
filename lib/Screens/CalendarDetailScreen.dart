@@ -103,7 +103,7 @@ class _CalendarDetailScreenState extends State<CalendarDetailScreen> {
                           offset: Offset(3.0, 5.0))
                     ]),
                 child: Icon(
-                  Icons.arrow_back_ios,
+                  Icons.arrow_back_ios_outlined,
                   color: Colors.black,
                 ),
               ),
@@ -437,7 +437,7 @@ class _CalendarDetailScreenState extends State<CalendarDetailScreen> {
           "eventid": widget.eventData["_id"],
           "userid": "${customerId}"
         };
-        Services.PostForList(api_name: 'eventRegister', body: body).then(
+        Services.PostForList(api_name: 'admin/eventRegister', body: body).then(
             (responseList) async {
           setState(() {
             isregister = false;

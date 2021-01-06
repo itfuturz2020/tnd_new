@@ -260,8 +260,7 @@ class _CalenderScreenState extends State<CalenderScreen>
                                               fontWeight: FontWeight.w600),
                                         ),
                                         Text(
-                                          "surat",
-                                          //  "${event["city"]["City"]}",
+                                          "${event["city"]["City"]}",
                                           style: TextStyle(
                                               fontSize: 14,
                                               color: Color(0xff4B4B4B),
@@ -651,7 +650,7 @@ class _CalenderScreenState extends State<CalenderScreen>
                         offset: Offset(3.0, 5.0))
                   ]),
               child: Icon(
-                Icons.arrow_back_ios,
+                Icons.arrow_back_ios_outlined,
                 color: Colors.black,
               ),
             ),
@@ -678,7 +677,7 @@ class _CalenderScreenState extends State<CalenderScreen>
                     child: new Row(
                       children: <Widget>[
                         FlatButton(
-                          child: Icon(Icons.arrow_back_ios),
+                          child: Icon(Icons.arrow_back_ios_outlined),
                           onPressed: () {
                             setState(() {
                               _targetDateTime = DateTime(_targetDateTime.year,

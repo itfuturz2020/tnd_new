@@ -75,7 +75,7 @@ class _EventTicketScreenState extends State<EventTicketScreen> {
                         offset: Offset(3.0, 5.0))
                   ]),
               child: Icon(
-                Icons.arrow_back_ios,
+                Icons.arrow_back_ios_outlined,
                 color: Colors.black,
               ),
             ),
@@ -331,7 +331,7 @@ class _EventTicketScreenState extends State<EventTicketScreen> {
           "eventid": widget.ticketdata["_id"],
           "userid": "${customerId}"
         };
-        Services.PostForList(api_name: 'eventicket', body: body).then(
+        Services.PostForList(api_name: 'admin/eventicket', body: body).then(
             (responseList) async {
           setState(() {
             isTicketLoading = false;

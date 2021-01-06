@@ -78,7 +78,7 @@ class _BussinessStoryScreenState extends State<BussinessStoryScreen> {
                         offset: Offset(3.0, 5.0))
                   ]),
               child: Icon(
-                Icons.arrow_back_ios,
+                Icons.arrow_back_ios_outlined,
                 color: Colors.black,
               ),
             ),

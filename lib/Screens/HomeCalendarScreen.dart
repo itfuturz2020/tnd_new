@@ -620,7 +620,7 @@ class _HomeCalendarScreenState extends State<HomeCalendarScreen>
                     child: new Row(
                       children: <Widget>[
                         FlatButton(
-                          child: Icon(Icons.arrow_back_ios),
+                          child: Icon(Icons.arrow_back_ios_outlined),
                           onPressed: () {
                             setState(() {
                               _targetDateTime = DateTime(_targetDateTime.year,

@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
+import 'package:the_national_dawn/Common/Services.dart';
 
 class EnquiryForm extends StatefulWidget {
   @override
@@ -11,6 +15,9 @@ class _EnquiryFormState extends State<EnquiryForm> {
   TextEditingController _name = TextEditingController();
   TextEditingController _email = TextEditingController();
   TextEditingController _phone = TextEditingController();
+  TextEditingController _description = TextEditingController();
+
+  String customerId;
 
   @override
   void initState() {
@@ -25,8 +32,11 @@ class _EnquiryFormState extends State<EnquiryForm> {
       _name.text = prefs.getString(Session.CustomerName);
       _email.text = prefs.getString(Session.CustomerEmailId);
       _phone.text = prefs.getString(Session.CustomerPhoneNo);
+      customerId = prefs.getString(Session.CustomerId);
     });
   }
+
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +77,7 @@ class _EnquiryFormState extends State<EnquiryForm> {
                         offset: Offset(3.0, 5.0))
                   ]),
               child: Icon(
-                Icons.arrow_back_ios,
+                Icons.arrow_back_ios_outlined,
                 color: Colors.black,
               ),
             ),
@@ -343,5 +353,42 @@ class _EnquiryFormState extends State<EnquiryForm> {
         ),
       ),
     );
+  }
+
+  _enquirySendData() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        setState(() {
+          isLoading = true;
+        });
+        var body = {
+          /* "name": "",
+          "email": "${Session.Email}",
+          "mobile": "${customerId}",
+          "description": "${customerId}",*/
+        };
+        Services.PostForList(api_name: 'admin/eventicket', body: body).then(
+            (responseList) async {
+          setState(() {
+            isLoading = false;
+          });
+          if (responseList.length > 0) {
+            setState(() {});
+          } else {
+            Fluttertoast.showToast(msg: "data Not Found");
+            //show "data not found" in dialog
+          }
+        }, onError: (e) {
+          setState(() {
+            isLoading = false;
+          });
+          print("error on call -> ${e.message}");
+          Fluttertoast.showToast(msg: "Something Went Wrong");
+        });
+      }
+    } on SocketException catch (_) {
+      Fluttertoast.showToast(msg: "No Internet Connection.");
+    }
   }
 }
