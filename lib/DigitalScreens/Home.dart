@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:the_national_dawn/DigitalCommon/Constants.dart' as cnst;
@@ -24,11 +25,12 @@ class _HomeState extends State<Home> {
       new DashboardCountClass(visitors: '0', calls: '0', share: '0');
 
   bool isLoading = false;
-  bool isLoadingProfile = false;
+  bool isProfileLoading = true;
   bool IsActivePayment = false;
   bool IsExpired = false;
 
   String MemberId = "";
+  String DigitalId = "";
   String Name = "";
   String Company = "";
   String Photo = "";
@@ -38,60 +40,109 @@ class _HomeState extends State<Home> {
   String MemberType = "";
   String ShareMsg = "";
 
-  Map<String, dynamic> profileList;
-  List digitalList = [];
+  Map<String, dynamic> profileList = {};
+  List<DigitalClass> digitalList = [];
 
   @override
   void initState() {
     super.initState();
-    GetProfileData();
+    // GetProfileData();
     GetDashboardCount();
     GetLocalData();
-
     _getUpdatedProfile();
   }
 
   CreateDigital(String Mobile, String Name, String Email) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    print("==============================");
-
-    serv.Services.CreateDigitalCard(
-      Mobile,
-      Name,
-      Email,
-    ).then((data) {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      //Future res = Services.MemberLogin(prefs.getString(cnst.Session.Mobile));
+      setState(() {
+        isLoading = true;
+      });
+      serv.Services.CreateDigitalCard(
+        Mobile,
+        Name,
+        Email,
+      ).then((data) async {
+        if (data != null && data.length > 0) {
+          setState(() {
+            isLoading = false;
+          });
+          print("length : ${data.length}");
+          if (data.length > 0) {
+            setState(() {
+              isLoading = false;
+              // isMultipleCard = true;
+              digitalList = data;
+            });
+            print("========================${digitalList[0].Id}");
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            await prefs.setString(Session.digital_Id, digitalList[0].Id);
+            DigitalId = prefs.getString(Session.digital_Id);
+            GetProfileData();
+          }
+        } else {
+          setState(() {
+            isLoading = false;
+          });
+          showMsg("Data Send");
+        }
+      }, onError: (e) {
+        setState(() {
+          isLoading = false;
+        });
+        print("Error : Data Not Saved");
+        showMsg("$e");
+      });
+    } catch (Ex) {
       setState(() {
         isLoading = false;
       });
-      //log("outside");
-      if (data != null && data.ERROR_STATUS == false && data.RECORDS == true) {
-        //    log("inside true");
-        // setState(() {
-        //   digitalList = data.Data;
-        // });
-        // print("========================+${data.Data}");
-        Fluttertoast.showToast(
-          msg: "Data Send ",
-          backgroundColor: Colors.green,
-          textColor: Colors.white,
-        );
-      } else {
-        // log("inside false");
-        Fluttertoast.showToast(
-            msg: "Data Not Saved " + data.MESSAGE,
-            backgroundColor: Colors.red,
-            toastLength: Toast.LENGTH_LONG);
-      }
-    }, onError: (e) {
-      setState(() {
-        isLoading = false;
-      });
-      Fluttertoast.showToast(
-          msg: "Data Not Saved      " + e.toString(),
-          backgroundColor: Colors.red);
-    });
+      showMsg("Something Went Wrong");
+    }
   }
+
+  // CreateDigital(String Mobile, String Name, String Email) async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //
+  //   print("==============================");
+  //
+  //   serv.Services.CreateDigitalCard(
+  //     Mobile,
+  //     Name,
+  //     Email,
+  //   ).then((data) {
+  //     setState(() {
+  //       isLoading = false;
+  //     });
+  //     //log("outside");
+  //     if (data != null && data.ERROR_STATUS == false && data.RECORDS == true) {
+  //       //    log("inside true");
+  //       // setState(() {
+  //       //   digitalList = data.Data;
+  //       // });
+  //       // print("========================+${data.Data}");
+  //       Fluttertoast.showToast(
+  //         msg: "Data Send ",
+  //         backgroundColor: Colors.green,
+  //         textColor: Colors.white,
+  //       );
+  //     } else {
+  //       // log("inside false");
+  //       Fluttertoast.showToast(
+  //           msg: "Data Not Saved " + data.MESSAGE,
+  //           backgroundColor: Colors.red,
+  //           toastLength: Toast.LENGTH_LONG);
+  //     }
+  //   }, onError: (e) {
+  //     setState(() {
+  //       isLoading = false;
+  //     });
+  //     Fluttertoast.showToast(
+  //         msg: "Data Not Saved      " + e.toString(),
+  //         backgroundColor: Colors.red);
+  //   });
+  // }
 
   bool checkValidity() {
     if (ExpDate.trim() != null && ExpDate.trim() != "") {
@@ -144,7 +195,7 @@ class _HomeState extends State<Home> {
 
   GetProfileData() {
     setState(() {
-      isLoadingProfile = true;
+      isLoading = true;
     });
     serv.Services.GetMemberDetail().then((data) {
       setState(() {
@@ -157,12 +208,12 @@ class _HomeState extends State<Home> {
         ExpDate = data[0].ExpDate;
         MemberType = data[0].MemberType;
         ShareMsg = data[0].ShareMsg;
-        isLoadingProfile = false;
+        isLoading = false;
       });
       print("MemberType : $MemberType");
     }, onError: (e) {
       setState(() {
-        isLoadingProfile = false;
+        isLoading = false;
       });
     });
   }
@@ -194,18 +245,22 @@ class _HomeState extends State<Home> {
   _getUpdatedProfile() async {
     try {
       final result = await InternetAddress.lookup('google.com');
+      setState(() {
+        isProfileLoading = true;
+      });
+
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
-
         var body = {
           "id": prefs.getString(Session.CustomerId),
         };
+        print("=================================");
+        print(prefs.getString(Session.CustomerId));
         Services.PostForList(api_name: 'admin/getsingleid', body: body).then(
             (ResponseList) async {
           setState(() {
-            isLoading = false;
+            isProfileLoading = false;
           });
-
           if (ResponseList.length > 0) {
             setState(() {
               profileList = ResponseList[0];
@@ -213,16 +268,15 @@ class _HomeState extends State<Home> {
             });
             CreateDigital(profileList["mobile"], profileList["name"],
                 profileList["email"]);
+
+            print("${ResponseList[0]}");
           } else {
-            setState(() {
-              isLoading = false;
-            });
             Fluttertoast.showToast(msg: "Product Not Found");
             //show "data not found" in dialog
           }
         }, onError: (e) {
           setState(() {
-            isLoading = false;
+            isProfileLoading = false;
           });
           print("error on call -> ${e.message}");
           Fluttertoast.showToast(msg: "Something Went Wrong");
@@ -235,7 +289,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return !isLoading
+    log("  '''''''''''''''' $isLoading");
+    return isProfileLoading == false
         ? Container(
             color: Colors.white,
             height: MediaQuery.of(context).size.height,
@@ -272,7 +327,7 @@ class _HomeState extends State<Home> {
                                 child: Center(
                                   child: Text(
                                     //  "${Name.toString().substring(0, 1)}",
-                                    "${profileList["name"]}",
+                                    "${profileList["name"].toString().substring(0, 1)}",
                                     style: TextStyle(
                                         decoration: TextDecoration.none,
                                         fontSize: 30,
@@ -573,7 +628,7 @@ class _HomeState extends State<Home> {
                                         pageBuilder:
                                             (BuildContext context, _, __) =>
                                                 CardShareComponent(
-                                          memberId: MemberId,
+                                          memberId: DigitalId,
                                           memberName: Name,
                                           isRegular: val,
                                           memberType: MemberType,
@@ -611,13 +666,13 @@ class _HomeState extends State<Home> {
                                     ],
                                   ),
                                   onPressed: () {
-                                    String withrefercode = cnst.inviteFriMsg
-                                        .replaceAll("#refercode", ReferCode);
+                                    // String withrefercode = cnst.inviteFriMsg
+                                    //     .replaceAll("#refercode", ReferCode);
                                     String withappurl = cnst.inviteFriMsg
                                         .replaceAll(
                                             "#appurl", cnst.playstoreUrl);
                                     String withmemberid =
-                                        withappurl.replaceAll("#id", MemberId);
+                                        withappurl.replaceAll("#id", DigitalId);
                                     Share.share(withmemberid);
                                   },
                                   shape: new RoundedRectangleBorder(
@@ -661,7 +716,7 @@ class _HomeState extends State<Home> {
                                   ),
                                   onPressed: () async {
                                     String profileUrl = cnst.profileUrl
-                                        .replaceAll("#id", profileList["_id"]);
+                                        .replaceAll("#id", DigitalId);
                                     if (await canLaunch(profileUrl)) {
                                       await launch(profileUrl);
                                     } else {

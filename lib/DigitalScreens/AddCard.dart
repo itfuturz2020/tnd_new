@@ -8,6 +8,7 @@ import 'package:the_national_dawn/DigitalCommon/Constants.dart' as cnst;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:the_national_dawn/DigitalCommon/Services.dart';
+import 'package:the_national_dawn/Common/Constants.dart' as serv;
 import 'package:the_national_dawn/DigitalComponent/ImagePickerHandlerComponent.dart';
 
 class AddCard extends StatefulWidget {
@@ -95,7 +96,7 @@ class _AddCardState extends State<AddCard> {
             gravity: ToastGravity.TOP,
           );
           SharedPreferences prefs = await SharedPreferences.getInstance();
-          await prefs.remove(cnst.Session.MemberId);
+          await prefs.remove(serv.Session.digital_Id);
           await prefs.remove(cnst.Session.Name);
           await prefs.remove(cnst.Session.Mobile);
           await prefs.remove(cnst.Session.Company);

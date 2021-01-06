@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:the_national_dawn/DigitalCommon/ClassList.dart';
 import 'package:the_national_dawn/DigitalCommon/Services.dart';
+import 'package:the_national_dawn/Common/Constants.dart';
 
 class EditService extends StatefulWidget {
   final ServicesClass servicesClass;
@@ -31,7 +32,7 @@ class _EditServiceState extends State<EditService> {
 
   GetLocalData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String memberId = prefs.getString(cnst.Session.MemberId);
+    String memberId = prefs.getString(Session.digital_Id);
 
     if (memberId != null && memberId != "")
       setState(() {

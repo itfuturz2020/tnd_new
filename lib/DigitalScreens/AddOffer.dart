@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/DigitalCommon/Services.dart';
 import 'package:the_national_dawn/DigitalCommon/Constants.dart' as cnst;
@@ -56,7 +57,7 @@ class _AddOfferState extends State<AddOffer>
 
   GetLocalData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String memberId = prefs.getString(cnst.Session.MemberId);
+    String memberId = prefs.getString(Session.digital_Id);
 
     if (memberId != null && memberId != "")
       setState(() {

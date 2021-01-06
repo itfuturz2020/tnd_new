@@ -6,11 +6,10 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/DigitalCommon/ClassList.dart';
 import 'package:the_national_dawn/DigitalCommon/Constants.dart';
+import 'package:the_national_dawn/Common/Constants.dart' as serv ;
 import 'package:xml2json/xml2json.dart';
 
 //Custom Files
-
-import 'package:the_national_dawn/DigitalCommon/Constants.dart' as cnst;
 
 import 'package:the_national_dawn/DigitalCommon/Constants.dart' as cnst;
 
@@ -18,7 +17,29 @@ Dio dio = new Dio();
 Xml2Json xml2json = new Xml2Json();
 
 class Services {
-  static Future<SaveDataClass> CreateDigitalCard(
+  // static Future<SaveDataClass> CreateDigitalCard(
+  //     String mobileNo, String name, String email) async {
+  //   String url = APIURL.API_URL +
+  //       'CheckDigitalCardMember?mobileNo=$mobileNo&name=$name&email=$email';
+  //   print("CheckDigitalCardMember URL: " + url);
+  //   final response = await http.get(url);
+  //   try {
+  //     if (response.statusCode == 200) {
+  //       SaveDataClass data;
+  //       final jsonResponse = json.decode(response.body);
+  //       SaveDataClass saveDataClass = new SaveDataClass.fromJson(jsonResponse);
+  //       print("ScanEventMemberEntry data: ");
+  //       print(jsonResponse);
+  //       return saveDataClass;
+  //     } else {
+  //       throw Exception(response.body);
+  //     }
+  //   } catch (e) {
+  //     print("CheckDigitalCardMember Erorr : " + e.toString());
+  //     throw Exception(MESSAGES.INTERNET_ERROR);
+  //   }
+  // }
+  static Future<List<DigitalClass>> CreateDigitalCard(
       String mobileNo, String name, String email) async {
     String url = APIURL.API_URL +
         'CheckDigitalCardMember?mobileNo=$mobileNo&name=$name&email=$email';
@@ -26,17 +47,24 @@ class Services {
     final response = await http.get(url);
     try {
       if (response.statusCode == 200) {
-        SaveDataClass data;
+        List<DigitalClass> list = [];
+        print("CheckDigitalCardMember Response: " + response.body);
+
         final jsonResponse = json.decode(response.body);
-        SaveDataClass saveDataClass = new SaveDataClass.fromJson(jsonResponse);
-        print("ScanEventMemberEntry data: ");
-        print(jsonResponse);
-        return saveDataClass;
+        DigitalDataClass memberDataClass =
+            new DigitalDataClass.fromJson(jsonResponse);
+
+        if (memberDataClass.ERROR_STATUS == false)
+          list = memberDataClass.Data;
+        else
+          list = [];
+
+        return list;
       } else {
-        throw Exception(response.body);
+        throw Exception(MESSAGES.INTERNET_ERROR);
       }
     } catch (e) {
-      print("CheckDigitalCardMember Erorr : " + e.toString());
+      print("Check Login Erorr : " + e.toString());
       throw Exception(MESSAGES.INTERNET_ERROR);
     }
   }
@@ -112,7 +140,7 @@ class Services {
 
   static Future<List<DashboardCountClass>> GetDashboardCount() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String memberId = prefs.getString(cnst.Session.MemberId);
+    String memberId = prefs.getString(serv.Session.digital_Id);
 
     List<DashboardCountClass> list = [];
 
@@ -146,7 +174,7 @@ class Services {
 
   static Future<List<EarnRedeemCountClass>> GetEarnRedeemCount() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String memberId = prefs.getString(cnst.Session.MemberId);
+    String memberId = prefs.getString(serv.Session.digital_Id);
     String referCode = prefs.getString(cnst.Session.ReferCode);
 
     List<EarnRedeemCountClass> list = [];
@@ -181,7 +209,7 @@ class Services {
 
   static Future<List<ServicesClass>> GetMemberServices() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String memberId = prefs.getString(cnst.Session.MemberId);
+    String memberId = prefs.getString(serv.Session.digital_Id);
 
     List<ServicesClass> list = [];
 
@@ -219,7 +247,7 @@ class Services {
 
   static Future<List<OfferClass>> GetMemberOffers() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String memberId = prefs.getString(cnst.Session.MemberId);
+    String memberId = prefs.getString(serv.Session.digital_Id);
 
     List<OfferClass> list = [];
 
@@ -315,7 +343,7 @@ class Services {
 
   static Future<List<RedeemHistoryClass>> GetRedemHistory() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String memberId = prefs.getString(cnst.Session.MemberId);
+    String memberId = prefs.getString(serv.Session.digital_Id);
 
     List<RedeemHistoryClass> list = [];
 
@@ -348,7 +376,7 @@ class Services {
 
   static Future<List<ShareClass>> GetShareHistory() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String memberId = prefs.getString(cnst.Session.MemberId);
+    String memberId = prefs.getString(serv.Session.digital_Id);
 
     List<ShareClass> list = [];
 
@@ -382,7 +410,7 @@ class Services {
 
   static Future<List<ThemeChange>> ChangeThemeImage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String memberId = prefs.getString(cnst.Session.MemberId);
+    String memberId = prefs.getString(serv.Session.digital_Id);
 
     List<ThemeChange> list = [];
 
@@ -617,7 +645,7 @@ class Services {
 
   static Future<List<MemberClass>> GetMemberDetail() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String memberId = prefs.getString(cnst.Session.MemberId);
+    String memberId = prefs.getString(serv.Session.digital_Id);
 
     List<MemberClass> list = [];
 
@@ -653,7 +681,7 @@ class Services {
 
   static Future<String> UpdateTheme(String memberid, String themeid) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String memberId = prefs.getString(cnst.Session.MemberId);
+    String memberId = prefs.getString(serv.Session.digital_Id);
 
     String message = "";
 

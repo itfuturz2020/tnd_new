@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/DigitalComponent/HeaderComponent.dart';
+import 'package:the_national_dawn/Common/Constants.dart';
 
 class More extends StatefulWidget {
   @override
@@ -21,7 +22,7 @@ class _MoreState extends State<More> {
 
   GetProfileData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String memberId = prefs.getString(cnst.Session.MemberId);
+    String memberId = prefs.getString(Session.digital_Id);
     setState(() {
       MemberId = memberId;
     });
@@ -113,7 +114,7 @@ class _MoreState extends State<More> {
                       onTap: () async {
                         /*SharedPreferences prefs =
                             await SharedPreferences.getInstance();
-                        prefs.remove(cnst.Session.MemberId);
+                        prefs.remove(Session.digital_Id);
                         prefs.remove(cnst.Session.Name);
                         prefs.remove(cnst.Session.Mobile);
                         prefs.remove(cnst.Session.Company);

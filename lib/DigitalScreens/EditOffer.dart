@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/DigitalCommon/ClassList.dart';
 import 'package:the_national_dawn/DigitalCommon/Services.dart';
+import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/DigitalCommon/Constants.dart' as cnst;
 import 'package:the_national_dawn/DigitalComponent/ImagePickerHandlerComponent.dart';
 
@@ -66,7 +67,7 @@ class _EditOfferState extends State<EditOffer>
 
   GetLocalData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String memberId = prefs.getString(cnst.Session.MemberId);
+    String memberId = prefs.getString(Session.digital_Id);
 
     if (memberId != null && memberId != "")
       setState(() {
@@ -267,19 +268,19 @@ class _EditOfferState extends State<EditOffer>
                   child: new Center(
                     child: _image == null
                         ? widget.offerClass.Image != null
-                            ? FadeInImage.assetNetwork(
-                                placeholder: "images/logo.png",
-                                image: widget.offerClass.Image,
-                                height: 200,
-                                width: 200,
-                                fit: BoxFit.cover)
-                            : Image.asset(
-                                "images/logo.png",
-                                height: 200.0,
-                                width: 200.0,
-                              )
+                        ? FadeInImage.assetNetwork(
+                        placeholder: "images/logo.png",
+                        image: widget.offerClass.Image,
+                        height: 200,
+                        width: 200,
+                        fit: BoxFit.cover)
+                        : Image.asset(
+                      "images/logo.png",
+                      height: 200.0,
+                      width: 200.0,
+                    )
                         : Image.file(File(_image.path),
-                            height: 200, width: 200, fit: BoxFit.cover),
+                        height: 200, width: 200, fit: BoxFit.cover),
                   ), //end Center
                 ),
               ),
