@@ -958,7 +958,7 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                             .center,
                                                     children: <Widget>[
                                                       Image.asset(
-                                                          "images/profile/gmail24.png"),
+                                                          "assets/gmail24.png"),
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets
@@ -1010,7 +1010,8 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                     controller: txtEmail,
                                                     decoration: InputDecoration(
                                                         prefixIcon: Image.asset(
-                                                            "assets/gmail24.png"),
+                                                          "assets/gmail24.png",
+                                                        ),
                                                         hintText: "Email"),
                                                     keyboardType: TextInputType
                                                         .emailAddress,

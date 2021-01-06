@@ -45,6 +45,7 @@ import 'package:the_national_dawn/Screens/PopularNewsScreen.dart';
 import 'package:the_national_dawn/Screens/ProfileScreen.dart';
 import 'package:the_national_dawn/Screens/ReferEarnScreen.dart';
 import 'package:the_national_dawn/Screens/RegisterScreen.dart';
+import 'package:the_national_dawn/Screens/RegistrationProfileScreen.dart';
 import 'package:the_national_dawn/Screens/RequestScreen.dart';
 import 'package:the_national_dawn/Screens/SplashScreen.dart';
 import 'package:the_national_dawn/Screens/StoriesScreen.dart';
@@ -113,6 +114,7 @@ class _MyAppState extends State<MyApp> {
         '/NewsBannerDetail': (context) => NewsBannerDetail(),
         '/EventTicketScreen': (context) => EventTicketScreen(),
         '/RequestScreen': (context) => RequestScreen(),
+        '/RegistrationProfileScreen': (context) => RegistrationProfileScreen(),
 
         //===============digital card screen=============
         '/AddCard': (context) => AddCard(),
