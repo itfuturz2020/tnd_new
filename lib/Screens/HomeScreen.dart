@@ -59,6 +59,7 @@ class _HomeScreenState extends State<HomeScreen>
       /* qrData =
           _name + "," + _comp_name + "," + _email + "," + img + "," + _mobileNo;*/
     });
+    print(" Value of Member $isVerified");
   }
 
   Future scanVisitor() async {
@@ -744,8 +745,6 @@ class _HomeScreenState extends State<HomeScreen>
                 }
               },
               staggeredTileBuilder: (int index) => new StaggeredTile.fit(1),
-              // mainAxisSpacing: 4.0,
-              // crossAxisSpacing: 4.0,
             )
           ],
         ),

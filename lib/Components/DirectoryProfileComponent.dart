@@ -32,7 +32,7 @@ class _DirectoryProfileComponentState extends State<DirectoryProfileComponent> {
         elevation: 0,
         title: Center(
           child: Text(
-            "Profile",
+            "Directory Profile",
             style: TextStyle(
               color: appPrimaryMaterialColor,
               fontSize: 18,
@@ -773,7 +773,7 @@ class _DirectoryProfileComponentState extends State<DirectoryProfileComponent> {
                                             ),
                                           ),
                                         ),
-                                        /*  Padding(
+                                        Padding(
                                           padding: const EdgeInsets.only(
                                               left: 20.0, top: 8),
                                           child: Text("Member Type : ",
@@ -856,7 +856,7 @@ class _DirectoryProfileComponentState extends State<DirectoryProfileComponent> {
                                                         })
                                                     : SizedBox(),
                                               )),
-                                        ),*/
+                                        ),
                                         Padding(
                                           padding: const EdgeInsets.only(
                                               left: 20.0, top: 8),
@@ -894,6 +894,8 @@ class _DirectoryProfileComponentState extends State<DirectoryProfileComponent> {
                                                   .directoryData["twitter"],
                                               whatsapp: widget
                                                   .directoryData["whatsApp"],
+                                              youtube: widget
+                                                  .directoryData["youTube"],
                                             ),
                                           ),
                                         ),

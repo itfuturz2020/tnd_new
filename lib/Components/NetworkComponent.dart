@@ -86,12 +86,16 @@ class _NetworkComponentState extends State<NetworkComponent> {
                 decoration: BoxDecoration(
                     // border: Border.all(color: Colors.grey[100]),
                     borderRadius: BorderRadius.circular(10)),
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      "${widget.networkData["img"]}",
-                      fit: BoxFit.cover,
-                    )),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.network(
+                        "${widget.networkData["img"]}",
+                        height: 100,
+                        fit: BoxFit.cover,
+                      )),
+                ),
               ),
               Expanded(
                 child: Padding(

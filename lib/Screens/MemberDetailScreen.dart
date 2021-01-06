@@ -369,7 +369,7 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                       "${profileList["whatsApp"]}",
                                                       style: TextStyle(
                                                           color: Colors.black,
-                                                          fontSize: 20,
+                                                          fontSize: 17,
                                                           fontWeight:
                                                               FontWeight.bold)),
                                                 ),
@@ -514,7 +514,7 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                     "${profileList["company_name"] ?? "-"}",
                                                     style: TextStyle(
                                                         color: Colors.black,
-                                                        fontSize: 20,
+                                                        fontSize: 16,
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   ),

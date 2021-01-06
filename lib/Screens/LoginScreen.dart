@@ -18,20 +18,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController txtMobileNumber = TextEditingController();
   final _formkey = new GlobalKey<FormState>();
-  List memberOf = [
-    {
-      "_id": "5fc763fae47d7d695ca827fc",
-      "memberShipName": "BNI",
-      "logo":
-          "https: //res.cloudinary.com/dckj2yfap/image/upload/v1601267438/blog/memberShip/2020-12-29T12: 03: 14.373Z",
-    },
-    {
-      "_id": "5fc763fae47d7d695ca827fc",
-      "memberShipName": "BNI",
-      "logo":
-          "https: //res.cloudinary.com/dckj2yfap/image/upload/v1601267438/blog/memberShip/2020-12-29T12: 03: 14.373Z",
-    }
-  ];
   bool isLoading = false;
   saveDataToSession(var data) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -57,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
     await prefs.setString(Session.twitter, data["twitter"]);
     await prefs.setString(Session.youTube, data["youTube"]);
     await prefs.setBool(Session.isVerified, data["isVerified"]);
-    await prefs.setString(Session.business_category, data["business_category"]);
+    //await prefs.setString(Session.business_category, data["business_category"]);
     await prefs.setString(Session.memberOf, json.encode(data["memberOf"]));
 
     //log(json.decode(prefs.getString(Session.memberOf)).toString());

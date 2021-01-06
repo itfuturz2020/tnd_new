@@ -4,14 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SocialMediaComponent extends StatefulWidget {
-  String instagram, facebook, linkedIn, twitter, whatsapp,mail;
-  SocialMediaComponent(
-      {this.instagram,
-      this.facebook,
-      this.linkedIn,
-      this.twitter,
-      this.whatsapp,
-      this.mail});
+  String instagram, facebook, linkedIn, twitter, whatsapp, mail, youtube;
+  SocialMediaComponent({
+    this.instagram,
+    this.facebook,
+    this.linkedIn,
+    this.twitter,
+    this.whatsapp,
+    this.mail,
+    this.youtube,
+  });
   @override
   _SocialMediaComponentState createState() => _SocialMediaComponentState();
 }
@@ -43,6 +45,7 @@ class _SocialMediaComponentState extends State<SocialMediaComponent> {
       throw 'Could not launch ${url}';
     }
   }
+
   _launchURL(String toMailId, String subject, String body) async {
     var url = 'mailto:$toMailId?subject=$subject&body=$body';
     if (await canLaunch(url)) {
@@ -51,6 +54,7 @@ class _SocialMediaComponentState extends State<SocialMediaComponent> {
       throw 'Could not launch $url';
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -88,10 +92,13 @@ class _SocialMediaComponentState extends State<SocialMediaComponent> {
           GestureDetector(
               onTap: () {
                 _launchURL(widget.mail, '', '');
-
               },
-              child:
-              Image.asset('assets/gmail.png', width: 30, height: 30)),
+              child: Image.asset('assets/gmail.png', width: 30, height: 30)),
+          GestureDetector(
+              onTap: () {
+                launchSocialMediaUrl(widget.youtube);
+              },
+              child: Image.asset('assets/yout.png', width: 30, height: 30)),
         ],
       ),
     );

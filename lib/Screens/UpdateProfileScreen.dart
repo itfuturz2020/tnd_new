@@ -495,6 +495,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
                           errorStyle: TextStyle(height: 0),
                           contentPadding: const EdgeInsets.all(15),
+
                           fillColor: Colors.white,
                           enabledBorder: OutlineInputBorder(
                             borderRadius:
@@ -703,6 +704,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         },
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(15),
+                          isDense: true,
                           errorStyle: TextStyle(height: 0),
                           fillColor: Colors.white,
                           enabledBorder: OutlineInputBorder(

@@ -242,7 +242,7 @@ class _NetworkingProfileState extends State<NetworkingProfile> {
               SizedBox(
                 height: 25,
               ),
-              Row(
+              /*  Row(
                 children: [
                   Flexible(
                     child: Container(
@@ -301,7 +301,7 @@ class _NetworkingProfileState extends State<NetworkingProfile> {
                     ),
                   ),
                 ],
-              ),
+              ),*/
             ],
           ),
         ),

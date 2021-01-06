@@ -60,10 +60,20 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
 
   @override
   void initState() {
-    // _profile();
+    _profile();
     getCategory();
     getMemberType();
     _getMember();
+  }
+
+  _profile() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      txtName.text = prefs.getString(Session.CustomerName);
+      txtEmail.text = prefs.getString(Session.CustomerEmailId);
+      txtMobileNumber.text = prefs.getString(Session.CustomerPhoneNo);
+      txtCName.text = prefs.getString(Session.CustomerCompanyName);
+    });
   }
 
   getMemberType() async {
@@ -325,7 +335,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
             ),
           ),
         ),
-        leading: Padding(
+        /* leading: Padding(
           padding:
               const EdgeInsets.only(top: 8.0, right: 0, left: 10, bottom: 8),
           child: GestureDetector(
@@ -352,7 +362,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
               ),
             ),
           ),
-        ),
+        ),*/
         iconTheme: new IconThemeData(color: Colors.black),
       ),
       body: SingleChildScrollView(

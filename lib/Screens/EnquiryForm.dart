@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
+import 'package:the_national_dawn/Components/LoadingComponent.dart';
 
 class EnquiryForm extends StatefulWidget {
   @override
@@ -32,7 +33,6 @@ class _EnquiryFormState extends State<EnquiryForm> {
       _name.text = prefs.getString(Session.CustomerName);
       _email.text = prefs.getString(Session.CustomerEmailId);
       _phone.text = prefs.getString(Session.CustomerPhoneNo);
-      customerId = prefs.getString(Session.CustomerId);
     });
   }
 
@@ -211,7 +211,7 @@ class _EnquiryFormState extends State<EnquiryForm> {
                     padding: const EdgeInsets.only(
                       left: 22.0,
                     ),
-                    child: Text("Telephone",
+                    child: Text("Mobile No",
                         style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.w500,
@@ -273,6 +273,7 @@ class _EnquiryFormState extends State<EnquiryForm> {
               Padding(
                 padding: const EdgeInsets.only(left: 20.0, right: 20, top: 7),
                 child: TextFormField(
+                  controller: _description,
                   maxLines: 5,
                   maxLength: 900,
                   style: TextStyle(fontSize: 15),
@@ -343,12 +344,16 @@ class _EnquiryFormState extends State<EnquiryForm> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5),
                 ),
-                onPressed: () {},
-                child: Text("SUBMIT",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 17))),
+                onPressed: () {
+                  _enquirySendData();
+                },
+                child: isLoading
+                    ? LoadingComponent()
+                    : Text("SUBMIT",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 17))),
           ),
         ),
       ),
@@ -363,18 +368,23 @@ class _EnquiryFormState extends State<EnquiryForm> {
           isLoading = true;
         });
         var body = {
-          /* "name": "",
-          "email": "${Session.Email}",
-          "mobile": "${customerId}",
-          "description": "${customerId}",*/
+          "name": _name.text,
+          "email": _email.text,
+          "mobile": _phone.text,
+          "description": _description.text,
         };
-        Services.PostForList(api_name: 'admin/eventicket', body: body).then(
+        print(body);
+        Services.PostForList(api_name: 'admin/inquiry', body: body).then(
             (responseList) async {
           setState(() {
             isLoading = false;
           });
           if (responseList.length > 0) {
-            setState(() {});
+            setState(() {
+              isLoading = false;
+            });
+            Navigator.pop(context);
+            Fluttertoast.showToast(msg: "Enquiry data send successfully");
           } else {
             Fluttertoast.showToast(msg: "data Not Found");
             //show "data not found" in dialog

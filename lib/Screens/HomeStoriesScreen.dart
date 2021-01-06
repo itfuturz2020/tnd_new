@@ -224,7 +224,7 @@ class _HomeStoriesScreenState extends State<HomeStoriesScreen> {
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
 //        var body = {};
         Services.PostForList(
-          api_name: 'getSuccessStory',
+          api_name: 'admin/getSuccessStory',
         ).then((ResponseList) async {
           setState(() {
             isLoading = false;
