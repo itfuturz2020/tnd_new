@@ -173,8 +173,11 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
       print("========================bdob");
       //print(_birthDate);
+      if (widget.updatedProfileData["number_of_child"] != null) {
+        txtChildrenCount.text =
+            "${widget.updatedProfileData["number_of_child"]}";
+      }
 
-      txtChildrenCount.text = "${widget.updatedProfileData["number_of_child"]}";
       // selectedList = prefs.getStringList(Session.memberOf);
       txtCName.text = "${widget.updatedProfileData["company_name"]}";
       txtEmail.text = "${widget.updatedProfileData["email"]}";
@@ -696,12 +699,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         keyboardType: TextInputType.text,
                         style: TextStyle(fontSize: 15),
                         cursorColor: appPrimaryMaterialColor,
-                        validator: (sname) {
-                          if (sname.length == 0) {
-                            return 'Please enter spouse name';
-                          }
-                          return null;
-                        },
+                        // validator: (sname) {
+                        //   if (sname.length == 0) {
+                        //     return 'Please enter spouse name';
+                        //   }
+                        //   return null;
+                        // },
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(15),
                           isDense: true,
@@ -823,12 +826,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         //controller: txtName,
                         controller: txtachievement,
                         keyboardType: TextInputType.text,
-                        validator: (ach) {
-                          if (ach.length == 0) {
-                            return 'Please enter your achievement';
-                          }
-                          return null;
-                        },
+                        // validator: (ach) {
+                        //   if (ach.length == 0) {
+                        //     return 'Please enter your achievement';
+                        //   }
+                        //   return null;
+                        // },
                         style: TextStyle(fontSize: 15),
                         cursorColor: appPrimaryMaterialColor,
                         decoration: InputDecoration(
@@ -889,12 +892,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         keyboardType: TextInputType.number,
                         style: TextStyle(fontSize: 15),
                         cursorColor: appPrimaryMaterialColor,
-                        validator: (child) {
-                          if (child.length == 0) {
-                            return 'Please enter your No. of child';
-                          }
-                          return null;
-                        },
+                        // validator: (child) {
+                        //   if (child.length == 0) {
+                        //     return 'Please enter your No. of child';
+                        //   }
+                        //   return null;
+                        // },
                         decoration: InputDecoration(
                           errorStyle: TextStyle(height: 0),
                           contentPadding: const EdgeInsets.all(15),
@@ -953,12 +956,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         keyboardType: TextInputType.text,
                         style: TextStyle(fontSize: 15),
                         cursorColor: appPrimaryMaterialColor,
-                        validator: (cname) {
-                          if (cname.length == 0) {
-                            return 'Please enter company name';
-                          }
-                          return null;
-                        },
+                        // validator: (cname) {
+                        //   if (cname.length == 0) {
+                        //     return 'Please enter company name';
+                        //   }
+                        //   return null;
+                        // },
                         decoration: InputDecoration(
                           errorStyle: TextStyle(height: 0),
                           contentPadding: const EdgeInsets.all(15),
@@ -1088,16 +1091,16 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         style: TextStyle(fontSize: 15),
                         cursorColor: appPrimaryMaterialColor,
                         maxLength: 10,
-                        validator: (wphone) {
-                          Pattern pattern = r'(^(?:[+0]9)?[0-9]{10,}$)';
-                          RegExp regExp = new RegExp(pattern);
-                          if (wphone.length == 0) {
-                            return 'Please enter mobile number';
-                          } else if (!regExp.hasMatch(wphone)) {
-                            return 'Please enter valid mobile number';
-                          }
-                          return null;
-                        },
+                        // validator: (wphone) {
+                        //   Pattern pattern = r'(^(?:[+0]9)?[0-9]{10,}$)';
+                        //   RegExp regExp = new RegExp(pattern);
+                        //   if (wphone.length == 0) {
+                        //     return 'Please enter mobile number';
+                        //   } else if (!regExp.hasMatch(wphone)) {
+                        //     return 'Please enter valid mobile number';
+                        //   }
+                        //   return null;
+                        // },
                         decoration: InputDecoration(
                           counterText: "",
                           errorStyle: TextStyle(height: 0),
@@ -1383,12 +1386,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         keyboardType: TextInputType.text,
                         style: TextStyle(fontSize: 15),
                         cursorColor: appPrimaryMaterialColor,
-                        validator: (business) {
-                          if (business.length == 0) {
-                            return 'Please enter about business';
-                          }
-                          return null;
-                        },
+                        // validator: (business) {
+                        //   if (business.length == 0) {
+                        //     return 'Please enter about business';
+                        //   }
+                        //   return null;
+                        // },
                         decoration: InputDecoration(
                           counterText: "",
                           errorStyle: TextStyle(height: 0),
@@ -1445,12 +1448,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       child: TextFormField(
                         //controller: txtName,
                         controller: txtExperience,
-                        validator: (exp) {
-                          if (exp.length == 0) {
-                            return 'Please enter your experience';
-                          }
-                          return null;
-                        },
+                        // validator: (exp) {
+                        //   if (exp.length == 0) {
+                        //     return 'Please enter your experience';
+                        //   }
+                        //   return null;
+                        // },
                         keyboardType: TextInputType.text,
                         style: TextStyle(fontSize: 15),
                         cursorColor: appPrimaryMaterialColor,
@@ -1517,12 +1520,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           keyboardType: TextInputType.text,
                           style: TextStyle(fontSize: 15),
                           cursorColor: appPrimaryMaterialColor,
-                          validator: (fb) {
-                            if (fb.length == 0) {
-                              return 'Please enter your facebook Link';
-                            }
-                            return null;
-                          },
+                          // validator: (fb) {
+                          //   if (fb.length == 0) {
+                          //     return 'Please enter your facebook Link';
+                          //   }
+                          //   return null;
+                          // },
                           decoration: InputDecoration(
                             errorStyle: TextStyle(height: 0),
                             hintText: "Facebook Link",
@@ -1575,12 +1578,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           controller: instagram,
                           keyboardType: TextInputType.text,
                           style: TextStyle(fontSize: 15),
-                          validator: (insta) {
-                            if (insta.length == 0) {
-                              return 'Please enter your instagram link';
-                            }
-                            return null;
-                          },
+                          // validator: (insta) {
+                          //   if (insta.length == 0) {
+                          //     return 'Please enter your instagram link';
+                          //   }
+                          //   return null;
+                          // },
                           cursorColor: appPrimaryMaterialColor,
                           decoration: InputDecoration(
                             hintText: "Instagram Link",
@@ -1635,12 +1638,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           keyboardType: TextInputType.text,
                           style: TextStyle(fontSize: 15),
                           cursorColor: appPrimaryMaterialColor,
-                          validator: (linkin) {
-                            if (linkin.length == 0) {
-                              return 'Please enter your linkedin link';
-                            }
-                            return null;
-                          },
+                          // validator: (linkin) {
+                          //   if (linkin.length == 0) {
+                          //     return 'Please enter your linkedin link';
+                          //   }
+                          //   return null;
+                          // },
                           decoration: InputDecoration(
                             errorStyle: TextStyle(height: 0),
                             hintText: "LinkedIn Link",
@@ -1694,12 +1697,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           keyboardType: TextInputType.text,
                           style: TextStyle(fontSize: 15),
                           cursorColor: appPrimaryMaterialColor,
-                          validator: (twitter) {
-                            if (twitter.length == 0) {
-                              return 'Please enter your twitter link';
-                            }
-                            return null;
-                          },
+                          // validator: (twitter) {
+                          //   if (twitter.length == 0) {
+                          //     return 'Please enter your twitter link';
+                          //   }
+                          //   return null;
+                          // },
                           decoration: InputDecoration(
                             errorStyle: TextStyle(height: 0),
                             hintText: "Twitter Link",
@@ -1753,12 +1756,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           keyboardType: TextInputType.text,
                           style: TextStyle(fontSize: 15),
                           cursorColor: appPrimaryMaterialColor,
-                          validator: (youtube) {
-                            if (youtube.length == 0) {
-                              return 'Please enter your youtube link';
-                            }
-                            return null;
-                          },
+                          // validator: (youtube) {
+                          //   if (youtube.length == 0) {
+                          //     return 'Please enter your youtube link';
+                          //   }
+                          //   return null;
+                          // },
                           decoration: InputDecoration(
                             errorStyle: TextStyle(height: 0),
                             hintText: "Youtube Link",
@@ -2000,7 +2003,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               //       Session.date_of_birth, responseList[0]["date_of_birth"]);
               //   prefs.setString(Session.CustomerImage, responseList[0]["img"]);
               // });
-              Navigator.of(context).pushNamed('/HomeScreen');
+              Navigator.pushNamedAndRemoveUntil(
+                  context, '/HomePage', (route) => false);
               Fluttertoast.showToast(
                   msg: "Profile Updated Successfully",
                   gravity: ToastGravity.BOTTOM);
