@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
 import 'package:the_national_dawn/Components/LoadingBlueComponent.dart';
+import 'package:the_national_dawn/Components/SocialMediaComponent.dart';
 import 'package:the_national_dawn/Screens/UpdateProfileScreen.dart';
 
 class MemberDetailScreen extends StatefulWidget {
@@ -428,6 +429,7 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                           child: SingleChildScrollView(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SizedBox(
                                   height: 35,
@@ -640,6 +642,7 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                           child: SingleChildScrollView(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SizedBox(
                                   height: 35,
@@ -669,6 +672,8 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: <Widget>[
                                           Padding(
                                             padding:
@@ -732,6 +737,50 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                 ),
                                               ),
                                             ],
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 20.0, top: 8),
+                                            child: Text(
+                                              "Social Media : ",
+                                              style: TextStyle(
+                                                  color: Colors.grey[700],
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 8,
+                                                left: 8.0,
+                                                right: 8,
+                                                bottom: 30),
+                                            child: Container(
+                                              height: 55,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  border: Border.all(
+                                                      color:
+                                                          appPrimaryMaterialColor[
+                                                              50],
+                                                      width: 1),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(
+                                                              22.0))),
+                                              child: SocialMediaComponent(
+                                                facebook:
+                                                    profileList["faceBook"],
+                                                instagram:
+                                                    profileList["instagram"],
+                                                linkedIn:
+                                                    profileList["linkedIn"],
+                                                twitter: profileList["twitter"],
+                                                whatsapp:
+                                                    profileList["whatsApp"],
+                                                youtube: profileList["youTube"],
+                                              ),
+                                            ),
                                           ),
                                         ],
                                       ),
