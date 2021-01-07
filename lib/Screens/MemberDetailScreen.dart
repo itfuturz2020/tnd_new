@@ -23,20 +23,20 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
 
   @override
   void initState() {
-    //_profile();
     _getUpdatedProfile();
   }
 
   var _name;
   var _comp_name;
-  var _mobileNo;
   var _email;
-  var img;
   var company_name;
   var business_category;
   var address;
   var about_business;
   var achievement;
+  var img;
+  var _mobileNo;
+  var qrData;
 
   _profile() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -51,10 +51,10 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
       about_business = profileList["about_business"];
       achievement = profileList["achievement"];
     });
-    /*setState(() {
+    setState(() {
       qrData =
           _name + "," + _comp_name + "," + _email + "," + img + "," + _mobileNo;
-    });*/
+    });
   }
 
   @override
@@ -722,7 +722,6 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                       const EdgeInsets.only(
                                                           left: 8.0, top: 12),
                                                   child: Text(
-                                                    // "Mr. Natasha Goel",
                                                     "${profileList["achievement"] ?? "-"}",
                                                     style: TextStyle(
                                                         color: Colors.black,

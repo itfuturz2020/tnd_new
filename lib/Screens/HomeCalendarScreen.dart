@@ -193,33 +193,33 @@ class _HomeCalendarScreenState extends State<HomeCalendarScreen>
       shrinkWrap: true,
       children: _currentMonthEventList
           .map(
-            (event) => Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Container(
-                child: Stack(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(left: 75.0),
-                      child: Container(
-                        padding: const EdgeInsets.only(left: 30.0, right: 8.0),
-                        height: 107,
-                        //width: 250,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            color: Colors.grey[100],
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(16))),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => CalendarDetailScreen(
-                                        eventData: event,
-                                      )),
-                            );
-                            // _showDialog(context, event);
-                          },
+            (event) => GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CalendarDetailScreen(
+                            eventData: event,
+                          )),
+                );
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Container(
+                  child: Stack(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(left: 75.0),
+                        child: Container(
+                          padding:
+                              const EdgeInsets.only(left: 30.0, right: 8.0),
+                          height: 107,
+                          //width: 250,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              color: Colors.grey[100],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16))),
                           child: Container(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -291,15 +291,15 @@ class _HomeCalendarScreenState extends State<HomeCalendarScreen>
                           ),
                         ),
                       ),
-                    ),
-                    Positioned(
-                      child: CircleAvatar(
-                        radius: 49,
-                        backgroundColor: Colors.grey,
-                        backgroundImage: NetworkImage(event["eventImage"]),
-                      ),
-                    )
-                  ],
+                      Positioned(
+                        child: CircleAvatar(
+                          radius: 49,
+                          backgroundColor: Colors.grey,
+                          backgroundImage: NetworkImage(event["eventImage"]),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

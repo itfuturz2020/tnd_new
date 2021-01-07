@@ -67,50 +67,52 @@ class _CalendarDetailScreenState extends State<CalendarDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.white,
-          title: Padding(
-            padding: const EdgeInsets.only(left: 15.0),
-            child: Text(
-              "Event Detail",
-              style: TextStyle(
-                color: appPrimaryMaterialColor,
-                fontSize: 18,
-                //fontWeight: FontWeight.bold
-              ),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        title: Padding(
+          padding: const EdgeInsets.only(left: 15.0),
+          child: Text(
+            "Event Detail",
+            style: TextStyle(
+              color: appPrimaryMaterialColor,
+              fontSize: 18,
+              //fontWeight: FontWeight.bold
             ),
           ),
-          leading: Padding(
-            padding:
-                const EdgeInsets.only(top: 8.0, right: 0, left: 10, bottom: 8),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-              child: Container(
-                height: 20,
-                width: 40,
-                decoration: BoxDecoration(
-                    color: Colors.grey[100],
-                    border: Border.all(color: Colors.grey[200], width: 1),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey[600].withOpacity(0.2),
-                          blurRadius: 1.0,
-                          spreadRadius: 1.0,
-                          offset: Offset(3.0, 5.0))
-                    ]),
-                child: Icon(
-                  Icons.arrow_back_ios_outlined,
-                  color: Colors.black,
-                ),
+        ),
+        leading: Padding(
+          padding:
+              const EdgeInsets.only(top: 8.0, right: 0, left: 10, bottom: 8),
+          child: GestureDetector(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: Container(
+              height: 20,
+              width: 40,
+              decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  border: Border.all(color: Colors.grey[200], width: 1),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey[600].withOpacity(0.2),
+                        blurRadius: 1.0,
+                        spreadRadius: 1.0,
+                        offset: Offset(3.0, 5.0))
+                  ]),
+              child: Icon(
+                Icons.arrow_back_ios_outlined,
+                color: Colors.black,
               ),
             ),
           ),
         ),
-        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      ),
+      body: SingleChildScrollView(
+        physics: NeverScrollableScrollPhysics(),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           SizedBox(
             height: 35,
           ),
@@ -228,15 +230,15 @@ class _CalendarDetailScreenState extends State<CalendarDetailScreen> {
             ),
           ),
           /*Padding(
-                padding: const EdgeInsets.only(top: 2.0, left: 20),
-                child: Text(
-                  "Description : ",
-                  style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w400),
-                ),
-              ),*/
+                  padding: const EdgeInsets.only(top: 2.0, left: 20),
+                  child: Text(
+                    "Description : ",
+                    style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w400),
+                  ),
+                ),*/
           Padding(
             padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
             child: Text(
@@ -271,126 +273,126 @@ class _CalendarDetailScreenState extends State<CalendarDetailScreen> {
               whatsapp: widget.eventData["whatsApp"],
             ),
             /*Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 5.0),
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.grey[300], width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 5.0, right: 5, top: 5, bottom: 5),
-                          child: Image.asset(
-                            'assets/face.png',
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5.0),
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.grey[300], width: 1),
+                            borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 5.0, right: 5, top: 5, bottom: 5),
+                            child: Image.asset(
+                              'assets/face.png',
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 5.0),
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.grey[300], width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 5.0, right: 5, top: 5, bottom: 5),
-                          child: Image.asset(
-                            'assets/insta.png',
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5.0),
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.grey[300], width: 1),
+                            borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 5.0, right: 5, top: 5, bottom: 5),
+                            child: Image.asset(
+                              'assets/insta.png',
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 5.0),
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.grey[300], width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 5.0, right: 5, top: 5, bottom: 5),
-                          child: Image.asset(
-                            'assets/link.png',
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5.0),
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.grey[300], width: 1),
+                            borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 5.0, right: 5, top: 5, bottom: 5),
+                            child: Image.asset(
+                              'assets/link.png',
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 5.0),
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.grey[300], width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 5.0, right: 5, top: 5, bottom: 5),
-                          child: Image.asset(
-                            'assets/whats.png',
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5.0),
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.grey[300], width: 1),
+                            borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 5.0, right: 5, top: 5, bottom: 5),
+                            child: Image.asset(
+                              'assets/whats.png',
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 5.0),
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.grey[300], width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 5.0, right: 5, top: 5, bottom: 5),
-                          child: Image.asset(
-                            'assets/youtu.png',
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5.0),
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.grey[300], width: 1),
+                            borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 5.0, right: 5, top: 5, bottom: 5),
+                            child: Image.asset(
+                              'assets/youtu.png',
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 5.0),
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.grey[300], width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 5.0, right: 5, top: 5, bottom: 5),
-                          child: Image.asset(
-                            'assets/twit.png',
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5.0),
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.grey[300], width: 1),
+                            borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 5.0, right: 5, top: 5, bottom: 5),
+                            child: Image.asset(
+                              'assets/twit.png',
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),*/
+                    ],
+                  ),*/
           ),
-          Expanded(
+          /*  Expanded(
             child: SizedBox(),
           ),
           Padding(
@@ -422,8 +424,37 @@ class _CalendarDetailScreenState extends State<CalendarDetailScreen> {
                 ),
               ),
             ),
+          ),*/
+        ]),
+      ),
+      bottomNavigationBar: Theme(
+        data: Theme.of(context).copyWith(
+          canvasColor: appPrimaryMaterialColor,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 10.0, right: 10, bottom: 15),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: 45,
+            child: RaisedButton(
+                color: appPrimaryMaterialColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                onPressed: () {
+                  _registerEvent();
+                },
+                child: isregister
+                    ? LoadingComponent()
+                    : Text("REGISTER",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 17))),
           ),
-        ]));
+        ),
+      ),
+    );
   }
 
   _registerEvent() async {

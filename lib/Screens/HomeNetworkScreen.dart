@@ -71,7 +71,7 @@ class _HomeNetworkScreenState extends State<HomeNetworkScreen> {
             ),
           ),*/
           iconTheme: new IconThemeData(color: Colors.black),
-          actions: [
+          /* actions: [
             Padding(
               padding: const EdgeInsets.only(
                   top: 8.0, right: 18, left: 10, bottom: 8),
@@ -95,7 +95,7 @@ class _HomeNetworkScreenState extends State<HomeNetworkScreen> {
                 ),
               ),
             )
-          ],
+          ],*/
         ),
         body: Column(
           children: [
