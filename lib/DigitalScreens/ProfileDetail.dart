@@ -1850,7 +1850,7 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                   child: Image
                                                                       .asset(
                                                                     "assets/facebook.png",
-                                                                    height: 5,
+                                                                    height: 3,
                                                                   ),
                                                                 ),
                                                                 hintText:
@@ -1957,7 +1957,9 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                 .center,
                                                         children: <Widget>[
                                                           Image.asset(
-                                                              "assets/twitter24.png"),
+                                                            "assets/twitter.png",
+                                                            height: 24,
+                                                          ),
                                                           Container(
                                                             width: MediaQuery.of(
                                                                         context)
@@ -2023,11 +2025,22 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                           5))),
                                                       child: TextFormField(
                                                         controller: txtTwitter,
-                                                        decoration: InputDecoration(
-                                                            prefixIcon: Image.asset(
-                                                                "assets/twitter24.png"),
-                                                            hintText:
-                                                                "Twitter Page"),
+                                                        decoration:
+                                                            InputDecoration(
+                                                                prefixIcon:
+                                                                    Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          10.0),
+                                                                  child: Image
+                                                                      .asset(
+                                                                    "assets/twitter.png",
+                                                                    height: 5,
+                                                                  ),
+                                                                ),
+                                                                hintText:
+                                                                    "Twitter Page"),
                                                         keyboardType:
                                                             TextInputType.url,
                                                         style: TextStyle(
@@ -2129,7 +2142,9 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                 .center,
                                                         children: <Widget>[
                                                           Image.asset(
-                                                              "assets/googleplus24.png"),
+                                                            "assets/googleplus24.png",
+                                                            height: 25,
+                                                          ),
                                                           Container(
                                                             width: MediaQuery.of(
                                                                         context)
@@ -2195,11 +2210,21 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                           5))),
                                                       child: TextFormField(
                                                         controller: txtGoogle,
-                                                        decoration: InputDecoration(
-                                                            prefixIcon: Image.asset(
-                                                                "assets/googleplus24.png"),
-                                                            hintText:
-                                                                "Google Page"),
+                                                        decoration:
+                                                            InputDecoration(
+                                                                prefixIcon:
+                                                                    Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          10.0),
+                                                                  child: Image.asset(
+                                                                      "assets/googleplus24.png",
+                                                                      height:
+                                                                          5),
+                                                                ),
+                                                                hintText:
+                                                                    "Google Page"),
                                                         keyboardType:
                                                             TextInputType.url,
                                                         style: TextStyle(
@@ -2299,7 +2324,9 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                 .center,
                                                         children: <Widget>[
                                                           Image.asset(
-                                                              "assets/linkedin24.png"),
+                                                            "assets/linkedin.png",
+                                                            height: 20,
+                                                          ),
                                                           Container(
                                                             width: MediaQuery.of(
                                                                         context)
@@ -2365,11 +2392,22 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                           5))),
                                                       child: TextFormField(
                                                         controller: txtLinkedin,
-                                                        decoration: InputDecoration(
-                                                            prefixIcon: Image.asset(
-                                                                "assets/linkedin24.png"),
-                                                            hintText:
-                                                                "Linkedin Page"),
+                                                        decoration:
+                                                            InputDecoration(
+                                                                prefixIcon:
+                                                                    Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          13.0),
+                                                                  child: Image
+                                                                      .asset(
+                                                                    "assets/linkedin.png",
+                                                                    height: 3,
+                                                                  ),
+                                                                ),
+                                                                hintText:
+                                                                    "Linkedin Page"),
                                                         keyboardType:
                                                             TextInputType.url,
                                                         style: TextStyle(
@@ -2472,7 +2510,9 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                 .center,
                                                         children: <Widget>[
                                                           Image.asset(
-                                                              "assets/youtube24.png"),
+                                                            "assets/youtu.png",
+                                                            height: 25,
+                                                          ),
                                                           Container(
                                                             width: MediaQuery.of(
                                                                         context)
@@ -2538,11 +2578,22 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                           5))),
                                                       child: TextFormField(
                                                         controller: txtYoutube,
-                                                        decoration: InputDecoration(
-                                                            prefixIcon: Image.asset(
-                                                                "assets/youtube24.png"),
-                                                            hintText:
-                                                                "Youtube Page"),
+                                                        decoration:
+                                                            InputDecoration(
+                                                                prefixIcon:
+                                                                    Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          10.0),
+                                                                  child: Image
+                                                                      .asset(
+                                                                    "assets/youtu.png",
+                                                                    height: 5,
+                                                                  ),
+                                                                ),
+                                                                hintText:
+                                                                    "Youtube Page"),
                                                         keyboardType:
                                                             TextInputType.url,
                                                         style: TextStyle(
@@ -2648,7 +2699,8 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                 .center,
                                                         children: <Widget>[
                                                           Image.asset(
-                                                              "assets/instagram24.png"),
+                                                              "assets/instagram.png",
+                                                              height: 22),
                                                           Container(
                                                             width: MediaQuery.of(
                                                                         context)
@@ -2715,11 +2767,22 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                           5))),
                                                       child: TextFormField(
                                                         controller: txtIntagram,
-                                                        decoration: InputDecoration(
-                                                            prefixIcon: Image.asset(
-                                                                "assets/instagram24.png"),
-                                                            hintText:
-                                                                "Instagram Page"),
+                                                        decoration:
+                                                            InputDecoration(
+                                                                prefixIcon:
+                                                                    Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          13.0),
+                                                                  child: Image
+                                                                      .asset(
+                                                                    "assets/instagram.png",
+                                                                    height: 5,
+                                                                  ),
+                                                                ),
+                                                                hintText:
+                                                                    "Instagram Page"),
                                                         keyboardType:
                                                             TextInputType.url,
                                                         style: TextStyle(
@@ -6018,7 +6081,8 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                 .center,
                                                         children: <Widget>[
                                                           Image.asset(
-                                                              "assets/whatsapp24.png"),
+                                                              "assets/whatsapp.png",
+                                                              height: 25),
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
@@ -6077,11 +6141,22 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                           5))),
                                                       child: TextFormField(
                                                         controller: txtWhatsApp,
-                                                        decoration: InputDecoration(
-                                                            prefixIcon: Image.asset(
-                                                                "assets/whatsapp24.png"),
-                                                            hintText:
-                                                                "Whatsapp No"),
+                                                        decoration:
+                                                            InputDecoration(
+                                                                prefixIcon:
+                                                                    Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          10.0),
+                                                                  child: Image
+                                                                      .asset(
+                                                                    "assets/whatsapp24.png",
+                                                                    height: 5,
+                                                                  ),
+                                                                ),
+                                                                hintText:
+                                                                    "Whatsapp No"),
                                                         keyboardType:
                                                             TextInputType.phone,
                                                         style: TextStyle(
@@ -6315,7 +6390,8 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                 .center,
                                                         children: <Widget>[
                                                           Image.asset(
-                                                              "assets/facebook24.png"),
+                                                              "assets/facebook.png",
+                                                              height: 25),
                                                           Container(
                                                             width: MediaQuery.of(
                                                                         context)
@@ -6382,11 +6458,22 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                       child: TextFormField(
                                                         controller:
                                                             txtFaceboook,
-                                                        decoration: InputDecoration(
-                                                            prefixIcon: Image.asset(
-                                                                "assets/facebook24.png"),
-                                                            hintText:
-                                                                "Facebook Page"),
+                                                        decoration:
+                                                            InputDecoration(
+                                                                prefixIcon:
+                                                                    Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          13.0),
+                                                                  child: Image
+                                                                      .asset(
+                                                                    "assets/facebook.png",
+                                                                    height: 3,
+                                                                  ),
+                                                                ),
+                                                                hintText:
+                                                                    "Facebook Page"),
                                                         keyboardType:
                                                             TextInputType.url,
                                                         style: TextStyle(
@@ -6489,7 +6576,9 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                 .center,
                                                         children: <Widget>[
                                                           Image.asset(
-                                                              "assets/twitter24.png"),
+                                                            "assets/twitter.png",
+                                                            height: 25,
+                                                          ),
                                                           Container(
                                                             width: MediaQuery.of(
                                                                         context)
@@ -6555,11 +6644,22 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                           5))),
                                                       child: TextFormField(
                                                         controller: txtTwitter,
-                                                        decoration: InputDecoration(
-                                                            prefixIcon: Image.asset(
-                                                                "assets/twitter24.png"),
-                                                            hintText:
-                                                                "Twitter Page"),
+                                                        decoration:
+                                                            InputDecoration(
+                                                                prefixIcon:
+                                                                    Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          10.0),
+                                                                  child: Image
+                                                                      .asset(
+                                                                    "assets/twitter.png",
+                                                                    height: 5,
+                                                                  ),
+                                                                ),
+                                                                hintText:
+                                                                    "Twitter Page"),
                                                         keyboardType:
                                                             TextInputType.url,
                                                         style: TextStyle(
@@ -6796,7 +6896,9 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                 .center,
                                                         children: <Widget>[
                                                           Image.asset(
-                                                              "assets/linkedin24.png"),
+                                                            "assets/linkedin.png",
+                                                            height: 25,
+                                                          ),
                                                           Container(
                                                             width: MediaQuery.of(
                                                                         context)
@@ -6862,11 +6964,22 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                           5))),
                                                       child: TextFormField(
                                                         controller: txtLinkedin,
-                                                        decoration: InputDecoration(
-                                                            prefixIcon: Image.asset(
-                                                                "assets/linkedin24.png"),
-                                                            hintText:
-                                                                "Linkedin Page"),
+                                                        decoration:
+                                                            InputDecoration(
+                                                                prefixIcon:
+                                                                    Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          10.0),
+                                                                  child: Image
+                                                                      .asset(
+                                                                    "assets/linkedin.png",
+                                                                    height: 5,
+                                                                  ),
+                                                                ),
+                                                                hintText:
+                                                                    "Linkedin Page"),
                                                         keyboardType:
                                                             TextInputType.url,
                                                         style: TextStyle(
@@ -6969,7 +7082,9 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                 .center,
                                                         children: <Widget>[
                                                           Image.asset(
-                                                              "assets/youtube24.png"),
+                                                            "assets/youtu.png",
+                                                            height: 25,
+                                                          ),
                                                           Container(
                                                             width: MediaQuery.of(
                                                                         context)
@@ -7035,11 +7150,22 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                           5))),
                                                       child: TextFormField(
                                                         controller: txtYoutube,
-                                                        decoration: InputDecoration(
-                                                            prefixIcon: Image.asset(
-                                                                "assets/youtube24.png"),
-                                                            hintText:
-                                                                "Youtube Page"),
+                                                        decoration:
+                                                            InputDecoration(
+                                                                prefixIcon:
+                                                                    Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          10.0),
+                                                                  child: Image
+                                                                      .asset(
+                                                                    "assets/youtu.png",
+                                                                    height: 5,
+                                                                  ),
+                                                                ),
+                                                                hintText:
+                                                                    "Youtube Page"),
                                                         keyboardType:
                                                             TextInputType.url,
                                                         style: TextStyle(
@@ -7145,7 +7271,9 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                 .center,
                                                         children: <Widget>[
                                                           Image.asset(
-                                                              "assets/instagram24.png"),
+                                                            "assets/instagram.png",
+                                                            height: 25,
+                                                          ),
                                                           Container(
                                                             width: MediaQuery.of(
                                                                         context)
@@ -7212,11 +7340,22 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                           5))),
                                                       child: TextFormField(
                                                         controller: txtIntagram,
-                                                        decoration: InputDecoration(
-                                                            prefixIcon: Image.asset(
-                                                                "assets/instagram24.png"),
-                                                            hintText:
-                                                                "Instagram Page"),
+                                                        decoration:
+                                                            InputDecoration(
+                                                                prefixIcon:
+                                                                    Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          10.0),
+                                                                  child: Image
+                                                                      .asset(
+                                                                    "assets/instagram.png",
+                                                                    height: 5,
+                                                                  ),
+                                                                ),
+                                                                hintText:
+                                                                    "Instagram Page"),
                                                         keyboardType:
                                                             TextInputType.url,
                                                         style: TextStyle(
