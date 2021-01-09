@@ -145,6 +145,37 @@ class Services {
     }
   }
 
+  static Future<SaveDataClass> postForSave2({apiname, body}) async {
+    print(body.toString());
+    String url = API_URL2 + '$apiname';
+    print("$apiname url : " + url);
+    var response;
+    try {
+      if (body == null) {
+        response = await dio.post(url);
+      } else {
+        response = await dio.post(url, data: body);
+      }
+      if (response.statusCode == 200) {
+        SaveDataClass savedata =
+            new SaveDataClass(Message: 'No Data', IsSuccess: false, Data: null);
+        print("$apiname Response: " + response.data.toString());
+        var responseData = response.data;
+        savedata.Message = responseData["Message"];
+        savedata.IsSuccess = responseData["IsSuccess"];
+        savedata.Data = responseData["Data"].toString();
+
+        return savedata;
+      } else {
+        print("error ->" + response.data.toString());
+        throw Exception(response.data.toString());
+      }
+    } catch (e) {
+      print("error -> ${e.toString()}");
+      throw Exception(e.toString());
+    }
+  }
+
   static Future<List<OfferClass>> getState() async {
     String url = API_URL + 'admin/businessCategory';
     try {

@@ -2,8 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
+import 'package:the_national_dawn/Common/Services.dart';
 import 'package:the_national_dawn/Components/DirectoryProfileComponent.dart';
+import 'package:the_national_dawn/Components/LoadingBlueComponent.dart';
+import 'package:the_national_dawn/Components/LoadingComponent.dart';
 import 'package:the_national_dawn/Screens/RequestScreen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -44,6 +50,30 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
     }
   }
 
+  _showDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertSend(
+          directoryData: widget.directoryData,
+        );
+      },
+    );
+  }
+
+  _showDialogComplete(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertComplete(
+          directoryData: widget.directoryData,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -57,7 +87,7 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
         padding:
             const EdgeInsets.only(top: 12, bottom: 22, left: 12, right: 12),
         child: Container(
-          height: 140,
+          height: 190,
           decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(color: Colors.grey[100], width: 1),
@@ -120,6 +150,159 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
                                     fontWeight: FontWeight.w400),
                               ),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Text(
+                          "1-2-1 Request : ",
+                          //widget.directoryData["business_category"],
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              color: Colors.black,
+                              //fontStyle: FontStyle.italic,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                _showDialog(context);
+                              },
+                              child: Container(
+                                height: 25,
+                                // width: 140,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(
+                                      color: appPrimaryMaterialColor[100],
+                                      width: 1),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                ),
+                                child: Row(
+                                  // mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset('assets/videocall.png'),
+                                    FittedBox(
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 3.0),
+                                        child: Text(
+                                          "Send  ",
+                                          style: TextStyle(fontSize: 12),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              height: 25,
+                              // width: 140,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(
+                                    color: appPrimaryMaterialColor[100],
+                                    width: 1),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
+                              ),
+                              child: Row(
+                                // mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset('assets/videocall.png'),
+                                  FittedBox(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 3.0),
+                                      child: Text(
+                                        "Requested  ",
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              height: 25,
+                              // width: 140,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(
+                                    color: appPrimaryMaterialColor[100],
+                                    width: 1),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
+                              ),
+                              child: Row(
+                                // mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset('assets/videocall.png'),
+                                  FittedBox(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 3.0),
+                                      child: Text(
+                                        "Accepted  ",
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  _showDialogComplete(context);
+                                },
+                                child: Container(
+                                  height: 25,
+                                  // width: 140,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border.all(
+                                        color: appPrimaryMaterialColor[100],
+                                        width: 1),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                  ),
+                                  child: Row(
+                                    // mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset('assets/videocall.png'),
+                                      FittedBox(
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 3.0),
+                                          child: Text(
+                                            "Completed ",
+                                            style: TextStyle(fontSize: 12),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       /* FittedBox(
                         child: Padding(
                           padding: const EdgeInsets.only(top: 15.0),
@@ -129,7 +312,8 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
                             decoration: BoxDecoration(
                               color: Colors.white,
                               border: Border.all(
-                                  color: appPrimaryMaterialColor[100], width: 1),
+                                  color: appPrimaryMaterialColor[100],
+                                  width: 1),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10.0)),
                             ),
@@ -141,7 +325,7 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 3.0),
                                     child: Text(
-                                      "Send 1-2-1 request",
+                                      "Send 1-2-1 request ",
                                       style: TextStyle(fontSize: 12),
                                     ),
                                   ),
@@ -151,6 +335,7 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
                           ),
                         ),
                       ),*/
+
                       /* GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -347,5 +532,465 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
     } else {
       throw 'Could not launch $url';
     }
+  }
+}
+
+class AlertSend extends StatefulWidget {
+  var directoryData;
+
+  AlertSend({this.directoryData});
+
+  @override
+  _AlertSendState createState() => _AlertSendState();
+}
+
+class _AlertSendState extends State<AlertSend> {
+  String requestType = "physical";
+  TextEditingController txtOnlineLink = TextEditingController();
+  bool isSendLoading = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: new Text(
+        "Send 1-2-1 Request",
+        style: TextStyle(
+          fontSize: 22,
+          color: appPrimaryMaterialColor,
+          // fontWeight: FontWeight.bold
+        ),
+      ),
+      content: new Wrap(
+        children: [
+          ListTile(
+            title: Column(
+              children: <Widget>[
+                Container(
+                  height: 40,
+                  child: RadioListTile(
+                    activeColor: appPrimaryMaterialColor,
+                    groupValue: requestType,
+                    title: Text("Physical-Meeting",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600)),
+                    value: 'physical',
+                    onChanged: (val) {
+                      setState(() {
+                        requestType = val;
+                      });
+                    },
+                  ),
+                ),
+                Container(
+                  height: 40,
+                  child: RadioListTile(
+                    activeColor: appPrimaryMaterialColor,
+                    groupValue: requestType,
+                    title: Text("Online-Meeting",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600)),
+                    value: 'online',
+                    onChanged: (val) {
+                      setState(() {
+                        requestType = val;
+                      });
+                    },
+                  ),
+                ),
+                requestType == "physical"
+                    ? Container()
+                    : Padding(
+                        padding: const EdgeInsets.only(top: 20.0),
+                        child: Container(
+                          height: 42,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              //border: Border.all(color: Colors.grey[500], width: 1),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: appPrimaryMaterialColor
+                                        .withOpacity(0.2),
+                                    blurRadius: 2.0,
+                                    spreadRadius: 2.0,
+                                    offset: Offset(3.0, 5.0))
+                              ]),
+                          child: TextFormField(
+                            //controller: txtName,
+                            controller: txtOnlineLink,
+                            // validator: (exp) {
+                            //   if (exp.length == 0) {
+                            //     return 'Please enter your experience';
+                            //   }
+                            //   return null;
+                            // },
+                            keyboardType: TextInputType.text,
+
+                            style: TextStyle(fontSize: 15),
+                            cursorColor: appPrimaryMaterialColor,
+                            decoration: InputDecoration(
+                              errorStyle: TextStyle(height: 0),
+                              counterText: "",
+                              contentPadding: const EdgeInsets.all(15),
+                              fillColor: Colors.white,
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.0)),
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.0)),
+                                borderSide: BorderSide(color: Colors.red),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.0)),
+                                borderSide: BorderSide(color: Colors.red),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.0)),
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      actions: <Widget>[
+        // usually buttons at the bottom of the dialog
+        FlatButton(
+          child: new Text(
+            "Cancel",
+            style: TextStyle(color: appPrimaryMaterialColor, fontSize: 18),
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        new FlatButton(
+          child: isSendLoading == true
+              ? LoadingBlueComponent()
+              : Text(
+                  "Ok",
+                  style:
+                      TextStyle(color: appPrimaryMaterialColor, fontSize: 18),
+                ),
+          onPressed: () async {
+            _sendRequest();
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            Navigator.pop(context);
+            // await prefs.clear();
+            // Navigator.pushNamedAndRemoveUntil(
+            //     context, '/LoginScreen', (route) => false);
+          },
+        ),
+      ],
+    );
+  }
+
+  _sendRequest() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        setState(() {
+          isSendLoading = true;
+        });
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        var map = {
+          'notificationBody': "Hi " +
+              "${widget.directoryData["name"]}" +
+              ", " +
+              "${prefs.getString(Session.CustomerName)} wants 1-2-1 meeting with you.",
+          'notificationTitle': "TND Request",
+        };
+        var body = {
+          "requestSender": "${prefs.getString(Session.CustomerId)}",
+          "requestReceiver": "${widget.directoryData["_id"]}",
+          "requestStatus": "requested",
+          "notificationData": {
+            'notificationBody': "Hi " +
+                "${widget.directoryData["name"]}" +
+                ", " +
+                "${prefs.getString(Session.CustomerName)} wants 1-2-1 meeting with you.",
+            'notificationTitle': "TND Request",
+          },
+          "meetingType": requestType,
+          "meetingLink": txtOnlineLink.text
+        };
+        Services.postForSave2(
+                apiname: 'users/oneTwoOneConnectionReq', body: body)
+            .then((response) async {
+          if (response.IsSuccess == true && response.Data == "1") {
+            setState(() {
+              isSendLoading = false;
+            });
+            Fluttertoast.showToast(msg: response.Message);
+          }
+        }, onError: (e) {
+          setState(() {
+            isSendLoading = false;
+          });
+          print("error on call -> ${e.message}");
+          Fluttertoast.showToast(msg: "something went wrong");
+        });
+      }
+    } on SocketException catch (_) {
+      Fluttertoast.showToast(msg: "No Internet Connection");
+    }
+  }
+}
+
+class AlertComplete extends StatefulWidget {
+  var directoryData;
+  AlertComplete({this.directoryData});
+
+  @override
+  _AlertCompleteState createState() => _AlertCompleteState();
+}
+
+class _AlertCompleteState extends State<AlertComplete> {
+  String reference = "yes";
+  TextEditingController txtTopic = TextEditingController();
+
+  DateTimePickerLocale _locale = DateTimePickerLocale.en_us;
+  String _format = 'yyyy-MMMM-dd';
+  DateTime _date = DateTime.now();
+
+  void _showDate() {
+    DatePicker.showDatePicker(
+      context,
+      dateFormat: _format,
+      initialDateTime: _date,
+      locale: _locale,
+      onCancel: () => print('onCancel'),
+      onChange: (dateTime, List<int> index) {
+        setState(() {
+          _date = dateTime;
+        });
+      },
+      onConfirm: (dateTime, List<int> index) {
+        setState(() {
+          _date = dateTime;
+        });
+        print(_date);
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: new Text(
+        "Complete 1-2-1 Request",
+        style: TextStyle(
+          fontSize: 22,
+          color: appPrimaryMaterialColor,
+          // fontWeight: FontWeight.bold
+        ),
+      ),
+      content: SingleChildScrollView(
+        child: new Wrap(
+          children: [
+            ListTile(
+              title: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Text("Date : ",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.grey[700],
+                                  fontWeight: FontWeight.w600)),
+                        ),
+                      ],
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      _showDate();
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 40,
+                          decoration: BoxDecoration(
+                              border:
+                                  Border.all(width: 1, color: Colors.black54),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(4.0))),
+                          child: _date == null
+                              ? Center(
+                                  child: Text(
+                                  'Select Date of Birth',
+                                  style: TextStyle(fontSize: 17),
+                                ))
+                              : Center(
+                                  child: Text(
+                                  '${_date.day}/${_date.month}/${_date.year}',
+                                  style: TextStyle(fontSize: 17),
+                                ))),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Text("Topic : ",
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.grey[700],
+                            fontWeight: FontWeight.w600)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5.0),
+                    child: Container(
+                      height: 42,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          //border: Border.all(color: Colors.grey[500], width: 1),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          boxShadow: [
+                            BoxShadow(
+                                color: appPrimaryMaterialColor.withOpacity(0.2),
+                                blurRadius: 2.0,
+                                spreadRadius: 2.0,
+                                offset: Offset(3.0, 5.0))
+                          ]),
+                      child: TextFormField(
+                        //controller: txtName,
+                        controller: txtTopic,
+                        // validator: (exp) {
+                        //   if (exp.length == 0) {
+                        //     return 'Please enter your experience';
+                        //   }
+                        //   return null;
+                        // },
+                        keyboardType: TextInputType.text,
+
+                        style: TextStyle(fontSize: 15),
+                        cursorColor: appPrimaryMaterialColor,
+                        decoration: InputDecoration(
+                          errorStyle: TextStyle(height: 0),
+                          counterText: "",
+                          contentPadding: const EdgeInsets.all(15),
+                          fillColor: Colors.white,
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, top: 15),
+                    child: Text("Generate Reference : ",
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.grey[700],
+                            fontWeight: FontWeight.w600)),
+                  ),
+                  Container(
+                    height: 40,
+                    child: RadioListTile(
+                      activeColor: appPrimaryMaterialColor,
+                      groupValue: reference,
+                      title: Text("Yes",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600)),
+                      value: 'yes',
+                      onChanged: (val) {
+                        setState(() {
+                          reference = val;
+                        });
+                      },
+                    ),
+                  ),
+                  Container(
+                    height: 40,
+                    child: RadioListTile(
+                      activeColor: appPrimaryMaterialColor,
+                      groupValue: reference,
+                      title: Text("No",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600)),
+                      value: 'no',
+                      onChanged: (val) {
+                        setState(() {
+                          reference = val;
+                        });
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+      actions: <Widget>[
+        // usually buttons at the bottom of the dialog
+        FlatButton(
+          child: new Text(
+            "Cancel",
+            style: TextStyle(color: appPrimaryMaterialColor, fontSize: 18),
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        new FlatButton(
+          child: new Text(
+            "Ok",
+            style: TextStyle(color: appPrimaryMaterialColor, fontSize: 18),
+          ),
+          onPressed: () async {
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            // await prefs.clear();
+            // Navigator.pushNamedAndRemoveUntil(
+            //     context, '/LoginScreen', (route) => false);
+          },
+        ),
+      ],
+    );
   }
 }

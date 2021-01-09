@@ -69,6 +69,33 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // _firebaseToken();
+    _firebaseMessaging.configure(onMessage: (Map<String, dynamic> message) {
+      print("onMessage");
+      print(message);
+    }, onResume: (Map<String, dynamic> message) {
+      print("onResume");
+      print(message);
+    }, onLaunch: (Map<String, dynamic> message) {
+      print("onLaunch");
+      print(message);
+    });
+
+    //For Ios Notification
+    // _firebaseMessaging.requestNotificationPermissions(
+    //     const IosNotificationSettings(sound: true, badge: true, alert: true));
+    //
+    //   _firebaseMessaging.onIosSettingsRegistered
+    //       .listen((IosNotificationSettings settings) {
+    //     print("Setting reqistered : $settings");
+    //   });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
