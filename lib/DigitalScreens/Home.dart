@@ -39,6 +39,8 @@ class _HomeState extends State<Home> {
   String ExpDate = "";
   String MemberType = "";
   String ShareMsg = "";
+  String txtName;
+  String txtCompany;
 
   Map<String, dynamic> profileList = {};
   List<DigitalClass> digitalList = [];
@@ -202,7 +204,7 @@ class _HomeState extends State<Home> {
         MemberId = data[0].Id;
         Name = data[0].Name;
         Company = data[0].Company;
-        Photo = data[0].Image != null ? data[0].Image : "";
+        Photo = data[0].Image != null ? data[0].Image : profileList["img"];
         CoverPhoto = data[0].CoverImage != null ? data[0].CoverImage : "";
         ReferCode = data[0].MyReferralCode;
         ExpDate = data[0].ExpDate;
@@ -340,8 +342,8 @@ class _HomeState extends State<Home> {
                                 child: ClipOval(
                                   child: FadeInImage.assetNetwork(
                                       placeholder: "images/users.png",
-                                      //image: Photo,
-                                      image: profileList["img"],
+                                      image: Photo,
+                                      //image: profileList["img"],
                                       height: 100,
                                       width: 100,
                                       fit: BoxFit.cover),
@@ -353,7 +355,10 @@ class _HomeState extends State<Home> {
                                 children: <Widget>[
                                   Padding(
                                       padding: EdgeInsets.only(top: 10),
-                                      child: Text("${profileList["name"]}",
+                                      child: Text(
+                                          Name == ""
+                                              ? "${profileList["name"]}"
+                                              : Name,
                                           style: TextStyle(
                                               fontSize: 20,
                                               color: Colors.grey[800],
@@ -362,7 +367,7 @@ class _HomeState extends State<Home> {
                                       padding:
                                           EdgeInsets.only(top: 5, bottom: 0),
                                       child: Text(
-                                          "${profileList["company_name"]}",
+                                          "${Company == "" ? profileList["company_name"] : Company}",
                                           style: TextStyle(
                                               fontSize: 15,
                                               color: Colors.grey[600],
