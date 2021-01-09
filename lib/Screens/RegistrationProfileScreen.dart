@@ -1298,6 +1298,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                                         size: 40,
                                         color: Colors.black,
                                       ),
+
                                       isExpanded: true,
                                       value: selectedOfferCat2,
                                       onChanged: (value) {
@@ -1354,6 +1355,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
 //                      ),
                           )),
                     ),
+
                     Padding(
                       padding:
                           const EdgeInsets.only(top: 20.0, left: 5, bottom: 5),

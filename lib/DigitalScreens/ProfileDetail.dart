@@ -228,7 +228,7 @@ class _ProfileDetailState extends State<ProfileDetail>
     });
   }
 
-  SetDataToController1() {
+  SetDataToController1() async {
     //Profile Data
     txtName.text = memberdata.Name;
     txtMobile.text = memberdata.Mobile;
@@ -260,6 +260,8 @@ class _ProfileDetailState extends State<ProfileDetail>
     setState(() {
       MemberId = memberdata.Id;
     });
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(Session.CustomerName, memberdata.Name);
   }
 
   _getDigitalProfileMember() async {
@@ -1423,7 +1425,9 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                 .center,
                                                         children: <Widget>[
                                                           Image.asset(
-                                                              "assets/whatsapp24.png"),
+                                                            "assets/whatsapp2.png",
+                                                            height: 25,
+                                                          ),
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
@@ -1482,11 +1486,22 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                           5))),
                                                       child: TextFormField(
                                                         controller: txtWhatsApp,
-                                                        decoration: InputDecoration(
-                                                            prefixIcon: Image.asset(
-                                                                "assets/whatsapp24.png"),
-                                                            hintText:
-                                                                "Whatsapp No"),
+                                                        decoration:
+                                                            InputDecoration(
+                                                                prefixIcon:
+                                                                    Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          10.0),
+                                                                  child: Image
+                                                                      .asset(
+                                                                    "assets/whatsapp2.png",
+                                                                    height: 5,
+                                                                  ),
+                                                                ),
+                                                                hintText:
+                                                                    "Whatsapp No"),
                                                         keyboardType:
                                                             TextInputType.phone,
                                                         style: TextStyle(
@@ -1756,7 +1771,8 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                 .center,
                                                         children: <Widget>[
                                                           Image.asset(
-                                                              "assets/facebook24.png"),
+                                                              "assets/facebook.png",
+                                                              height: 20),
                                                           Container(
                                                             width: MediaQuery.of(
                                                                         context)
@@ -1823,11 +1839,22 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                       child: TextFormField(
                                                         controller:
                                                             txtFaceboook,
-                                                        decoration: InputDecoration(
-                                                            prefixIcon: Image.asset(
-                                                                "assets/facebook24.png"),
-                                                            hintText:
-                                                                "Facebook Page"),
+                                                        decoration:
+                                                            InputDecoration(
+                                                                prefixIcon:
+                                                                    Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          12.0),
+                                                                  child: Image
+                                                                      .asset(
+                                                                    "assets/facebook.png",
+                                                                    height: 5,
+                                                                  ),
+                                                                ),
+                                                                hintText:
+                                                                    "Facebook Page"),
                                                         keyboardType:
                                                             TextInputType.url,
                                                         style: TextStyle(
