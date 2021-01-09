@@ -192,7 +192,6 @@ class _ProfileScreenState extends State<ProfileScreen>
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       Text(
-                        // "Mr. Natasha Goel",
                         "${_name}",
                         style: TextStyle(
                             color: Colors.black,
@@ -204,9 +203,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                               color: Colors.grey[700],
                               fontSize: 18,
                               fontWeight: FontWeight.w500)),
-                      Text(
-//                                          "Future Group Info Soft",
-                          "${_comp_name}",
+                      Text("${_comp_name}",
                           style: TextStyle(
                               color: Colors.grey[700],
                               fontSize: 16,

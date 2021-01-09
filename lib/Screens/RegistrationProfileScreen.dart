@@ -468,60 +468,67 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                             fontWeight: FontWeight.w600),
                       ),
                     ),
-                    Container(
-                      height: 42,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          //border: Border.all(color: Colors.grey[500], width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                          boxShadow: [
-                            BoxShadow(
-                                color: appPrimaryMaterialColor.withOpacity(0.2),
-                                blurRadius: 2.0,
-                                spreadRadius: 2.0,
-                                offset: Offset(3.0, 5.0))
-                          ]),
-                      child: TextFormField(
-                        controller: txtName,
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(fontSize: 15),
-                        cursorColor: appPrimaryMaterialColor,
-                        validator: (name) {
-                          if (name.length == 0) {
-                            return 'Please enter name';
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          // contentPadding: EdgeInsets.symmetric(
-                          //     vertical: 0.0, horizontal: 0.0),
+                    Stack(
+                      children: [
+                        Container(
+                          height: 47,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              //border: Border.all(color: Colors.grey[500], width: 1),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: appPrimaryMaterialColor
+                                        .withOpacity(0.2),
+                                    blurRadius: 2.0,
+                                    spreadRadius: 2.0,
+                                    offset: Offset(3.0, 5.0))
+                              ]),
+                          child: TextFormField(
+                            controller: txtName,
+                            keyboardType: TextInputType.text,
+                            style: TextStyle(fontSize: 15),
+                            cursorColor: appPrimaryMaterialColor,
+                            validator: (name) {
+                              if (name.length == 0) {
+                                return 'Please enter name';
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              // contentPadding: EdgeInsets.symmetric(
+                              //     vertical: 0.0, horizontal: 0.0),
 
-                          errorStyle: TextStyle(height: 0),
-                          contentPadding: const EdgeInsets.all(15),
-                          fillColor: Colors.white,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.grey),
+                              //  errorStyle: TextStyle(height: 0),
+                              contentPadding: const EdgeInsets.only(
+                                  left: 5, right: 5, top: 15, bottom: 15),
+                              fillColor: Colors.white,
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.0)),
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.0)),
+                                borderSide: BorderSide(color: Colors.red),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.0)),
+                                borderSide: BorderSide(color: Colors.red),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.0)),
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 15.0),
@@ -617,57 +624,64 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                             fontWeight: FontWeight.w600),
                       ),
                     ),
-                    Container(
-                      height: 42,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          //border: Border.all(color: Colors.grey[500], width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                          boxShadow: [
-                            BoxShadow(
-                                color: appPrimaryMaterialColor.withOpacity(0.2),
-                                blurRadius: 2.0,
-                                spreadRadius: 2.0,
-                                offset: Offset(3.0, 5.0))
-                          ]),
-                      child: TextFormField(
-                        controller: txtAddress,
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(fontSize: 15),
-                        cursorColor: appPrimaryMaterialColor,
-                        validator: (address) {
-                          if (address.length == 0) {
-                            return 'Please enter address';
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          errorStyle: TextStyle(height: 0),
-                          contentPadding: const EdgeInsets.all(15),
-                          fillColor: Colors.white,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.grey),
+                    Stack(
+                      children: [
+                        Container(
+                          height: 47,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              //border: Border.all(color: Colors.grey[500], width: 1),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: appPrimaryMaterialColor
+                                        .withOpacity(0.2),
+                                    blurRadius: 2.0,
+                                    spreadRadius: 2.0,
+                                    offset: Offset(3.0, 5.0))
+                              ]),
+                        ),
+                        TextFormField(
+                          controller: txtAddress,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(fontSize: 15),
+                          cursorColor: appPrimaryMaterialColor,
+                          validator: (address) {
+                            if (address.length == 0) {
+                              return 'Please enter address';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            //errorStyle: TextStyle(height: 0),
+                            contentPadding: const EdgeInsets.only(
+                                left: 5, right: 5, top: 15, bottom: 15),
+                            fillColor: Colors.white,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
                     Padding(
                       padding:
@@ -680,57 +694,64 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                             fontWeight: FontWeight.w600),
                       ),
                     ),
-                    Container(
-                      height: 42,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          //border: Border.all(color: Colors.grey[500], width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                          boxShadow: [
-                            BoxShadow(
-                                color: appPrimaryMaterialColor.withOpacity(0.2),
-                                blurRadius: 2.0,
-                                spreadRadius: 2.0,
-                                offset: Offset(3.0, 5.0))
-                          ]),
-                      child: TextFormField(
-                        controller: txtSpouseName,
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(fontSize: 15),
-                        cursorColor: appPrimaryMaterialColor,
-                        // validator: (sname) {
-                        //   if (sname.length == 0) {
-                        //     return 'Please enter spouse name';
-                        //   }
-                        //   return null;
-                        // },
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(15),
-                          errorStyle: TextStyle(height: 0),
-                          fillColor: Colors.white,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.grey),
+                    Stack(
+                      children: [
+                        Container(
+                          height: 47,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              //border: Border.all(color: Colors.grey[500], width: 1),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: appPrimaryMaterialColor
+                                        .withOpacity(0.2),
+                                    blurRadius: 2.0,
+                                    spreadRadius: 2.0,
+                                    offset: Offset(3.0, 5.0))
+                              ]),
+                        ),
+                        TextFormField(
+                          controller: txtSpouseName,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(fontSize: 15),
+                          cursorColor: appPrimaryMaterialColor,
+                          // validator: (sname) {
+                          //   if (sname.length == 0) {
+                          //     return 'Please enter spouse name';
+                          //   }
+                          //   return null;
+                          // },
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.only(
+                                left: 5, right: 5, top: 15, bottom: 15),
+                            errorStyle: TextStyle(height: 0),
+                            fillColor: Colors.white,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
 
 /*                    Padding(
@@ -807,58 +828,65 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                             fontWeight: FontWeight.w600),
                       ),
                     ),
-                    Container(
-                      height: 42,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          //border: Border.all(color: Colors.grey[500], width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                          boxShadow: [
-                            BoxShadow(
-                                color: appPrimaryMaterialColor.withOpacity(0.2),
-                                blurRadius: 2.0,
-                                spreadRadius: 2.0,
-                                offset: Offset(3.0, 5.0))
-                          ]),
-                      child: TextFormField(
-                        //controller: txtName,
-                        controller: txtachievement,
-                        keyboardType: TextInputType.text,
-                        // validator: (ach) {
-                        //   if (ach.length == 0) {
-                        //     return 'Please enter your achievement';
-                        //   }
-                        //   return null;
-                        // },
-                        style: TextStyle(fontSize: 15),
-                        cursorColor: appPrimaryMaterialColor,
-                        decoration: InputDecoration(
-                          errorStyle: TextStyle(height: 0),
-                          contentPadding: const EdgeInsets.all(15),
-                          fillColor: Colors.white,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.grey),
+                    Stack(
+                      children: [
+                        Container(
+                          height: 47,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              //border: Border.all(color: Colors.grey[500], width: 1),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: appPrimaryMaterialColor
+                                        .withOpacity(0.2),
+                                    blurRadius: 2.0,
+                                    spreadRadius: 2.0,
+                                    offset: Offset(3.0, 5.0))
+                              ]),
+                          child: TextFormField(
+                            //controller: txtName,
+                            controller: txtachievement,
+                            keyboardType: TextInputType.text,
+                            // validator: (ach) {
+                            //   if (ach.length == 0) {
+                            //     return 'Please enter your achievement';
+                            //   }
+                            //   return null;
+                            // },
+                            style: TextStyle(fontSize: 15),
+                            cursorColor: appPrimaryMaterialColor,
+                            decoration: InputDecoration(
+                              //errorStyle: TextStyle(height: 0),
+                              contentPadding: const EdgeInsets.only(
+                                  left: 5, right: 5, top: 15, bottom: 15),
+                              fillColor: Colors.white,
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.0)),
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.0)),
+                                borderSide: BorderSide(color: Colors.red),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.0)),
+                                borderSide: BorderSide(color: Colors.red),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.0)),
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
                     Padding(
                       padding:
@@ -871,315 +899,41 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                             fontWeight: FontWeight.w600),
                       ),
                     ),
-                    Container(
-                      height: 42,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          //border: Border.all(color: Colors.grey[500], width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                          boxShadow: [
-                            BoxShadow(
-                                color: appPrimaryMaterialColor.withOpacity(0.2),
-                                blurRadius: 2.0,
-                                spreadRadius: 2.0,
-                                offset: Offset(3.0, 5.0))
-                          ]),
-                      child: TextFormField(
-                        //controller: txtName,
-                        controller: txtChildrenCount,
-                        keyboardType: TextInputType.number,
-                        style: TextStyle(fontSize: 15),
-                        cursorColor: appPrimaryMaterialColor,
-                        // validator: (child) {
-                        //   if (child.length == 0) {
-                        //     return 'Please enter your No. of child';
-                        //   }
-                        //   return null;
-                        // },
-                        decoration: InputDecoration(
-                          errorStyle: TextStyle(height: 0),
-                          contentPadding: const EdgeInsets.all(15),
-                          fillColor: Colors.white,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
+                    Stack(
+                      children: [
+                        Container(
+                          height: 47,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              //border: Border.all(color: Colors.grey[500], width: 1),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: appPrimaryMaterialColor
+                                        .withOpacity(0.2),
+                                    blurRadius: 2.0,
+                                    spreadRadius: 2.0,
+                                    offset: Offset(3.0, 5.0))
+                              ]),
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(top: 20.0, left: 5, bottom: 5),
-                      child: Text(
-                        'Company Name',
-                        style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.grey[700],
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                    Container(
-                      height: 42,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          //border: Border.all(color: Colors.grey[500], width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                          boxShadow: [
-                            BoxShadow(
-                                color: appPrimaryMaterialColor.withOpacity(0.2),
-                                blurRadius: 2.0,
-                                spreadRadius: 2.0,
-                                offset: Offset(3.0, 5.0))
-                          ]),
-                      child: TextFormField(
-                        //controller: txtName,
-                        controller: txtCName,
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(fontSize: 15),
-                        cursorColor: appPrimaryMaterialColor,
-                        validator: (cname) {
-                          if (cname.length == 0) {
-                            return 'Please enter company name';
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          errorStyle: TextStyle(height: 0),
-                          contentPadding: const EdgeInsets.all(15),
-                          fillColor: Colors.white,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(top: 20.0, left: 5, bottom: 5),
-                      child: Text(
-                        'Mobile Number',
-                        style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.grey[700],
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                    Container(
-                      height: 42,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          //border: Border.all(color: Colors.grey[500], width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                          boxShadow: [
-                            BoxShadow(
-                                color: appPrimaryMaterialColor.withOpacity(0.2),
-                                blurRadius: 2.0,
-                                spreadRadius: 2.0,
-                                offset: Offset(3.0, 5.0))
-                          ]),
-                      child: TextFormField(
-                        //controller: txtName,
-                        controller: txtMobileNumber,
-                        keyboardType: TextInputType.phone,
-                        style: TextStyle(fontSize: 15),
-                        cursorColor: appPrimaryMaterialColor,
-                        maxLength: 10,
-                        validator: (phone) {
-                          Pattern pattern = r'(^(?:[+0]9)?[0-9]{10,}$)';
-                          RegExp regExp = new RegExp(pattern);
-                          if (phone.length == 0) {
-                            return 'Please enter mobile number';
-                          } else if (!regExp.hasMatch(phone)) {
-                            return 'Please enter valid mobile number';
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          counterText: "",
-                          errorStyle: TextStyle(height: 0),
-                          contentPadding: const EdgeInsets.all(15),
-                          fillColor: Colors.white,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(top: 20.0, left: 5, bottom: 5),
-                      child: Text(
-                        'Whatsapp Number',
-                        style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.grey[700],
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                    Container(
-                      height: 42,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          //border: Border.all(color: Colors.grey[500], width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                          boxShadow: [
-                            BoxShadow(
-                                color: appPrimaryMaterialColor.withOpacity(0.2),
-                                blurRadius: 2.0,
-                                spreadRadius: 2.0,
-                                offset: Offset(3.0, 5.0))
-                          ]),
-                      child: TextFormField(
-                        //controller: txtName,
-                        controller: txtWNumber,
-                        keyboardType: TextInputType.phone,
-                        style: TextStyle(fontSize: 15),
-                        cursorColor: appPrimaryMaterialColor,
-                        maxLength: 10,
-                        // validator: (wphone) {
-                        //   Pattern pattern = r'(^(?:[+0]9)?[0-9]{10,}$)';
-                        //   RegExp regExp = new RegExp(pattern);
-                        //   if (wphone.length == 0) {
-                        //     return 'Please enter mobile number';
-                        //   } else if (!regExp.hasMatch(wphone)) {
-                        //     return 'Please enter valid mobile number';
-                        //   }
-                        //   return null;
-                        // },
-                        decoration: InputDecoration(
-                          counterText: "",
-                          errorStyle: TextStyle(height: 0),
-                          contentPadding: const EdgeInsets.all(15),
-                          fillColor: Colors.white,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(top: 20.0, left: 5, bottom: 5),
-                      child: Text(
-                        'Email',
-                        style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.grey[700],
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 15.0),
-                      child: Container(
-                        height: 42,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            //border: Border.all(color: Colors.grey[500], width: 1),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            boxShadow: [
-                              BoxShadow(
-                                  color:
-                                      appPrimaryMaterialColor.withOpacity(0.2),
-                                  blurRadius: 2.0,
-                                  spreadRadius: 2.0,
-                                  offset: Offset(3.0, 5.0))
-                            ]),
-                        child: TextFormField(
-//                      controller: txtEmail,
-                          controller: txtEmail,
-                          keyboardType: TextInputType.emailAddress,
+                        TextFormField(
+                          //controller: txtName,
+                          controller: txtChildrenCount,
+                          keyboardType: TextInputType.number,
                           style: TextStyle(fontSize: 15),
-                          cursorColor: Colors.black,
-                          validator: (email) {
-                            Pattern pattern =
-                                r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                            RegExp regex = new RegExp(pattern);
-                            print(email);
-                            if (email.isEmpty) {
-                              return 'Please enter email';
-                            } else {
-                              if (!regex.hasMatch(email))
-                                return 'Enter valid Email Address';
-                              else
-                                return null;
-                            }
-                          },
+                          cursorColor: appPrimaryMaterialColor,
+                          // validator: (child) {
+                          //   if (child.length == 0) {
+                          //     return 'Please enter your No. of child';
+                          //   }
+                          //   return null;
+                          // },
                           decoration: InputDecoration(
                             errorStyle: TextStyle(height: 0),
-                            contentPadding: const EdgeInsets.all(15),
+                            contentPadding: const EdgeInsets.only(
+                                left: 5, right: 5, top: 15, bottom: 15),
                             fillColor: Colors.white,
                             enabledBorder: OutlineInputBorder(
                               borderRadius:
@@ -1203,6 +957,313 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                             ),
                           ),
                         ),
+                      ],
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 20.0, left: 5, bottom: 5),
+                      child: Text(
+                        'Company Name',
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.grey[700],
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    Stack(
+                      children: [
+                        Container(
+                          height: 47,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              //border: Border.all(color: Colors.grey[500], width: 1),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: appPrimaryMaterialColor
+                                        .withOpacity(0.2),
+                                    blurRadius: 2.0,
+                                    spreadRadius: 2.0,
+                                    offset: Offset(3.0, 5.0))
+                              ]),
+                        ),
+                        TextFormField(
+                          //controller: txtName,
+                          controller: txtCName,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(fontSize: 15),
+                          cursorColor: appPrimaryMaterialColor,
+                          validator: (cname) {
+                            if (cname.length == 0) {
+                              return 'Please enter company name';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            //errorStyle: TextStyle(height: 0),
+                            contentPadding: const EdgeInsets.only(
+                                left: 5, right: 5, top: 15, bottom: 15),
+                            fillColor: Colors.white,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 20.0, left: 5, bottom: 5),
+                      child: Text(
+                        'Mobile Number',
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.grey[700],
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    Stack(
+                      children: [
+                        Container(
+                          height: 47,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              //border: Border.all(color: Colors.grey[500], width: 1),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: appPrimaryMaterialColor
+                                        .withOpacity(0.2),
+                                    blurRadius: 2.0,
+                                    spreadRadius: 2.0,
+                                    offset: Offset(3.0, 5.0))
+                              ]),
+                        ),
+                        TextFormField(
+                          //controller: txtName,
+                          controller: txtMobileNumber,
+                          keyboardType: TextInputType.phone,
+                          style: TextStyle(fontSize: 15),
+                          cursorColor: appPrimaryMaterialColor,
+                          maxLength: 10,
+                          validator: (phone) {
+                            Pattern pattern = r'(^(?:[+0]9)?[0-9]{10,}$)';
+                            RegExp regExp = new RegExp(pattern);
+                            if (phone.length == 0) {
+                              return 'Please enter mobile number';
+                            } else if (!regExp.hasMatch(phone)) {
+                              return 'Please enter valid mobile number';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            counterText: "",
+                            //errorStyle: TextStyle(height: 0),
+                            contentPadding: const EdgeInsets.only(
+                                left: 5, right: 5, top: 15, bottom: 15),
+                            fillColor: Colors.white,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 20.0, left: 5, bottom: 5),
+                      child: Text(
+                        'Whatsapp Number',
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.grey[700],
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    Stack(
+                      children: [
+                        Container(
+                          height: 47,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              //border: Border.all(color: Colors.grey[500], width: 1),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: appPrimaryMaterialColor
+                                        .withOpacity(0.2),
+                                    blurRadius: 2.0,
+                                    spreadRadius: 2.0,
+                                    offset: Offset(3.0, 5.0))
+                              ]),
+                          child: TextFormField(
+                            //controller: txtName,
+                            controller: txtWNumber,
+                            keyboardType: TextInputType.phone,
+                            style: TextStyle(fontSize: 15),
+                            cursorColor: appPrimaryMaterialColor,
+                            maxLength: 10,
+                            // validator: (wphone) {
+                            //   Pattern pattern = r'(^(?:[+0]9)?[0-9]{10,}$)';
+                            //   RegExp regExp = new RegExp(pattern);
+                            //   if (wphone.length == 0) {
+                            //     return 'Please enter mobile number';
+                            //   } else if (!regExp.hasMatch(wphone)) {
+                            //     return 'Please enter valid mobile number';
+                            //   }
+                            //   return null;
+                            // },
+                            decoration: InputDecoration(
+                              counterText: "",
+                              // errorStyle: TextStyle(height: 0),
+                              contentPadding: const EdgeInsets.only(
+                                  left: 5, right: 5, top: 15, bottom: 15),
+                              fillColor: Colors.white,
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.0)),
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.0)),
+                                borderSide: BorderSide(color: Colors.red),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.0)),
+                                borderSide: BorderSide(color: Colors.red),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.0)),
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 20.0, left: 5, bottom: 5),
+                      child: Text(
+                        'Email',
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.grey[700],
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 15.0),
+                      child: Stack(
+                        children: [
+                          Container(
+                            height: 47,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                //border: Border.all(color: Colors.grey[500], width: 1),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.0)),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: appPrimaryMaterialColor
+                                          .withOpacity(0.2),
+                                      blurRadius: 2.0,
+                                      spreadRadius: 2.0,
+                                      offset: Offset(3.0, 5.0))
+                                ]),
+                            child: TextFormField(
+//                      controller: txtEmail,
+                              controller: txtEmail,
+                              keyboardType: TextInputType.emailAddress,
+                              style: TextStyle(fontSize: 15),
+                              cursorColor: Colors.black,
+                              validator: (email) {
+                                Pattern pattern =
+                                    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                                RegExp regex = new RegExp(pattern);
+                                print(email);
+                                if (email.isEmpty) {
+                                  return 'Please enter email';
+                                } else {
+                                  if (!regex.hasMatch(email))
+                                    return 'Enter valid Email Address';
+                                  else
+                                    return null;
+                                }
+                              },
+                              decoration: InputDecoration(
+                                //errorStyle: TextStyle(height: 0),
+                                contentPadding: const EdgeInsets.only(
+                                    left: 5, right: 5, top: 15, bottom: 15),
+                                fillColor: Colors.white,
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(color: Colors.grey),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(color: Colors.red),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(color: Colors.red),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(color: Colors.grey),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     Padding(
@@ -1365,59 +1426,66 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                             fontWeight: FontWeight.w600),
                       ),
                     ),
-                    Container(
-                      height: 42,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          //border: Border.all(color: Colors.grey[500], width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                          boxShadow: [
-                            BoxShadow(
-                                color: appPrimaryMaterialColor.withOpacity(0.2),
-                                blurRadius: 2.0,
-                                spreadRadius: 2.0,
-                                offset: Offset(3.0, 5.0))
-                          ]),
-                      child: TextFormField(
-                        //controller: txtName,
-                        controller: txtAboutBusiness,
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(fontSize: 15),
-                        cursorColor: appPrimaryMaterialColor,
-                        // validator: (business) {
-                        //   if (business.length == 0) {
-                        //     return 'Please enter about business';
-                        //   }
-                        //   return null;
-                        // },
-                        decoration: InputDecoration(
-                          counterText: "",
-                          errorStyle: TextStyle(height: 0),
-                          contentPadding: const EdgeInsets.all(15),
-                          fillColor: Colors.white,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.grey),
+                    Stack(
+                      children: [
+                        Container(
+                          height: 47,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              //border: Border.all(color: Colors.grey[500], width: 1),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: appPrimaryMaterialColor
+                                        .withOpacity(0.2),
+                                    blurRadius: 2.0,
+                                    spreadRadius: 2.0,
+                                    offset: Offset(3.0, 5.0))
+                              ]),
+                        ),
+                        TextFormField(
+                          //controller: txtName,
+                          controller: txtAboutBusiness,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(fontSize: 15),
+                          cursorColor: appPrimaryMaterialColor,
+                          // validator: (business) {
+                          //   if (business.length == 0) {
+                          //     return 'Please enter about business';
+                          //   }
+                          //   return null;
+                          // },
+                          decoration: InputDecoration(
+                            counterText: "",
+                            errorStyle: TextStyle(height: 0),
+                            contentPadding: const EdgeInsets.only(
+                                left: 5, right: 5, top: 15, bottom: 15),
+                            fillColor: Colors.white,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
                     Padding(
                       padding:
@@ -1430,59 +1498,65 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                             fontWeight: FontWeight.w600),
                       ),
                     ),
-                    Container(
-                      height: 42,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          //border: Border.all(color: Colors.grey[500], width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                          boxShadow: [
-                            BoxShadow(
-                                color: appPrimaryMaterialColor.withOpacity(0.2),
-                                blurRadius: 2.0,
-                                spreadRadius: 2.0,
-                                offset: Offset(3.0, 5.0))
-                          ]),
-                      child: TextFormField(
-                        //controller: txtName,
-                        controller: txtExperience,
-                        // validator: (exp) {
-                        //   if (exp.length == 0) {
-                        //     return 'Please enter your experience';
-                        //   }
-                        //   return null;
-                        // },
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(fontSize: 15),
-                        cursorColor: appPrimaryMaterialColor,
-                        decoration: InputDecoration(
-                          errorStyle: TextStyle(height: 0),
-                          counterText: "",
-                          contentPadding: const EdgeInsets.all(15),
-                          fillColor: Colors.white,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            borderSide: BorderSide(color: Colors.grey),
+                    Stack(
+                      children: [
+                        Container(
+                          height: 47,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              //border: Border.all(color: Colors.grey[500], width: 1),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: appPrimaryMaterialColor
+                                        .withOpacity(0.2),
+                                    blurRadius: 2.0,
+                                    spreadRadius: 2.0,
+                                    offset: Offset(3.0, 5.0))
+                              ]),
+                        ),
+                        TextFormField(
+                          //controller: txtName,
+                          controller: txtExperience,
+                          // validator: (exp) {
+                          //   if (exp.length == 0) {
+                          //     return 'Please enter your experience';
+                          //   }
+                          //   return null;
+                          // },
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(fontSize: 15),
+                          cursorColor: appPrimaryMaterialColor,
+                          decoration: InputDecoration(
+                            errorStyle: TextStyle(height: 0),
+                            counterText: "",
+                            contentPadding: const EdgeInsets.all(15),
+                            fillColor: Colors.white,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
                     Padding(
                       padding:
@@ -1498,7 +1572,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 4.0),
                       child: Container(
-                        height: 42,
+                        height: 45,
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                             color: Colors.white,
@@ -1557,7 +1631,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 4.0),
                       child: Container(
-                        height: 42,
+                        height: 45,
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                             color: Colors.white,
@@ -1616,7 +1690,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 4.0),
                       child: Container(
-                        height: 42,
+                        height: 45,
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                             color: Colors.white,
@@ -1675,7 +1749,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 4.0),
                       child: Container(
-                        height: 42,
+                        height: 45,
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                             color: Colors.white,
@@ -1734,7 +1808,7 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 4.0),
                       child: Container(
-                        height: 42,
+                        height: 45,
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                             color: Colors.white,

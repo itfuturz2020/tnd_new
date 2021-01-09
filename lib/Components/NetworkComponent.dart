@@ -101,7 +101,7 @@ class _NetworkComponentState extends State<NetworkComponent> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -148,7 +148,7 @@ class _NetworkComponentState extends State<NetworkComponent> {
                           ),*/
                         ],
                       ),
-                      FittedBox(
+                      /* FittedBox(
                         child: Padding(
                           padding: const EdgeInsets.only(top: 5.0),
                           child: Container(
@@ -182,8 +182,8 @@ class _NetworkComponentState extends State<NetworkComponent> {
                             ),
                           ),
                         ),
-                      ),
-                      FittedBox(
+                      ),*/
+                      /* FittedBox(
                         child: Padding(
                           padding: const EdgeInsets.only(top: 5.0),
                           child: Container(
@@ -218,7 +218,7 @@ class _NetworkComponentState extends State<NetworkComponent> {
                             ),
                           ),
                         ),
-                      ),
+                      ),*/
                       Padding(
                         padding: const EdgeInsets.only(top: 7.0),
                         child: Row(
