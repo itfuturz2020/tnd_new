@@ -66,6 +66,8 @@ dependencies:
   geocoder: ^0.2.1
   progress_dialog: ^1.2.0
   get: ^3.24.0
+  flutter_local_notifications: ^0.9.1+1
+
 
 dev_dependencies:
   flutter_test:

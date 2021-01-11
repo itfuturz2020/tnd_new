@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:the_national_dawn/DigitalScreens/AddCard.dart';
@@ -72,6 +75,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
   void initState() {
     // TODO: implement initState
@@ -96,38 +100,37 @@ class _MyAppState extends State<MyApp> {
       //when app is open
       onMessage: (Map<String, dynamic> message) async {
         Get.to(NotificationPopUp(data: message));
-        print("onMessage");
-        print(message);
+        //Get.to(NotificationPopUp(data: message));
+        //   log("onMessage");
+        // log(message.toString());
       },
       //when app is closed and user click on notification
       onLaunch: (Map<String, dynamic> message) async {
-        print("onLaunch: $message");
+        log("onLaunch: $message");
         // _navigateToItemDetail(message);
         Get.to(NotificationPopUp(data: message));
       },
       //when app is in background and user click on notification
       onResume: (Map<String, dynamic> message) async {
-        print(
-            "onResume:------------------- $message  --------------------------------");
+        log("onResume:------------------- $message  --------------------------------");
         // _navigateToItemDetail(message);
         Get.to(NotificationPopUp(data: message));
       },
     );
 
-    //For Ios Notification
-    // _firebaseMessaging.requestNotificationPermissions(
-    //       const IosNotificationSettings(sound: true, badge: true, alert: true));
-    //
-    //  _firebaseMessaging.onIosSettingsRegistered
-    //      .listen((IosNotificationSettings settings) {
-    //    print("Setting reqistered : $settings");
-    //  });
+    _firebaseMessaging.requestNotificationPermissions(
+        const IosNotificationSettings(sound: true, badge: true, alert: true));
 
-    // flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
-    // var android = new AndroidInitializationSettings('@mipmap/ic_launcher');
-    // var iOS = new IOSInitializationSettings();
-    // var initSetttings = new InitializationSettings(android, iOS);
-    // flutterLocalNotificationsPlugin.initialize(initSetttings);
+    _firebaseMessaging.onIosSettingsRegistered
+        .listen((IosNotificationSettings settings) {
+      log("Setting reqistered : $settings");
+    });
+
+    flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+    var android = new AndroidInitializationSettings('@mipmap/ic_launcher');
+    var iOS = new IOSInitializationSettings();
+    var initSetttings = new InitializationSettings(android, iOS);
+    flutterLocalNotificationsPlugin.initialize(initSetttings);
   }
 
   @override
@@ -136,6 +139,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'TND',
       initialRoute: '/',
+      navigatorKey: Get.key,
       routes: {
         //'/': (context) => AddressScreen(),
         '/': (context) => SplashScreen(),

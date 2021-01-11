@@ -7,6 +7,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:image_slider/image_slider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,6 +16,7 @@ import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
 import 'package:the_national_dawn/Components/LoadingBlueComponent.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:the_national_dawn/Screens/NotificationPopUp.dart';
 import 'package:the_national_dawn/offlineDatabase/db_handler.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -434,7 +436,8 @@ class _HomeScreenState extends State<HomeScreen>
           ),*/
           GestureDetector(
               onTap: () {
-                Navigator.of(context).pushNamed('/NotificationScreen');
+                Get.to(NotificationPopUp());
+                // Navigator.of(context).pushNamed('/NotificationScreen');
               },
               child: Image.asset("assets/bell.png")),
         ],

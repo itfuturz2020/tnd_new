@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
@@ -72,6 +73,19 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
         );
       },
     );
+  }
+
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  String fcmToken = "";
+
+  @override
+  void initState() {
+    _firebaseMessaging.getToken().then((token) {
+      setState(() {
+        fcmToken = token;
+      });
+      print('----------->' + '${token}');
+    });
   }
 
   @override
