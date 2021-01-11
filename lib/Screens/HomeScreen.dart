@@ -320,7 +320,7 @@ class _HomeScreenState extends State<HomeScreen>
       setState(() {
         fcmToken = token;
       });
-      _updateFCMtoken();
+      _updateFCMtoken(fcmToken);
       print('----------->' + '${token}');
     });
   }
@@ -387,14 +387,14 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  _updateFCMtoken() async {
+  _updateFCMtoken(String token) async {
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         setState(() {
           isFCMtokenLoading = true;
         });
-        var body = {"mobile": "${_mobileNo}", "fcmToken": "${fcmToken}"};
+        var body = {"mobile": "${_mobileNo}", "fcmToken": "${token}"};
         Services.postForSave(apiname: 'api/registration/verify', body: body)
             .then((response) async {
           if (response.IsSuccess == true && response.Data == "1") {
