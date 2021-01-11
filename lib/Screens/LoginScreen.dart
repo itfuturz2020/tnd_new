@@ -224,15 +224,15 @@ class _LoginScreenState extends State<LoginScreen> {
               setState(() {
                 isLoading = false;
               });
-              saveDataToSession(responselist[0]);
-              /* Navigator.of(context).push(MaterialPageRoute(
+              // saveDataToSession(responselist[0]);
+              Navigator.of(context).push(MaterialPageRoute(
                   builder: (BuildContext context) => VerificationScreen(
                         mobile: txtMobileNumber.text,
                         logindata: responselist[0],
                         onLoginSuccess: () {
                           saveDataToSession(responselist[0]);
                         },
-                      )));*/
+                      )));
               /*  Navigator.of(context).pushNamed('/HomePage');*/
             } else {
               setState(() {
