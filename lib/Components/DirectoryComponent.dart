@@ -708,13 +708,6 @@ class _AlertSendState extends State<AlertSend> {
           isSendLoading = true;
         });
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        var map = {
-          'notificationBody': "Hi " +
-              "${widget.directoryData["name"]}" +
-              ", " +
-              "${prefs.getString(Session.CustomerName)} wants 1-2-1 meeting with you.",
-          'notificationTitle': "TND Request",
-        };
         var body = {
           "requestSender": "${prefs.getString(Session.CustomerId)}",
           "requestReceiver": "${widget.directoryData["_id"]}",

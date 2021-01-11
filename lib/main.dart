@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:the_national_dawn/DigitalScreens/AddCard.dart';
 import 'package:the_national_dawn/DigitalScreens/AddOffer.dart';
@@ -37,6 +38,7 @@ import 'package:the_national_dawn/Screens/MemberDetailScreen.dart';
 import 'package:the_national_dawn/Screens/MyEcardScreen.dart';
 import 'package:the_national_dawn/Screens/NetworkScreen.dart';
 import 'package:the_national_dawn/Screens/NewsBannerDetail.dart';
+import 'package:the_national_dawn/Screens/NotificationPopUp.dart';
 import 'package:the_national_dawn/Screens/NotificationScreen.dart';
 import 'package:the_national_dawn/Screens/OfferDetailScreen.dart';
 import 'package:the_national_dawn/Screens/OfferScreen.dart';
@@ -75,16 +77,7 @@ class _MyAppState extends State<MyApp> {
     // TODO: implement initState
     super.initState();
     // _firebaseToken();
-    _firebaseMessaging.configure(onMessage: (Map<String, dynamic> message) {
-      print("onMessage");
-      print(message);
-    }, onResume: (Map<String, dynamic> message) {
-      print("onResume");
-      print(message);
-    }, onLaunch: (Map<String, dynamic> message) {
-      print("onLaunch");
-      print(message);
-    });
+    setNotification();
 
     //For Ios Notification
     // _firebaseMessaging.requestNotificationPermissions(
@@ -94,6 +87,47 @@ class _MyAppState extends State<MyApp> {
     //       .listen((IosNotificationSettings settings) {
     //     print("Setting reqistered : $settings");
     //   });
+  }
+
+  void setNotification() async {
+    //_messaging.getToken().then((token) {});
+
+    _firebaseMessaging.configure(
+      //when app is open
+      onMessage: (Map<String, dynamic> message) async {
+        Get.to(NotificationPopUp(data: message));
+        print("onMessage");
+        print(message);
+      },
+      //when app is closed and user click on notification
+      onLaunch: (Map<String, dynamic> message) async {
+        print("onLaunch: $message");
+        // _navigateToItemDetail(message);
+        Get.to(NotificationPopUp(data: message));
+      },
+      //when app is in background and user click on notification
+      onResume: (Map<String, dynamic> message) async {
+        print(
+            "onResume:------------------- $message  --------------------------------");
+        // _navigateToItemDetail(message);
+        Get.to(NotificationPopUp(data: message));
+      },
+    );
+
+    //For Ios Notification
+    // _firebaseMessaging.requestNotificationPermissions(
+    //       const IosNotificationSettings(sound: true, badge: true, alert: true));
+    //
+    //  _firebaseMessaging.onIosSettingsRegistered
+    //      .listen((IosNotificationSettings settings) {
+    //    print("Setting reqistered : $settings");
+    //  });
+
+    // flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+    // var android = new AndroidInitializationSettings('@mipmap/ic_launcher');
+    // var iOS = new IOSInitializationSettings();
+    // var initSetttings = new InitializationSettings(android, iOS);
+    // flutterLocalNotificationsPlugin.initialize(initSetttings);
   }
 
   @override
@@ -142,6 +176,7 @@ class _MyAppState extends State<MyApp> {
         '/EventTicketScreen': (context) => EventTicketScreen(),
         '/RequestScreen': (context) => RequestScreen(),
         '/RegistrationProfileScreen': (context) => RegistrationProfileScreen(),
+        '/NotificationPopUp': (context) => NotificationPopUp(),
 
         //===============digital card screen=============
         '/AddCard': (context) => AddCard(),
