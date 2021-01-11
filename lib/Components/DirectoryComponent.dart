@@ -721,6 +721,7 @@ class _AlertSendState extends State<AlertSend> {
         setState(() {
           isSendLoading = true;
         });
+
         SharedPreferences prefs = await SharedPreferences.getInstance();
         var body = {
           "requestSender": "${prefs.getString(Session.CustomerId)}",
@@ -736,27 +737,77 @@ class _AlertSendState extends State<AlertSend> {
           "meetingType": requestType,
           "meetingLink": txtOnlineLink.text
         };
-        Services.postForSave2(
-                apiname: 'users/oneTwoOneConnectionReq', body: body)
-            .then((response) async {
-          if (response.IsSuccess == true && response.Data == "1") {
+        // print(body.fields);
+        Services.PostForList2(
+                api_name: 'users/oneTwoOneConnectionReq', body: body)
+            .then((subCatResponseList) async {
+          setState(() {
+            isSendLoading = false;
+          });
+          if (subCatResponseList.length > 0) {
+            Fluttertoast.showToast(msg: "Request Send Successfully!");
+          } else {
             setState(() {
-              isSendLoading = false;
+              Fluttertoast.showToast(msg: "Try Again!");
             });
-            Fluttertoast.showToast(msg: response.Message);
+            Fluttertoast.showToast(msg: "Data Not Found");
+            //show "data not found" in dialog
           }
         }, onError: (e) {
           setState(() {
             isSendLoading = false;
           });
           print("error on call -> ${e.message}");
-          Fluttertoast.showToast(msg: "something went wrong");
+          Fluttertoast.showToast(msg: "Something Went Wrong");
         });
       }
     } on SocketException catch (_) {
-      Fluttertoast.showToast(msg: "No Internet Connection");
+      Fluttertoast.showToast(msg: "No Internet Connection.");
     }
   }
+  // _sendRequest() async {
+  //   try {
+  //     final result = await InternetAddress.lookup('google.com');
+  //     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+  //       setState(() {
+  //         isSendLoading = true;
+  //       });
+  //       SharedPreferences prefs = await SharedPreferences.getInstance();
+  //       var body = {
+  //         "requestSender": "${prefs.getString(Session.CustomerId)}",
+  //         "requestReceiver": "${widget.directoryData["_id"]}",
+  //         "requestStatus": "requested",
+  //         "notificationData": {
+  //           'notificationBody': "Hi " +
+  //               "${widget.directoryData["name"]}" +
+  //               ", " +
+  //               "${prefs.getString(Session.CustomerName)} wants 1-2-1 meeting with you.",
+  //           'notificationTitle': "TND Request",
+  //         },
+  //         "meetingType": requestType,
+  //         "meetingLink": txtOnlineLink.text
+  //       };
+  //       Services.postForSave2(
+  //               apiname: 'users/oneTwoOneConnectionReq', body: body)
+  //           .then((response) async {
+  //         if (response.IsSuccess == true && response.Data == "1") {
+  //           setState(() {
+  //             isSendLoading = false;
+  //           });
+  //           Fluttertoast.showToast(msg: response.Message);
+  //         }
+  //       }, onError: (e) {
+  //         setState(() {
+  //           isSendLoading = false;
+  //         });
+  //         print("error on call -> ${e.message}");
+  //         Fluttertoast.showToast(msg: "something went wrong");
+  //       });
+  //     }
+  //   } on SocketException catch (_) {
+  //     Fluttertoast.showToast(msg: "No Internet Connection");
+  //   }
+  // }
 }
 
 class AlertComplete extends StatefulWidget {
