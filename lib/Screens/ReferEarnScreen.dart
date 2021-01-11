@@ -142,34 +142,38 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
             padding: const EdgeInsets.only(bottom: 12.0),
             child: GestureDetector(
               onTap: () {},
-              child: Container(
-                width: MediaQuery.of(context).size.width / 1.5,
-                height: 40,
-                child: RaisedButton(
-                    color: appPrimaryMaterialColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    onPressed: () {
-                      share();
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.share,
-                          color: Colors.white,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15.0),
-                          child: Text("Share",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 17)),
-                        ),
-                      ],
-                    )),
+              child: Padding(
+                padding:
+                    const EdgeInsets.only(left: 14.0, right: 14, bottom: 8),
+                child: Container(
+                  width: MediaQuery.of(context).size.width / 1,
+                  height: 40,
+                  child: RaisedButton(
+                      color: appPrimaryMaterialColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      onPressed: () {
+                        share();
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.share,
+                            color: Colors.white,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15.0),
+                            child: Text("Share",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 17)),
+                          ),
+                        ],
+                      )),
+                ),
               ),
             ),
           ),
