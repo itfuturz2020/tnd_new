@@ -36,7 +36,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   TabController tabController;
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   String fcmToken = "";
   String qrData;
   var _name;
@@ -311,16 +310,6 @@ class _HomeScreenState extends State<HomeScreen>
     dbHelper = DBHelper();
     _bannerImage();
     _profile();
-    _firebaseMessaging.configure(onMessage: (Map<String, dynamic> message) {
-      print("onMessage");
-      print(message);
-    }, onResume: (Map<String, dynamic> message) {
-      print("onResume");
-      print(message);
-    }, onLaunch: (Map<String, dynamic> message) {
-      print("onLaunch");
-      print(message);
-    });
   }
 
   List listB = [
@@ -436,8 +425,7 @@ class _HomeScreenState extends State<HomeScreen>
           ),*/
           GestureDetector(
               onTap: () {
-                Get.to(NotificationPopUp());
-                // Navigator.of(context).pushNamed('/NotificationScreen');
+                Navigator.of(context).pushNamed('/NotificationScreen');
               },
               child: Image.asset("assets/bell.png")),
         ],
