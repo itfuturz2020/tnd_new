@@ -44,6 +44,8 @@ class _HomeScreenState extends State<HomeScreen>
   var _email;
   bool isVerified;
   var img;
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  bool isFCMtokenLoading = false;
   String barCode;
   DBHelper dbHelper;
   Future<List<Visitorclass>> visitor;
@@ -310,6 +312,17 @@ class _HomeScreenState extends State<HomeScreen>
     dbHelper = DBHelper();
     _bannerImage();
     _profile();
+    getToken();
+  }
+
+  getToken() async {
+    await _firebaseMessaging.getToken().then((token) {
+      setState(() {
+        fcmToken = token;
+      });
+      _updateFCMtoken();
+      print('----------->' + '${token}');
+    });
   }
 
   List listB = [
@@ -372,6 +385,34 @@ class _HomeScreenState extends State<HomeScreen>
         return AlertboxLogout();
       },
     );
+  }
+
+  _updateFCMtoken() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        setState(() {
+          isFCMtokenLoading = true;
+        });
+        var body = {"mobile": "${_mobileNo}", "fcmToken": "${fcmToken}"};
+        Services.postForSave(apiname: 'api/registration/verify', body: body)
+            .then((response) async {
+          if (response.IsSuccess == true && response.Data == "1") {
+            setState(() {
+              isFCMtokenLoading = false;
+            });
+          }
+        }, onError: (e) {
+          setState(() {
+            isFCMtokenLoading = false;
+          });
+          print("error on call -> ${e.message}");
+          Fluttertoast.showToast(msg: "something went wrong");
+        });
+      }
+    } on SocketException catch (_) {
+      Fluttertoast.showToast(msg: "No Internet Connection");
+    }
   }
 
   _scanDialog(var data) {}
