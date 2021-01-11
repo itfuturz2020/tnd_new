@@ -62,11 +62,9 @@ import 'Screens/EnquiryForm.dart';
 import 'Screens/MyOfferScreen.dart';
 
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
-  // initializeDateFormatting().then((_) =>
-  runApp(MyApp());
-  //);
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  initializeDateFormatting().then((_) => runApp(MyApp()));
 }
 
 class MyApp extends StatefulWidget {
