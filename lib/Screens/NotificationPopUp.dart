@@ -100,7 +100,7 @@ class _NotificationPopUpState extends State<NotificationPopUp> {
         var body = {
           "requestSender": "${widget.message["requestReceiver"]}",
           "requestReceiver": "${widget.message["requestSender"]}",
-          "requestStatus": status,
+          "requestStatus": status.toString(),
           "notificationData": {
             'notificationBody': "Hi " +
                 ", "
@@ -110,7 +110,7 @@ class _NotificationPopUpState extends State<NotificationPopUp> {
             'notificationTitle': "${widget.message["notification"]["title"]}",
           },
         };
-        Services.postForSave2(apiname: 'users/updateConnectionReq', body: body)
+        Services.postForSave(apiname: 'users/updateConnectionReq', body: body)
             .then((response) async {
           if (response.IsSuccess == true && response.Data == "1") {
             setState(() {
