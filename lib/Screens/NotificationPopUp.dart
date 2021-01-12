@@ -100,8 +100,8 @@ class _NotificationPopUpState extends State<NotificationPopUp> {
         });
         SharedPreferences prefs = await SharedPreferences.getInstance();
         var body = {
-          "requestSender": "${widget.message["data"]["ReceiverId"]}",
-          "requestReceiver": "${widget.message["data"]["senerID"]}",
+          "requestSender": "${widget.message["data"]["senerID"]}",
+          "requestReceiver": "${widget.message["data"]["ReceiverId"]}",
           "requestStatus": status,
           // "notificationData": {
           //   "notificationBody": "Hi " +
