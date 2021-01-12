@@ -102,14 +102,14 @@ class _NotificationPopUpState extends State<NotificationPopUp> {
         var body = {
           "requestSender": "${widget.message["requestReceiver"]}",
           "requestReceiver": "${widget.message["requestSender"]}",
-          "requestStatus": status.toString(),
+          "requestStatus": status,
           "notificationData": {
-            'notificationBody': "Hi " +
+            "notificationBody": "Hi " +
                 ", "
                     "${prefs.getString(Session.CustomerName)} has " +
                 status +
                 " your request",
-            'notificationTitle':
+            "notificationTitle":
                 "${widget.message["notification"]["notificationTitle"]}",
           },
         };

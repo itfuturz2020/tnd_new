@@ -28,6 +28,16 @@ class _StoriesScreenState extends State<StoriesScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
+        title: Center(
+          child: Text(
+            "Success Story ",
+            style: TextStyle(
+              color: appPrimaryMaterialColor,
+              fontSize: 18,
+              //fontWeight: FontWeight.bold
+            ),
+          ),
+        ),
         leading: Padding(
           padding:
               const EdgeInsets.only(top: 8.0, right: 0, left: 10, bottom: 8),
