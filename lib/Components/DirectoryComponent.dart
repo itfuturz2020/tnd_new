@@ -736,7 +736,8 @@ class _AlertSendState extends State<AlertSend> {
           "meetingType": requestType,
           "meetingLink": txtOnlineLink.text
         };
-        Services.postForSave(apiname: 'users/updateConnectionReq', body: body)
+        Services.postForSave(
+                apiname: 'users/oneTwoOneConnectionReq', body: body)
             .then((response) async {
           if (response.IsSuccess == true && response.Data == "1") {
             setState(() {
