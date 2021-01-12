@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'dart:developer';
 import 'package:the_national_dawn/Common/ClassList.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 
@@ -158,6 +159,9 @@ class Services {
       } else {
         response = await dio.post(url, data: body);
       }
+
+      log("->>> ${response.data}");
+
       if (response.statusCode == 200) {
         SaveDataClass savedata =
             new SaveDataClass(Message: 'No Data', IsSuccess: false, Data: null);
