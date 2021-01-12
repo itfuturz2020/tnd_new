@@ -1045,8 +1045,9 @@ class _AlertCompleteState extends State<AlertComplete> {
                       TextStyle(color: appPrimaryMaterialColor, fontSize: 18),
                 ),
           onPressed: () async {
-            SharedPreferences prefs = await SharedPreferences.getInstance();
+            //SharedPreferences prefs = await SharedPreferences.getInstance();
             _completeRequest();
+            Navigator.pop(context);
 
             // await prefs.clear();
             // Navigator.pushNamedAndRemoveUntil(
@@ -1066,9 +1067,11 @@ class _AlertCompleteState extends State<AlertComplete> {
         });
         SharedPreferences prefs = await SharedPreferences.getInstance();
         var body = {
-          // "requestSender": "${widget.message["requestReceiver"]}",
-          // "requestReceiver": "${widget.message["requestSender"]}",
-          // "requestStatus": status.toString(),
+          "requestSender": "${prefs.getString(Session.CustomerId)}",
+          "requestReceiver": "${widget.directoryData["_id"]}",
+          "topic": txtTopic.text,
+          "date": _date.toString(),
+          "generatedRefral": reference,
           // "notificationData": {
           //   'notificationBody': "Hi " +
           //       ", "
@@ -1079,12 +1082,12 @@ class _AlertCompleteState extends State<AlertComplete> {
           //   "${widget.message["notification"]["notificationTitle"]}",
           // },
         };
-        Services.postForSave(apiname: 'users/updateConnectionReq', body: body)
-            .then((response) async {
+        Services.postForSave(apiname: 'users/requestcomplete', body: body).then(
+            (response) async {
+          setState(() {
+            isLoading = false;
+          });
           if (response.IsSuccess == true && response.Data == "1") {
-            setState(() {
-              isLoading = false;
-            });
             Fluttertoast.showToast(msg: response.Message);
             Navigator.of(context).pop();
           }
