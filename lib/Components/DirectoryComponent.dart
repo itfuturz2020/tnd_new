@@ -721,7 +721,6 @@ class _AlertSendState extends State<AlertSend> {
         setState(() {
           isSendLoading = true;
         });
-
         SharedPreferences prefs = await SharedPreferences.getInstance();
         var body = {
           "requestSender": "${prefs.getString(Session.CustomerId)}",
@@ -737,32 +736,24 @@ class _AlertSendState extends State<AlertSend> {
           "meetingType": requestType,
           "meetingLink": txtOnlineLink.text
         };
-        // print(body.fields);
-        Services.PostForList(
-                api_name: 'users/oneTwoOneConnectionReq', body: body)
-            .then((subCatResponseList) async {
-          setState(() {
-            isSendLoading = false;
-          });
-          if (subCatResponseList.length > 0) {
-            Fluttertoast.showToast(msg: "Request Send Successfully!");
-          } else {
+        Services.postForSave(apiname: 'users/updateConnectionReq', body: body)
+            .then((response) async {
+          if (response.IsSuccess == true && response.Data == "1") {
             setState(() {
-              Fluttertoast.showToast(msg: "Try Again!");
+              isSendLoading = false;
             });
-            Fluttertoast.showToast(msg: "Data Not Found");
-            //show "data not found" in dialog
+            Fluttertoast.showToast(msg: response.Message);
           }
         }, onError: (e) {
           setState(() {
             isSendLoading = false;
           });
           print("error on call -> ${e.message}");
-          Fluttertoast.showToast(msg: "Something Went Wrong");
+          Fluttertoast.showToast(msg: "something went wrong");
         });
       }
     } on SocketException catch (_) {
-      Fluttertoast.showToast(msg: "No Internet Connection.");
+      Fluttertoast.showToast(msg: "No Internet Connection");
     }
   }
   // _sendRequest() async {
@@ -772,6 +763,7 @@ class _AlertSendState extends State<AlertSend> {
   //       setState(() {
   //         isSendLoading = true;
   //       });
+  //
   //       SharedPreferences prefs = await SharedPreferences.getInstance();
   //       var body = {
   //         "requestSender": "${prefs.getString(Session.CustomerId)}",
@@ -787,31 +779,36 @@ class _AlertSendState extends State<AlertSend> {
   //         "meetingType": requestType,
   //         "meetingLink": txtOnlineLink.text
   //       };
-  //       Services.postForSave2(
-  //               apiname: 'users/oneTwoOneConnectionReq', body: body)
-  //           .then((response) async {
-  //         if (response.IsSuccess == true && response.Data == "1") {
-  //           setState(() {
-  //             isSendLoading = false;
-  //           });
-  //           Fluttertoast.showToast(msg: response.Message);
+  //       // print(body.fields);
+  //       Services.PostForList(
+  //               api_name: 'users/oneTwoOneConnectionReq', body: body)
+  //           .then((subCatResponseList) async {
+  //         setState(() {
+  //           isSendLoading = false;
+  //         });
+  //         if (subCatResponseList.length > 0) {
+  //           Fluttertoast.showToast(msg: "Request Send Successfully!");
+  //         } else {
+  //           Fluttertoast.showToast(msg: "Try Again!");
+  //           //show "data not found" in dialog
   //         }
   //       }, onError: (e) {
   //         setState(() {
   //           isSendLoading = false;
   //         });
   //         print("error on call -> ${e.message}");
-  //         Fluttertoast.showToast(msg: "something went wrong");
+  //         Fluttertoast.showToast(msg: "Something Went Wrong");
   //       });
   //     }
   //   } on SocketException catch (_) {
-  //     Fluttertoast.showToast(msg: "No Internet Connection");
+  //     Fluttertoast.showToast(msg: "No Internet Connection.");
   //   }
   // }
 }
 
 class AlertComplete extends StatefulWidget {
   var directoryData;
+
   AlertComplete({this.directoryData});
 
   @override
@@ -821,6 +818,7 @@ class AlertComplete extends StatefulWidget {
 class _AlertCompleteState extends State<AlertComplete> {
   String reference = "yes";
   TextEditingController txtTopic = TextEditingController();
+  bool isLoading = false;
 
   DateTimePickerLocale _locale = DateTimePickerLocale.en_us;
   String _format = 'yyyy-MMMM-dd';
@@ -1037,12 +1035,17 @@ class _AlertCompleteState extends State<AlertComplete> {
           },
         ),
         new FlatButton(
-          child: new Text(
-            "Ok",
-            style: TextStyle(color: appPrimaryMaterialColor, fontSize: 18),
-          ),
+          child: isLoading == true
+              ? LoadingBlueComponent()
+              : Text(
+                  "Ok",
+                  style:
+                      TextStyle(color: appPrimaryMaterialColor, fontSize: 18),
+                ),
           onPressed: () async {
             SharedPreferences prefs = await SharedPreferences.getInstance();
+            _completeRequest();
+
             // await prefs.clear();
             // Navigator.pushNamedAndRemoveUntil(
             //     context, '/LoginScreen', (route) => false);
@@ -1050,5 +1053,49 @@ class _AlertCompleteState extends State<AlertComplete> {
         ),
       ],
     );
+  }
+
+  _completeRequest() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        setState(() {
+          isLoading = true;
+        });
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        var body = {
+          // "requestSender": "${widget.message["requestReceiver"]}",
+          // "requestReceiver": "${widget.message["requestSender"]}",
+          // "requestStatus": status.toString(),
+          // "notificationData": {
+          //   'notificationBody': "Hi " +
+          //       ", "
+          //           "${prefs.getString(Session.CustomerName)} has " +
+          //       status +
+          //       " your request",
+          //   'notificationTitle':
+          //   "${widget.message["notification"]["notificationTitle"]}",
+          // },
+        };
+        Services.postForSave(apiname: 'users/updateConnectionReq', body: body)
+            .then((response) async {
+          if (response.IsSuccess == true && response.Data == "1") {
+            setState(() {
+              isLoading = false;
+            });
+            Fluttertoast.showToast(msg: response.Message);
+            Navigator.of(context).pop();
+          }
+        }, onError: (e) {
+          setState(() {
+            isLoading = false;
+          });
+          print("error on call -> ${e.message}");
+          Fluttertoast.showToast(msg: "something went wrong");
+        });
+      }
+    } on SocketException catch (_) {
+      Fluttertoast.showToast(msg: "No Internet Connection");
+    }
   }
 }

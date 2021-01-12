@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:the_national_dawn/Common/ClassList.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
@@ -15,6 +17,7 @@ class Services {
       } else {
         response = await dio.post(url, data: body);
       }
+      log("->>>" + response.data.toString());
       if (response.statusCode == 200) {
         List list = [];
         print("$api_name Response: " + response.data.toString());
