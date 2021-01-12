@@ -738,7 +738,7 @@ class _AlertSendState extends State<AlertSend> {
           "meetingLink": txtOnlineLink.text
         };
         // print(body.fields);
-        Services.PostForList2(
+        Services.PostForList(
                 api_name: 'users/oneTwoOneConnectionReq', body: body)
             .then((subCatResponseList) async {
           setState(() {
