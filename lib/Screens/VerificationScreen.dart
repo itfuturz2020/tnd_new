@@ -236,6 +236,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
           isFCMtokenLoading = true;
         });
         var body = {"mobile": "${widget.mobile}", "fcmToken": "${fcmToken}"};
+
         Services.postForSave(apiname: 'api/registration/verify', body: body)
             .then((response) async {
           if (response.IsSuccess == true && response.Data == "1") {

@@ -244,7 +244,7 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                   height: 22,
                                 ),
                                 Container(
-                                  height: 131,
+                                  height: 260,
                                   width: MediaQuery.of(context).size.width,
                                   decoration: BoxDecoration(
                                       color: Colors.white,
@@ -261,39 +261,193 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                             spreadRadius: 2.0,
                                             offset: Offset(3.0, 5.0))
                                       ]),
-                                  child: Center(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: <Widget>[
-                                        Flexible(
-                                          child: Text(
-                                            // "Mr. Natasha Goel",
-                                            "${profileList["name"]}",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold),
-                                          ),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(top: 15.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            Icon(
+                                              Icons.person,
+                                              size: 25,
+                                              color: appPrimaryMaterialColor,
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 5),
+                                              child: Text(
+                                                'Personal Info',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.black),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        Flexible(
-                                          child: Text("Manager",
-                                              style: TextStyle(
-                                                  color: Colors.grey[700],
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w500)),
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 20.0),
+                                        child: Column(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                top: 15,
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    "Name : ",
+                                                    style: TextStyle(
+                                                        color: Colors.grey[500],
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                  Text(
+                                                    "${profileList["name"]}",
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.only(top: 5),
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    "Date Of Birth : ",
+                                                    style: TextStyle(
+                                                        color: Colors.grey[500],
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                  Text(
+                                                    "${profileList["date_of_birth"]}",
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.only(top: 5),
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    "Gender : ",
+                                                    style: TextStyle(
+                                                        color: Colors.grey[500],
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                  Text(
+                                                    "${profileList["gender"]}",
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.only(top: 5),
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    "Spouse Name : ",
+                                                    style: TextStyle(
+                                                        color: Colors.grey[500],
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                  Text(
+                                                    "${profileList["spouse_name"]}",
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.only(top: 5),
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    "Spouse Birth Date : ",
+                                                    style: TextStyle(
+                                                        color: Colors.grey[500],
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                  Text(
+                                                    "${profileList["spouse_birth_date"]}",
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 5, bottom: 15),
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    "Number Of Child : ",
+                                                    style: TextStyle(
+                                                        color: Colors.grey[500],
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                  Text(
+                                                    "${profileList["number_of_child"]}",
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        Flexible(
-                                          child: Text(
-//                                          "Future Group Info Soft",
-                                              "${profileList["company_name"]}",
-                                              style: TextStyle(
-                                                  color: Colors.grey[700],
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w500)),
-                                        )
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 SizedBox(
@@ -354,7 +508,6 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                               children: <Widget>[
                                                 Flexible(
                                                   child: Text(
-//                                              "+91-8488848476",
                                                     "${profileList["mobile"]}",
                                                     style: TextStyle(
                                                         color: Colors.black,
