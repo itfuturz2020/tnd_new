@@ -949,7 +949,7 @@ class _AlertCompleteState extends State<AlertComplete> {
                         decoration: InputDecoration(
                           errorStyle: TextStyle(height: 0),
                           counterText: "",
-                          contentPadding: const EdgeInsets.all(15),
+                          contentPadding: const EdgeInsets.all(8),
                           fillColor: Colors.white,
                           enabledBorder: OutlineInputBorder(
                             borderRadius:
