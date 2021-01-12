@@ -704,7 +704,7 @@ class _AlertSendState extends State<AlertSend> {
           onPressed: () async {
             _sendRequest();
             SharedPreferences prefs = await SharedPreferences.getInstance();
-            Navigator.pop(context);
+
             // await prefs.clear();
             // Navigator.pushNamedAndRemoveUntil(
             //     context, '/LoginScreen', (route) => false);
@@ -744,6 +744,7 @@ class _AlertSendState extends State<AlertSend> {
               isSendLoading = false;
             });
             Fluttertoast.showToast(msg: response.Message);
+            Navigator.pop(context);
           }
         }, onError: (e) {
           setState(() {

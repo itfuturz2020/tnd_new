@@ -103,14 +103,14 @@ class _NotificationPopUpState extends State<NotificationPopUp> {
           "requestSender": "${widget.message["data"]["ReceiverId"]}",
           "requestReceiver": "${widget.message["data"]["senerID"]}",
           "requestStatus": status,
-          "notificationData": {
-            "notificationBody": "Hi " +
-                ", "
-                    "${prefs.getString(Session.CustomerName)} has " +
-                status +
-                " your request",
-            "notificationTitle": "${widget.message["notification"]["title"]}",
-          },
+          // "notificationData": {
+          //   "notificationBody": "Hi " +
+          //       ", "
+          //           "${prefs.getString(Session.CustomerName)} has " +
+          //       status +
+          //       " your request",
+          //   "notificationTitle": "${widget.message["notification"]["title"]}",
+          // },
         };
         Services.postForSave(apiname: 'users/updateConnectionReq', body: body)
             .then((response) async {
