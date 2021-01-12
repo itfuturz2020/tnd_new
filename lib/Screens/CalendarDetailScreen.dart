@@ -468,6 +468,7 @@ class _CalendarDetailScreenState extends State<CalendarDetailScreen> {
           "eventid": widget.eventData["_id"],
           "userid": "${customerId}"
         };
+        print(body);
         Services.PostForList(api_name: 'admin/eventRegister', body: body).then(
             (responseList) async {
           setState(() {

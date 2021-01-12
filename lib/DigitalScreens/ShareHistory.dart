@@ -117,7 +117,6 @@ class _ShareHistoryState extends State<ShareHistory> {
                   hintText: "Search...",
                   hintStyle: new TextStyle(color: Colors.white)),
               onChanged: searchOperation,
-//onSubmitted: searchOperation,
             );
             _handleSearchStart();
           } else {

@@ -264,8 +264,6 @@ class _DailyNewScreenState extends State<DailyNewScreen>
                                                             "featured_img_src"],
                                                         // width: 300,
                                                       ),
-//                                                    Image.network(Image_URL +
-//                                                        link["newsImage"]),
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets
@@ -353,18 +351,17 @@ class _DailyNewScreenState extends State<DailyNewScreen>
                                                       ),
                                                       Positioned(
                                                           bottom: 0.0,
-                                                          left: 0.0,
                                                           child: Container(
                                                             height: 60,
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width -
+                                                                30,
                                                             padding:
                                                                 EdgeInsets.only(
                                                                     left: 8,
                                                                     right: 8),
-                                                            width:
-                                                                MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width,
                                                             decoration:
                                                                 BoxDecoration(
                                                               color: Color(
@@ -388,30 +385,18 @@ class _DailyNewScreenState extends State<DailyNewScreen>
                                                                 SizedBox(
                                                                   height: 5,
                                                                 ),
-                                                                Container(
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: const EdgeInsets
-                                                                            .only(
-                                                                        right:
-                                                                            8.0),
-                                                                    child: Text(
-                                                                      link[
-                                                                          "title"],
-                                                                      maxLines:
-                                                                          2,
-                                                                      overflow:
-                                                                          TextOverflow
-                                                                              .ellipsis,
-                                                                      style: TextStyle(
-                                                                          color: Colors
-                                                                              .white,
-                                                                          fontSize:
-                                                                              11,
-                                                                          letterSpacing:
-                                                                              0.1),
-                                                                    ),
-                                                                  ),
+                                                                Text(
+                                                                  link["title"],
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .start,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          11,
+                                                                      letterSpacing:
+                                                                          0.1),
                                                                 ),
                                                                 SizedBox(
                                                                   height: 5,
@@ -428,8 +413,7 @@ class _DailyNewScreenState extends State<DailyNewScreen>
                                                                     ),
                                                                     link["newsDate"] ==
                                                                             null
-                                                                        ? Text(
-                                                                            "")
+                                                                        ? SizedBox()
                                                                         : Text(
                                                                             "${link["newsDate"]}" +
                                                                                 "${link["newsTime"]}",
@@ -768,7 +752,6 @@ class _DailyNewScreenState extends State<DailyNewScreen>
               isLoadingCat = false;
             });
             Fluttertoast.showToast(msg: "Product Not Found");
-            //show "data not found" in dialog
           }
         }, onError: (e) {
           setState(() {
@@ -868,7 +851,6 @@ class _DailyNewScreenState extends State<DailyNewScreen>
               imgList = [];
             });
             Fluttertoast.showToast(msg: "Data Not Found");
-            //show "data not found" in dialog
           }
         }, onError: (e) {
           setState(() {

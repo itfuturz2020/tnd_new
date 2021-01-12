@@ -20,7 +20,7 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with TickerProviderStateMixin {
   DashboardCountClass _dashboardCount =
       new DashboardCountClass(visitors: '0', calls: '0', share: '0');
 
@@ -802,7 +802,7 @@ class _HomeState extends State<Home> {
                               ),
                               onPressed: () async {
                                 Navigator.pushReplacementNamed(
-                                    context, '/HomeScreen');
+                                    context, '/HomePage');
                               },
                               shape: new RoundedRectangleBorder(
                                   borderRadius:

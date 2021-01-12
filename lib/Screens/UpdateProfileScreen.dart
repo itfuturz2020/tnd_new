@@ -238,7 +238,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         style: TextStyle(
                           fontSize: 22,
                           color: appPrimaryMaterialColor,
-                          //fontWeight: FontWeight.bold
                         ),
                       ),
                     ),
