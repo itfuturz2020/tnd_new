@@ -5,6 +5,7 @@ import 'package:carousel_pro/carousel_pro.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
 import 'package:the_national_dawn/Components/DailyNewsComponent.dart';
@@ -773,8 +774,11 @@ class _DailyNewScreenState extends State<DailyNewScreen>
         setState(() {
           isLoadingNews = true;
         });
-
-        FormData body = FormData.fromMap({"news_category": "${subcatId}"});
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        FormData body = FormData.fromMap({
+          "news_category": "${subcatId}",
+          "user_id": "${prefs.getString(Session.CustomerId)}"
+        });
 
         // print(body.fields);
         Services.PostForList1(api_name: 'custom/category_wise_news', body: body)

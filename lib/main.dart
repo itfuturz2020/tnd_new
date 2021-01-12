@@ -40,6 +40,7 @@ import 'package:the_national_dawn/Screens/MemberDetailScreen.dart';
 import 'package:the_national_dawn/Screens/MyEcardScreen.dart';
 import 'package:the_national_dawn/Screens/NetworkScreen.dart';
 import 'package:the_national_dawn/Screens/NewsBannerDetail.dart';
+import 'package:the_national_dawn/Screens/NotificationDilog.dart';
 import 'package:the_national_dawn/Screens/NotificationPopUp.dart';
 import 'package:the_national_dawn/Screens/NotificationScreen.dart';
 import 'package:the_national_dawn/Screens/OfferDetailScreen.dart';
@@ -79,19 +80,34 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
-        Get.to(NotificationPopUp(message: message));
-        print("onMessage: $message");
+        if (message["data"]["status"] == "requested") {
+          Get.to(NotificationPopUp(message: message));
+          print("onMessage: $message");
+        } else {
+          Get.to(NotificationDilog(message: message));
+          print("onMessage: $message");
+        }
       },
       //when app is closed and user click on notification
       onLaunch: (Map<String, dynamic> message) async {
-        Get.to(NotificationPopUp(message: message));
-        print("onLaunch: $message");
+        if (message["data"]["status"] == "requested") {
+          Get.to(NotificationPopUp(message: message));
+          print("onLaunch: $message");
+        } else {
+          Get.to(NotificationDilog(message: message));
+          print("onLaunch: $message");
+        }
       },
       //when app is in background and user click on notification
       onResume: (Map<String, dynamic> message) async {
         log("onResume:------------------- $message  --------------------------------");
-        Get.to(NotificationPopUp(message: message));
-        print("onResume: $message");
+        if (message["data"]["status"] == "requested") {
+          Get.to(NotificationPopUp(message: message));
+          print("onResume: $message");
+        } else {
+          Get.to(NotificationDilog(message: message));
+          print("onResume: $message");
+        }
       },
     );
   }
@@ -144,6 +160,7 @@ class _MyAppState extends State<MyApp> {
         '/RequestScreen': (context) => RequestScreen(),
         '/RegistrationProfileScreen': (context) => RegistrationProfileScreen(),
         '/NotificationPopUp': (context) => NotificationPopUp(),
+        '/NotificationDilog': (context) => NotificationDilog(),
 
         //===============digital card screen=============
         '/AddCard': (context) => AddCard(),
