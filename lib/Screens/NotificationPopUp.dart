@@ -110,8 +110,7 @@ class _NotificationPopUpState extends State<NotificationPopUp> {
             'notificationTitle': "${widget.message["notification"]["title"]}",
           },
         };
-        Services.postForSave2(
-                apiname: 'users/oneTwoOneConnectionReq', body: body)
+        Services.postForSave2(apiname: 'users/updateConnectionReq', body: body)
             .then((response) async {
           if (response.IsSuccess == true && response.Data == "1") {
             setState(() {
