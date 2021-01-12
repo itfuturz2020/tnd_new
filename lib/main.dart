@@ -78,7 +78,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     _firebaseMessaging.configure(
-      onMessage: (var message) async {
+      onMessage: (Map<String, dynamic> message) async {
         Get.to(NotificationPopUp(message: message));
         print("onMessage: $message");
       },

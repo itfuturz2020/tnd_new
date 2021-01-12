@@ -100,8 +100,8 @@ class _NotificationPopUpState extends State<NotificationPopUp> {
         });
         SharedPreferences prefs = await SharedPreferences.getInstance();
         var body = {
-          "requestSender": "${widget.message[2]["requestReceiver"]}",
-          "requestReceiver": "${widget.message[1]["requestSender"]}",
+          "requestSender": "${widget.message["requestReceiver"]}",
+          "requestReceiver": "${widget.message["requestSender"]}",
           "requestStatus": status.toString(),
           "notificationData": {
             'notificationBody': "Hi " +
@@ -110,7 +110,7 @@ class _NotificationPopUpState extends State<NotificationPopUp> {
                 status +
                 " your request",
             'notificationTitle':
-                "${widget.message[0]["notification"]["notificationTitle"]}",
+                "${widget.message["notification"]["notificationTitle"]}",
           },
         };
         Services.postForSave(apiname: 'users/updateConnectionReq', body: body)
