@@ -72,6 +72,8 @@ class _NotificationPopUpState extends State<NotificationPopUp> {
                             style: TextStyle(color: Colors.white, fontSize: 18),
                           ),
                     onPressed: () async {
+                      print(
+                          "=======================>${widget.message["requestReceiver"]}======================>${widget.message["requestSender"]}");
                       _sendRequest("rejected");
                       // SharedPreferences prefs = await SharedPreferences.getInstance();
                       Navigator.pop(context);
@@ -98,8 +100,8 @@ class _NotificationPopUpState extends State<NotificationPopUp> {
         });
         SharedPreferences prefs = await SharedPreferences.getInstance();
         var body = {
-          "requestSender": "${widget.message["requestReceiver"]}",
-          "requestReceiver": "${widget.message["requestSender"]}",
+          "requestSender": "${widget.message[2]["requestReceiver"]}",
+          "requestReceiver": "${widget.message[1]["requestSender"]}",
           "requestStatus": status.toString(),
           "notificationData": {
             'notificationBody': "Hi " +
@@ -107,7 +109,8 @@ class _NotificationPopUpState extends State<NotificationPopUp> {
                     "${prefs.getString(Session.CustomerName)} has " +
                 status +
                 " your request",
-            'notificationTitle': "${widget.message["notification"]["title"]}",
+            'notificationTitle':
+                "${widget.message[0]["notification"]["notificationTitle"]}",
           },
         };
         Services.postForSave(apiname: 'users/updateConnectionReq', body: body)
