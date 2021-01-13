@@ -82,10 +82,10 @@ class _MyAppState extends State<MyApp> {
       onMessage: (Map<String, dynamic> message) async {
         if (message["data"]["status"] == "requested") {
           Get.to(NotificationPopUp(message: message));
-          print("onMessage: $message");
+          print("onMessage  (requested) $message");
         } else {
           Get.to(NotificationDilog(message: message));
-          print("onMessage: $message");
+          print("onMessage (${message["data"]["status"]}): $message");
         }
       },
       //when app is closed and user click on notification

@@ -33,7 +33,7 @@ class _NotificationDilogState extends State<NotificationDilog> {
               padding: const EdgeInsets.only(
                   left: 5.0, right: 5, top: 15, bottom: 2),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   FlatButton(
                     color: appPrimaryMaterialColor,
