@@ -2,11 +2,62 @@ import 'package:flutter/material.dart';
 import 'package:the_national_dawn/Common/Constants.dart' as cnst;
 
 class NotificationComponent extends StatefulWidget {
+  var notificationData;
+
+  NotificationComponent({this.notificationData});
+
   @override
   _NotificationComponentState createState() => _NotificationComponentState();
 }
 
 class _NotificationComponentState extends State<NotificationComponent> {
+  String dateData;
+  List<String> date;
+  String month;
+
+  @override
+  void initState() {
+    //dateData = " ${widget.notificationData["date"]}";
+    funDate();
+  }
+
+  funDate() {
+    dateData = " ${widget.notificationData["date"]}";
+    date = dateData.split(' ');
+    print("-------------------->${date}");
+    funMonth("${date[2]}");
+  }
+
+  funMonth(String mon) {
+    if (mon == "01") {
+      month = "Jan";
+    } else if (mon == "02") {
+      month = "Feb";
+    } else if (mon == "03") {
+      month = "March";
+    } else if (mon == "04") {
+      month = "April";
+    } else if (mon == "05") {
+      month = "May";
+    } else if (mon == "06") {
+      month = "June";
+    } else if (mon == "07") {
+      month = "July";
+    } else if (mon == "08") {
+      month = "Aug";
+    } else if (mon == "09") {
+      month = "Sept";
+    } else if (mon == "10") {
+      month = "Oct";
+    } else if (mon == "11") {
+      month = "Nov";
+    } else if (mon == "12") {
+      month = "Dec";
+    } else {
+      month = "";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -46,7 +97,7 @@ class _NotificationComponentState extends State<NotificationComponent> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Text(
-                                '6',
+                                " ${date[1]}",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 15,
@@ -70,7 +121,15 @@ class _NotificationComponentState extends State<NotificationComponent> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Text(
-                                " Dec 2020",
+                                " ${month}",
+                                //  '${new DateFormat.MMM().format(DateTime.parse(DateFormat("yyyy-MM-dd").parse(widget.notification["Date"].toString().substring(0,10)).toString()))},${widget.notification["Date"].substring(0, 4)}',
+                                style: TextStyle(
+                                    fontSize: 11,
+                                    color: cnst.appPrimaryMaterialColor,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              Text(
+                                " ${date[3]}",
                                 //  '${new DateFormat.MMM().format(DateTime.parse(DateFormat("yyyy-MM-dd").parse(widget.notification["Date"].toString().substring(0,10)).toString()))},${widget.notification["Date"].substring(0, 4)}',
                                 style: TextStyle(
                                     fontSize: 11,
@@ -91,7 +150,7 @@ class _NotificationComponentState extends State<NotificationComponent> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "New Meeting scheduled",
+                          " ${widget.notificationData["notification"]["notificationTitle"]}",
                           //'${widget.notification["Title"]}',
                           style: TextStyle(
                               color: Colors.black,
@@ -100,7 +159,7 @@ class _NotificationComponentState extends State<NotificationComponent> {
                         ),
                         Text(
                           // '${widget.notification["Description"]}',
-                          "Meeting on 26 on Zoom Cloud Meeting ",
+                          "${widget.notificationData["notification"]["notificationBody"]}",
                           style:
                               TextStyle(color: Colors.grey[500], fontSize: 14),
                         ),

@@ -3,13 +3,16 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:share/share.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
+import 'package:the_national_dawn/Common/Services.dart';
 import 'package:the_national_dawn/Screens/PopularNewsScreen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DailyNewsComponent extends StatefulWidget {
-  var newsData, newsType;
+  var newsData, newsType, isBookmark;
   String instagram, facebook, linkedIn, twitter, whatsapp;
 
   DailyNewsComponent(
@@ -19,13 +22,24 @@ class DailyNewsComponent extends StatefulWidget {
       this.twitter,
       this.whatsapp,
       this.newsData,
-      this.newsType});
+      this.newsType,
+      this.isBookmark});
 
   @override
   _DailyNewsComponentState createState() => _DailyNewsComponentState();
 }
 
 class _DailyNewsComponentState extends State<DailyNewsComponent> {
+  bool isBookmarkLoading = false;
+  bool isBookmark = false;
+
+  @override
+  void initState() {
+    setState(() {
+      isBookmark = widget.isBookmark;
+    });
+  }
+
   void launchwhatsapp({
     @required String phone,
     @required String message,
@@ -197,13 +211,26 @@ class _DailyNewsComponentState extends State<DailyNewsComponent> {
                             SizedBox(
                               width: 20,
                             ),
-                            Container(
-                                height: 25,
-                                child: Icon(
-                                  Icons.favorite,
-                                  size: 25,
-                                  color: Colors.red,
-                                )),
+                            GestureDetector(
+                              onTap: () {
+                                _addToBookmark();
+                              },
+                              child: isBookmark == false
+                                  ? Container(
+                                      height: 25,
+                                      child: Icon(
+                                        Icons.favorite_border,
+                                        size: 25,
+                                        color: Colors.red,
+                                      ))
+                                  : Container(
+                                      height: 25,
+                                      child: Icon(
+                                        Icons.favorite,
+                                        size: 25,
+                                        color: Colors.red,
+                                      )),
+                            ),
                           ],
                         ),
                       ),
@@ -235,5 +262,48 @@ class _DailyNewsComponentState extends State<DailyNewsComponent> {
         ),
       ),
     );
+  }
+
+  _addToBookmark() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        var body = {
+          "userId": prefs.getString(Session.CustomerId),
+          "newsId": "${widget.newsData["id"]}",
+        };
+        setState(() {
+          isBookmarkLoading = true;
+        });
+        Services.postForSave(apiname: 'admin/addToBookMark', body: body).then(
+            (responseList) async {
+          setState(() {
+            isBookmarkLoading = false;
+          });
+          if (responseList.IsSuccess == true && responseList.Data == "1") {
+            setState(() {
+              isBookmark = !isBookmark;
+            });
+            if (isBookmark == true) {
+              Fluttertoast.showToast(msg: "Added to Bookmark");
+            } else {
+              Fluttertoast.showToast(msg: "Remove from Bookmark");
+            }
+          } else {
+            Fluttertoast.showToast(msg: "Data Not Found");
+            //show "data not found" in dialog
+          }
+        }, onError: (e) {
+          setState(() {
+            isBookmarkLoading = false;
+          });
+          print("error on call -> ${e.message}");
+          Fluttertoast.showToast(msg: "Something Went Wrong");
+        });
+      }
+    } on SocketException catch (_) {
+      Fluttertoast.showToast(msg: "No Internet Connection.");
+    }
   }
 }

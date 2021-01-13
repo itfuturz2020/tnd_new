@@ -674,6 +674,11 @@ class _DailyNewScreenState extends State<DailyNewScreen>
                                                                           index]
                                                                       [
                                                                       "newsType"],
+                                                              isBookmark:
+                                                                  searchlist[
+                                                                          index]
+                                                                      [
+                                                                      "bookmark"],
                                                             );
                                                           })
                                                       : _isSearching && isfirst
@@ -694,6 +699,10 @@ class _DailyNewScreenState extends State<DailyNewScreen>
                                                                   newsData:
                                                                       searchlist[
                                                                           index],
+                                                                  isBookmark: searchlist[
+                                                                          index]
+                                                                      [
+                                                                      "bookmark"],
                                                                 );
                                                               })
                                                           : ListView.builder(
@@ -712,6 +721,10 @@ class _DailyNewScreenState extends State<DailyNewScreen>
                                                                   newsData:
                                                                       subCategoriesList[
                                                                           index],
+                                                                  isBookmark: subCategoriesList[
+                                                                          index]
+                                                                      [
+                                                                      "bookmark"],
                                                                 );
                                                               })
                                                   : Center(

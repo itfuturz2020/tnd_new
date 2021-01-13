@@ -1,5 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
+import 'package:the_national_dawn/Common/Services.dart';
+import 'package:the_national_dawn/Components/LoadingComponent.dart';
 import 'package:the_national_dawn/Components/NotificationComponent.dart';
 
 class NotificationScreen extends StatefulWidget {
@@ -8,6 +14,14 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
+  List notifiactionList = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    _getNotification();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,12 +68,53 @@ class _NotificationScreenState extends State<NotificationScreen> {
           ),
         ),
       ),
-      body: ListView.builder(
-          physics: BouncingScrollPhysics(),
-          itemCount: 5,
-          itemBuilder: (BuildContext context, int index) {
-            return NotificationComponent();
-          }),
+      body: isLoading == true
+          ? LoadingComponent()
+          : notifiactionList.length > 0
+              ? ListView.builder(
+                  physics: BouncingScrollPhysics(),
+                  itemCount: notifiactionList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return NotificationComponent(
+                      notificationData: notifiactionList[index],
+                    );
+                  })
+              : Center(child: Text("No Data Found...!")),
     );
+  }
+
+  _getNotification() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        var body = {"id": prefs.getString(Session.CustomerId)};
+        Services.PostForList(
+                api_name: 'users/getsingleusernotification', body: body)
+            .then((ResponseList) async {
+          setState(() {
+            isLoading = false;
+          });
+          if (ResponseList.length > 0) {
+            setState(() {
+              notifiactionList = ResponseList;
+            });
+          } else {
+            setState(() {
+              isLoading = false;
+            });
+            //show "data not found" in dialog
+          }
+        }, onError: (e) {
+          setState(() {
+            isLoading = false;
+          });
+          print("error on call -> ${e.message}");
+          Fluttertoast.showToast(msg: "Something Went Wrong");
+        });
+      }
+    } on SocketException catch (_) {
+      Fluttertoast.showToast(msg: "No Internet Connection.");
+    }
   }
 }

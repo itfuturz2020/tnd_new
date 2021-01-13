@@ -53,7 +53,7 @@ class _BookMarkComponentState extends State<BookMarkComponent> {
                       Padding(
                         padding: const EdgeInsets.only(left: 16.0, top: 15.0),
                         child: Text(
-                          "${widget.bookmarkData["newsId"]["headline"]}",
+                          "${widget.bookmarkData["title"]}",
                           maxLines: 4,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
@@ -104,7 +104,7 @@ class _BookMarkComponentState extends State<BookMarkComponent> {
                                 color: Colors.grey,
                               ),
                               Text(
-                                "${widget.bookmarkData["newsId"]["newsDate"] + widget.bookmarkData["newsId"]["newsTime"]}}",
+                                "${widget.bookmarkData["newsDate"] + widget.bookmarkData["newsTime"]}}",
                                 style:
                                     TextStyle(color: Colors.grey, fontSize: 12),
                               )
@@ -123,7 +123,7 @@ class _BookMarkComponentState extends State<BookMarkComponent> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(14),
                     child: Image.network(
-                      "${widget.bookmarkData["newsId"]["newsImage"]}",
+                      "${widget.bookmarkData["featured_img_src"]}",
                       height: 150,
                       width: 130,
                       fit: BoxFit.cover,

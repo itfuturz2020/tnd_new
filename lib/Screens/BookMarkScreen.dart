@@ -16,18 +16,9 @@ class BookMarkScreen extends StatefulWidget {
 class _BookMarkScreenState extends State<BookMarkScreen> {
   List bookmarkList = [];
   bool isLoading = true;
-  String CustomerId;
-
-  _profile() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      CustomerId = prefs.getString(Session.CustomerId);
-    });
-  }
 
   @override
   void initState() {
-    _profile();
     _getBookmark();
   }
 
@@ -106,7 +97,7 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
             height: MediaQuery.of(context).size.height,
             child: isLoading == true
                 ? LoadingBlueComponent()
-                : bookmarkList.length < 0
+                : bookmarkList.length > 0
                     ? ListView.builder(
                         physics: BouncingScrollPhysics(),
                         // scrollDirection: Axis.horizontal,
@@ -125,15 +116,17 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        var body = {"userId": CustomerId};
-        Services.PostForList(api_name: 'admin/getAllBookMarkNews', body: body)
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        var body = {"userId": prefs.getString(Session.CustomerId)};
+        Services.PostForList(
+                api_name: 'admin/getsingleuserbookmark', body: body)
             .then((ResponseList) async {
           setState(() {
             isLoading = false;
           });
           if (ResponseList.length > 0) {
             setState(() {
-              bookmarkList = ResponseList;
+              bookmarkList = ResponseList[0]["Data"];
             });
           } else {
             setState(() {
