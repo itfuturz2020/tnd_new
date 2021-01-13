@@ -730,7 +730,7 @@ class _AlertSendState extends State<AlertSend> {
             'notificationBody': "Hi " +
                 "${widget.directoryData["name"]}" +
                 ", " +
-                "${prefs.getString(Session.CustomerName)} wants 1-2-1 meeting with you.",
+                "${prefs.getString(Session.CustomerName)} wants ${requestType} 1-2-1 meeting with you.",
             'notificationTitle': "TND Request",
           },
           "meetingType": requestType,
