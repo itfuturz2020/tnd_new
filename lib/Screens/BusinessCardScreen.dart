@@ -30,6 +30,7 @@ class _BusinessCardScreenState extends State<BusinessCardScreen> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
+          centerTitle: true,
           elevation: 0,
           backgroundColor: Colors.white,
           title: Center(

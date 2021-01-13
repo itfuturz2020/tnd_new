@@ -40,6 +40,7 @@ class _EventTicketScreenState extends State<EventTicketScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
         title: Padding(

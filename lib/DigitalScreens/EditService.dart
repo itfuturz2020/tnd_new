@@ -98,6 +98,7 @@ class _EditServiceState extends State<EditService> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           title: Text('Edit Service'),
         ),
         body: Container(

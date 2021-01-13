@@ -12,6 +12,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
         title: Center(

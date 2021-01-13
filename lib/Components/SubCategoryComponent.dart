@@ -29,6 +29,7 @@ class _SubCategoryComponentState extends State<SubCategoryComponent> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white,
+          centerTitle: true,
           title: Center(
             child: Text(
               "Category",

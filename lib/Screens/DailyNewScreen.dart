@@ -58,6 +58,7 @@ class _DailyNewScreenState extends State<DailyNewScreen>
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
+        centerTitle: true,
         title: FittedBox(
           child: Row(
             children: [
@@ -88,13 +89,32 @@ class _DailyNewScreenState extends State<DailyNewScreen>
             ],
           ),
         ),
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.of(context).pop();
-          },
-          child: Icon(
-            Icons.arrow_back_ios_outlined,
-            color: Colors.black,
+        leading: Padding(
+          padding:
+              const EdgeInsets.only(top: 8.0, right: 0, left: 10, bottom: 8),
+          child: GestureDetector(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: Container(
+              height: 20,
+              width: 40,
+              decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  border: Border.all(color: Colors.grey[200], width: 1),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey[600].withOpacity(0.2),
+                        blurRadius: 1.0,
+                        spreadRadius: 1.0,
+                        offset: Offset(3.0, 5.0))
+                  ]),
+              child: Icon(
+                Icons.arrow_back_ios_outlined,
+                color: Colors.black,
+              ),
+            ),
           ),
         ),
         iconTheme: new IconThemeData(color: Colors.black),
@@ -107,7 +127,6 @@ class _DailyNewScreenState extends State<DailyNewScreen>
                   child: Column(
                     children: [
                       SizedBox(
-                        //scroll tabbar
                         height: 50.0,
                         child: TabBar(
                           isScrollable: true,
@@ -118,15 +137,12 @@ class _DailyNewScreenState extends State<DailyNewScreen>
                           onTap: (index) {
                             _newsCategory(subCategoriesTab[index]["newsType"]);
                           },
-                          //labelPadding: EdgeInsets.symmetric(horizontal: 8),
                           tabs: List<Widget>.generate(subCategoriesTab.length,
                               (int index) {
                             return Tab(
                               child: Text(
                                 subCategoriesTab[index]["newsType"],
-                                style: TextStyle(
-                                    // fontWeight: FontWeight.bold,
-                                    fontSize: 14.0),
+                                style: TextStyle(fontSize: 14.0),
                               ),
                             );
                           }),

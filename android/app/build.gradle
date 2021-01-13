@@ -42,8 +42,8 @@ android {
         applicationId "com.example1.the_national_dawn"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 10
-        versionName "1.0.8"
+        versionCode 11
+        versionName "1.0.9"
         multiDexEnabled true
     }
 

@@ -26,11 +26,12 @@ class _StoriesScreenState extends State<StoriesScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
         title: Center(
           child: Text(
-            "Success Story ",
+            "Success Stories ",
             style: TextStyle(
               color: appPrimaryMaterialColor,
               fontSize: 18,

@@ -68,6 +68,7 @@ class _CalendarDetailScreenState extends State<CalendarDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
         title: Padding(

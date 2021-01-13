@@ -41,6 +41,7 @@ class _MyEcardScreenState extends State<MyEcardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
         title: Center(

@@ -42,6 +42,7 @@ class _EnquiryFormState extends State<EnquiryForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
         title: Padding(

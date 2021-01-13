@@ -36,6 +36,7 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
+          centerTitle: true,
           elevation: 0,
           backgroundColor: Colors.white,
           title: Center(

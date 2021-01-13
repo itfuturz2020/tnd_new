@@ -30,6 +30,7 @@ class _DirectoryProfileComponentState extends State<DirectoryProfileComponent> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
+        centerTitle: true,
         title: Center(
           child: Text(
             "Directory Profile",

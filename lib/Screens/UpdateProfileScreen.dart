@@ -319,6 +319,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
         title: Center(

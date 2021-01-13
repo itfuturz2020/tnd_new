@@ -136,6 +136,7 @@ class _AddOfferState extends State<AddOffer>
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           title: Text('Add Offer'),
         ),
         body: Container(

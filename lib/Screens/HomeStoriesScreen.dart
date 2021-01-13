@@ -25,11 +25,12 @@ class _HomeStoriesScreenState extends State<HomeStoriesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
         title: Center(
           child: Text(
-            "Success Story ",
+            "Success Stories",
             style: TextStyle(
               color: appPrimaryMaterialColor,
               fontSize: 18,
@@ -37,7 +38,7 @@ class _HomeStoriesScreenState extends State<HomeStoriesScreen> {
             ),
           ),
         ),
-        leading: Padding(
+        /* leading: Padding(
           padding:
               const EdgeInsets.only(top: 8.0, right: 0, left: 10, bottom: 8),
           child: GestureDetector(
@@ -64,7 +65,7 @@ class _HomeStoriesScreenState extends State<HomeStoriesScreen> {
               ),
             ),
           ),
-        ),
+        ),*/
       ),
       backgroundColor: Colors.white,
       body: isLoading == true

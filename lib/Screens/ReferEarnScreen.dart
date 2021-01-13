@@ -18,6 +18,7 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.white,
         title: Center(
           child: Text(

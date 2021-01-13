@@ -139,6 +139,7 @@ class _EditOfferState extends State<EditOffer>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text('Edit Offer'),
       ),
       body: Container(

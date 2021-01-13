@@ -17,6 +17,7 @@ class _OfferDetailState extends State<OfferDetail> {
     final CardTheme cardTheme = CardTheme.of(context);
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text('Offer Detail'),
       ),
       body: Container(

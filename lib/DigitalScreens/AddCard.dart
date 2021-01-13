@@ -130,6 +130,7 @@ class _AddCardState extends State<AddCard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text("Make New Card"),
       ),
       body: SingleChildScrollView(

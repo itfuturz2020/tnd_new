@@ -29,6 +29,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
+          centerTitle: true,
           elevation: 0,
           backgroundColor: Colors.white,
           title: Center(

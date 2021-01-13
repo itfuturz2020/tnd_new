@@ -243,6 +243,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
         title: Center(

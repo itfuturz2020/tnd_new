@@ -615,6 +615,7 @@ class _CalenderScreenState extends State<CalenderScreen>
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
         title: Padding(
