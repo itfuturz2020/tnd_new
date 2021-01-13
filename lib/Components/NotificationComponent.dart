@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:the_national_dawn/Common/Constants.dart' as cnst;
+import 'package:url_launcher/url_launcher.dart';
 
 class NotificationComponent extends StatefulWidget {
   var notificationData;
@@ -55,6 +56,15 @@ class _NotificationComponentState extends State<NotificationComponent> {
       month = "Dec";
     } else {
       month = "";
+    }
+  }
+
+  _launchURL() async {
+    var url = "${widget.notificationData["meetingLink"]}";
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
     }
   }
 
@@ -163,6 +173,43 @@ class _NotificationComponentState extends State<NotificationComponent> {
                           style:
                               TextStyle(color: Colors.grey[500], fontSize: 14),
                         ),
+                        widget.notificationData["meetingType"] == "online"
+                            ? Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(""),
+                                  GestureDetector(
+                                    onTap: () {
+                                      _launchURL();
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: cnst.appPrimaryMaterialColor,
+                                            width: 0.5),
+                                        borderRadius: BorderRadius.only(
+                                            topRight: Radius.circular(7),
+                                            bottomLeft: Radius.circular(7),
+                                            bottomRight: Radius.circular(7),
+                                            topLeft: Radius.circular(7)),
+                                        // color: cnst.appPrimaryMaterialColor
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Text(
+                                          "Go",
+                                          style: TextStyle(
+                                              color:
+                                                  cnst.appPrimaryMaterialColor,
+                                              fontSize: 16),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              )
+                            : Container()
                       ],
                     ),
                   ))

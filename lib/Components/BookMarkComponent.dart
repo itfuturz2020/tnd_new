@@ -79,7 +79,7 @@ class _BookMarkComponentState extends State<BookMarkComponent> {
                           ),
                           child: Center(
                               child: Text(
-                            "${widget.bookmarkData["userId"]["name"]}",
+                            "${widget.bookmarkData["content"]}",
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 color: Colors.white,

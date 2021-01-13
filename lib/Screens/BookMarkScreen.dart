@@ -126,7 +126,7 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
           });
           if (ResponseList.length > 0) {
             setState(() {
-              bookmarkList = ResponseList[0]["Data"];
+              bookmarkList = ResponseList;
             });
           } else {
             setState(() {

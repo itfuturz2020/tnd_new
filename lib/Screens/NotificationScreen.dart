@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
+import 'package:the_national_dawn/Components/LoadingBlueComponent.dart';
 import 'package:the_national_dawn/Components/LoadingComponent.dart';
 import 'package:the_national_dawn/Components/NotificationComponent.dart';
 
@@ -69,7 +70,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
         ),
       ),
       body: isLoading == true
-          ? LoadingComponent()
+          ? LoadingBlueComponent()
           : notifiactionList.length > 0
               ? ListView.builder(
                   physics: BouncingScrollPhysics(),
