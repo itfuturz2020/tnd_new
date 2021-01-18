@@ -512,7 +512,7 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                     "${profileList["mobile"]}",
                                                     style: TextStyle(
                                                         color: Colors.black,
-                                                        fontSize: 20,
+                                                        fontSize: 16,
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         letterSpacing: 1),
@@ -520,22 +520,19 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                 ),
                                                 Flexible(
                                                   child: Text(
-//                                                "+91-9723131314",
                                                       "${profileList["whatsApp"]}",
                                                       style: TextStyle(
                                                           color: Colors.black,
-                                                          fontSize: 17,
+                                                          fontSize: 16,
                                                           fontWeight:
                                                               FontWeight.bold)),
                                                 ),
                                                 Flexible(
                                                   child: Text(
-//                                                "xsantosh7@gmail.com",
                                                       "${profileList["email"]}",
                                                       style: TextStyle(
-                                                          color:
-                                                              Colors.grey[700],
-                                                          fontSize: 16,
+                                                          color: Colors.black,
+                                                          fontSize: 15,
                                                           fontWeight:
                                                               FontWeight.w500)),
                                                 )
@@ -609,14 +606,14 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                               spreadRadius: 2.0,
                                               offset: Offset(3.0, 5.0))
                                         ]),
-                                    child: Center(
+                                    /* child: Center(
                                       child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
+                                        // mainAxisAlignment:
+                                        //     MainAxisAlignment.spaceAround,
                                         children: <Widget>[
                                           Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 5.0),
+                                            padding: const EdgeInsets.only(
+                                                top: 15.0),
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
@@ -643,84 +640,78 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                               ],
                                             ),
                                           ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 18.0, top: 12),
-                                                child: Text(
-                                                  // "Mr. Natasha Goel",
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 18.0, top: 12),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Text(
                                                   "Company Name  : ",
                                                   style: TextStyle(
-                                                      color: Colors.grey[700],
-                                                      fontSize: 16,
+                                                      color: Colors.grey[500],
+                                                      fontSize: 15,
                                                       fontWeight:
                                                           FontWeight.w500),
                                                 ),
-                                              ),
-                                              Flexible(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 8.0, top: 12),
+                                                Flexible(
                                                   child: Text(
-                                                    // "Mr. Natasha Goel",
                                                     "${profileList["company_name"] ?? "-"}",
                                                     style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 16,
                                                         fontWeight:
-                                                            FontWeight.bold),
+                                                            FontWeight.w600),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 18.0),
-                                                child: Text(
-                                                  // "Mr. Natasha Goel",
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 5.0, left: 18),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Text(
                                                   "About Bussiness  : ",
                                                   style: TextStyle(
-                                                      color: Colors.grey[700],
-                                                      fontSize: 16,
+                                                      color: Colors.grey[500],
+                                                      fontSize: 15,
                                                       fontWeight:
                                                           FontWeight.w500),
                                                 ),
-                                              ),
-                                              Flexible(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 8.0),
-                                                  child: Text(
-                                                      "${profileList["about_business"] ?? "-"}",
-                                                      style: TextStyle(
-                                                          color:
-                                                              Colors.grey[700],
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.w500)),
+                                                Flexible(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 3.0),
+                                                    child: Text(
+                                                        "${profileList["about_business"]}" !=
+                                                                ""
+                                                            ? "${profileList["about_business"]}"
+                                                            : "-",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600)),
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 18.0),
-                                                child: Text(
-                                                  // "Mr. Natasha Goel",
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 5.0, left: 18),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Text(
                                                   "Business Category  : ",
                                                   style: TextStyle(
                                                       color: Colors.grey[700],
@@ -728,23 +719,27 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                       fontWeight:
                                                           FontWeight.w500),
                                                 ),
-                                              ),
-                                              Flexible(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 8.0),
-                                                  child: Text(
-                                                      "${business_category ?? "-"}",
-                                                      style: TextStyle(
-                                                          color:
-                                                              Colors.grey[700],
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.w500)),
+                                                Flexible(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 8.0),
+                                                    child: Text(
+                                                        //  "${profileList[business_category] ?? "-"}",
+                                                        "${profileList["business_category"]["categoryName"]}" !=
+                                                                ""
+                                                            ? "${profileList["business_category"]["categoryName"]}"
+                                                            : "-",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600)),
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                           Row(
                                             mainAxisAlignment:
@@ -769,8 +764,11 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                       const EdgeInsets.only(
                                                           left: 8.0),
                                                   child: Text(
-//                                          "Future Group Info Soft",
-                                                      "${profileList["address"] ?? "-"}",
+                                                      //  "${profileList["address"] ?? "-"}",
+                                                      "${profileList["address"]}" !=
+                                                              ""
+                                                          ? "${profileList["address"]}"
+                                                          : "-",
                                                       style: TextStyle(
                                                           color:
                                                               Colors.grey[700],
@@ -783,6 +781,192 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                           ),
                                         ],
                                       ),
+                                    ),*/
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 15.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              Icon(
+                                                Icons.business,
+                                                size: 25,
+                                                color: appPrimaryMaterialColor,
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 5),
+                                                child: Text(
+                                                  'Business Info',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: Colors.black),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 20.0),
+                                          child: Column(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  top: 15,
+                                                ),
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      "Company Name : ",
+                                                      style: TextStyle(
+                                                          color:
+                                                              Colors.grey[500],
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w500),
+                                                    ),
+                                                    Text(
+                                                      "${profileList["company_name"]}" !=
+                                                              ""
+                                                          ? "${profileList["company_name"]}"
+                                                          : "-",
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  top: 5,
+                                                ),
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      "Company Website : ",
+                                                      style: TextStyle(
+                                                          color:
+                                                              Colors.grey[500],
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w500),
+                                                    ),
+                                                    Text(
+                                                      "${profileList["company_website"]}" !=
+                                                              null
+                                                          ? "${profileList["company_website"]}"
+                                                          : "-",
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 5),
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      "About Bussiness : ",
+                                                      style: TextStyle(
+                                                          color:
+                                                              Colors.grey[500],
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w500),
+                                                    ),
+                                                    Text(
+                                                      "${profileList["about_business"]}" !=
+                                                              ""
+                                                          ? "${profileList["about_business"]}"
+                                                          : "-",
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 5),
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      "Business Category : ",
+                                                      style: TextStyle(
+                                                          color:
+                                                              Colors.grey[500],
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w500),
+                                                    ),
+                                                    Text(
+                                                      "${profileList["business_category"]["categoryName"]}" !=
+                                                              ""
+                                                          ? "${profileList["business_category"]["categoryName"]}"
+                                                          : "-",
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 5, bottom: 20),
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      "Address : ",
+                                                      style: TextStyle(
+                                                          color:
+                                                              Colors.grey[500],
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w500),
+                                                    ),
+                                                    Text(
+                                                      "${profileList["address"]}" !=
+                                                              ""
+                                                          ? "${profileList["address"]}"
+                                                          : "-",
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
@@ -881,7 +1065,10 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                       const EdgeInsets.only(
                                                           left: 8.0, top: 12),
                                                   child: Text(
-                                                    "${profileList["achievement"] ?? "-"}",
+                                                    "${profileList["achievement"]}" !=
+                                                            ""
+                                                        ? "${profileList["achievement"]}"
+                                                        : "-",
                                                     style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 20,
