@@ -38,6 +38,7 @@ import 'package:the_national_dawn/Screens/HomeStoriesScreen.dart';
 import 'package:the_national_dawn/Screens/LoginScreen.dart';
 import 'package:the_national_dawn/Screens/MemberDetailScreen.dart';
 import 'package:the_national_dawn/Screens/MyEcardScreen.dart';
+import 'package:the_national_dawn/Screens/MyOfferDetailScreen.dart';
 import 'package:the_national_dawn/Screens/NetworkScreen.dart';
 import 'package:the_national_dawn/Screens/NewsBannerDetail.dart';
 import 'package:the_national_dawn/Screens/NotificationDilog.dart';
@@ -161,6 +162,7 @@ class _MyAppState extends State<MyApp> {
         '/RegistrationProfileScreen': (context) => RegistrationProfileScreen(),
         '/NotificationPopUp': (context) => NotificationPopUp(),
         '/NotificationDilog': (context) => NotificationDilog(),
+        '/MyOfferDetailScreen': (context) => MyOfferDetailScreen(),
 
         //===============digital card screen=============
         '/AddCard': (context) => AddCard(),

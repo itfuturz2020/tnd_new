@@ -24,6 +24,7 @@ class DirectoryComponent extends StatefulWidget {
 }
 
 class _DirectoryComponentState extends State<DirectoryComponent> {
+  List list;
   launchSocialMediaUrl(var url) async {
     if (await canLaunch(url)) {
       await launch(url);
@@ -703,7 +704,7 @@ class _AlertSendState extends State<AlertSend> {
                 ),
           onPressed: () async {
             _sendRequest();
-            SharedPreferences prefs = await SharedPreferences.getInstance();
+            Navigator.pop(context);
 
             // await prefs.clear();
             // Navigator.pushNamedAndRemoveUntil(

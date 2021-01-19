@@ -66,28 +66,28 @@ class _BookMarkComponentState extends State<BookMarkComponent> {
                       SizedBox(
                         height: 8,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 13.0),
-                        child: Container(
-                          height: 30,
-                          width: 120,
-                          decoration: BoxDecoration(
-                            //color: Color(0xff4B4B4BE6),
-                            color: Colors.grey[600],
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(14.0)),
-                          ),
-                          child: Center(
-                              child: Text(
-                            "${widget.bookmarkData["content"]}",
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold),
-                          )),
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(left: 13.0),
+                      //   child: Container(
+                      //     height: 30,
+                      //     width: 120,
+                      //     decoration: BoxDecoration(
+                      //       //color: Color(0xff4B4B4BE6),
+                      //       color: Colors.grey[600],
+                      //       borderRadius:
+                      //           BorderRadius.all(Radius.circular(14.0)),
+                      //     ),
+                      //     child: Center(
+                      //         child: Text(
+                      //       "${widget.bookmarkData["content"]}",
+                      //       overflow: TextOverflow.ellipsis,
+                      //       style: TextStyle(
+                      //           color: Colors.white,
+                      //           fontSize: 14,
+                      //           fontWeight: FontWeight.bold),
+                      //     )),
+                      //   ),
+                      // ),
                       SizedBox(
                         height: 8,
                       ),
@@ -104,7 +104,7 @@ class _BookMarkComponentState extends State<BookMarkComponent> {
                                 color: Colors.grey,
                               ),
                               Text(
-                                "${widget.bookmarkData["newsDate"] + widget.bookmarkData["newsTime"]}}",
+                                "${widget.bookmarkData["newsDate"] + "  " + widget.bookmarkData["newsTime"]}",
                                 style:
                                     TextStyle(color: Colors.grey, fontSize: 12),
                               )
@@ -119,12 +119,12 @@ class _BookMarkComponentState extends State<BookMarkComponent> {
                   ),
                 ),
                 Container(
-                  height: 150,
+                  height: 110,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(14),
                     child: Image.network(
                       "${widget.bookmarkData["featured_img_src"]}",
-                      height: 150,
+                      height: 100,
                       width: 130,
                       fit: BoxFit.cover,
                     ),

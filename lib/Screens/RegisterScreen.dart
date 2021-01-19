@@ -140,111 +140,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
               ),
-              /* Padding(
-                padding: const EdgeInsets.only(left: 30.0, right: 30, top: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width / 1.5,
-                      child: TextFormField(
-                        keyboardType: TextInputType.phone,
-                        controller: txtMobileNumber,
-                        style: TextStyle(fontSize: 15),
-                        cursorColor: appPrimaryMaterialColor,
-                        maxLength: 10,
-                        validator: (phone) {
-                          Pattern pattern = r'(^(?:[+0]9)?[0-9]{10,}$)';
-                          RegExp regExp = new RegExp(pattern);
-                          if (phone.length == 0) {
-                            return 'Please enter mobile number';
-                          } else if (!regExp.hasMatch(phone)) {
-                            return 'Please enter valid mobile number';
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          counterText: "",
-                          contentPadding: EdgeInsets.only(
-                              top: 1.0, bottom: 1, left: 10, right: 1),
-                          hintText: "Enter Mobile No",
-                          hintStyle: TextStyle(
-                              color: Colors.grey[400],
-                              fontWeight: FontWeight.w500),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
-                            borderSide:
-                                BorderSide(color: appPrimaryMaterialColor[400]),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
-                            borderSide:
-                                BorderSide(color: appPrimaryMaterialColor),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        _sendOTP();
-                      },
-                      child: Container(
-                          child: Icon(
-                            Icons.arrow_forward,
-                            color: appPrimaryMaterialColor,
-                          ),
-                          height: 45,
-                          width: MediaQuery.of(context).size.width / 7,
-                          decoration: new BoxDecoration(
-                              border: Border.all(
-                                  color: appPrimaryMaterialColor[400]),
-                              //color: appPrimaryMaterialColor, // border color
-                              // shape: BoxShape.circle,
-                              borderRadius: BorderRadius.circular(10))),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 30.0, right: 30, top: 10),
-                child: Container(
-                    child: Center(
-                      child: PinCodeTextField(
-                        controller: txtOTP,
-                        autofocus: false,
-                        wrapAlignment: WrapAlignment.center,
-                        highlight: true,
-                        pinBoxHeight: 35,
-                        pinBoxWidth: 45,
-                        highlightColor: Colors.black,
-                        defaultBorderColor: Colors.black,
-                        hasTextBorderColor: appPrimaryMaterialColor,
-                        maxLength: 4,
-                        pinBoxDecoration:
-                            ProvidedPinBoxDecoration.underlinedPinBoxDecoration,
-                        pinTextStyle: TextStyle(fontSize: 15),
-                      ),
-                    ),
-                    height: 45,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: new BoxDecoration(
-                        border: Border.all(color: appPrimaryMaterialColor[400]),
-                        //color: appPrimaryMaterialColor, // border color
-                        // shape: BoxShape.circle,
-                        borderRadius: BorderRadius.circular(10))),
-              ),*/
               Padding(
                 padding: const EdgeInsets.only(left: 30.0, right: 30, top: 10),
                 child: TextFormField(
@@ -333,75 +228,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
               ),
-              /* Row(
-                children: [
-                  Flexible(
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 30.0, right: 15, top: 10),
-                      child: TextFormField(
-                        keyboardType: TextInputType.text,
-                        controller: txtReferredBy,
-                        style: TextStyle(fontSize: 15),
-                        cursorColor: appPrimaryMaterialColor,
-                        decoration: InputDecoration(
-                          counterText: "",
-                          contentPadding: EdgeInsets.only(
-                              top: 1.0, bottom: 1, left: 10, right: 1),
-                          hintText: "Enter Referral Code",
-                          hintStyle: TextStyle(
-                              color: Colors.grey[400],
-                              fontWeight: FontWeight.w500),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
-                            borderSide:
-                                BorderSide(color: appPrimaryMaterialColor[400]),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
-                            borderSide:
-                                BorderSide(color: appPrimaryMaterialColor),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10.0, right: 30),
-                    child: SizedBox(
-                      width: 100,
-                      child: RaisedButton(
-                          color: appPrimaryMaterialColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          onPressed: () {},
-                          child: isLoading
-                              ? CircularProgressIndicator(
-                                  valueColor: new AlwaysStoppedAnimation<Color>(
-                                      Colors.white),
-                                )
-                              : Text("VERIFY",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 16))),
-                    ),
-                  ),
-                ],
-              ),*/
               Padding(
                 padding: const EdgeInsets.only(left: 30.0, right: 30, top: 30),
                 child: Container(
@@ -450,6 +276,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
     Fluttertoast.showToast(
         msg: "OTP send successfully", gravity: ToastGravity.BOTTOM);
   }*/
+  _showDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: new Text(
+            "You are already register, please login...",
+            style: TextStyle(fontSize: 16),
+          ),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text(
+                "Ok",
+                style: TextStyle(color: appPrimaryMaterialColor),
+              ),
+              onPressed: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/LoginScreen', (route) => false);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   _registration() async {
     if (_formkey.currentState.validate()) {
@@ -481,6 +332,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                       )));
             } else {
+              _showDialog(context);
               Fluttertoast.showToast(msg: "Registration Fail!!!!");
               //showMsg(data.Message); //show "data not found" in dialog
             }

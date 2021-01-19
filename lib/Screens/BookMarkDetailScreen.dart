@@ -31,7 +31,7 @@ class _BookMarkDetailScreenState extends State<BookMarkDetailScreen> {
                       child: FadeInImage.assetNetwork(
                         placeholder: "assets/TND Logo_PNG_Newspaper.png",
                         fit: BoxFit.fill,
-                        image: "${widget.bookmarkData["newsImage"]}",
+                        image: "${widget.bookmarkData["featured_img_src"]}",
                       ),
                     ),
                   ),
@@ -185,7 +185,7 @@ class _BookMarkDetailScreenState extends State<BookMarkDetailScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text("${widget.bookmarkData["headline"]}",
+                    Text("${widget.bookmarkData["title"]}",
                         textAlign: TextAlign.justify,
                         style: TextStyle(
                             color: Colors.black,

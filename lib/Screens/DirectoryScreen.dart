@@ -18,6 +18,7 @@ class DirectoryScreen extends StatefulWidget {
 
 class _DirectoryScreenState extends State<DirectoryScreen> {
   List directoryList = [];
+  List StatusList = [];
   bool isLoading = true;
   List searchlist = new List();
   List searchlist1 = new List();
@@ -33,6 +34,7 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
   void initState() {
     _getDirectory();
     _getOfferCat();
+    // _getStatus();
   }
 
   @override
@@ -434,6 +436,42 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
       Fluttertoast.showToast(msg: "No Internet Connection.");
     }
   }
+
+//   _getStatus() async {
+//     try {
+//       final result = await InternetAddress.lookup('google.com');
+//       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+// //        var body = {};
+//         Services.PostForList(
+//           api_name: 'directory/directoryconnection',
+//         ).then((ResponseList) async {
+//           setState(() {
+//             isLoading = false;
+//           });
+//           if (ResponseList.length > 0) {
+//             setState(() {
+//               StatusList = ResponseList;
+//             });
+//             print(ResponseList);
+//           } else {
+//             setState(() {
+//               isLoading = false;
+//             });
+//             Fluttertoast.showToast(msg: "No Data Found");
+//             //show "data not found" in dialog
+//           }
+//         }, onError: (e) {
+//           setState(() {
+//             isLoading = false;
+//           });
+//           print("error on call -> ${e.message}");
+//           Fluttertoast.showToast(msg: "Something Went Wrong");
+//         });
+//       }
+//     } on SocketException catch (_) {
+//       Fluttertoast.showToast(msg: "No Internet Connection.");
+//     }
+//   }
 
   void searchOperation(String searchText) {
     /*  log('===========0================');*/

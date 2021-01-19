@@ -117,7 +117,7 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        var body = {"userId": prefs.getString(Session.CustomerId)};
+        var body = {"userid": prefs.getString(Session.CustomerId)};
         Services.PostForList(
                 api_name: 'admin/getsingleuserbookmark', body: body)
             .then((ResponseList) async {

@@ -159,7 +159,7 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                   indicator: new BubbleTabIndicator(
                     indicatorHeight: 43,
                     indicatorRadius: 6,
-                    indicatorColor: appPrimaryMaterialColor[700],
+                    indicatorColor: appPrimaryMaterialColor[400],
                     tabBarIndicatorSize: TabBarIndicatorSize.tab,
                   ),
                   tabs: [
@@ -315,7 +315,12 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                             FontWeight.w500),
                                                   ),
                                                   Text(
-                                                    "${profileList["name"]}",
+                                                    "${profileList["name"]}" ==
+                                                                "" ||
+                                                            "${profileList["name"]}" ==
+                                                                "null"
+                                                        ? "   -"
+                                                        : "${profileList["name"]}",
                                                     style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 16,
@@ -339,7 +344,12 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                             FontWeight.w500),
                                                   ),
                                                   Text(
-                                                    "${profileList["date_of_birth"]}",
+                                                    "${profileList["date_of_birth"]}" ==
+                                                                "" ||
+                                                            "${profileList["date_of_birth"]}" ==
+                                                                "null"
+                                                        ? "   -"
+                                                        : "${profileList["date_of_birth"]}",
                                                     style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 16,
@@ -363,7 +373,12 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                             FontWeight.w500),
                                                   ),
                                                   Text(
-                                                    "${profileList["gender"]}",
+                                                    "${profileList["gender"]}" ==
+                                                                "" ||
+                                                            "${profileList["gender"]}" ==
+                                                                "null"
+                                                        ? "   -"
+                                                        : "${profileList["gender"]}",
                                                     style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 16,
@@ -387,7 +402,12 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                             FontWeight.w500),
                                                   ),
                                                   Text(
-                                                    "${profileList["spouse_name"]}",
+                                                    "${profileList["spouse_name"]}" ==
+                                                                "" ||
+                                                            "${profileList["spouse_name"]}" ==
+                                                                "null"
+                                                        ? "    -"
+                                                        : "${profileList["spouse_name"]}",
                                                     style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 16,
@@ -411,7 +431,12 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                             FontWeight.w500),
                                                   ),
                                                   Text(
-                                                    "${profileList["spouse_birth_date"]}",
+                                                    "${profileList["spouse_birth_date"]}" ==
+                                                                "" ||
+                                                            "${profileList["spouse_birth_date"]}" ==
+                                                                "null"
+                                                        ? "    -"
+                                                        : "${profileList["spouse_birth_date"]}",
                                                     style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 16,
@@ -435,7 +460,12 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                             FontWeight.w500),
                                                   ),
                                                   Text(
-                                                    "${profileList["number_of_child"]}",
+                                                    "${profileList["number_of_child"]}" ==
+                                                                "" ||
+                                                            "${profileList["number_of_child"]}" ==
+                                                                "null"
+                                                        ? "    -"
+                                                        : "${profileList["number_of_child"]}",
                                                     style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 16,
@@ -520,7 +550,12 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                 ),
                                                 Flexible(
                                                   child: Text(
-                                                      "${profileList["whatsApp"]}",
+                                                      "${profileList["whatsApp"]}" ==
+                                                                  "" ||
+                                                              "${profileList["whatsApp"]}" ==
+                                                                  "null"
+                                                          ? "   -"
+                                                          : "${profileList["whatsApp"]}",
                                                       style: TextStyle(
                                                           color: Colors.black,
                                                           fontSize: 16,
@@ -529,7 +564,12 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                 ),
                                                 Flexible(
                                                   child: Text(
-                                                      "${profileList["email"]}",
+                                                      "${profileList["email"]}" ==
+                                                                  "" ||
+                                                              "${profileList["email"]}" ==
+                                                                  "null"
+                                                          ? "   -"
+                                                          : "${profileList["email"]}",
                                                       style: TextStyle(
                                                           color: Colors.black,
                                                           fontSize: 15,
@@ -923,7 +963,9 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                     ),
                                                     Text(
                                                       "${profileList["business_category"]["categoryName"]}" !=
-                                                              ""
+                                                                  "" ||
+                                                              "${profileList["business_category"]["categoryName"]}" !=
+                                                                  null
                                                           ? "${profileList["business_category"]["categoryName"]}"
                                                           : "-",
                                                       style: TextStyle(

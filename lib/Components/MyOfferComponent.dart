@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
+import 'package:the_national_dawn/Screens/MyOfferDetailScreen.dart';
 
 class MyOfferComponent extends StatefulWidget {
   var offerData;
@@ -17,12 +18,12 @@ class _MyOfferComponentState extends State<MyOfferComponent> {
         children: [
           GestureDetector(
             onTap: () {
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) => OfferDetailScreen(
-              //           offerData: widget.offerData,
-              //         )));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => MyOfferDetailScreen(
+                            offerData: widget.offerData,
+                          )));
             },
             child: Container(
               height: 179,

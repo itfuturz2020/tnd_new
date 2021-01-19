@@ -276,14 +276,15 @@ class _DailyNewsComponentState extends State<DailyNewsComponent> {
         setState(() {
           isBookmarkLoading = true;
         });
-        Services.postForSave(apiname: 'admin/addToBookMark', body: body).then(
-            (responseList) async {
+        Services.PostForList(api_name: 'admin/addToBookMark', body: body).then(
+            (ResponseList) async {
           setState(() {
             isBookmarkLoading = false;
           });
-          if (responseList.IsSuccess == true && responseList.Data == "1") {
+          if (ResponseList.length > 0) {
             setState(() {
-              isBookmark = !isBookmark;
+              // isBookmark = !isBookmark;
+              isBookmark = ResponseList[0]["status"];
             });
             if (isBookmark == true) {
               Fluttertoast.showToast(msg: "Added to Bookmark");
@@ -291,8 +292,10 @@ class _DailyNewsComponentState extends State<DailyNewsComponent> {
               Fluttertoast.showToast(msg: "Remove from Bookmark");
             }
           } else {
+            setState(() {
+              isBookmarkLoading = false;
+            });
             Fluttertoast.showToast(msg: "Data Not Found");
-            //show "data not found" in dialog
           }
         }, onError: (e) {
           setState(() {
@@ -306,4 +309,47 @@ class _DailyNewsComponentState extends State<DailyNewsComponent> {
       Fluttertoast.showToast(msg: "No Internet Connection.");
     }
   }
+
+  // _addToBookmark() async {
+  //   try {
+  //     final result = await InternetAddress.lookup('google.com');
+  //     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+  //       SharedPreferences prefs = await SharedPreferences.getInstance();
+  //       var body = {
+  //         "userId": prefs.getString(Session.CustomerId),
+  //         "newsId": "${widget.newsData["id"]}",
+  //       };
+  //       setState(() {
+  //         isBookmarkLoading = true;
+  //       });
+  //       Services.postForSave(apiname: 'admin/addToBookMark', body: body).then(
+  //           (responseList) async {
+  //         setState(() {
+  //           isBookmarkLoading = false;
+  //         });
+  //         if (responseList.IsSuccess == true && responseList.Data == "1") {
+  //           setState(() {
+  //             isBookmark = !isBookmark;
+  //           });
+  //           if (isBookmark == true) {
+  //             Fluttertoast.showToast(msg: "Added to Bookmark");
+  //           } else {
+  //             Fluttertoast.showToast(msg: "Remove from Bookmark");
+  //           }
+  //         } else {
+  //           Fluttertoast.showToast(msg: "Data Not Found");
+  //           //show "data not found" in dialog
+  //         }
+  //       }, onError: (e) {
+  //         setState(() {
+  //           isBookmarkLoading = false;
+  //         });
+  //         print("error on call -> ${e.message}");
+  //         Fluttertoast.showToast(msg: "Something Went Wrong");
+  //       });
+  //     }
+  //   } on SocketException catch (_) {
+  //     Fluttertoast.showToast(msg: "No Internet Connection.");
+  //   }
+  // }
 }

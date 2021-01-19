@@ -123,30 +123,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     );
   }
 
-  void _showSpouseDatePicker() {
-    DatePicker.showDatePicker(
-      context,
-      dateFormat: _format,
-      initialDateTime: _spouseBirthDate,
-      locale: _locale,
-      onCancel: () => print('onCancel'),
-      onChange: (dateTime, List<int> index) {
-        setState(() {
-          _spouseBirthDate = dateTime;
-        });
-      },
-      onConfirm: (dateTime, List<int> index) {
-        setState(() {
-          _spouseBirthDate = dateTime;
-        });
-        print(_spouseBirthDate);
-      },
-    );
-  }
-
   _profile() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    print("==============${widget.updatedProfileData["memberOf"]}");
+    log("==============>${widget.updatedProfileData["memberOf"]}");
     setState(() {
       txtName.text = "${widget.updatedProfileData["name"]}";
       Gender = "${widget.updatedProfileData["gender"]}";
@@ -154,13 +133,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       txtSpouseName.text = "${widget.updatedProfileData["spouse_name"]}";
       txtachievement.text = "${widget.updatedProfileData["achievement"]}";
 
-      // if (widget.updatedProfileData["business_category"] != "") {
-      //   selectedOfferCat2.offerId =
-      //       widget.updatedProfileData["business_category"];
-      // }
-
-      if (widget.updatedProfileData["memberOf"] != null) {
-        selectedList = widget.updatedProfileData["memberOf"];
+      if (widget.updatedProfileData["member_id"] != null) {
+        selectedList = widget.updatedProfileData["member_id"];
       }
 
       //img = prefs.getString(Session.CustomerImage);
@@ -1923,10 +1897,10 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               isCategoty = false;
               offerCatList = responseList;
             });
-
+            log("========================>${widget.updatedProfileData["business_category"]}");
             for (int i = 0; i < responseList.length; i++) {
               if (responseList[i].offerId ==
-                  widget.updatedProfileData["business_category"]) {
+                  widget.updatedProfileData["business_category"]["_id"]) {
                 selectedOfferCat2 = responseList[i];
               }
             }

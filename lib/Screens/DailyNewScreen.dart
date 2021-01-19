@@ -281,91 +281,91 @@ class _DailyNewScreenState extends State<DailyNewScreen>
                                                             "featured_img_src"],
                                                         // width: 300,
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: Container(
-                                                          margin:
-                                                              EdgeInsets.all(5),
-                                                          height: 22,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color:
-                                                                appPrimaryMaterialColor,
-                                                            // border: Border.all(color: Colors.black, width: 1),
-                                                            borderRadius:
-                                                                BorderRadius.all(
-                                                                    Radius.circular(
-                                                                        15.0)),
-                                                          ),
-                                                          width: 100,
-                                                          child: Center(
-                                                            child: Text(
-                                                              link["type"],
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .ellipsis,
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize: 12),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Align(
-                                                        alignment:
-                                                            Alignment.topRight,
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Container(
-                                                            height: 22,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: Colors
-                                                                  .transparent
-                                                                  .withBlue(2),
-                                                              // border: Border.all(color: Colors.black, width: 1),
-                                                              borderRadius: BorderRadius
-                                                                  .all(Radius
-                                                                      .circular(
-                                                                          15.0)),
-                                                            ),
-                                                            width: 60,
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    left: 8,
-                                                                    right: 8),
-                                                            child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Icon(
-                                                                  Icons.star,
-                                                                  color: Colors
-                                                                      .white,
-                                                                  size: 14,
-                                                                ),
-                                                                Text(
-                                                                  "10k",
-                                                                  overflow:
-                                                                      TextOverflow
-                                                                          .ellipsis,
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          12),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
+                                                      // Padding(
+                                                      //   padding:
+                                                      //       const EdgeInsets
+                                                      //           .all(8.0),
+                                                      //   child: Container(
+                                                      //     margin:
+                                                      //         EdgeInsets.all(5),
+                                                      //     height: 22,
+                                                      //     decoration:
+                                                      //         BoxDecoration(
+                                                      //       color:
+                                                      //           appPrimaryMaterialColor,
+                                                      //       // border: Border.all(color: Colors.black, width: 1),
+                                                      //       borderRadius:
+                                                      //           BorderRadius.all(
+                                                      //               Radius.circular(
+                                                      //                   15.0)),
+                                                      //     ),
+                                                      //     width: 100,
+                                                      //     child: Center(
+                                                      //       child: Text(
+                                                      //         link["type"],
+                                                      //         overflow:
+                                                      //             TextOverflow
+                                                      //                 .ellipsis,
+                                                      //         style: TextStyle(
+                                                      //             color: Colors
+                                                      //                 .white,
+                                                      //             fontSize: 12),
+                                                      //       ),
+                                                      //     ),
+                                                      //   ),
+                                                      // ),
+                                                      // Align(
+                                                      //   alignment:
+                                                      //       Alignment.topRight,
+                                                      //   child: Padding(
+                                                      //     padding:
+                                                      //         const EdgeInsets
+                                                      //             .all(8.0),
+                                                      //     child: Container(
+                                                      //       height: 22,
+                                                      //       decoration:
+                                                      //           BoxDecoration(
+                                                      //         color: Colors
+                                                      //             .transparent
+                                                      //             .withBlue(2),
+                                                      //         // border: Border.all(color: Colors.black, width: 1),
+                                                      //         borderRadius: BorderRadius
+                                                      //             .all(Radius
+                                                      //                 .circular(
+                                                      //                     15.0)),
+                                                      //       ),
+                                                      //       width: 60,
+                                                      //       padding:
+                                                      //           EdgeInsets.only(
+                                                      //               left: 8,
+                                                      //               right: 8),
+                                                      //       child: Row(
+                                                      //         mainAxisAlignment:
+                                                      //             MainAxisAlignment
+                                                      //                 .center,
+                                                      //         children: [
+                                                      //           Icon(
+                                                      //             Icons.star,
+                                                      //             color: Colors
+                                                      //                 .white,
+                                                      //             size: 14,
+                                                      //           ),
+                                                      //           Text(
+                                                      //             "10k",
+                                                      //             overflow:
+                                                      //                 TextOverflow
+                                                      //                     .ellipsis,
+                                                      //             style: TextStyle(
+                                                      //                 color: Colors
+                                                      //                     .white,
+                                                      //                 fontSize:
+                                                      //                     12),
+                                                      //           ),
+                                                      //         ],
+                                                      //       ),
+                                                      //     ),
+                                                      //   ),
+                                                      // ),
                                                       Positioned(
                                                           bottom: 0.0,
                                                           child: Container(
@@ -451,177 +451,6 @@ class _DailyNewScreenState extends State<DailyNewScreen>
                                                   ),
                                                 );
                                               }).toList(),
-
-//                                              [
-//                                                Stack(
-//                                                  children: [
-//                                                    Image.network(
-//                                                        "assets/z.jpeg"),
-//                                                    Padding(
-//                                                      padding:
-//                                                          const EdgeInsets.all(
-//                                                              8.0),
-//                                                      child: Container(
-//                                                        height: 22,
-//                                                        decoration:
-//                                                            BoxDecoration(
-//                                                          color:
-//                                                              appPrimaryMaterialColor,
-//                                                          // border: Border.all(color: Colors.black, width: 1),
-//                                                          borderRadius:
-//                                                              BorderRadius.all(
-//                                                                  Radius
-//                                                                      .circular(
-//                                                                          15.0)),
-//                                                        ),
-//                                                        width: 80,
-//                                                        child: Center(
-//                                                          child: Text(
-//                                                            "celebrity",
-//                                                            overflow:
-//                                                                TextOverflow
-//                                                                    .ellipsis,
-//                                                            style: TextStyle(
-//                                                                color: Colors
-//                                                                    .white,
-//                                                                fontSize: 12),
-//                                                          ),
-//                                                        ),
-//                                                      ),
-//                                                    ),
-//                                                    Align(
-//                                                      alignment:
-//                                                          Alignment.topRight,
-//                                                      child: Padding(
-//                                                        padding:
-//                                                            const EdgeInsets
-//                                                                .all(8.0),
-//                                                        child: Container(
-//                                                          height: 22,
-//                                                          decoration:
-//                                                              BoxDecoration(
-//                                                            color: Colors
-//                                                                .transparent
-//                                                                .withBlue(2),
-//                                                            // border: Border.all(color: Colors.black, width: 1),
-//                                                            borderRadius:
-//                                                                BorderRadius.all(
-//                                                                    Radius.circular(
-//                                                                        15.0)),
-//                                                          ),
-//                                                          width: 60,
-//                                                          child: Row(
-//                                                            mainAxisAlignment:
-//                                                                MainAxisAlignment
-//                                                                    .center,
-//                                                            children: [
-//                                                              Icon(
-//                                                                Icons.star,
-//                                                                color: Colors
-//                                                                    .white,
-//                                                                size: 14,
-//                                                              ),
-//                                                              Text(
-//                                                                "10k",
-//                                                                overflow:
-//                                                                    TextOverflow
-//                                                                        .ellipsis,
-//                                                                style: TextStyle(
-//                                                                    color: Colors
-//                                                                        .white,
-//                                                                    fontSize:
-//                                                                        12),
-//                                                              ),
-//                                                            ],
-//                                                          ),
-//                                                        ),
-//                                                      ),
-//                                                    ),
-//                                                    Positioned(
-//                                                        bottom: 0.0,
-//                                                        left: 0.0,
-//                                                        child: Container(
-//                                                          height: 60,
-//                                                          width: MediaQuery.of(
-//                                                                  context)
-//                                                              .size
-//                                                              .width,
-//                                                          decoration:
-//                                                              BoxDecoration(
-//                                                            color: Color(
-//                                                                0xff4B4B4B4A),
-//                                                            //color: Colors.transparent,
-////                                                              borderRadius:
-////                                                              BorderRadius.only(
-////                                                                  bottomLeft: Radius
-////                                                                      .circular(
-////                                                                      18.0),
-////                                                                  bottomRight: Radius
-////                                                                      .circular(
-////                                                                      18.0)),
-//                                                          ),
-//                                                          child: Padding(
-//                                                            padding:
-//                                                                const EdgeInsets
-//                                                                        .only(
-//                                                                    left: 12.0,
-//                                                                    right: 14),
-//                                                            child: Column(
-//                                                              crossAxisAlignment:
-//                                                                  CrossAxisAlignment
-//                                                                      .start,
-//                                                              children: <
-//                                                                  Widget>[
-//                                                                SizedBox(
-//                                                                  height: 5,
-//                                                                ),
-//                                                                Container(
-//                                                                  child: Text(
-//                                                                    "Katrina kaif goes in long drive that does not make me \nsmile.",
-//                                                                    style: TextStyle(
-//                                                                        color: Colors
-//                                                                            .white,
-//                                                                        fontSize:
-//                                                                            11,
-//                                                                        letterSpacing:
-//                                                                            0.1),
-//                                                                  ),
-//                                                                ),
-//                                                                SizedBox(
-//                                                                  height: 5,
-//                                                                ),
-//                                                                Row(
-//                                                                  children: <
-//                                                                      Widget>[
-//                                                                    Icon(
-//                                                                      Icons
-//                                                                          .timer,
-//                                                                      size: 14,
-//                                                                      color: Colors
-//                                                                          .grey,
-//                                                                    ),
-//                                                                    Text(
-//                                                                      "11 september 2019",
-//                                                                      style: TextStyle(
-//                                                                          color: Colors
-//                                                                              .white,
-//                                                                          letterSpacing:
-//                                                                              0.5,
-//                                                                          fontSize:
-//                                                                              8),
-//                                                                    )
-//                                                                  ],
-//                                                                ),
-//                                                                SizedBox(
-//                                                                  height: 5,
-//                                                                ),
-//                                                              ],
-//                                                            ),
-//                                                          ),
-//                                                        )),
-//                                                  ],
-//                                                ),
-//                                              ],
                                             ),
                                           ),
                                           Padding(

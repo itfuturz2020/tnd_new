@@ -1151,15 +1151,15 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
         SharedPreferences prefs = await SharedPreferences.getInstance();
 
         FormData body = FormData.fromMap({
-          //"id": prefs.getString(Session.CustomerId),
-          "title ": title.text,
+          "userId": prefs.getString(Session.CustomerId),
+          "title": title.text,
           "bannerImage": (filePath != null && filePath != '')
               ? await MultipartFile.fromFile(filePath,
                   filename: filename.toString())
               : null,
           "dateTime": date.text,
           "offerExpire": expiryDate.text,
-          "details ": description.text,
+          "details": description.text,
           "faceBook": fbLink.text,
           "instagram": instaLink.text,
           "linkedIn": linkinLink.text,
@@ -1196,7 +1196,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
             //       responseList[0]["spouse_birth_date"]);
             //   prefs.setString(Session.CustomerImage, responseList[0]["img"]);
             // });
-            Navigator.of(context).pushNamed('/HomeScreen');
+            Navigator.of(context).pushNamed('/HomePage');
             Fluttertoast.showToast(
                 msg: "Offer Added Successfully", gravity: ToastGravity.BOTTOM);
           }
