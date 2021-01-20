@@ -24,13 +24,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String qrData;
-  var _name;
+  var _name = "";
   var _comp_name;
   var _mobileNo;
   var _email;
   var img;
-  String barCode;
-  DBHelper dbHelper;
+  String barCode = "";
+  DBHelper dbHelper = DBHelper();
   Future<List<Visitorclass>> visitor;
 
   @override
@@ -46,8 +46,15 @@ class _HomePageState extends State<HomePage> {
       _email = prefs.getString(Session.CustomerEmailId);
       img = prefs.getString(Session.CustomerImage);
       _mobileNo = prefs.getString(Session.CustomerPhoneNo);
-      qrData =
-          _name + "," + _comp_name + "," + _email + "," + img + "," + _mobileNo;
+      qrData = _name +
+          "," +
+          _comp_name +
+          "," +
+          _email +
+          "," +
+          "$img" +
+          "," +
+          _mobileNo;
     });
   }
 
@@ -221,6 +228,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 GestureDetector(
                   onTap: () {
+                    print(qrtext);
                     dbHelper.insertVisitor(Visitorclass(
                         qrtext[0].toString(),
                         qrtext[1].toString(),

@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
@@ -29,6 +32,11 @@ class DBHelper {
 
   Future<Visitorclass> insertVisitor(Visitorclass visitor) async {
     var dbClient = await db;
+    /*  try {
+      visitor.id = await dbClient.insert('eventvisitor', visitor.toMap());
+    } on SocketException catch (_) {
+      Fluttertoast.showToast(msg: "User already entere");
+    }*/
     visitor.id = await dbClient.insert('eventvisitor', visitor.toMap());
     return visitor;
   }
