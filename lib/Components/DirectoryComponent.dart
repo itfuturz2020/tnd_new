@@ -26,6 +26,7 @@ class DirectoryComponent extends StatefulWidget {
 
 class _DirectoryComponentState extends State<DirectoryComponent> {
   List list;
+
   launchSocialMediaUrl(var url) async {
     if (await canLaunch(url)) {
       await launch(url);
@@ -185,66 +186,71 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            GestureDetector(
-                              onTap: () {
-                                _showDialog(context);
-                              },
-                              child: Container(
-                                height: 25,
-                                // width: 140,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      color: appPrimaryMaterialColor[100],
-                                      width: 1),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                ),
-                                child: Row(
-                                  // mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset('assets/videocall.png'),
-                                    FittedBox(
-                                      child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 3.0),
-                                        child: Text(
-                                          "Send  ",
-                                          style: TextStyle(fontSize: 12),
-                                        ),
+                            "${widget.directoryData["status"]}" == "send"
+                                ? GestureDetector(
+                                    onTap: () {
+                                      _showDialog(context);
+                                    },
+                                    child: Container(
+                                      height: 25,
+                                      // width: 140,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(
+                                            color: appPrimaryMaterialColor[100],
+                                            width: 1),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
                                       ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Container(
-                              height: 25,
-                              // width: 140,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(
-                                    color: appPrimaryMaterialColor[100],
-                                    width: 1),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
-                              ),
-                              child: Row(
-                                // mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset('assets/videocall.png'),
-                                  FittedBox(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 3.0),
-                                      child: Text(
-                                        "Requested  ",
-                                        style: TextStyle(fontSize: 12),
+                                      child: Row(
+                                        // mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Image.asset('assets/videocall.png'),
+                                          FittedBox(
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 3.0),
+                                              child: Text(
+                                                "Send  ",
+                                                style: TextStyle(fontSize: 12),
+                                              ),
+                                            ),
+                                          )
+                                        ],
                                       ),
                                     ),
                                   )
-                                ],
-                              ),
-                            ),
+                                : Container(),
+                            "${widget.directoryData["status"]}" == "requested"
+                                ? Container(
+                                    height: 25,
+                                    // width: 140,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border.all(
+                                          color: appPrimaryMaterialColor[100],
+                                          width: 1),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                    ),
+                                    child: Row(
+                                      // mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Image.asset('assets/videocall.png'),
+                                        FittedBox(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 3.0),
+                                            child: Text(
+                                              "Requested  ",
+                                              style: TextStyle(fontSize: 12),
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                : Container(),
                           ],
                         ),
                       ),
@@ -253,74 +259,116 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              height: 25,
-                              // width: 140,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(
-                                    color: appPrimaryMaterialColor[100],
-                                    width: 1),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
-                              ),
-                              child: Row(
-                                // mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset('assets/videocall.png'),
-                                  FittedBox(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 3.0),
-                                      child: Text(
-                                        "Accepted  ",
-                                        style: TextStyle(fontSize: 12),
+                            "${widget.directoryData["status"]}" == "accepted"
+                                ? Container(
+                                    height: 25,
+                                    // width: 140,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border.all(
+                                          color: appPrimaryMaterialColor[100],
+                                          width: 1),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                    ),
+                                    child: Row(
+                                      // mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Image.asset('assets/videocall.png'),
+                                        FittedBox(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 3.0),
+                                            child: Text(
+                                              "Accepted  ",
+                                              style: TextStyle(fontSize: 12),
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                : "${widget.directoryData["status"]}" ==
+                                        "rejected"
+                                    ? Container(
+                                        height: 25,
+                                        // width: 140,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border: Border.all(
+                                              color:
+                                                  appPrimaryMaterialColor[100],
+                                              width: 1),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10.0)),
+                                        ),
+                                        child: Row(
+                                          // mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Image.asset('assets/videocall.png'),
+                                            FittedBox(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 3.0),
+                                                child: Text(
+                                                  "Rejected  ",
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    : Container(),
+                            "${widget.directoryData["status"]}" == "accepted"
+                                ? Padding(
+                                    padding: const EdgeInsets.only(left: 8.0),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        // _showDialogComplete(context);
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        new CompleteScreen(
+                                                          directoryData: widget
+                                                              .directoryData,
+                                                        )));
+                                      },
+                                      child: Container(
+                                        height: 25,
+                                        // width: 140,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border: Border.all(
+                                              color:
+                                                  appPrimaryMaterialColor[100],
+                                              width: 1),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10.0)),
+                                        ),
+                                        child: Row(
+                                          // mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Image.asset('assets/videocall.png'),
+                                            FittedBox(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 3.0),
+                                                child: Text(
+                                                  "Completed ",
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   )
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: GestureDetector(
-                                onTap: () {
-                                  // _showDialogComplete(context);
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          new CompleteScreen(
-                                            directoryData: widget.directoryData,
-                                          )));
-                                },
-                                child: Container(
-                                  height: 25,
-                                  // width: 140,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    border: Border.all(
-                                        color: appPrimaryMaterialColor[100],
-                                        width: 1),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
-                                  ),
-                                  child: Row(
-                                    // mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset('assets/videocall.png'),
-                                      FittedBox(
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 3.0),
-                                          child: Text(
-                                            "Completed ",
-                                            style: TextStyle(fontSize: 12),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
+                                : Container(),
                           ],
                         ),
                       ),
@@ -765,54 +813,54 @@ class _AlertSendState extends State<AlertSend> {
       Fluttertoast.showToast(msg: "No Internet Connection");
     }
   }
-  // _sendRequest() async {
-  //   try {
-  //     final result = await InternetAddress.lookup('google.com');
-  //     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-  //       setState(() {
-  //         isSendLoading = true;
-  //       });
-  //
-  //       SharedPreferences prefs = await SharedPreferences.getInstance();
-  //       var body = {
-  //         "requestSender": "${prefs.getString(Session.CustomerId)}",
-  //         "requestReceiver": "${widget.directoryData["_id"]}",
-  //         "requestStatus": "requested",
-  //         "notificationData": {
-  //           'notificationBody': "Hi " +
-  //               "${widget.directoryData["name"]}" +
-  //               ", " +
-  //               "${prefs.getString(Session.CustomerName)} wants 1-2-1 meeting with you.",
-  //           'notificationTitle': "TND Request",
-  //         },
-  //         "meetingType": requestType,
-  //         "meetingLink": txtOnlineLink.text
-  //       };
-  //       // print(body.fields);
-  //       Services.PostForList(
-  //               api_name: 'users/oneTwoOneConnectionReq', body: body)
-  //           .then((subCatResponseList) async {
-  //         setState(() {
-  //           isSendLoading = false;
-  //         });
-  //         if (subCatResponseList.length > 0) {
-  //           Fluttertoast.showToast(msg: "Request Send Successfully!");
-  //         } else {
-  //           Fluttertoast.showToast(msg: "Try Again!");
-  //           //show "data not found" in dialog
-  //         }
-  //       }, onError: (e) {
-  //         setState(() {
-  //           isSendLoading = false;
-  //         });
-  //         print("error on call -> ${e.message}");
-  //         Fluttertoast.showToast(msg: "Something Went Wrong");
-  //       });
-  //     }
-  //   } on SocketException catch (_) {
-  //     Fluttertoast.showToast(msg: "No Internet Connection.");
-  //   }
-  // }
+// _sendRequest() async {
+//   try {
+//     final result = await InternetAddress.lookup('google.com');
+//     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+//       setState(() {
+//         isSendLoading = true;
+//       });
+//
+//       SharedPreferences prefs = await SharedPreferences.getInstance();
+//       var body = {
+//         "requestSender": "${prefs.getString(Session.CustomerId)}",
+//         "requestReceiver": "${widget.directoryData["_id"]}",
+//         "requestStatus": "requested",
+//         "notificationData": {
+//           'notificationBody': "Hi " +
+//               "${widget.directoryData["name"]}" +
+//               ", " +
+//               "${prefs.getString(Session.CustomerName)} wants 1-2-1 meeting with you.",
+//           'notificationTitle': "TND Request",
+//         },
+//         "meetingType": requestType,
+//         "meetingLink": txtOnlineLink.text
+//       };
+//       // print(body.fields);
+//       Services.PostForList(
+//               api_name: 'users/oneTwoOneConnectionReq', body: body)
+//           .then((subCatResponseList) async {
+//         setState(() {
+//           isSendLoading = false;
+//         });
+//         if (subCatResponseList.length > 0) {
+//           Fluttertoast.showToast(msg: "Request Send Successfully!");
+//         } else {
+//           Fluttertoast.showToast(msg: "Try Again!");
+//           //show "data not found" in dialog
+//         }
+//       }, onError: (e) {
+//         setState(() {
+//           isSendLoading = false;
+//         });
+//         print("error on call -> ${e.message}");
+//         Fluttertoast.showToast(msg: "Something Went Wrong");
+//       });
+//     }
+//   } on SocketException catch (_) {
+//     Fluttertoast.showToast(msg: "No Internet Connection.");
+//   }
+// }
 }
 
 class AlertComplete extends StatefulWidget {

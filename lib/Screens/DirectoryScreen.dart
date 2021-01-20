@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/ClassList.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
@@ -405,10 +406,11 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-//        var body = {};
-        Services.PostForList(
-          api_name: 'directory/directorylisting',
-        ).then((ResponseList) async {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+
+        var body = {"userid": prefs.getString(Session.CustomerId)};
+        Services.PostForList(api_name: 'directory/directorylisting', body: body)
+            .then((ResponseList) async {
           setState(() {
             isLoading = false;
           });
