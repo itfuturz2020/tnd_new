@@ -1086,7 +1086,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                       onPressed: () {
                         _settingModalBottomSheet();
                       },
-                      child: Text("Upload Offer",
+                      child: Text("Upload Image",
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w500,
@@ -1165,7 +1165,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
           "linkedIn": linkinLink.text,
           "twitter": twitterLink.text,
           "youTube": youtubeLink.text,
-          "business_category": selectedOfferCat.offerId
+          "businessCategory": selectedOfferCat.offerId
         });
         print(body.fields);
 

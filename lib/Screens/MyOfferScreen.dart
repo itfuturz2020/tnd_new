@@ -79,17 +79,18 @@ class _MyOfferScreenState extends State<MyOfferScreen> {
       ),
       body: isLoading == true
           ? LoadingBlueComponent()
-          : Padding(
-              padding: const EdgeInsets.only(top: 10.0),
-              child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  itemCount: getOfferList.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return MyOfferComponent(
-                      offerData: getOfferList[index],
-                    );
-                  }),
-            ),
+          : getOfferList.length > 0
+              ? Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: ListView.builder(
+                      physics: BouncingScrollPhysics(),
+                      itemCount: getOfferList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return MyOfferComponent(
+                          offerData: getOfferList[index],
+                        );
+                      }))
+              : Center(child: Text("No Data Found...!")),
       floatingActionButton: FloatingActionButton(
         backgroundColor: appPrimaryMaterialColor,
         child: Icon(

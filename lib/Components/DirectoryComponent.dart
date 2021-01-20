@@ -11,6 +11,7 @@ import 'package:the_national_dawn/Common/Services.dart';
 import 'package:the_national_dawn/Components/DirectoryProfileComponent.dart';
 import 'package:the_national_dawn/Components/LoadingBlueComponent.dart';
 import 'package:the_national_dawn/Components/LoadingComponent.dart';
+import 'package:the_national_dawn/Screens/CompleteScreen.dart';
 import 'package:the_national_dawn/Screens/RequestScreen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -283,7 +284,12 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
                               padding: const EdgeInsets.only(left: 8.0),
                               child: GestureDetector(
                                 onTap: () {
-                                  _showDialogComplete(context);
+                                  // _showDialogComplete(context);
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          new CompleteScreen(
+                                            directoryData: widget.directoryData,
+                                          )));
                                 },
                                 child: Container(
                                   height: 25,

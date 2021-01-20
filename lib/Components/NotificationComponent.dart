@@ -198,7 +198,7 @@ class _NotificationComponentState extends State<NotificationComponent> {
                                       child: Padding(
                                         padding: const EdgeInsets.all(5.0),
                                         child: Text(
-                                          "Go",
+                                          "Connect",
                                           style: TextStyle(
                                               color:
                                                   cnst.appPrimaryMaterialColor,

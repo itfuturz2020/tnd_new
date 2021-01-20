@@ -52,7 +52,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   List<CategoryData> memberTypeList = [];
   CategoryData selectedOfferCat;
   bool isOfferLoading = false;
-  String MemberTypeId, BusinessCategory;
+  String MemberTypeId;
   bool isCategoty = true;
   List<OfferClass> offerCatList = [];
   OfferClass selectedOfferCat2;
@@ -1340,8 +1340,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                       onChanged: (value) {
                                         setState(() {
                                           selectedOfferCat2 = value;
-                                          BusinessCategory =
-                                              selectedOfferCat2.offerId;
                                         });
                                       },
                                       items: offerCatList.map(
@@ -2021,7 +2019,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             "linkedIn": linkedIn.text,
             "twitter": twitter.text,
             "youTube": youTube.text,
-            "business_category": BusinessCategory
+            "business_category": selectedOfferCat2.offerId
           });
           print(body.fields);
           //"key":"value"

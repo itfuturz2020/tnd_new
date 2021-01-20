@@ -60,6 +60,7 @@ import 'package:the_national_dawn/Screens/VerificationScreen.dart';
 import 'package:the_national_dawn/Screens/ViewDetailScreen.dart';
 
 import 'Screens/AddOfferScreen.dart';
+import 'Screens/CompleteScreen.dart';
 import 'Screens/EnquiryForm.dart';
 import 'Screens/MyOfferScreen.dart';
 
@@ -163,6 +164,7 @@ class _MyAppState extends State<MyApp> {
         '/NotificationPopUp': (context) => NotificationPopUp(),
         '/NotificationDilog': (context) => NotificationDilog(),
         '/MyOfferDetailScreen': (context) => MyOfferDetailScreen(),
+        '/CompleteScreen': (context) => CompleteScreen(),
 
         //===============digital card screen=============
         '/AddCard': (context) => AddCard(),

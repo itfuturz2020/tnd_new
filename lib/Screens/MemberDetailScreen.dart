@@ -629,7 +629,7 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                   padding: const EdgeInsets.only(
                                       left: 20, right: 20),
                                   child: Container(
-                                    height: 250,
+                                    height: 300,
                                     width: MediaQuery.of(context).size.width,
                                     decoration: BoxDecoration(
                                         color: Colors.white,
@@ -972,10 +972,8 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                     ),
                                                     Flexible(
                                                       child: Text(
-                                                        "${profileList["business_category"]["categoryName"]}" !=
-                                                                    "" ||
-                                                                "${profileList["business_category"]["categoryName"]}" !=
-                                                                    null
+                                                        profileList["business_category"] !=
+                                                                null
                                                             ? "${profileList["business_category"]["categoryName"]}"
                                                             : "-",
                                                         style: TextStyle(

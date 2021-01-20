@@ -66,8 +66,8 @@ class _OfferScreenState extends State<OfferScreen> {
         });
 
         var body = {"businessCategory_id": "${offerId}"};
-        Services.PostForList(api_name: 'admin/getOffer', body: body).then(
-            (subCatResponseList) async {
+        Services.PostForList(api_name: 'admin/getOfferOfBusiness', body: body)
+            .then((subCatResponseList) async {
           setState(() {
             isLoading = false;
           });
@@ -162,14 +162,13 @@ class _OfferScreenState extends State<OfferScreen> {
                         child: isOfferLoading
                             ? LoadingBlueComponent()
                             : DropdownButton<OfferClass>(
-//                                hint: dropdownValue == null
-//                                    ? Text(
-//                                        "Select category",
-//                                        style: TextStyle(
-//                                          color: Colors.black,
-//                                        ),
-//                                      )
-//                                    : Text(dropdownValue),
+                                // hint: Text(
+                                //   "Select category",
+                                //   style: TextStyle(
+                                //     color: Colors.black,
+                                //   ),
+                                // ),
+//
                                 dropdownColor: Colors.white,
                                 icon: Icon(
                                   Icons.arrow_drop_down,
@@ -184,6 +183,10 @@ class _OfferScreenState extends State<OfferScreen> {
                                   });
                                   _getOffer(selectedOfferCat.offerId);
                                 },
+                                hint: Padding(
+                                  padding: const EdgeInsets.only(left: 10.0),
+                                  child: Text('Select Categories'),
+                                ),
                                 items: offerCatList.map(
                                   (OfferClass offer) {
                                     return DropdownMenuItem<OfferClass>(
@@ -234,15 +237,17 @@ class _OfferScreenState extends State<OfferScreen> {
               Expanded(
                 child: isLoading == true
                     ? LoadingBlueComponent()
-                    : ListView.builder(
-                        physics: BouncingScrollPhysics(),
-                        // scrollDirection: Axis.horizontal,
-                        itemCount: offerList.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return OfferComponent(
-                            offerData: offerList[index],
-                          );
-                        }),
+                    : offerList.length > 0
+                        ? ListView.builder(
+                            physics: BouncingScrollPhysics(),
+                            // scrollDirection: Axis.horizontal,
+                            itemCount: offerList.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return OfferComponent(
+                                offerData: offerList[index],
+                              );
+                            })
+                        : Center(child: Text("No Data Found...!")),
               ),
             ],
           ),
