@@ -125,17 +125,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
   _profile() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    log("==============>${widget.updatedProfileData["memberOf"]}");
+    log("==============>abc${widget.updatedProfileData["member_id"]}");
     setState(() {
       txtName.text = "${widget.updatedProfileData["name"]}";
       Gender = "${widget.updatedProfileData["gender"]}";
       txtAddress.text = "${widget.updatedProfileData["address"]}";
       txtSpouseName.text = "${widget.updatedProfileData["spouse_name"]}";
       txtachievement.text = "${widget.updatedProfileData["achievement"]}";
-
-      if (widget.updatedProfileData["member_id"] != null) {
-        selectedList = widget.updatedProfileData["member_id"];
-      }
 
       //img = prefs.getString(Session.CustomerImage);
 
@@ -172,6 +168,10 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     });
     print("=================dob");
     print(dob);
+    if (widget.updatedProfileData["member_id"] != null ||
+        widget.updatedProfileData["member_id"] != "") {
+      selectedList = widget.updatedProfileData["member_id"];
+    }
   }
 
   File _Image;
@@ -1897,11 +1897,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               isCategoty = false;
               offerCatList = responseList;
             });
-            log("========================>${widget.updatedProfileData["business_category"]}");
+            log("${responseList}");
+            log("========================>xyz${widget.updatedProfileData["business_id"]}");
+            log("========================>offer id${responseList[0].offerId}");
             for (int i = 0; i < responseList.length; i++) {
               if (responseList[i].offerId ==
-                  widget.updatedProfileData["business_category"]["_id"]) {
+                  widget.updatedProfileData["business_id"]) {
                 selectedOfferCat2 = responseList[i];
+                log("==========business class${responseList[i]}");
               }
             }
           } else {

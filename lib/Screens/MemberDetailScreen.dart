@@ -876,16 +876,19 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                           fontWeight:
                                                               FontWeight.w500),
                                                     ),
-                                                    Text(
-                                                      "${profileList["company_name"]}" !=
-                                                              ""
-                                                          ? "${profileList["company_name"]}"
-                                                          : "-",
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w600),
+                                                    Flexible(
+                                                      child: Text(
+                                                        "${profileList["company_name"]}" !=
+                                                                ""
+                                                            ? "${profileList["company_name"]}"
+                                                            : "-",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600),
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
@@ -905,16 +908,19 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                           fontWeight:
                                                               FontWeight.w500),
                                                     ),
-                                                    Text(
-                                                      "${profileList["company_website"]}" !=
-                                                              null
-                                                          ? "${profileList["company_website"]}"
-                                                          : "-",
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w600),
+                                                    Flexible(
+                                                      child: Text(
+                                                        "${profileList["company_website"]}" !=
+                                                                null
+                                                            ? "${profileList["company_website"]}"
+                                                            : "-",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600),
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
@@ -933,16 +939,19 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                           fontWeight:
                                                               FontWeight.w500),
                                                     ),
-                                                    Text(
-                                                      "${profileList["about_business"]}" !=
-                                                              ""
-                                                          ? "${profileList["about_business"]}"
-                                                          : "-",
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w600),
+                                                    Flexible(
+                                                      child: Text(
+                                                        "${profileList["about_business"]}" !=
+                                                                ""
+                                                            ? "${profileList["about_business"]}"
+                                                            : "-",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600),
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
@@ -961,18 +970,21 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                           fontWeight:
                                                               FontWeight.w500),
                                                     ),
-                                                    Text(
-                                                      "${profileList["business_category"]["categoryName"]}" !=
-                                                                  "" ||
-                                                              "${profileList["business_category"]["categoryName"]}" !=
-                                                                  null
-                                                          ? "${profileList["business_category"]["categoryName"]}"
-                                                          : "-",
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w600),
+                                                    Flexible(
+                                                      child: Text(
+                                                        "${profileList["business_category"]["categoryName"]}" !=
+                                                                    "" ||
+                                                                "${profileList["business_category"]["categoryName"]}" !=
+                                                                    null
+                                                            ? "${profileList["business_category"]["categoryName"]}"
+                                                            : "-",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600),
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
@@ -991,16 +1003,19 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                           fontWeight:
                                                               FontWeight.w500),
                                                     ),
-                                                    Text(
-                                                      "${profileList["address"]}" !=
-                                                              ""
-                                                          ? "${profileList["address"]}"
-                                                          : "-",
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w600),
+                                                    Flexible(
+                                                      child: Text(
+                                                        "${profileList["address"]}" !=
+                                                                ""
+                                                            ? "${profileList["address"]}"
+                                                            : "-",
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600),
+                                                      ),
                                                     ),
                                                   ],
                                                 ),

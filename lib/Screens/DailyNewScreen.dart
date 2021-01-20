@@ -121,269 +121,285 @@ class _DailyNewScreenState extends State<DailyNewScreen>
       ),
       body: isLoadingCat
           ? LoadingBlueComponent()
-          : Row(
-              children: <Widget>[
-                Expanded(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 50.0,
-                        child: TabBar(
-                          isScrollable: true,
-                          controller: _tabController,
-                          unselectedLabelColor: Colors.black,
-                          labelColor: appPrimaryMaterialColor,
-                          indicatorColor: appPrimaryMaterialColor,
-                          onTap: (index) {
-                            _newsCategory(subCategoriesTab[index]["newsType"]);
-                          },
-                          tabs: List<Widget>.generate(subCategoriesTab.length,
-                              (int index) {
-                            return Tab(
-                              child: Text(
-                                subCategoriesTab[index]["newsType"],
-                                style: TextStyle(fontSize: 14.0),
-                              ),
-                            );
-                          }),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 35.0, right: 35, top: 25),
-                        child: Container(
-                          height: 35,
-                          child: TextFormField(
-                            keyboardType: TextInputType.text,
-                            style: TextStyle(fontSize: 15),
-                            cursorColor: appPrimaryMaterialColor,
-                            onChanged: searchOperation,
-                            decoration: InputDecoration(
-                              suffixIcon: Icon(
-                                Icons.search,
-                                size: 25,
-                                color: Colors.black,
-                              ),
+          : subCategoriesList.length < 0 && subCategoriesList == null
+              ? Center(
+                  child: Container(
+                    //color: Color.fromRGBO(0, 0, 0, 0.6),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    child: Text("No Data Available",
+                        style: TextStyle(
+                            fontSize: 20, color: appPrimaryMaterialColor)),
+                  ),
+                )
+              : Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 50.0,
+                            child: TabBar(
+                              isScrollable: true,
+                              controller: _tabController,
+                              unselectedLabelColor: Colors.black,
+                              labelColor: appPrimaryMaterialColor,
+                              indicatorColor: appPrimaryMaterialColor,
+                              onTap: (index) {
+                                _newsCategory(
+                                    subCategoriesTab[index]["newsType"]);
+                              },
+                              tabs: List<Widget>.generate(
+                                  subCategoriesTab.length, (int index) {
+                                return Tab(
+                                  child: Text(
+                                    subCategoriesTab[index]["newsType"],
+                                    style: TextStyle(fontSize: 14.0),
+                                  ),
+                                );
+                              }),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 35.0, right: 35, top: 25),
+                            child: Container(
+                              height: 35,
+                              child: TextFormField(
+                                keyboardType: TextInputType.text,
+                                style: TextStyle(fontSize: 15),
+                                cursorColor: appPrimaryMaterialColor,
+                                onChanged: searchOperation,
+                                decoration: InputDecoration(
+                                  suffixIcon: Icon(
+                                    Icons.search,
+                                    size: 25,
+                                    color: Colors.black,
+                                  ),
 
 //                    Padding(
 //                      padding: const EdgeInsets.only(right: 5.0, top: 0),
 //                      child: Image.asset("assets/search.png"),
 //                    ),
-                              counterText: "",
-                              contentPadding: EdgeInsets.only(
-                                  top: 0.0, bottom: 0, left: 15, right: 5),
-                              hintText: "Type to Search...",
-                              hintStyle: TextStyle(
-                                  color: Colors.grey[400],
-                                  fontWeight: FontWeight.w500),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(25.0)),
-                                borderSide: BorderSide(color: Colors.black),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(25.0)),
-                                borderSide: BorderSide(color: Colors.black),
+                                  counterText: "",
+                                  contentPadding: EdgeInsets.only(
+                                      top: 0.0, bottom: 0, left: 15, right: 5),
+                                  hintText: "Type to Search...",
+                                  hintStyle: TextStyle(
+                                      color: Colors.grey[400],
+                                      fontWeight: FontWeight.w500),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(25.0)),
+                                    borderSide: BorderSide(color: Colors.black),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(25.0)),
+                                    borderSide: BorderSide(color: Colors.black),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Flexible(
-                        child: TabBarView(
-                          physics: BouncingScrollPhysics(),
-                          controller: _tabController,
-                          children: List<Widget>.generate(
-                              subCategoriesTab.length, (int index) {
-                            return isLoadingNews
-                                ? Center(
-                                    child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        appPrimaryMaterialColor),
-                                  ))
-                                : SingleChildScrollView(
-                                    physics: BouncingScrollPhysics(),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 18.0, left: 15, right: 15),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 10.0, top: 3),
-                                            child: Text(
-                                              "Featured",
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          Container(
-                                            height: 190,
-                                            decoration: BoxDecoration(
-                                              //color: Colors.grey[100],
-                                              border: Border.all(
-                                                  color: Colors.grey[200],
-                                                  width: 2),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Flexible(
+                            child: TabBarView(
+                              physics: BouncingScrollPhysics(),
+                              controller: _tabController,
+                              children: List<Widget>.generate(
+                                  subCategoriesTab.length, (int index) {
+                                return isLoadingNews
+                                    ? Center(
+                                        child: CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                                appPrimaryMaterialColor),
+                                      ))
+                                    : SingleChildScrollView(
+                                        physics: BouncingScrollPhysics(),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 18.0, left: 15, right: 15),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 10.0, top: 3),
+                                                child: Text(
+                                                  "Featured",
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              Container(
+                                                height: 190,
+                                                decoration: BoxDecoration(
+                                                  //color: Colors.grey[100],
+                                                  border: Border.all(
+                                                      color: Colors.grey[200],
+                                                      width: 2),
 //                                                borderRadius: BorderRadius.all(
 //                                                    Radius.circular(10.0)),
-                                            ),
-                                            child: Carousel(
-                                              boxFit: BoxFit.contain,
-                                              autoplay: true,
-                                              animationCurve:
-                                                  Curves.fastOutSlowIn,
-                                              animationDuration:
-                                                  Duration(milliseconds: 1500),
-                                              dotSize: 0.0,
-                                              //  borderRadius: true,
-                                              dotIncreasedColor:
-                                                  Color(0xFF9f782d),
-                                              dotBgColor: Colors.transparent,
-                                              dotPosition:
-                                                  DotPosition.bottomCenter,
-                                              dotVerticalPadding: 10.0,
-                                              showIndicator: false,
-                                              indicatorBgPadding: 7.0,
-                                              dotColor: Colors.grey,
-                                              onImageChange: (a, b) {
+                                                ),
+                                                child: Carousel(
+                                                  boxFit: BoxFit.contain,
+                                                  autoplay: true,
+                                                  animationCurve:
+                                                      Curves.fastOutSlowIn,
+                                                  animationDuration: Duration(
+                                                      milliseconds: 1500),
+                                                  dotSize: 0.0,
+                                                  //  borderRadius: true,
+                                                  dotIncreasedColor:
+                                                      Color(0xFF9f782d),
+                                                  dotBgColor:
+                                                      Colors.transparent,
+                                                  dotPosition:
+                                                      DotPosition.bottomCenter,
+                                                  dotVerticalPadding: 10.0,
+                                                  showIndicator: false,
+                                                  indicatorBgPadding: 7.0,
+                                                  dotColor: Colors.grey,
+                                                  onImageChange: (a, b) {
 //                                                    log(a.toString());
 //                                                    log(b.toString());
-                                                setState(() {
-                                                  //skip = b;
-                                                });
-                                              },
-                                              images: imgList.map((link) {
-                                                return GestureDetector(
-                                                  onTap: () {
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              NewsBannerDetail(
-                                                            newsData: link,
-                                                          ),
-                                                        ));
+                                                    setState(() {
+                                                      //skip = b;
+                                                    });
                                                   },
-                                                  child: Stack(
-                                                    children: [
-                                                      FadeInImage.assetNetwork(
-                                                        placeholder:
-                                                            'assets/TND Logo_PNG_Newspaper.png',
-                                                        image: link[
-                                                            "featured_img_src"],
-                                                        // width: 300,
-                                                      ),
-                                                      // Padding(
-                                                      //   padding:
-                                                      //       const EdgeInsets
-                                                      //           .all(8.0),
-                                                      //   child: Container(
-                                                      //     margin:
-                                                      //         EdgeInsets.all(5),
-                                                      //     height: 22,
-                                                      //     decoration:
-                                                      //         BoxDecoration(
-                                                      //       color:
-                                                      //           appPrimaryMaterialColor,
-                                                      //       // border: Border.all(color: Colors.black, width: 1),
-                                                      //       borderRadius:
-                                                      //           BorderRadius.all(
-                                                      //               Radius.circular(
-                                                      //                   15.0)),
-                                                      //     ),
-                                                      //     width: 100,
-                                                      //     child: Center(
-                                                      //       child: Text(
-                                                      //         link["type"],
-                                                      //         overflow:
-                                                      //             TextOverflow
-                                                      //                 .ellipsis,
-                                                      //         style: TextStyle(
-                                                      //             color: Colors
-                                                      //                 .white,
-                                                      //             fontSize: 12),
-                                                      //       ),
-                                                      //     ),
-                                                      //   ),
-                                                      // ),
-                                                      // Align(
-                                                      //   alignment:
-                                                      //       Alignment.topRight,
-                                                      //   child: Padding(
-                                                      //     padding:
-                                                      //         const EdgeInsets
-                                                      //             .all(8.0),
-                                                      //     child: Container(
-                                                      //       height: 22,
-                                                      //       decoration:
-                                                      //           BoxDecoration(
-                                                      //         color: Colors
-                                                      //             .transparent
-                                                      //             .withBlue(2),
-                                                      //         // border: Border.all(color: Colors.black, width: 1),
-                                                      //         borderRadius: BorderRadius
-                                                      //             .all(Radius
-                                                      //                 .circular(
-                                                      //                     15.0)),
-                                                      //       ),
-                                                      //       width: 60,
-                                                      //       padding:
-                                                      //           EdgeInsets.only(
-                                                      //               left: 8,
-                                                      //               right: 8),
-                                                      //       child: Row(
-                                                      //         mainAxisAlignment:
-                                                      //             MainAxisAlignment
-                                                      //                 .center,
-                                                      //         children: [
-                                                      //           Icon(
-                                                      //             Icons.star,
-                                                      //             color: Colors
-                                                      //                 .white,
-                                                      //             size: 14,
-                                                      //           ),
-                                                      //           Text(
-                                                      //             "10k",
-                                                      //             overflow:
-                                                      //                 TextOverflow
-                                                      //                     .ellipsis,
-                                                      //             style: TextStyle(
-                                                      //                 color: Colors
-                                                      //                     .white,
-                                                      //                 fontSize:
-                                                      //                     12),
-                                                      //           ),
-                                                      //         ],
-                                                      //       ),
-                                                      //     ),
-                                                      //   ),
-                                                      // ),
-                                                      Positioned(
-                                                          bottom: 0.0,
-                                                          child: Container(
-                                                            height: 60,
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width -
-                                                                30,
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    left: 8,
-                                                                    right: 8),
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: Color(
-                                                                  0xff4B4B4B4A),
-                                                              //color: Colors.transparent,
+                                                  images: imgList.map((link) {
+                                                    return GestureDetector(
+                                                      onTap: () {
+                                                        Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  NewsBannerDetail(
+                                                                newsData: link,
+                                                              ),
+                                                            ));
+                                                      },
+                                                      child: Stack(
+                                                        children: [
+                                                          FadeInImage
+                                                              .assetNetwork(
+                                                            placeholder:
+                                                                'assets/TND Logo_PNG_Newspaper.png',
+                                                            image: link[
+                                                                "featured_img_src"],
+                                                            // width: 300,
+                                                          ),
+                                                          // Padding(
+                                                          //   padding:
+                                                          //       const EdgeInsets
+                                                          //           .all(8.0),
+                                                          //   child: Container(
+                                                          //     margin:
+                                                          //         EdgeInsets.all(5),
+                                                          //     height: 22,
+                                                          //     decoration:
+                                                          //         BoxDecoration(
+                                                          //       color:
+                                                          //           appPrimaryMaterialColor,
+                                                          //       // border: Border.all(color: Colors.black, width: 1),
+                                                          //       borderRadius:
+                                                          //           BorderRadius.all(
+                                                          //               Radius.circular(
+                                                          //                   15.0)),
+                                                          //     ),
+                                                          //     width: 100,
+                                                          //     child: Center(
+                                                          //       child: Text(
+                                                          //         link["type"],
+                                                          //         overflow:
+                                                          //             TextOverflow
+                                                          //                 .ellipsis,
+                                                          //         style: TextStyle(
+                                                          //             color: Colors
+                                                          //                 .white,
+                                                          //             fontSize: 12),
+                                                          //       ),
+                                                          //     ),
+                                                          //   ),
+                                                          // ),
+                                                          // Align(
+                                                          //   alignment:
+                                                          //       Alignment.topRight,
+                                                          //   child: Padding(
+                                                          //     padding:
+                                                          //         const EdgeInsets
+                                                          //             .all(8.0),
+                                                          //     child: Container(
+                                                          //       height: 22,
+                                                          //       decoration:
+                                                          //           BoxDecoration(
+                                                          //         color: Colors
+                                                          //             .transparent
+                                                          //             .withBlue(2),
+                                                          //         // border: Border.all(color: Colors.black, width: 1),
+                                                          //         borderRadius: BorderRadius
+                                                          //             .all(Radius
+                                                          //                 .circular(
+                                                          //                     15.0)),
+                                                          //       ),
+                                                          //       width: 60,
+                                                          //       padding:
+                                                          //           EdgeInsets.only(
+                                                          //               left: 8,
+                                                          //               right: 8),
+                                                          //       child: Row(
+                                                          //         mainAxisAlignment:
+                                                          //             MainAxisAlignment
+                                                          //                 .center,
+                                                          //         children: [
+                                                          //           Icon(
+                                                          //             Icons.star,
+                                                          //             color: Colors
+                                                          //                 .white,
+                                                          //             size: 14,
+                                                          //           ),
+                                                          //           Text(
+                                                          //             "10k",
+                                                          //             overflow:
+                                                          //                 TextOverflow
+                                                          //                     .ellipsis,
+                                                          //             style: TextStyle(
+                                                          //                 color: Colors
+                                                          //                     .white,
+                                                          //                 fontSize:
+                                                          //                     12),
+                                                          //           ),
+                                                          //         ],
+                                                          //       ),
+                                                          //     ),
+                                                          //   ),
+                                                          // ),
+                                                          Positioned(
+                                                              bottom: 0.0,
+                                                              child: Container(
+                                                                height: 60,
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width -
+                                                                    30,
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        left: 8,
+                                                                        right:
+                                                                            8),
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: Color(
+                                                                      0xff4B4B4B4A),
+                                                                  //color: Colors.transparent,
 //                                                              borderRadius:
 //                                                              BorderRadius.only(
 //                                                                  bottomLeft: Radius
@@ -392,125 +408,98 @@ class _DailyNewScreenState extends State<DailyNewScreen>
 //                                                                  bottomRight: Radius
 //                                                                      .circular(
 //                                                                      18.0)),
-                                                            ),
-                                                            child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: <
-                                                                  Widget>[
-                                                                SizedBox(
-                                                                  height: 5,
                                                                 ),
-                                                                Text(
-                                                                  link["title"],
-                                                                  textAlign:
-                                                                      TextAlign
+                                                                child: Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
                                                                           .start,
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          11,
-                                                                      letterSpacing:
-                                                                          0.1),
-                                                                ),
-                                                                SizedBox(
-                                                                  height: 5,
-                                                                ),
-                                                                Row(
                                                                   children: <
                                                                       Widget>[
-                                                                    Icon(
-                                                                      Icons
-                                                                          .timer,
-                                                                      size: 14,
-                                                                      color: Colors
-                                                                          .grey,
+                                                                    SizedBox(
+                                                                      height: 5,
                                                                     ),
-                                                                    link["newsDate"] ==
-                                                                            null
-                                                                        ? SizedBox()
-                                                                        : Text(
-                                                                            "${link["newsDate"]}" +
-                                                                                "${link["newsTime"]}",
-                                                                            style: TextStyle(
-                                                                                color: Colors.white,
-                                                                                letterSpacing: 0.5,
-                                                                                fontSize: 8),
-                                                                          )
+                                                                    Text(
+                                                                      link[
+                                                                          "title"],
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .start,
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .white,
+                                                                          fontSize:
+                                                                              11,
+                                                                          letterSpacing:
+                                                                              0.1),
+                                                                    ),
+                                                                    SizedBox(
+                                                                      height: 5,
+                                                                    ),
+                                                                    Row(
+                                                                      children: <
+                                                                          Widget>[
+                                                                        Icon(
+                                                                          Icons
+                                                                              .timer,
+                                                                          size:
+                                                                              14,
+                                                                          color:
+                                                                              Colors.grey,
+                                                                        ),
+                                                                        link["newsDate"] ==
+                                                                                null
+                                                                            ? SizedBox()
+                                                                            : Text(
+                                                                                "${link["newsDate"]}" + "${link["newsTime"]}",
+                                                                                style: TextStyle(color: Colors.white, letterSpacing: 0.5, fontSize: 8),
+                                                                              )
+                                                                      ],
+                                                                    ),
+                                                                    SizedBox(
+                                                                      height: 5,
+                                                                    ),
                                                                   ],
                                                                 ),
-                                                                SizedBox(
-                                                                  height: 5,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          )),
-                                                    ],
-                                                  ),
-                                                );
-                                              }).toList(),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 10.0, top: 25),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  "Popular News",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                                              )),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  }).toList(),
                                                 ),
-                                                Icon(
-                                                  Icons.arrow_forward_ios,
-                                                  color: Colors.black,
-                                                  size: 23,
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          isLoadingCat
-                                              ? Center(
-                                                  child: LoadingBlueComponent())
-                                              : subCategoriesList.length > 0 &&
-                                                      subCategoriesList != null
-                                                  ? searchlist.length != 0
-                                                      ? ListView.builder(
-                                                          physics:
-                                                              NeverScrollableScrollPhysics(),
-                                                          shrinkWrap: true,
-                                                          // scrollDirection: Axis.horizontal,
-                                                          itemCount:
-                                                              searchlist.length,
-                                                          itemBuilder:
-                                                              (BuildContext
-                                                                      context,
-                                                                  int index) {
-                                                            return DailyNewsComponent(
-                                                              newsData:
-                                                                  searchlist[
-                                                                      index],
-                                                              newsType:
-                                                                  subCategoriesTab[
-                                                                          index]
-                                                                      [
-                                                                      "newsType"],
-                                                              isBookmark:
-                                                                  searchlist[
-                                                                          index]
-                                                                      [
-                                                                      "bookmark"],
-                                                            );
-                                                          })
-                                                      : _isSearching && isfirst
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 10.0, top: 25),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      "Popular News",
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                    Icon(
+                                                      Icons.arrow_forward_ios,
+                                                      color: Colors.black,
+                                                      size: 23,
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              isLoadingCat
+                                                  ? Center(
+                                                      child:
+                                                          LoadingBlueComponent())
+                                                  : subCategoriesList.length >
+                                                              0 &&
+                                                          subCategoriesList !=
+                                                              null
+                                                      ? searchlist.length != 0
                                                           ? ListView.builder(
                                                               physics:
                                                                   NeverScrollableScrollPhysics(),
@@ -528,61 +517,89 @@ class _DailyNewScreenState extends State<DailyNewScreen>
                                                                   newsData:
                                                                       searchlist[
                                                                           index],
+                                                                  newsType: subCategoriesTab[
+                                                                          index]
+                                                                      [
+                                                                      "newsType"],
                                                                   isBookmark: searchlist[
                                                                           index]
                                                                       [
                                                                       "bookmark"],
                                                                 );
                                                               })
-                                                          : ListView.builder(
-                                                              physics:
-                                                                  NeverScrollableScrollPhysics(),
-                                                              shrinkWrap: true,
-                                                              // scrollDirection: Axis.horizontal,
-                                                              itemCount:
-                                                                  subCategoriesList
-                                                                      .length,
-                                                              itemBuilder:
-                                                                  (BuildContext
-                                                                          context,
-                                                                      int index) {
-                                                                return DailyNewsComponent(
-                                                                  newsData:
-                                                                      subCategoriesList[
-                                                                          index],
-                                                                  isBookmark: subCategoriesList[
-                                                                          index]
-                                                                      [
-                                                                      "bookmark"],
-                                                                );
-                                                              })
-                                                  : Center(
-                                                      child: Container(
-                                                        //color: Color.fromRGBO(0, 0, 0, 0.6),
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal: 20,
-                                                                vertical: 10),
-                                                        child: Text(
-                                                            "No Data Available",
-                                                            style: TextStyle(
-                                                                fontSize: 20,
-                                                                color:
-                                                                    appPrimaryMaterialColor)),
-                                                      ),
-                                                    )
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                          }),
-                        ),
+                                                          : _isSearching &&
+                                                                  isfirst
+                                                              ? ListView
+                                                                  .builder(
+                                                                      physics:
+                                                                          NeverScrollableScrollPhysics(),
+                                                                      shrinkWrap:
+                                                                          true,
+                                                                      // scrollDirection: Axis.horizontal,
+                                                                      itemCount:
+                                                                          searchlist
+                                                                              .length,
+                                                                      itemBuilder: (BuildContext
+                                                                              context,
+                                                                          int
+                                                                              index) {
+                                                                        return DailyNewsComponent(
+                                                                          newsData:
+                                                                              searchlist[index],
+                                                                          isBookmark:
+                                                                              searchlist[index]["bookmark"],
+                                                                        );
+                                                                      })
+                                                              : ListView
+                                                                  .builder(
+                                                                      physics:
+                                                                          NeverScrollableScrollPhysics(),
+                                                                      shrinkWrap:
+                                                                          true,
+                                                                      // scrollDirection: Axis.horizontal,
+                                                                      itemCount:
+                                                                          subCategoriesList
+                                                                              .length,
+                                                                      itemBuilder:
+                                                                          (BuildContext context,
+                                                                              int index) {
+                                                                        return DailyNewsComponent(
+                                                                          newsData:
+                                                                              subCategoriesList[index],
+                                                                          isBookmark:
+                                                                              subCategoriesList[index]["bookmark"],
+                                                                        );
+                                                                      })
+                                                      : Center(
+                                                          child: Container(
+                                                            //color: Color.fromRGBO(0, 0, 0, 0.6),
+                                                            padding: EdgeInsets
+                                                                .symmetric(
+                                                                    horizontal:
+                                                                        20,
+                                                                    vertical:
+                                                                        10),
+                                                            child: Text(
+                                                                "No Data Available",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        20,
+                                                                    color:
+                                                                        appPrimaryMaterialColor)),
+                                                          ),
+                                                        )
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                              }),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
     );
   }
 
