@@ -90,7 +90,7 @@ class _MyOfferDetailScreenState extends State<MyOfferDetailScreen> {
               twitter: widget.offerData["twitter"],
               whatsapp: widget.offerData["whatsApp"],
               youtube: widget.offerData["youTube"],
-              mail: widget.offerData["whatsApp"],
+              mail: widget.offerData["mail"],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

@@ -1165,6 +1165,7 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
           "linkedIn": linkinLink.text,
           "twitter": twitterLink.text,
           "youTube": youtubeLink.text,
+          "mail": mailLink.text,
           "businessCategory": selectedOfferCat.offerId
         });
         print(body.fields);
