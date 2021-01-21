@@ -170,7 +170,15 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0),
                         child: Text(
-                          "1-2-1 Request : ",
+                          "${widget.directoryData["status"]}" == "send"
+                              ? "1-2-1 Send : "
+                              : "${widget.directoryData["status"]}" ==
+                                      "requested"
+                                  ? "1-2-1 Requested : "
+                                  : "${widget.directoryData["status"]}" ==
+                                          "accepted"
+                                      ? "1-2-1 Accepted : "
+                                      : "1-2-1 Send : ",
                           //widget.directoryData["business_category"],
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.start,
@@ -220,37 +228,39 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
                                       ),
                                     ),
                                   )
-                                : Container(),
-                            "${widget.directoryData["status"]}" == "requested"
-                                ? Container(
-                                    height: 25,
-                                    // width: 140,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          color: appPrimaryMaterialColor[100],
-                                          width: 1),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                    ),
-                                    child: Row(
-                                      // mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Image.asset('assets/videocall.png'),
-                                        FittedBox(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 3.0),
-                                            child: Text(
-                                              "Requested  ",
-                                              style: TextStyle(fontSize: 12),
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  )
-                                : Container(),
+                                : "${widget.directoryData["status"]}" ==
+                                        "requested"
+                                    ? Container(
+                                        height: 25,
+                                        // width: 140,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border: Border.all(
+                                              color:
+                                                  appPrimaryMaterialColor[100],
+                                              width: 1),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10.0)),
+                                        ),
+                                        child: Row(
+                                          // mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Image.asset('assets/videocall.png'),
+                                            FittedBox(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 3.0),
+                                                child: Text(
+                                                  "Requested  ",
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    : Container(),
                           ],
                         ),
                       ),
