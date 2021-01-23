@@ -300,35 +300,80 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
                                   )
                                 : "${widget.directoryData["status"]}" ==
                                         "rejected"
-                                    ? Container(
-                                        height: 25,
-                                        // width: 140,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          border: Border.all(
-                                              color:
-                                                  appPrimaryMaterialColor[100],
-                                              width: 1),
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10.0)),
-                                        ),
-                                        child: Row(
-                                          // mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            Image.asset('assets/videocall.png'),
-                                            FittedBox(
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 3.0),
-                                                child: Text(
-                                                  "Rejected  ",
-                                                  style:
-                                                      TextStyle(fontSize: 12),
-                                                ),
+                                    ? Row(
+                                        children: [
+                                          Container(
+                                            height: 25,
+                                            // width: 140,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              border: Border.all(
+                                                  color:
+                                                      appPrimaryMaterialColor[
+                                                          100],
+                                                  width: 1),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10.0)),
+                                            ),
+                                            child: Row(
+                                              // mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Image.asset(
+                                                    'assets/videocall.png'),
+                                                FittedBox(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 3.0),
+                                                    child: Text(
+                                                      "Rejected  ",
+                                                      style: TextStyle(
+                                                          fontSize: 12),
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
+                                              _showDialog(context);
+                                            },
+                                            child: Container(
+                                              height: 25,
+                                              // width: 140,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                border: Border.all(
+                                                    color:
+                                                        appPrimaryMaterialColor[
+                                                            100],
+                                                    width: 1),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
                                               ),
-                                            )
-                                          ],
-                                        ),
+                                              child: Row(
+                                                // mainAxisAlignment: MainAxisAlignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                      'assets/videocall.png'),
+                                                  FittedBox(
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 3.0),
+                                                      child: Text(
+                                                        "Send Again  ",
+                                                        style: TextStyle(
+                                                            fontSize: 12),
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          )
+                                        ],
                                       )
                                     : Container(),
                             "${widget.directoryData["status"]}" == "accepted"
@@ -802,7 +847,7 @@ class _AlertSendState extends State<AlertSend> {
           "meetingLink": txtOnlineLink.text
         };
         Services.postForSave(
-                apiname: 'users/oneTwoOneConnectionReq', body: body)
+                apiname: 'users/oneTwoOneConnectionReq_V1', body: body)
             .then((response) async {
           if (response.IsSuccess == true && response.Data == "1") {
             setState(() {
