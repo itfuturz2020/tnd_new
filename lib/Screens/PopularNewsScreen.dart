@@ -197,19 +197,31 @@ class _PopularNewsScreenState extends State<PopularNewsScreen> {
                                   offset: Offset(1, 6))
                             ],
                           ),
-                          child: CircleAvatar(
-                              radius: 30.0,
-                              backgroundColor: Colors.white,
-                              child: GestureDetector(
-                                onTap: () {
-                                  addToBookmark();
-                                },
-                                child: Icon(Icons.favorite,
-                                    color: Colors.red, size: 45.0),
-                              )
+                          child: widget.newsData["bookmark"] == false
+                              ? CircleAvatar(
+                                  radius: 30.0,
+                                  backgroundColor: Colors.white,
+                                  child: GestureDetector(
+                                    onTap: () {},
+                                    child: Icon(Icons.favorite_border,
+                                        color: Colors.red, size: 45.0),
+                                  )
 //                            Image.asset("assets/Lheart.png"),
-                              //Icon(Icons.favorite,color: Colors.red,size: 45.0,),
-                              ),
+                                  //Icon(Icons.favorite,color: Colors.red,size: 45.0,),
+                                  )
+                              : CircleAvatar(
+                                  radius: 30.0,
+                                  backgroundColor: Colors.white,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      addToBookmark();
+                                    },
+                                    child: Icon(Icons.favorite,
+                                        color: Colors.red, size: 45.0),
+                                  )
+//                            Image.asset("assets/Lheart.png"),
+                                  //Icon(Icons.favorite,color: Colors.red,size: 45.0,),
+                                  ),
                         ),
                       )
 //                      child: CircleAvatar(

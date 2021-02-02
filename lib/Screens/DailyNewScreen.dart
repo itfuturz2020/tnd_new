@@ -48,6 +48,7 @@ class _DailyNewScreenState extends State<DailyNewScreen>
     );
     _tabController.addListener(() {
       _newsCategory(subCategoriesTab[_tabController.index]["newsType"]);
+      _newsBanner(subCategoriesTab[_tabController.index]["newsType"]);
     });
   }
 
@@ -716,14 +717,15 @@ class _DailyNewScreenState extends State<DailyNewScreen>
 
               //set "data" here to your variable
             });
+            log("News Banners ${imgList}");
             // for (var i = 0; i <= subCatResponseList.length; i++) {
-            //   if (subCatResponseList[i]["trending"] == true) {
-            //     setState(() {
-            //       imgList.add(subCatResponseList[i]);
-            //       tabController =
-            //           TabController(length: imgList.length, vsync: this);
-            //     });
-            //   }
+            //   //  if (subCatResponseList[i]["trending"] == true) {
+            //   setState(() {
+            //     imgList.add(subCatResponseList[i]);
+            //     tabController =
+            //         TabController(length: imgList.length, vsync: this);
+            //   });
+            // }
             // }
           } else {
             setState(() {
