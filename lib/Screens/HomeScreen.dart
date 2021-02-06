@@ -337,7 +337,7 @@ class _HomeScreenState extends State<HomeScreen>
       "screenName": "/BussinessStoryScreen",
     },
     {
-      "lable": " Directory",
+      "lable": " IBC",
       "image": "assets/directory.png",
       "screenName": "/DirectoryScreen",
     },
@@ -485,8 +485,8 @@ class _HomeScreenState extends State<HomeScreen>
             children: <Widget>[
               DrawerHeader(
                 child: Image.asset(
-                  'assets/splash.png',
-                  fit: BoxFit.cover,
+                  'assets/LOGO1.png',
+                  fit: BoxFit.contain,
                 ),
                 decoration: BoxDecoration(
                   color: appPrimaryMaterialColor[200],
@@ -709,73 +709,11 @@ class _HomeScreenState extends State<HomeScreen>
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, int index) {
-                if (index == 2) {
-                  if (isVerified == true) {
-                    return custombox(
-                      listB[index]["lable"],
-                      listB[index]["image"],
-                      listB[index]["screenName"],
-                    );
-                  } else
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pushNamed('/EnquiryForm');
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Container(
-                          height: MediaQuery.of(context).size.height * 0.13,
-                          width: MediaQuery.of(context).size.height * 0.1,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(
-                                  color: Color(0xff16B8FF), width: 1),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(16.0)),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: appPrimaryMaterialColor
-                                        .withOpacity(0.2),
-                                    blurRadius: 2.0,
-                                    spreadRadius: 2.0,
-                                    offset: Offset(3.0, 5.0))
-                              ]),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.info_outline_rounded,
-                                color: appPrimaryMaterialColor,
-                                size: 50,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 5.0),
-                                child: FittedBox(
-                                  // fit: BoxFit.contain,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(3.0),
-                                    child: Text(
-                                      "Enquiry",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: appPrimaryMaterialColor,
-                                          fontSize: 12),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                } else {
-                  return custombox(
-                    listB[index]["lable"],
-                    listB[index]["image"],
-                    listB[index]["screenName"],
-                  );
-                }
+                return custombox(
+                  listB[index]["lable"],
+                  listB[index]["image"],
+                  listB[index]["screenName"],
+                );
               },
               staggeredTileBuilder: (int index) => new StaggeredTile.fit(1),
             )

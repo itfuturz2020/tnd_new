@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Screens/BookMarkDetailScreen.dart';
@@ -11,13 +13,60 @@ class BookMarkComponent extends StatefulWidget {
 }
 
 class _BookMarkComponentState extends State<BookMarkComponent> {
+  // String dateData;
+  // List<String> date;
+  // String month;
+  //
+  // @override
+  // void initState() {
+  //   //dateData = " ${widget.notificationData["date"]}";
+  //   funDate();
+  // }
+  //
+  // funDate() {
+  //   dateData = " ${widget.bookmarkData["newsDate"]}";
+  //   log(" ${widget.bookmarkData["newsDate"]}");
+  //   date = dateData.split(' ');
+  //   print("-------------------->${date}");
+  //   funMonth("${date[2]}");
+  // }
+  //
+  // funMonth(String mon) {
+  //   if (mon == "01") {
+  //     month = "Jan";
+  //   } else if (mon == "02") {
+  //     month = "Feb";
+  //   } else if (mon == "03") {
+  //     month = "March";
+  //   } else if (mon == "04") {
+  //     month = "April";
+  //   } else if (mon == "05") {
+  //     month = "May";
+  //   } else if (mon == "06") {
+  //     month = "June";
+  //   } else if (mon == "07") {
+  //     month = "July";
+  //   } else if (mon == "08") {
+  //     month = "Aug";
+  //   } else if (mon == "09") {
+  //     month = "Sept";
+  //   } else if (mon == "10") {
+  //     month = "Oct";
+  //   } else if (mon == "11") {
+  //     month = "Nov";
+  //   } else if (mon == "12") {
+  //     month = "Dec";
+  //   } else {
+  //     month = "";
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15.0),
       child: GestureDetector(
         onTap: () {
-          Navigator.of(context).pushNamed('/BookMarkDetailScreen');
           Navigator.push(
               context,
               MaterialPageRoute(
@@ -104,7 +153,7 @@ class _BookMarkComponentState extends State<BookMarkComponent> {
                                 color: Colors.grey,
                               ),
                               Text(
-                                "${widget.bookmarkData["newsDate"] + "  " + widget.bookmarkData["newsTime"]}",
+                                " ${widget.bookmarkData["newsDate"] + "  " + widget.bookmarkData["newsTime"]}",
                                 style:
                                     TextStyle(color: Colors.grey, fontSize: 12),
                               )

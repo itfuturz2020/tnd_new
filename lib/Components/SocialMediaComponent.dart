@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class SocialMediaComponent extends StatefulWidget {
   String instagram, facebook, linkedIn, twitter, whatsapp, mail, youtube;
+
   SocialMediaComponent({
     this.instagram,
     this.facebook,
@@ -14,6 +15,7 @@ class SocialMediaComponent extends StatefulWidget {
     this.mail,
     this.youtube,
   });
+
   @override
   _SocialMediaComponentState createState() => _SocialMediaComponentState();
 }

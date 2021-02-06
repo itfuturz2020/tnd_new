@@ -293,188 +293,163 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     log("  '''''''''''''''' $isLoading");
     return isProfileLoading == false
-        ? Container(
-            color: Colors.white,
-            height: MediaQuery.of(context).size.height,
-            child: SingleChildScrollView(
-              child: Stack(
-                children: <Widget>[
-                  ClipPath(
-                    child: FadeInImage.assetNetwork(
-                        placeholder: "assets/profilebackground.png",
-                        image: CoverPhoto,
-                        height: MediaQuery.of(context).size.height * 0.35,
-                        width: MediaQuery.of(context).size.width,
-                        fit: BoxFit.cover),
-                    clipper: MyClipper(),
+        ? Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.white,
+              elevation: 0,
+              leading: Padding(
+                padding: const EdgeInsets.only(
+                    top: 8.0, right: 0, left: 10, bottom: 8),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushReplacementNamed(context, '/HomePage');
+                  },
+                  child: Container(
+                    height: 20,
+                    width: 40,
+                    decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        border: Border.all(color: Colors.grey[200], width: 1),
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey[600].withOpacity(0.2),
+                              blurRadius: 1.0,
+                              spreadRadius: 1.0,
+                              offset: Offset(3.0, 5.0))
+                        ]),
+                    child: Icon(
+                      Icons.arrow_back_ios_outlined,
+                      color: Colors.black,
+                    ),
                   ),
-                  Container(
-                    padding: EdgeInsets.all(15),
-                    width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height * 0.24),
-                    color: Colors.transparent,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        //   Photo == ""
-                        profileList["img"] == ""
-                            ? Container(
-                                decoration: new BoxDecoration(
-                                    color: cnst.appMaterialColor,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(75))),
-                                width: 100,
-                                height: 100,
-                                child: Center(
-                                  child: Text(
-                                    //  "${Name.toString().substring(0, 1)}",
-                                    "${profileList["name"].toString().substring(0, 1)}",
-                                    style: TextStyle(
-                                        decoration: TextDecoration.none,
-                                        fontSize: 30,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w500),
+                ),
+              ),
+            ),
+            body: Container(
+              color: Colors.white,
+              height: MediaQuery.of(context).size.height,
+              child: SingleChildScrollView(
+                child: Stack(
+                  children: <Widget>[
+                    ClipPath(
+                      child: FadeInImage.assetNetwork(
+                          placeholder: "assets/profilebackground.png",
+                          image: CoverPhoto,
+                          height: MediaQuery.of(context).size.height * 0.35,
+                          width: MediaQuery.of(context).size.width,
+                          fit: BoxFit.cover),
+                      clipper: MyClipper(),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(15),
+                      width: MediaQuery.of(context).size.width,
+                      margin: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.24),
+                      color: Colors.transparent,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          //   Photo == ""
+                          profileList["img"] == ""
+                              ? Container(
+                                  decoration: new BoxDecoration(
+                                      color: cnst.appMaterialColor,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(75))),
+                                  width: 100,
+                                  height: 100,
+                                  child: Center(
+                                    child: Text(
+                                      //  "${Name.toString().substring(0, 1)}",
+                                      "${profileList["name"].toString().substring(0, 1)}",
+                                      style: TextStyle(
+                                          decoration: TextDecoration.none,
+                                          fontSize: 30,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ),
+                                )
+                              : Container(
+                                  child: ClipOval(
+                                    child: FadeInImage.assetNetwork(
+                                        placeholder: "images/users.png",
+                                        image: Photo,
+                                        //image: profileList["img"],
+                                        height: 100,
+                                        width: 100,
+                                        fit: BoxFit.cover),
                                   ),
                                 ),
-                              )
-                            : Container(
-                                child: ClipOval(
-                                  child: FadeInImage.assetNetwork(
-                                      placeholder: "images/users.png",
-                                      image: Photo,
-                                      //image: profileList["img"],
-                                      height: 100,
-                                      width: 100,
-                                      fit: BoxFit.cover),
-                                ),
-                              ),
-                        //!isLoadingProfile
-                        !isLoading
-                            ? Column(
-                                children: <Widget>[
-                                  Padding(
-                                      padding: EdgeInsets.only(top: 10),
-                                      child: Text(
-                                          Name == ""
-                                              ? "${profileList["name"]}"
-                                              : Name,
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              color: Colors.grey[800],
-                                              fontWeight: FontWeight.w600))),
-                                  Padding(
-                                      padding:
-                                          EdgeInsets.only(top: 5, bottom: 0),
-                                      child: Text(
-                                          "${Company == "" ? profileList["company_name"] : Company}",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Colors.grey[600],
-                                              fontWeight: FontWeight.w600))),
-                                  GestureDetector(
-                                    onTap: () => Navigator.pushNamed(
-                                        context, "/ProfileDetail"),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 15, bottom: 20),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: <Widget>[
-                                          Text("Edit Profile",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  color: Colors.blue,
-                                                  fontWeight: FontWeight.w600)),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(left: 10),
-                                            child: Icon(Icons.edit,
-                                                color: Colors.blue, size: 17),
-                                          )
-                                        ],
+                          //!isLoadingProfile
+                          !isLoading
+                              ? Column(
+                                  children: <Widget>[
+                                    Padding(
+                                        padding: EdgeInsets.only(top: 10),
+                                        child: Text(
+                                            Name == ""
+                                                ? "${profileList["name"]}"
+                                                : Name,
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.grey[800],
+                                                fontWeight: FontWeight.w600))),
+                                    Padding(
+                                        padding:
+                                            EdgeInsets.only(top: 5, bottom: 0),
+                                        child: Text(
+                                            "${Company == "" ? profileList["company_name"] : Company}",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.grey[600],
+                                                fontWeight: FontWeight.w600))),
+                                    GestureDetector(
+                                      onTap: () => Navigator.pushNamed(
+                                          context, "/ProfileDetail"),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 15, bottom: 20),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: <Widget>[
+                                            Text("Edit Profile",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: Colors.blue,
+                                                    fontWeight:
+                                                        FontWeight.w600)),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: Icon(Icons.edit,
+                                                  color: Colors.blue, size: 17),
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              )
-                            : Container(
-                                height: 100,
-                                width: 100,
-                                child: Center(
-                                  child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        Colors.blue),
-                                    strokeWidth: 3,
-                                  ),
-                                ),
-                              ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Card(
-                              elevation: 3,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
-                                  side: BorderSide(
-                                      width: 0.5, color: Colors.grey[900])),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    gradient: new LinearGradient(colors: [
-                                      cnst.appMaterialColor,
-                                      cnst.buttoncolor
-                                    ]),
-                                    boxShadow: [
-                                      new BoxShadow(
-                                        color: Colors.grey[500],
-                                        blurRadius: 20.0,
-                                        spreadRadius: 1.0,
-                                      )
-                                    ]),
-                                child: Column(
-                                  children: <Widget>[
-                                    !isLoading
-                                        ? Text(_dashboardCount.visitors,
-                                            style: TextStyle(
-                                                fontSize: 17,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w600))
-                                        : SizedBox(
-                                            height: 20,
-                                            width: 20,
-                                            child: CircularProgressIndicator(
-                                              valueColor:
-                                                  AlwaysStoppedAnimation<Color>(
-                                                      Colors.blue),
-                                              strokeWidth: 3,
-                                            ),
-                                          ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 10),
-                                      child: Text("Visitors",
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w600)),
-                                    ),
                                   ],
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                )
+                              : Container(
+                                  height: 100,
+                                  width: 100,
+                                  child: Center(
+                                    child: CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          Colors.blue),
+                                      strokeWidth: 3,
+                                    ),
+                                  ),
                                 ),
-                                height: 85,
-                                width: 85,
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () =>
-                                  Navigator.pushNamed(context, '/ShareHistory'),
-                              child: Card(
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Card(
                                 elevation: 3,
                                 shape: RoundedRectangleBorder(
                                     borderRadius:
@@ -485,13 +460,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                   decoration: BoxDecoration(
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(10)),
-                                      gradient: new LinearGradient(
-                                          begin: FractionalOffset(0, 1.0),
-                                          end: FractionalOffset(0, 0),
-                                          colors: [
-                                            cnst.appMaterialColor,
-                                            cnst.buttoncolor
-                                          ]),
+                                      gradient: new LinearGradient(colors: [
+                                        cnst.appMaterialColor,
+                                        cnst.buttoncolor
+                                      ]),
                                       boxShadow: [
                                         new BoxShadow(
                                           color: Colors.grey[500],
@@ -502,7 +474,132 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                   child: Column(
                                     children: <Widget>[
                                       !isLoading
-                                          ? Text(_dashboardCount.share,
+                                          ? Text(_dashboardCount.visitors,
+                                              style: TextStyle(
+                                                  fontSize: 17,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w600))
+                                          : SizedBox(
+                                              height: 20,
+                                              width: 20,
+                                              child: CircularProgressIndicator(
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                        Color>(Colors.blue),
+                                                strokeWidth: 3,
+                                              ),
+                                            ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 10),
+                                        child: Text("Visitors",
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w600)),
+                                      ),
+                                    ],
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                  ),
+                                  height: 85,
+                                  width: 85,
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () => Navigator.pushNamed(
+                                    context, '/ShareHistory'),
+                                child: Card(
+                                  elevation: 3,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      side: BorderSide(
+                                          width: 0.5, color: Colors.grey[900])),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        gradient: new LinearGradient(
+                                            begin: FractionalOffset(0, 1.0),
+                                            end: FractionalOffset(0, 0),
+                                            colors: [
+                                              cnst.appMaterialColor,
+                                              cnst.buttoncolor
+                                            ]),
+                                        boxShadow: [
+                                          new BoxShadow(
+                                            color: Colors.grey[500],
+                                            blurRadius: 20.0,
+                                            spreadRadius: 1.0,
+                                          )
+                                        ]),
+                                    child: Column(
+                                      children: <Widget>[
+                                        !isLoading
+                                            ? Text(_dashboardCount.share,
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.w600))
+                                            : SizedBox(
+                                                height: 20,
+                                                width: 20,
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  valueColor:
+                                                      AlwaysStoppedAnimation<
+                                                          Color>(Colors.blue),
+                                                  strokeWidth: 3,
+                                                ),
+                                              ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 10),
+                                          child: Text("Share",
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w600)),
+                                        ),
+                                      ],
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                    ),
+                                    height: 85,
+                                    width: 85,
+                                  ),
+                                ),
+                              ),
+                              Card(
+                                elevation: 3,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                    side: BorderSide(
+                                        width: 0.5, color: Colors.grey[900])),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      gradient: new LinearGradient(colors: [
+                                        cnst.buttoncolor,
+                                        cnst.appMaterialColor
+                                      ]),
+                                      boxShadow: [
+                                        new BoxShadow(
+                                          color: Colors.grey[500],
+                                          blurRadius: 20.0,
+                                          spreadRadius: 1.0,
+                                        )
+                                      ]),
+                                  child: Column(
+                                    children: <Widget>[
+                                      !isLoading
+                                          ? Text(_dashboardCount.calls,
                                               style: TextStyle(
                                                   fontSize: 16,
                                                   color: Colors.white,
@@ -519,7 +616,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                             ),
                                       Padding(
                                         padding: const EdgeInsets.only(top: 10),
-                                        child: Text("Share",
+                                        child: Text("Calls",
                                             style: TextStyle(
                                                 fontSize: 14,
                                                 color: Colors.white,
@@ -534,284 +631,234 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                   width: 85,
                                 ),
                               ),
-                            ),
-                            Card(
-                              elevation: 3,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
-                                  side: BorderSide(
-                                      width: 0.5, color: Colors.grey[900])),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    gradient: new LinearGradient(colors: [
-                                      cnst.buttoncolor,
-                                      cnst.appMaterialColor
-                                    ]),
-                                    boxShadow: [
-                                      new BoxShadow(
-                                        color: Colors.grey[500],
-                                        blurRadius: 20.0,
-                                        spreadRadius: 1.0,
-                                      )
-                                    ]),
-                                child: Column(
-                                  children: <Widget>[
-                                    !isLoading
-                                        ? Text(_dashboardCount.calls,
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w600))
-                                        : SizedBox(
-                                            height: 20,
-                                            width: 20,
-                                            child: CircularProgressIndicator(
-                                              valueColor:
-                                                  AlwaysStoppedAnimation<Color>(
-                                                      Colors.blue),
-                                              strokeWidth: 3,
-                                            ),
-                                          ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 10),
-                                      child: Text("Calls",
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w600)),
-                                    ),
-                                  ],
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                ),
-                                height: 85,
-                                width: 85,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 20),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width / 2.5,
-                              child: RaisedButton(
-                                  padding: EdgeInsets.symmetric(horizontal: 20),
-                                  elevation: 5,
-                                  textColor: Colors.white,
-                                  color: cnst.buttoncolor,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Icon(
-                                        Icons.share,
-                                        color: Colors.white,
-                                        size: 16,
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 10),
-                                        child: Text("Share",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 14)),
-                                      )
-                                    ],
-                                  ),
-                                  onPressed: () {
-                                    bool val = checkValidity();
-                                    Navigator.of(context).push(
-                                      PageRouteBuilder(
-                                        opaque: false,
-                                        pageBuilder:
-                                            (BuildContext context, _, __) =>
-                                                CardShareComponent(
-                                          memberId: DigitalId,
-                                          memberName: Name,
-                                          isRegular: val,
-                                          memberType: MemberType,
-                                          shareMsg: ShareMsg,
-                                          IsActivePayment: IsActivePayment,
+                            ],
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 20),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width / 2.5,
+                                child: RaisedButton(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 20),
+                                    elevation: 5,
+                                    textColor: Colors.white,
+                                    color: cnst.buttoncolor,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.share,
+                                          color: Colors.white,
+                                          size: 16,
                                         ),
-                                      ),
-                                    );
-                                  },
-                                  shape: new RoundedRectangleBorder(
-                                      borderRadius:
-                                          new BorderRadius.circular(30.0))),
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width / 2.5,
-                              child: RaisedButton(
-                                  padding: EdgeInsets.symmetric(horizontal: 20),
-                                  elevation: 5,
-                                  textColor: Colors.white,
-                                  color: cnst.buttoncolor,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Image.asset("assets/logo.png",
-                                          height: 24, width: 24),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 10),
-                                        child: Text("Refer",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 14)),
-                                      )
-                                    ],
-                                  ),
-                                  onPressed: () {
-                                    // String withrefercode = cnst.inviteFriMsg
-                                    //     .replaceAll("#refercode", ReferCode);
-                                    String withappurl = cnst.inviteFriMsg
-                                        .replaceAll(
-                                            "#appurl", cnst.playstoreUrl);
-                                    String withmemberid =
-                                        withappurl.replaceAll("#id", DigitalId);
-                                    Share.share(withmemberid);
-                                  },
-                                  shape: new RoundedRectangleBorder(
-                                      borderRadius:
-                                          new BorderRadius.circular(30.0))),
-                            )
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: (IsActivePayment == true) &&
-                                  (MemberType.toLowerCase() == "trial" ||
-                                      checkValidity() == false)
-                              ? MainAxisAlignment.spaceEvenly
-                              : MainAxisAlignment.center,
-                          children: <Widget>[
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width / 2.5,
-                              child: RaisedButton(
-                                  padding: EdgeInsets.symmetric(horizontal: 20),
-                                  elevation: 5,
-                                  textColor: Colors.white,
-                                  color: cnst.buttoncolor,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Icon(
-                                        Icons.remove_red_eye,
-                                        color: Colors.white,
-                                        size: 16,
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 10),
-                                        child: Text("View Card",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 14)),
-                                      )
-                                    ],
-                                  ),
-                                  onPressed: () async {
-                                    String profileUrl = cnst.profileUrl
-                                        .replaceAll("#id", DigitalId);
-                                    if (await canLaunch(profileUrl)) {
-                                      await launch(profileUrl);
-                                    } else {
-                                      throw 'Could not launch $profileUrl';
-                                    }
-                                  },
-                                  shape: new RoundedRectangleBorder(
-                                      borderRadius:
-                                          new BorderRadius.circular(30.0))),
-                            ),
-                            (IsActivePayment == true) &&
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 10),
+                                          child: Text("Share",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 14)),
+                                        )
+                                      ],
+                                    ),
+                                    onPressed: () {
+                                      bool val = checkValidity();
+                                      Navigator.of(context).push(
+                                        PageRouteBuilder(
+                                          opaque: false,
+                                          pageBuilder:
+                                              (BuildContext context, _, __) =>
+                                                  CardShareComponent(
+                                            memberId: DigitalId,
+                                            memberName: Name,
+                                            isRegular: val,
+                                            memberType: MemberType,
+                                            shareMsg: ShareMsg,
+                                            IsActivePayment: IsActivePayment,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    shape: new RoundedRectangleBorder(
+                                        borderRadius:
+                                            new BorderRadius.circular(30.0))),
+                              ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width / 2.5,
+                                child: RaisedButton(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 20),
+                                    elevation: 5,
+                                    textColor: Colors.white,
+                                    color: cnst.buttoncolor,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Image.asset("assets/logo.png",
+                                            height: 24, width: 24),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 10),
+                                          child: Text("Refer",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 14)),
+                                        )
+                                      ],
+                                    ),
+                                    onPressed: () {
+                                      // String withrefercode = cnst.inviteFriMsg
+                                      //     .replaceAll("#refercode", ReferCode);
+                                      String withappurl = cnst.inviteFriMsg
+                                          .replaceAll(
+                                              "#appurl", cnst.playstoreUrl);
+                                      String withmemberid = withappurl
+                                          .replaceAll("#id", DigitalId);
+                                      Share.share(withmemberid);
+                                    },
+                                    shape: new RoundedRectangleBorder(
+                                        borderRadius:
+                                            new BorderRadius.circular(30.0))),
+                              )
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: (IsActivePayment == true) &&
                                     (MemberType.toLowerCase() == "trial" ||
                                         checkValidity() == false)
-                                ? SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width / 2.5,
-                                    child: RaisedButton(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 20),
-                                      elevation: 5,
-                                      textColor: Colors.white,
-                                      color: cnst.buttoncolor,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(left: 10),
-                                            child: Text(
-                                              "${cnst.Inr_Rupee}  Pay Now",
+                                ? MainAxisAlignment.spaceEvenly
+                                : MainAxisAlignment.center,
+                            children: <Widget>[
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width / 2.5,
+                                child: RaisedButton(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 20),
+                                    elevation: 5,
+                                    textColor: Colors.white,
+                                    color: cnst.buttoncolor,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.remove_red_eye,
+                                          color: Colors.white,
+                                          size: 16,
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 10),
+                                          child: Text("View Card",
                                               style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 14,
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      onPressed: () {
-                                        Navigator.pushReplacementNamed(
-                                            context, '/Payment');
-                                      },
-                                      shape: new RoundedRectangleBorder(
-                                        borderRadius:
-                                            new BorderRadius.circular(30.0),
-                                      ),
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 14)),
+                                        )
+                                      ],
                                     ),
-                                  )
-                                : Container()
-                          ],
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width / 1.5,
-                          child: RaisedButton(
-                              padding: EdgeInsets.symmetric(horizontal: 20),
-                              elevation: 5,
-                              textColor: Colors.white,
-                              color: cnst.buttoncolor,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.dashboard,
-                                    color: Colors.white,
-                                    size: 16,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: Text("Back to DashBoard",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 14)),
-                                  )
-                                ],
+                                    onPressed: () async {
+                                      String profileUrl = cnst.profileUrl
+                                          .replaceAll("#id", DigitalId);
+                                      if (await canLaunch(profileUrl)) {
+                                        await launch(profileUrl);
+                                      } else {
+                                        throw 'Could not launch $profileUrl';
+                                      }
+                                    },
+                                    shape: new RoundedRectangleBorder(
+                                        borderRadius:
+                                            new BorderRadius.circular(30.0))),
                               ),
-                              onPressed: () async {
-                                Navigator.pushReplacementNamed(
-                                    context, '/HomePage');
-                              },
-                              shape: new RoundedRectangleBorder(
-                                  borderRadius:
-                                      new BorderRadius.circular(30.0))),
-                        ),
-                      ],
+                              (IsActivePayment == true) &&
+                                      (MemberType.toLowerCase() == "trial" ||
+                                          checkValidity() == false)
+                                  ? SizedBox(
+                                      width: MediaQuery.of(context).size.width /
+                                          2.5,
+                                      child: RaisedButton(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 20),
+                                        elevation: 5,
+                                        textColor: Colors.white,
+                                        color: cnst.buttoncolor,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: Text(
+                                                "${cnst.Inr_Rupee}  Pay Now",
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        onPressed: () {
+                                          Navigator.pushReplacementNamed(
+                                              context, '/Payment');
+                                        },
+                                        shape: new RoundedRectangleBorder(
+                                          borderRadius:
+                                              new BorderRadius.circular(30.0),
+                                        ),
+                                      ),
+                                    )
+                                  : Container()
+                            ],
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 1.5,
+                            child: RaisedButton(
+                                padding: EdgeInsets.symmetric(horizontal: 20),
+                                elevation: 5,
+                                textColor: Colors.white,
+                                color: cnst.buttoncolor,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.dashboard,
+                                      color: Colors.white,
+                                      size: 16,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Text("Back to DashBoard",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 14)),
+                                    )
+                                  ],
+                                ),
+                                onPressed: () async {
+                                  Navigator.pushReplacementNamed(
+                                      context, '/HomePage');
+                                },
+                                shape: new RoundedRectangleBorder(
+                                    borderRadius:
+                                        new BorderRadius.circular(30.0))),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           )

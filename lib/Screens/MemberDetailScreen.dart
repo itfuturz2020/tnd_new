@@ -1044,7 +1044,7 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                   padding: const EdgeInsets.only(
                                       left: 20, right: 20),
                                   child: Container(
-                                    height: 250,
+                                    height: 350,
                                     width: MediaQuery.of(context).size.width,
                                     decoration: BoxDecoration(
                                         color: Colors.white,
@@ -1121,7 +1121,7 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                           left: 8.0, top: 12),
                                                   child: Text(
                                                     "${profileList["achievement"]}" !=
-                                                            ""
+                                                            "null"
                                                         ? "${profileList["achievement"]}"
                                                         : "-",
                                                     style: TextStyle(
@@ -1145,39 +1145,268 @@ class _MemberDetailScreenState extends State<MemberDetailScreen> {
                                                   fontWeight: FontWeight.w500),
                                             ),
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 8,
-                                                left: 8.0,
-                                                right: 8,
-                                                bottom: 30),
-                                            child: Container(
-                                              height: 55,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  border: Border.all(
-                                                      color:
-                                                          appPrimaryMaterialColor[
-                                                              50],
-                                                      width: 1),
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(
-                                                              22.0))),
-                                              child: SocialMediaComponent(
-                                                facebook:
-                                                    profileList["faceBook"],
-                                                instagram:
-                                                    profileList["instagram"],
-                                                linkedIn:
-                                                    profileList["linkedIn"],
-                                                twitter: profileList["twitter"],
-                                                whatsapp:
-                                                    profileList["whatsApp"],
-                                                youtube: profileList["youTube"],
+                                          Expanded(
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 40.0,
+                                                  top: 8,
+                                                  bottom: 8),
+                                              child: Row(
+                                                //mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                children: <Widget>[
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceAround,
+                                                    children: <Widget>[
+                                                      // Icon(
+                                                      //   Icons.phone,
+                                                      //   color:
+                                                      //       Color(0xff16B8FF),
+                                                      //   size: 22,
+                                                      // ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(top: 5.0),
+                                                        child: Image.asset(
+                                                            "assets/instagram.png",
+                                                            width: 20,
+                                                            height: 20),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(top: 5.0),
+                                                        child: Image.asset(
+                                                            "assets/facebook.png",
+                                                            width: 20,
+                                                            height: 20),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(top: 5.0),
+                                                        child: Image.asset(
+                                                            "assets/linkedin.png",
+                                                            width: 20,
+                                                            height: 20),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(top: 5.0),
+                                                        child: Image.asset(
+                                                            "assets/twitter.png",
+                                                            width: 20,
+                                                            height: 20),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(top: 5.0),
+                                                        child: Image.asset(
+                                                            "assets/whatsapp2.png",
+                                                            width: 20,
+                                                            height: 20),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(top: 5.0),
+                                                        child: Icon(
+                                                          Icons.email,
+                                                          color:
+                                                              Colors.redAccent,
+                                                          size: 23,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(top: 5.0),
+                                                        child: Image.asset(
+                                                            "assets/yout.png",
+                                                            width: 20,
+                                                            height: 20),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    width: 20,
+                                                  ),
+                                                  Expanded(
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceAround,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: <Widget>[
+                                                        // Flexible(
+                                                        //   child: Text(
+                                                        //       "${profileList["mobile"]}",
+                                                        //       style: TextStyle(
+                                                        //           color: Colors
+                                                        //               .black,
+                                                        //           fontSize: 15,
+                                                        //           fontWeight:
+                                                        //               FontWeight
+                                                        //                   .w500)),
+                                                        // ),
+                                                        Flexible(
+                                                          child: Text(
+                                                              "${profileList["instagram"]}" ==
+                                                                          "" ||
+                                                                      "${profileList["instagram"]}" ==
+                                                                          "null"
+                                                                  ? "   -"
+                                                                  : "${profileList["instagram"]}",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500)),
+                                                        ),
+                                                        Flexible(
+                                                          child: Text(
+                                                              "${profileList["faceBook"]}" ==
+                                                                          "" ||
+                                                                      "${profileList["faceBook"]}" ==
+                                                                          "null"
+                                                                  ? "   -"
+                                                                  : "${profileList["faceBook"]}",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500)),
+                                                        ),
+                                                        Flexible(
+                                                          child: Text(
+                                                              "${profileList["linkedIn"]}" ==
+                                                                          "" ||
+                                                                      "${profileList["linkedIn"]}" ==
+                                                                          "null"
+                                                                  ? "   -"
+                                                                  : "${profileList["linkedIn"]}",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500)),
+                                                        ),
+                                                        Flexible(
+                                                          child: Text(
+                                                              "${profileList["twitter"]}" ==
+                                                                          "" ||
+                                                                      "${profileList["twitter"]}" ==
+                                                                          "null"
+                                                                  ? "   -"
+                                                                  : "${profileList["twitter"]}",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500)),
+                                                        ),
+                                                        Flexible(
+                                                          child: Text(
+                                                              "${profileList["whatsApp"]}" ==
+                                                                          "" ||
+                                                                      "${profileList["whatsApp"]}" ==
+                                                                          "null"
+                                                                  ? "   -"
+                                                                  : "${profileList["whatsApp"]}",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500)),
+                                                        ),
+                                                        Flexible(
+                                                          child: Text(
+                                                              "${profileList["email"]}" ==
+                                                                          "" ||
+                                                                      "${profileList["email"]}" ==
+                                                                          "null"
+                                                                  ? "   -"
+                                                                  : "${profileList["email"]}",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500)),
+                                                        ),
+                                                        Flexible(
+                                                          child: Text(
+                                                              "${profileList["youTube"]}" ==
+                                                                          "" ||
+                                                                      "${profileList["youTube"]}" ==
+                                                                          "null"
+                                                                  ? "   -"
+                                                                  : "${profileList["youTube"]}",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500)),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                           ),
+                                          // Padding(
+                                          //   padding: const EdgeInsets.only(
+                                          //       top: 8,
+                                          //       left: 8.0,
+                                          //       right: 8,
+                                          //       bottom: 30),
+                                          //   child: Container(
+                                          //     height: 55,
+                                          //     decoration: BoxDecoration(
+                                          //         color: Colors.white,
+                                          //         border: Border.all(
+                                          //             color:
+                                          //                 appPrimaryMaterialColor[
+                                          //                     50],
+                                          //             width: 1),
+                                          //         borderRadius:
+                                          //             BorderRadius.all(
+                                          //                 Radius.circular(
+                                          //                     22.0))),
+                                          //     child: SocialMediaComponent(
+                                          //       facebook:
+                                          //           profileList["faceBook"],
+                                          //       instagram:
+                                          //           profileList["instagram"],
+                                          //       linkedIn:
+                                          //           profileList["linkedIn"],
+                                          //       twitter: profileList["twitter"],
+                                          //       whatsapp:
+                                          //           profileList["whatsApp"],
+                                          //       youtube: profileList["youTube"],
+                                          //     ),
+                                          //   ),
+                                          // ),
                                         ],
                                       ),
                                     ),

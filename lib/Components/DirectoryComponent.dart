@@ -167,30 +167,30 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
                                     fontWeight: FontWeight.w400),
                               ),
                       ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(top: 8.0),
+                      //   child: Text(
+                      //     "${widget.directoryData["status"]}" == "send"
+                      //         ? "1-2-1 Send : "
+                      //         : "${widget.directoryData["status"]}" ==
+                      //                 "requested"
+                      //             ? "1-2-1 Requested : "
+                      //             : "${widget.directoryData["status"]}" ==
+                      //                     "accepted"
+                      //                 ? "1-2-1 Accepted : "
+                      //                 : "1-2-1 Send : ",
+                      //     //widget.directoryData["business_category"],
+                      //     overflow: TextOverflow.ellipsis,
+                      //     textAlign: TextAlign.start,
+                      //     style: TextStyle(
+                      //         color: Colors.black,
+                      //         //fontStyle: FontStyle.italic,
+                      //         fontSize: 15,
+                      //         fontWeight: FontWeight.w500),
+                      //   ),
+                      // ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                        child: Text(
-                          "${widget.directoryData["status"]}" == "send"
-                              ? "1-2-1 Send : "
-                              : "${widget.directoryData["status"]}" ==
-                                      "requested"
-                                  ? "1-2-1 Requested : "
-                                  : "${widget.directoryData["status"]}" ==
-                                          "accepted"
-                                      ? "1-2-1 Accepted : "
-                                      : "1-2-1 Send : ",
-                          //widget.directoryData["business_category"],
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                              color: Colors.black,
-                              //fontStyle: FontStyle.italic,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5.0),
+                        padding: const EdgeInsets.only(top: 15.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -219,7 +219,7 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
                                               padding: const EdgeInsets.only(
                                                   left: 3.0),
                                               child: Text(
-                                                "Send  ",
+                                                "Send 1-2-1  ",
                                                 style: TextStyle(fontSize: 12),
                                               ),
                                             ),
@@ -758,9 +758,11 @@ class _AlertSendState extends State<AlertSend> {
 
                             style: TextStyle(fontSize: 15),
                             cursorColor: appPrimaryMaterialColor,
+
                             decoration: InputDecoration(
                               errorStyle: TextStyle(height: 0),
                               counterText: "",
+                              hintText: "Enter Zoom Link or Google Meet Link",
                               contentPadding: const EdgeInsets.all(15),
                               fillColor: Colors.white,
                               enabledBorder: OutlineInputBorder(

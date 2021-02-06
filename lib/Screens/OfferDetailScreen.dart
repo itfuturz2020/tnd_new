@@ -10,6 +10,33 @@ class OfferDetailScreen extends StatefulWidget {
 }
 
 class _OfferDetailScreenState extends State<OfferDetailScreen> {
+  String exDate;
+  var date;
+  var date2 = DateTime.now();
+  var difference;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // log("Expiry Date :${widget.offerData["offerExpire"]}");
+    // funDate();
+  }
+
+  funDate() {
+    exDate = " ${widget.offerData["offerExpire"]}";
+    date = exDate.split('-');
+    int year = int.parse("${date[0]}");
+    int month = int.parse("${date[1]}");
+    int day = int.parse("${date[2]}");
+    var expiryDate = DateTime(year, month, day);
+    print("-------------------->${expiryDate}");
+    setState(() {
+      difference = expiryDate.difference(date2).inDays;
+    });
+    print("-------------------->${difference}");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

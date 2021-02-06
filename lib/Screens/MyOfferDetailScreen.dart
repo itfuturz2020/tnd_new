@@ -1,15 +1,48 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Components/SocialMediaComponent.dart';
 
 class MyOfferDetailScreen extends StatefulWidget {
   var offerData;
+
   MyOfferDetailScreen({this.offerData});
+
   @override
   _MyOfferDetailScreenState createState() => _MyOfferDetailScreenState();
 }
 
 class _MyOfferDetailScreenState extends State<MyOfferDetailScreen> {
+  //the birthday's date
+
+  String exDate;
+  var date;
+  var date2 = DateTime.now();
+  var difference;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    log("Expiry Date :${widget.offerData["offerExpire"]}");
+    funDate();
+  }
+
+  funDate() {
+    exDate = " ${widget.offerData["offerExpire"]}";
+    date = exDate.split('-');
+    int year = int.parse("${date[0]}");
+    int month = int.parse("${date[1]}");
+    int day = int.parse("${date[2]}");
+    var expiryDate = DateTime(year, month, day);
+    print("-------------------->${expiryDate}");
+    setState(() {
+      difference = expiryDate.difference(date2).inDays;
+    });
+    print("-------------------->${difference}");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -197,7 +230,7 @@ class _MyOfferDetailScreenState extends State<MyOfferDetailScreen> {
                           child: Center(
                               child: Padding(
                             padding: const EdgeInsets.all(5.0),
-                            child: Text("${widget.offerData["offerExpire"]}",
+                            child: Text("${date[2]}-${date[1]}-${date[0]}",
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 18)),
                           )),
@@ -214,10 +247,13 @@ class _MyOfferDetailScreenState extends State<MyOfferDetailScreen> {
                       child: Center(
                           child: Padding(
                         padding: const EdgeInsets.all(5.0),
-                        child: Text(
-                            "${widget.offerData["daysRemain"]}" + " Days to Go",
-                            style:
-                                TextStyle(color: Colors.black, fontSize: 18)),
+                        child: difference < 0
+                            ? Text("Offer expired",
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 18))
+                            : Text("${difference}" + " Days to Go",
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 18)),
                       )),
                     ),
                   ),

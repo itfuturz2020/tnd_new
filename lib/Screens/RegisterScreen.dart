@@ -51,7 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               SizedBox(
                 height: MediaQuery.of(context).padding.top + 20,
               ),
-              Image.asset("assets/splash.png"),
+              Image.asset("assets/LOGO1.png"),
               Padding(
                 padding: const EdgeInsets.only(left: 30.0, right: 30),
                 child: TextFormField(

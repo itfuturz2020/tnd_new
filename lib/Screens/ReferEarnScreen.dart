@@ -18,7 +18,8 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
   bool isLoading = true;
 
   share() async {
-    await Share.share("Referal Code : ${referalList[0]["referalcode"]}",
+    await Share.share(
+        "https://play.google.com/store/apps/details?id=com.example1.the_national_dawn        Referal Code : ${referalList[0]["referalcode"]}",
         subject: 'Referal Code');
   }
 

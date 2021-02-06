@@ -18,13 +18,16 @@ class _SplashScreenState extends State<SplashScreen> {
         // backgroundColor: appPrimaryMaterialColor,
         body: Stack(
           children: [
-            SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                child: Image.asset(
-                  'assets/splash.png',
-                  fit: BoxFit.contain,
-                )),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  child: Image.asset(
+                    'assets/LOGO1.png',
+                    fit: BoxFit.contain,
+                  )),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 70.0, left: 40),
               child: Align(

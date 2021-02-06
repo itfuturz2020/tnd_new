@@ -90,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: MediaQuery.of(context).padding.top + 20,
               ),
-              Image.asset("assets/splash.png"),
+              Image.asset("assets/LOGO1.png"),
               SizedBox(
                 height: MediaQuery.of(context).padding.top + 40,
               ),

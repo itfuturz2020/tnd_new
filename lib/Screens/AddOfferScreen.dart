@@ -360,6 +360,12 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                   child: TextFormField(
                     controller: title,
                     keyboardType: TextInputType.text,
+                    validator: (cname) {
+                      if (cname.length == 0) {
+                        return 'Please enter Title name';
+                      }
+                      return null;
+                    },
                     style: TextStyle(fontSize: 16),
                     cursorColor: appPrimaryMaterialColor,
                     decoration: InputDecoration(
@@ -1012,6 +1018,12 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                     maxLines: 5,
                     maxLength: 400,
                     maxLengthEnforced: true,
+                    validator: (cname) {
+                      if (cname.length == 0) {
+                        return 'Please enter Description name';
+                      }
+                      return null;
+                    },
                     keyboardType: TextInputType.multiline,
                     textInputAction: TextInputAction.newline,
                     style: TextStyle(fontSize: 16),
@@ -1218,4 +1230,105 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
       Fluttertoast.showToast(msg: "No Internet Connection.");
     }
   }
+  // _addOffers() async {
+  //   if (_formkey.currentState.validate()) {
+  //     try {
+  //       final result = await InternetAddress.lookup('google.com');
+  //       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+  //         setState(() {
+  //           isLoading = true;
+  //         });
+  //
+  //         String filename = "";
+  //         String filePath = "";
+  //         File compressedFile;
+  //         if (_Image != null) {
+  //           ImageProperties properties =
+  //               await FlutterNativeImage.getImageProperties(_Image.path);
+  //
+  //           compressedFile = await FlutterNativeImage.compressImage(
+  //             _Image.path,
+  //             quality: 80,
+  //             targetWidth: 600,
+  //             targetHeight:
+  //                 (properties.height * 600 / properties.width).round(),
+  //           );
+  //
+  //           filename = _Image.path.split('/').last;
+  //           filePath = compressedFile.path;
+  //         }
+  //         SharedPreferences prefs = await SharedPreferences.getInstance();
+  //
+  //         FormData body = FormData.fromMap({
+  //           "userId": prefs.getString(Session.CustomerId),
+  //           "title": title.text,
+  //           "bannerImage": (filePath != null && filePath != '')
+  //               ? await MultipartFile.fromFile(filePath,
+  //                   filename: filename.toString())
+  //               : null,
+  //           "dateTime": date.text,
+  //           "offerExpire": expiryDate.text,
+  //           "details": description.text,
+  //           "faceBook": fbLink.text,
+  //           "instagram": instaLink.text,
+  //           "linkedIn": linkinLink.text,
+  //           "twitter": twitterLink.text,
+  //           "youTube": youtubeLink.text,
+  //           "mail": mailLink.text,
+  //           "businessCategory": selectedOfferCat.offerId
+  //         });
+  //         print(body.fields);
+  //
+  //         Services.PostForList(api_name: 'admin/offer', body: body).then(
+  //             (responseList) async {
+  //           setState(() {
+  //             isLoading = false;
+  //           });
+  //           if (responseList.length > 0) {
+  //             SharedPreferences prefs = await SharedPreferences.getInstance();
+  //             // setState(() {
+  //             //   prefs.setString(Session.CustomerName, txtName.text);
+  //             //   prefs.setString(Session.CustomerCompanyName, txtCName.text);
+  //             //   prefs.setString(Session.CustomerEmailId, txtEmail.text);
+  //             //   prefs.setString(Session.CustomerPhoneNo, txtMobileNumber.text);
+  //             //   prefs.setString(Session.spouse_name, txtSpouseName.text);
+  //             //   prefs.setString(Session.number_of_child, txtChildrenCount.text);
+  //             //   prefs.setString(Session.about_business, txtAboutBusiness.text);
+  //             //   prefs.setString(Session.experience, txtExperience.text);
+  //             //   prefs.setString(Session.achievement, txtachievement.text);
+  //             //   prefs.setString(Session.linkedIn, linkedIn.text);
+  //             //   prefs.setString(Session.faceBook, facebook.text);
+  //             //   prefs.setString(Session.youTube, youTube.text);
+  //             //   prefs.setString(Session.instagram, instagram.text);
+  //             //   prefs.setString(Session.twitter, twitter.text);
+  //             //   prefs.setString(Session.gender, Gender);
+  //             //   prefs.setString(Session.spouse_birth_date,
+  //             //       responseList[0]["spouse_birth_date"]);
+  //             //   prefs.setString(Session.CustomerImage, responseList[0]["img"]);
+  //             // });
+  //             Navigator.of(context).pushNamed('/HomePage');
+  //             Fluttertoast.showToast(
+  //                 msg: "Offer Added Successfully",
+  //                 gravity: ToastGravity.BOTTOM);
+  //           }
+  //
+  //           setState(() {
+  //             isLoading = false;
+  //           });
+  //         }, onError: (e) {
+  //           setState(() {
+  //             isLoading = false;
+  //           });
+  //           print("error on call -> ${e.message}");
+  //           Fluttertoast.showToast(msg: "Something Went Wrong");
+  //           //showMsg("something went wrong");
+  //         });
+  //       }
+  //     } on SocketException catch (_) {
+  //       Fluttertoast.showToast(msg: "No Internet Connection.");
+  //     }
+  //   } else {
+  //     Fluttertoast.showToast(msg: "Please fill all the fields...");
+  //   }
+  // }
 }
