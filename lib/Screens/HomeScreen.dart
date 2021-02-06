@@ -1,8 +1,8 @@
 import 'dart:io';
-import 'dart:math';
 import 'dart:ui';
-
+import 'dart:developer';
 import 'package:barcode_scan/barcode_scan.dart';
+import 'package:dio/dio.dart' as formdata;
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +16,7 @@ import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
 import 'package:the_national_dawn/Components/LoadingBlueComponent.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:the_national_dawn/Screens/NewsBannerDetail.dart';
 import 'package:the_national_dawn/Screens/NotificationPopUp.dart';
 import 'package:the_national_dawn/offlineDatabase/db_handler.dart';
 
@@ -671,14 +672,27 @@ class _HomeScreenState extends State<HomeScreen>
 
                       /// Children in slideView to slide
                       children: imgList.map((link) {
-                        return new ClipRRect(
-                            // borderRadius: BorderRadius.circular(8.0),
-                            child: Image.network(
-                          link["image"],
-                          width: MediaQuery.of(context).size.width,
-                          height: 220,
-                          fit: BoxFit.contain,
-                        ));
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => NewsBannerDetail(
+                                    newsData: link,
+                                  ),
+                                ));
+                          },
+                          child: new ClipRRect(
+                              // borderRadius: BorderRadius.circular(8.0),
+                              child: link['featured_img_src'] == null
+                                  ? Image.asset('assets/LOGO1.png')
+                                  : Image.network(
+                                      link['featured_img_src'],
+                                      width: MediaQuery.of(context).size.width,
+                                      height: 220,
+                                      fit: BoxFit.contain,
+                                    )),
+                        );
                       }).toList(),
                     ),
             ),
@@ -939,8 +953,9 @@ class _HomeScreenState extends State<HomeScreen>
         setState(() {
           isBannerLoading = true;
         });
-        var body = {};
-        Services.PostForList(api_name: 'admin/getAllBanner').then(
+        formdata.FormData body =
+            formdata.FormData.fromMap({"news_category": "local-news"});
+        Services.PostForList1(api_name: 'custom/slider_news', body: body).then(
             (bannerresponselist) async {
           setState(() {
             isBannerLoading = false;
@@ -952,6 +967,7 @@ class _HomeScreenState extends State<HomeScreen>
                   TabController(length: imgList.length, vsync: this);
               //set "data" here to your variable
             });
+            log("My Data" + imgList.toString());
           } else {
             Fluttertoast.showToast(msg: "Banner Not Found");
             //show "data not found" in dialog
