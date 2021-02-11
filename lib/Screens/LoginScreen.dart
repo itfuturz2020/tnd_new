@@ -23,6 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(Session.CustomerId, data["_id"].toString());
     await prefs.setString(Session.CustomerName, data["name"]);
+    await prefs.setString(Session.ismember, data["ismember"].toString());
     await prefs.setString(Session.referred_by, data["referred_by"]);
     await prefs.setString(Session.CustomerCompanyName, data["company_name"]);
     await prefs.setString(Session.CustomerEmailId, data["email"]);
@@ -90,7 +91,11 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: MediaQuery.of(context).padding.top + 20,
               ),
-              Image.asset("assets/LOGO1.png"),
+              Image.asset(
+                "assets/LOGO1.png",
+                height: 250,
+                width: 250,
+              ),
               SizedBox(
                 height: MediaQuery.of(context).padding.top + 40,
               ),
@@ -174,17 +179,17 @@ class _LoginScreenState extends State<LoginScreen> {
               Padding(
                 padding: const EdgeInsets.only(left: 30.0, right: 30, top: 5),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 5.0, bottom: 10),
-                      child: Text(
-                        "forgot password",
-                        style: TextStyle(
-                            color: appPrimaryMaterialColor,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(top: 5.0, bottom: 10),
+                    //   child: Text(
+                    //     "forgot password",
+                    //     style: TextStyle(
+                    //         color: appPrimaryMaterialColor,
+                    //         fontWeight: FontWeight.w500),
+                    //   ),
+                    // ),
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).pushNamed('/RegisterScreen');

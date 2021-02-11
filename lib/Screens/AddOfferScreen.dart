@@ -343,66 +343,72 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 20.0, right: 20),
-                child: Container(
-                  height: 42,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      // border: Border.all(color: appPrimaryMaterialColor[400], width: 1),
-                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      boxShadow: [
-                        BoxShadow(
-                            color: appPrimaryMaterialColor.withOpacity(0.2),
-                            blurRadius: 2.0,
-                            spreadRadius: 2.0,
-                            offset: Offset(3.0, 5.0))
-                      ]),
-                  child: TextFormField(
-                    controller: title,
-                    keyboardType: TextInputType.text,
-                    validator: (cname) {
-                      if (cname.length == 0) {
-                        return 'Please enter Title name';
-                      }
-                      return null;
-                    },
-                    style: TextStyle(fontSize: 16),
-                    cursorColor: appPrimaryMaterialColor,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(
-                          top: 15.0, bottom: 1, left: 1, right: 1),
-                      hintText: "Title",
-                      hintStyle: TextStyle(
-                          color: Colors.grey[400], fontWeight: FontWeight.w500),
-                      prefixIcon: Container(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 2.0, left: 10, right: 10),
-                          child: Icon(
-                            Icons.title,
-                            color: appPrimaryMaterialColor,
+                child: Stack(
+                  children: [
+                    Container(
+                      height: 47,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          // border: Border.all(color: appPrimaryMaterialColor[400], width: 1),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          boxShadow: [
+                            BoxShadow(
+                                color: appPrimaryMaterialColor.withOpacity(0.2),
+                                blurRadius: 2.0,
+                                spreadRadius: 2.0,
+                                offset: Offset(3.0, 5.0))
+                          ]),
+                    ),
+                    TextFormField(
+                      controller: title,
+                      keyboardType: TextInputType.text,
+                      validator: (cname) {
+                        if (cname.length == 0) {
+                          return 'Please enter title ';
+                        }
+                        return null;
+                      },
+                      style: TextStyle(fontSize: 16),
+                      cursorColor: appPrimaryMaterialColor,
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(
+                            top: 15.0, bottom: 1, left: 1, right: 1),
+                        hintText: "Title",
+                        hintStyle: TextStyle(
+                            color: Colors.grey[400],
+                            fontWeight: FontWeight.w500),
+                        prefixIcon: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                top: 2.0, left: 10, right: 10),
+                            child: Icon(
+                              Icons.title,
+                              color: appPrimaryMaterialColor,
+                            ),
                           ),
                         ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                        borderSide:
-                            BorderSide(color: appPrimaryMaterialColor[400]),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                        borderSide: BorderSide(color: appPrimaryMaterialColor),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                        borderSide: BorderSide(color: Colors.red),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                        borderSide: BorderSide(color: Colors.red),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          borderSide:
+                              BorderSide(color: appPrimaryMaterialColor[400]),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          borderSide:
+                              BorderSide(color: appPrimaryMaterialColor),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          borderSide: BorderSide(color: Colors.red),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          borderSide: BorderSide(color: Colors.red),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ),
               // Padding(
@@ -997,68 +1003,95 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
                   ),
                 ),
               ),
+
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 20.0, left: 20, right: 20),
+              //   child: Container(
+              //     //height: 130,
+              //     width: MediaQuery.of(context).size.width,
+              //     decoration: BoxDecoration(
+              //         color: Colors.white,
+              //         // border: Border.all(color: appPrimaryMaterialColor[400], width: 1),
+              //         borderRadius: BorderRadius.all(Radius.circular(20.0)),
+              //         boxShadow: [
+              //           BoxShadow(
+              //               color: appPrimaryMaterialColor.withOpacity(0.2),
+              //               blurRadius: 2.0,
+              //               spreadRadius: 2.0,
+              //               offset: Offset(3.0, 5.0))
+              //         ]),
+              //     child:
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.only(top: 20.0, left: 20, right: 20),
-                child: Container(
-                  //height: 130,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      // border: Border.all(color: appPrimaryMaterialColor[400], width: 1),
-                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      boxShadow: [
-                        BoxShadow(
-                            color: appPrimaryMaterialColor.withOpacity(0.2),
-                            blurRadius: 2.0,
-                            spreadRadius: 2.0,
-                            offset: Offset(3.0, 5.0))
-                      ]),
-                  child: TextFormField(
-                    controller: description,
-                    maxLines: 5,
-                    maxLength: 400,
-                    maxLengthEnforced: true,
-                    validator: (cname) {
-                      if (cname.length == 0) {
-                        return 'Please enter Description name';
-                      }
-                      return null;
-                    },
-                    keyboardType: TextInputType.multiline,
-                    textInputAction: TextInputAction.newline,
-                    style: TextStyle(fontSize: 16),
-                    cursorColor: appPrimaryMaterialColor,
-                    decoration: InputDecoration(
-                      alignLabelWithHint: true,
-                      counterText: "",
-                      contentPadding: EdgeInsets.only(
-                          top: 15, bottom: 1, left: 1, right: 1),
-                      hintText: "Description",
-                      hintStyle: TextStyle(
-                          color: Colors.grey[400], fontWeight: FontWeight.w500),
-                      prefixIcon: Icon(
-                        Icons.sticky_note_2_outlined,
-                        color: appPrimaryMaterialColor,
-                      ),
-                      enabledBorder: OutlineInputBorder(
+                child: Stack(
+                  children: [
+                    Container(
+                      //height: 130,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        // border: Border.all(color: appPrimaryMaterialColor[400], width: 1),
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                        borderSide:
-                            BorderSide(color: appPrimaryMaterialColor[400]),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                        borderSide: BorderSide(color: appPrimaryMaterialColor),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                        borderSide: BorderSide(color: Colors.red),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                        borderSide: BorderSide(color: Colors.red),
+                        // boxShadow: [
+                        //   BoxShadow(
+                        //       color: appPrimaryMaterialColor.withOpacity(0.2),
+                        //       blurRadius: 2.0,
+                        //       spreadRadius: 2.0,
+                        //       offset: Offset(3.0, 5.0))
+                        // ]
                       ),
                     ),
-                  ),
+                    TextFormField(
+                      controller: description,
+                      maxLines: 5,
+                      maxLength: 400,
+                      maxLengthEnforced: true,
+                      validator: (cname) {
+                        if (cname.length == 0) {
+                          return 'Please enter Description';
+                        }
+                        return null;
+                      },
+                      keyboardType: TextInputType.multiline,
+                      textInputAction: TextInputAction.newline,
+                      style: TextStyle(fontSize: 16),
+                      cursorColor: appPrimaryMaterialColor,
+                      decoration: InputDecoration(
+                        alignLabelWithHint: true,
+                        counterText: "",
+                        contentPadding: EdgeInsets.only(
+                            top: 15, bottom: 1, left: 1, right: 1),
+                        hintText: "Description",
+                        hintStyle: TextStyle(
+                            color: Colors.grey[400],
+                            fontWeight: FontWeight.w500),
+                        prefixIcon: Icon(
+                          Icons.sticky_note_2_outlined,
+                          color: appPrimaryMaterialColor,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          borderSide:
+                              BorderSide(color: appPrimaryMaterialColor[400]),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          borderSide:
+                              BorderSide(color: appPrimaryMaterialColor),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          borderSide: BorderSide(color: Colors.red),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          borderSide: BorderSide(color: Colors.red),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Padding(
@@ -1135,200 +1168,201 @@ class _AddOfferScreenState extends State<AddOfferScreen> {
     );
   }
 
-  _addOffers() async {
-    try {
-      final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        setState(() {
-          isLoading = true;
-        });
-
-        String filename = "";
-        String filePath = "";
-        File compressedFile;
-        if (_Image != null) {
-          ImageProperties properties =
-              await FlutterNativeImage.getImageProperties(_Image.path);
-
-          compressedFile = await FlutterNativeImage.compressImage(
-            _Image.path,
-            quality: 80,
-            targetWidth: 600,
-            targetHeight: (properties.height * 600 / properties.width).round(),
-          );
-
-          filename = _Image.path.split('/').last;
-          filePath = compressedFile.path;
-        }
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-
-        FormData body = FormData.fromMap({
-          "userId": prefs.getString(Session.CustomerId),
-          "title": title.text,
-          "bannerImage": (filePath != null && filePath != '')
-              ? await MultipartFile.fromFile(filePath,
-                  filename: filename.toString())
-              : null,
-          "dateTime": date.text,
-          "offerExpire": expiryDate.text,
-          "details": description.text,
-          "faceBook": fbLink.text,
-          "instagram": instaLink.text,
-          "linkedIn": linkinLink.text,
-          "twitter": twitterLink.text,
-          "youTube": youtubeLink.text,
-          "mail": mailLink.text,
-          "businessCategory": selectedOfferCat.offerId
-        });
-        print(body.fields);
-
-        Services.PostForList(api_name: 'admin/offer', body: body).then(
-            (responseList) async {
-          setState(() {
-            isLoading = false;
-          });
-          if (responseList.length > 0) {
-            SharedPreferences prefs = await SharedPreferences.getInstance();
-            // setState(() {
-            //   prefs.setString(Session.CustomerName, txtName.text);
-            //   prefs.setString(Session.CustomerCompanyName, txtCName.text);
-            //   prefs.setString(Session.CustomerEmailId, txtEmail.text);
-            //   prefs.setString(Session.CustomerPhoneNo, txtMobileNumber.text);
-            //   prefs.setString(Session.spouse_name, txtSpouseName.text);
-            //   prefs.setString(Session.number_of_child, txtChildrenCount.text);
-            //   prefs.setString(Session.about_business, txtAboutBusiness.text);
-            //   prefs.setString(Session.experience, txtExperience.text);
-            //   prefs.setString(Session.achievement, txtachievement.text);
-            //   prefs.setString(Session.linkedIn, linkedIn.text);
-            //   prefs.setString(Session.faceBook, facebook.text);
-            //   prefs.setString(Session.youTube, youTube.text);
-            //   prefs.setString(Session.instagram, instagram.text);
-            //   prefs.setString(Session.twitter, twitter.text);
-            //   prefs.setString(Session.gender, Gender);
-            //   prefs.setString(Session.spouse_birth_date,
-            //       responseList[0]["spouse_birth_date"]);
-            //   prefs.setString(Session.CustomerImage, responseList[0]["img"]);
-            // });
-            Navigator.of(context).pushNamed('/HomePage');
-            Fluttertoast.showToast(
-                msg: "Offer Added Successfully", gravity: ToastGravity.BOTTOM);
-          }
-
-          setState(() {
-            isLoading = false;
-          });
-        }, onError: (e) {
-          setState(() {
-            isLoading = false;
-          });
-          print("error on call -> ${e.message}");
-          Fluttertoast.showToast(msg: "Something Went Wrong");
-          //showMsg("something went wrong");
-        });
-      }
-    } on SocketException catch (_) {
-      Fluttertoast.showToast(msg: "No Internet Connection.");
-    }
-  }
+  //
   // _addOffers() async {
-  //   if (_formkey.currentState.validate()) {
-  //     try {
-  //       final result = await InternetAddress.lookup('google.com');
-  //       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-  //         setState(() {
-  //           isLoading = true;
-  //         });
+  //   try {
+  //     final result = await InternetAddress.lookup('google.com');
+  //     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+  //       setState(() {
+  //         isLoading = true;
+  //       });
   //
-  //         String filename = "";
-  //         String filePath = "";
-  //         File compressedFile;
-  //         if (_Image != null) {
-  //           ImageProperties properties =
-  //               await FlutterNativeImage.getImageProperties(_Image.path);
+  //       String filename = "";
+  //       String filePath = "";
+  //       File compressedFile;
+  //       if (_Image != null) {
+  //         ImageProperties properties =
+  //             await FlutterNativeImage.getImageProperties(_Image.path);
   //
-  //           compressedFile = await FlutterNativeImage.compressImage(
-  //             _Image.path,
-  //             quality: 80,
-  //             targetWidth: 600,
-  //             targetHeight:
-  //                 (properties.height * 600 / properties.width).round(),
-  //           );
+  //         compressedFile = await FlutterNativeImage.compressImage(
+  //           _Image.path,
+  //           quality: 80,
+  //           targetWidth: 600,
+  //           targetHeight: (properties.height * 600 / properties.width).round(),
+  //         );
   //
-  //           filename = _Image.path.split('/').last;
-  //           filePath = compressedFile.path;
-  //         }
-  //         SharedPreferences prefs = await SharedPreferences.getInstance();
-  //
-  //         FormData body = FormData.fromMap({
-  //           "userId": prefs.getString(Session.CustomerId),
-  //           "title": title.text,
-  //           "bannerImage": (filePath != null && filePath != '')
-  //               ? await MultipartFile.fromFile(filePath,
-  //                   filename: filename.toString())
-  //               : null,
-  //           "dateTime": date.text,
-  //           "offerExpire": expiryDate.text,
-  //           "details": description.text,
-  //           "faceBook": fbLink.text,
-  //           "instagram": instaLink.text,
-  //           "linkedIn": linkinLink.text,
-  //           "twitter": twitterLink.text,
-  //           "youTube": youtubeLink.text,
-  //           "mail": mailLink.text,
-  //           "businessCategory": selectedOfferCat.offerId
-  //         });
-  //         print(body.fields);
-  //
-  //         Services.PostForList(api_name: 'admin/offer', body: body).then(
-  //             (responseList) async {
-  //           setState(() {
-  //             isLoading = false;
-  //           });
-  //           if (responseList.length > 0) {
-  //             SharedPreferences prefs = await SharedPreferences.getInstance();
-  //             // setState(() {
-  //             //   prefs.setString(Session.CustomerName, txtName.text);
-  //             //   prefs.setString(Session.CustomerCompanyName, txtCName.text);
-  //             //   prefs.setString(Session.CustomerEmailId, txtEmail.text);
-  //             //   prefs.setString(Session.CustomerPhoneNo, txtMobileNumber.text);
-  //             //   prefs.setString(Session.spouse_name, txtSpouseName.text);
-  //             //   prefs.setString(Session.number_of_child, txtChildrenCount.text);
-  //             //   prefs.setString(Session.about_business, txtAboutBusiness.text);
-  //             //   prefs.setString(Session.experience, txtExperience.text);
-  //             //   prefs.setString(Session.achievement, txtachievement.text);
-  //             //   prefs.setString(Session.linkedIn, linkedIn.text);
-  //             //   prefs.setString(Session.faceBook, facebook.text);
-  //             //   prefs.setString(Session.youTube, youTube.text);
-  //             //   prefs.setString(Session.instagram, instagram.text);
-  //             //   prefs.setString(Session.twitter, twitter.text);
-  //             //   prefs.setString(Session.gender, Gender);
-  //             //   prefs.setString(Session.spouse_birth_date,
-  //             //       responseList[0]["spouse_birth_date"]);
-  //             //   prefs.setString(Session.CustomerImage, responseList[0]["img"]);
-  //             // });
-  //             Navigator.of(context).pushNamed('/HomePage');
-  //             Fluttertoast.showToast(
-  //                 msg: "Offer Added Successfully",
-  //                 gravity: ToastGravity.BOTTOM);
-  //           }
-  //
-  //           setState(() {
-  //             isLoading = false;
-  //           });
-  //         }, onError: (e) {
-  //           setState(() {
-  //             isLoading = false;
-  //           });
-  //           print("error on call -> ${e.message}");
-  //           Fluttertoast.showToast(msg: "Something Went Wrong");
-  //           //showMsg("something went wrong");
-  //         });
+  //         filename = _Image.path.split('/').last;
+  //         filePath = compressedFile.path;
   //       }
-  //     } on SocketException catch (_) {
-  //       Fluttertoast.showToast(msg: "No Internet Connection.");
+  //       SharedPreferences prefs = await SharedPreferences.getInstance();
+  //
+  //       FormData body = FormData.fromMap({
+  //         "userId": prefs.getString(Session.CustomerId),
+  //         "title": title.text,
+  //         "bannerImage": (filePath != null && filePath != '')
+  //             ? await MultipartFile.fromFile(filePath,
+  //                 filename: filename.toString())
+  //             : null,
+  //         "dateTime": date.text,
+  //         "offerExpire": expiryDate.text,
+  //         "details": description.text,
+  //         "faceBook": fbLink.text,
+  //         "instagram": instaLink.text,
+  //         "linkedIn": linkinLink.text,
+  //         "twitter": twitterLink.text,
+  //         "youTube": youtubeLink.text,
+  //         "mail": mailLink.text,
+  //         "businessCategory": selectedOfferCat.offerId
+  //       });
+  //       print(body.fields);
+  //
+  //       Services.PostForList(api_name: 'admin/offer', body: body).then(
+  //           (responseList) async {
+  //         setState(() {
+  //           isLoading = false;
+  //         });
+  //         if (responseList.length > 0) {
+  //           SharedPreferences prefs = await SharedPreferences.getInstance();
+  //           // setState(() {
+  //           //   prefs.setString(Session.CustomerName, txtName.text);
+  //           //   prefs.setString(Session.CustomerCompanyName, txtCName.text);
+  //           //   prefs.setString(Session.CustomerEmailId, txtEmail.text);
+  //           //   prefs.setString(Session.CustomerPhoneNo, txtMobileNumber.text);
+  //           //   prefs.setString(Session.spouse_name, txtSpouseName.text);
+  //           //   prefs.setString(Session.number_of_child, txtChildrenCount.text);
+  //           //   prefs.setString(Session.about_business, txtAboutBusiness.text);
+  //           //   prefs.setString(Session.experience, txtExperience.text);
+  //           //   prefs.setString(Session.achievement, txtachievement.text);
+  //           //   prefs.setString(Session.linkedIn, linkedIn.text);
+  //           //   prefs.setString(Session.faceBook, facebook.text);
+  //           //   prefs.setString(Session.youTube, youTube.text);
+  //           //   prefs.setString(Session.instagram, instagram.text);
+  //           //   prefs.setString(Session.twitter, twitter.text);
+  //           //   prefs.setString(Session.gender, Gender);
+  //           //   prefs.setString(Session.spouse_birth_date,
+  //           //       responseList[0]["spouse_birth_date"]);
+  //           //   prefs.setString(Session.CustomerImage, responseList[0]["img"]);
+  //           // });
+  //           Navigator.of(context).pushNamed('/HomePage');
+  //           Fluttertoast.showToast(
+  //               msg: "Offer Added Successfully", gravity: ToastGravity.BOTTOM);
+  //         }
+  //
+  //         setState(() {
+  //           isLoading = false;
+  //         });
+  //       }, onError: (e) {
+  //         setState(() {
+  //           isLoading = false;
+  //         });
+  //         print("error on call -> ${e.message}");
+  //         Fluttertoast.showToast(msg: "Something Went Wrong");
+  //         //showMsg("something went wrong");
+  //       });
   //     }
-  //   } else {
-  //     Fluttertoast.showToast(msg: "Please fill all the fields...");
+  //   } on SocketException catch (_) {
+  //     Fluttertoast.showToast(msg: "No Internet Connection.");
   //   }
   // }
+  _addOffers() async {
+    if (_formkey.currentState.validate()) {
+      try {
+        final result = await InternetAddress.lookup('google.com');
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          setState(() {
+            isLoading = true;
+          });
+
+          String filename = "";
+          String filePath = "";
+          File compressedFile;
+          if (_Image != null) {
+            ImageProperties properties =
+                await FlutterNativeImage.getImageProperties(_Image.path);
+
+            compressedFile = await FlutterNativeImage.compressImage(
+              _Image.path,
+              quality: 80,
+              targetWidth: 600,
+              targetHeight:
+                  (properties.height * 600 / properties.width).round(),
+            );
+
+            filename = _Image.path.split('/').last;
+            filePath = compressedFile.path;
+          }
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+
+          FormData body = FormData.fromMap({
+            "userId": prefs.getString(Session.CustomerId),
+            "title": title.text,
+            "bannerImage": (filePath != null && filePath != '')
+                ? await MultipartFile.fromFile(filePath,
+                    filename: filename.toString())
+                : null,
+            "dateTime": date.text,
+            "offerExpire": expiryDate.text,
+            "details": description.text,
+            "faceBook": fbLink.text,
+            "instagram": instaLink.text,
+            "linkedIn": linkinLink.text,
+            "twitter": twitterLink.text,
+            "youTube": youtubeLink.text,
+            "mail": mailLink.text,
+            "businessCategory": selectedOfferCat.offerId
+          });
+          print(body.fields);
+
+          Services.PostForList(api_name: 'admin/offer', body: body).then(
+              (responseList) async {
+            setState(() {
+              isLoading = false;
+            });
+            if (responseList.length > 0) {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              // setState(() {
+              //   prefs.setString(Session.CustomerName, txtName.text);
+              //   prefs.setString(Session.CustomerCompanyName, txtCName.text);
+              //   prefs.setString(Session.CustomerEmailId, txtEmail.text);
+              //   prefs.setString(Session.CustomerPhoneNo, txtMobileNumber.text);
+              //   prefs.setString(Session.spouse_name, txtSpouseName.text);
+              //   prefs.setString(Session.number_of_child, txtChildrenCount.text);
+              //   prefs.setString(Session.about_business, txtAboutBusiness.text);
+              //   prefs.setString(Session.experience, txtExperience.text);
+              //   prefs.setString(Session.achievement, txtachievement.text);
+              //   prefs.setString(Session.linkedIn, linkedIn.text);
+              //   prefs.setString(Session.faceBook, facebook.text);
+              //   prefs.setString(Session.youTube, youTube.text);
+              //   prefs.setString(Session.instagram, instagram.text);
+              //   prefs.setString(Session.twitter, twitter.text);
+              //   prefs.setString(Session.gender, Gender);
+              //   prefs.setString(Session.spouse_birth_date,
+              //       responseList[0]["spouse_birth_date"]);
+              //   prefs.setString(Session.CustomerImage, responseList[0]["img"]);
+              // });
+              Navigator.of(context).pushNamed('/HomePage');
+              Fluttertoast.showToast(
+                  msg: "Offer Added Successfully",
+                  gravity: ToastGravity.BOTTOM);
+            }
+
+            setState(() {
+              isLoading = false;
+            });
+          }, onError: (e) {
+            setState(() {
+              isLoading = false;
+            });
+            print("error on call -> ${e.message}");
+            Fluttertoast.showToast(msg: "Something Went Wrong");
+            //showMsg("something went wrong");
+          });
+        }
+      } on SocketException catch (_) {
+        Fluttertoast.showToast(msg: "No Internet Connection.");
+      }
+    } else {
+      Fluttertoast.showToast(msg: "Please fill all the fields...");
+    }
+  }
 }

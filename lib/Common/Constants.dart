@@ -35,6 +35,7 @@ MaterialColor appPrimaryMaterialColor =
 
 class Session {
   static const String CustomerId = "CustomerId";
+  static const String ismember = "ismember";
   static const String CustomerName = "CustomerName";
   static const String referred_by = "referred_by";
   static const String addressId = "addressId";

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Components/SubCategoryComponent.dart';
 
@@ -10,6 +11,28 @@ class CategoryComponent extends StatefulWidget {
 }
 
 class _CategoryComponentState extends State<CategoryComponent> {
+  String isMember = "";
+
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   //print(widget.catData["memberOf"]);
+  // }
+  @override
+  void initState() {
+    setState(() {
+      _profile();
+    });
+  }
+
+  _profile() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isMember = prefs.getString(Session.ismember);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

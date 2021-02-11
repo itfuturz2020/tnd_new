@@ -1,5 +1,6 @@
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Components/SocialMediaComponent.dart';
 
@@ -15,12 +16,26 @@ class CategoryProfileComponent extends StatefulWidget {
 
 class _CategoryProfileComponentState extends State<CategoryProfileComponent> {
   String memberImg = "";
+  String isMember = "";
 
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   //print(widget.catData["memberOf"]);
+  // }
   @override
   void initState() {
-    // TODO: implement initState
-    super.initState();
-    //print(widget.catData["memberOf"]);
+    setState(() {
+      _profile();
+    });
+  }
+
+  _profile() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isMember = prefs.getString(Session.ismember);
+    });
   }
 
   @override
@@ -530,13 +545,17 @@ class _CategoryProfileComponentState extends State<CategoryProfileComponent> {
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.w500),
                                           ),
-                                          // Text(
-                                          //   "${widget.catData["business_category"]["categoryName"]}",
-                                          //   style: TextStyle(
-                                          //       color: Colors.black,
-                                          //       fontSize: 16,
-                                          //       fontWeight: FontWeight.w600),
-                                          // ),
+                                          Text(
+                                            widget.catData[
+                                                        "business_category"] !=
+                                                    null
+                                                ? "${widget.catData["business_category"]["categoryName"]}"
+                                                : "-",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600),
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -721,55 +740,66 @@ class _CategoryProfileComponentState extends State<CategoryProfileComponent> {
                                             ],
                                           ),
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 8.0, left: 20),
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                "Mobile : ",
-                                                style: TextStyle(
-                                                  color: Colors.grey[500],
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                              Text(
-                                                "${widget.catData["mobile"]}",
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.bold,
-                                                    letterSpacing: 1),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        FittedBox(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 8.0, left: 20),
-                                            child: Row(
-                                              children: [
-                                                Text(
-                                                  "Email : ",
-                                                  style: TextStyle(
-                                                    color: Colors.grey[500],
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                                Text(
-                                                    "${widget.catData["email"]}",
-                                                    style: TextStyle(
-                                                        color: Colors.black,
+                                        isMember == "false"
+                                            ? Container()
+                                            : Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 8.0, left: 20),
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      "Mobile : ",
+                                                      style: TextStyle(
+                                                        color: Colors.grey[500],
                                                         fontSize: 15,
                                                         fontWeight:
-                                                            FontWeight.w500))
-                                              ],
-                                            ),
-                                          ),
-                                        ),
+                                                            FontWeight.w500,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      "${widget.catData["mobile"]}",
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          letterSpacing: 1),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                        isMember == "false"
+                                            ? Container()
+                                            : FittedBox(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 8.0, left: 20),
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
+                                                        "Email : ",
+                                                        style: TextStyle(
+                                                          color:
+                                                              Colors.grey[500],
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                          "${widget.catData["email"]}",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500))
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
                                         Padding(
                                           padding: const EdgeInsets.only(
                                               left: 20.0, top: 8),
@@ -779,121 +809,127 @@ class _CategoryProfileComponentState extends State<CategoryProfileComponent> {
                                                   color: Colors.grey[500],
                                                   fontWeight: FontWeight.w500)),
                                         ),
-                                        // Padding(
-                                        //   padding: const EdgeInsets.only(
-                                        //       left: 20,
-                                        //       right: 20,
-                                        //       top: 5,
-                                        //       bottom: 10),
-                                        //   child: Container(
-                                        //       height: 75,
-                                        //       width: MediaQuery.of(context)
-                                        //           .size
-                                        //           .width,
-                                        //       decoration: BoxDecoration(
-                                        //           color: Colors.white,
-                                        //           border: Border.all(
-                                        //               color:
-                                        //                   appPrimaryMaterialColor[
-                                        //                       50],
-                                        //               width: 1),
-                                        //           borderRadius:
-                                        //               BorderRadius.all(
-                                        //                   Radius.circular(
-                                        //                       22.0))),
-                                        //       child: SizedBox(
-                                        //         child: widget
-                                        //                     .catData["memberOf"]
-                                        //                     .length >
-                                        //                 0
-                                        //             ? ListView.builder(
-                                        //                 physics:
-                                        //                     BouncingScrollPhysics(),
-                                        //                 scrollDirection:
-                                        //                     Axis.horizontal,
-                                        //                 itemCount: widget
-                                        //                     .catData["memberOf"]
-                                        //                     .length,
-                                        //                 itemBuilder:
-                                        //                     (BuildContext
-                                        //                             context,
-                                        //                         int index) {
-                                        //                   return Padding(
-                                        //                     padding:
-                                        //                         const EdgeInsets
-                                        //                                 .only(
-                                        //                             left: 5.0,
-                                        //                             bottom: 3),
-                                        //                     child: Container(
-                                        //                       child: Column(
-                                        //                         children: [
-                                        //                           Padding(
-                                        //                               padding: const EdgeInsets
-                                        //                                       .only(
-                                        //                                   top:
-                                        //                                       15.0,
-                                        //                                   bottom:
-                                        //                                       5,
-                                        //                                   left:
-                                        //                                       5),
-                                        //                               child: Image
-                                        //                                   .network(
-                                        //                                 "${widget.catData["memberOf"][index]["logo"]}",
-                                        //                                 width:
-                                        //                                     45,
-                                        //                               )),
-                                        //                           Text(
-                                        //                               "${widget.catData["memberOf"][index]["memberShipName"]}"),
-                                        //                         ],
-                                        //                       ),
-                                        //                     ),
-                                        //                   );
-                                        //                 })
-                                        //             : SizedBox(),
-                                        //       )),
-                                        // ),
                                         Padding(
                                           padding: const EdgeInsets.only(
-                                              left: 20.0, top: 8),
-                                          child: Text("Social Media : ",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  color: Colors.grey[500],
-                                                  fontWeight: FontWeight.w500)),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 8,
-                                              left: 8.0,
-                                              right: 8,
-                                              bottom: 30),
+                                              left: 20,
+                                              right: 20,
+                                              top: 5,
+                                              bottom: 10),
                                           child: Container(
-                                            height: 55,
-                                            decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                border: Border.all(
-                                                    color:
-                                                        appPrimaryMaterialColor[
-                                                            50],
-                                                    width: 1),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(22.0))),
-                                            child: SocialMediaComponent(
-                                              facebook:
-                                                  widget.catData["faceBook"],
-                                              instagram:
-                                                  widget.catData["instagram"],
-                                              linkedIn:
-                                                  widget.catData["linkedIn"],
-                                              twitter:
-                                                  widget.catData["twitter"],
-                                              whatsapp:
-                                                  widget.catData["whatsApp"],
-                                              youtube:
-                                                  widget.catData["youTube"],
-                                            ),
-                                          ),
+                                              height: 75,
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  border: Border.all(
+                                                      color:
+                                                          appPrimaryMaterialColor[
+                                                              50],
+                                                      width: 1),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(
+                                                              22.0))),
+                                              child:
+                                                  widget.catData["memberOf"] ==
+                                                          null
+                                                      ? Center(
+                                                          child:
+                                                              Text("No Member"))
+                                                      : SizedBox(
+                                                          child: widget
+                                                                      .catData[
+                                                                          "memberOf"]
+                                                                      .length >
+                                                                  0
+                                                              ? ListView
+                                                                  .builder(
+                                                                      physics:
+                                                                          BouncingScrollPhysics(),
+                                                                      scrollDirection:
+                                                                          Axis
+                                                                              .horizontal,
+                                                                      itemCount: widget
+                                                                          .catData[
+                                                                              "memberOf"]
+                                                                          .length,
+                                                                      itemBuilder:
+                                                                          (BuildContext context,
+                                                                              int index) {
+                                                                        return Padding(
+                                                                          padding: const EdgeInsets.only(
+                                                                              left: 5.0,
+                                                                              bottom: 3),
+                                                                          child:
+                                                                              Container(
+                                                                            child:
+                                                                                Column(
+                                                                              children: [
+                                                                                Padding(
+                                                                                    padding: const EdgeInsets.only(top: 15.0, bottom: 5, left: 5),
+                                                                                    child: Image.network(
+                                                                                      "${widget.catData["memberOf"][index]["logo"]}",
+                                                                                      width: 45,
+                                                                                    )),
+                                                                                Text("${widget.catData["memberOf"][index]["memberShipName"]}"),
+                                                                              ],
+                                                                            ),
+                                                                          ),
+                                                                        );
+                                                                      })
+                                                              : SizedBox(),
+                                                        )),
                                         ),
+                                        isMember == "false"
+                                            ? Container()
+                                            : Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 20.0, top: 8),
+                                                child: Text("Social Media : ",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        color: Colors.grey[500],
+                                                        fontWeight:
+                                                            FontWeight.w500)),
+                                              ),
+                                        isMember == "false"
+                                            ? Container()
+                                            : Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 8,
+                                                    left: 8.0,
+                                                    right: 8,
+                                                    bottom: 30),
+                                                child: Container(
+                                                  height: 55,
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      border: Border.all(
+                                                          color:
+                                                              appPrimaryMaterialColor[
+                                                                  50],
+                                                          width: 1),
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  22.0))),
+                                                  child: SocialMediaComponent(
+                                                    facebook: widget
+                                                        .catData["faceBook"],
+                                                    instagram: widget
+                                                        .catData["instagram"],
+                                                    linkedIn: widget
+                                                        .catData["linkedIn"],
+                                                    twitter: widget
+                                                        .catData["twitter"],
+                                                    whatsapp: widget
+                                                        .catData["whatsApp"],
+                                                    youtube: widget
+                                                        .catData["youTube"],
+                                                  ),
+                                                ),
+                                              ),
                                       ],
                                     ),
                                   ),

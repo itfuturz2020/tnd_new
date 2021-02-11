@@ -1,10 +1,14 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Components/SocialMediaComponent.dart';
 
 class OfferDetailScreen extends StatefulWidget {
   var offerData;
+
   OfferDetailScreen({this.offerData});
+
   @override
   _OfferDetailScreenState createState() => _OfferDetailScreenState();
 }
@@ -19,22 +23,44 @@ class _OfferDetailScreenState extends State<OfferDetailScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    // log("Expiry Date :${widget.offerData["offerExpire"]}");
-    // funDate();
+    log("Expiry Date :${widget.offerData["offerExpire"]}");
+    funDate();
   }
 
   funDate() {
-    exDate = " ${widget.offerData["offerExpire"]}";
-    date = exDate.split('-');
-    int year = int.parse("${date[0]}");
-    int month = int.parse("${date[1]}");
-    int day = int.parse("${date[2]}");
-    var expiryDate = DateTime(year, month, day);
-    print("-------------------->${expiryDate}");
+    //
+    // date = exDate.split('-');
+    // int day = int.parse("${date[0]}");
+    // int month = int.parse("${date[1]}");
+    // int year = int.parse("${date[2]}");
+    // var expiryDate = DateTime(year, month, day);
+    // print("expiryDate-------------------->${expiryDate}");
+    // setState(() {
+    //   difference = expiryDate.difference(date2).inDays;
+    // });
+    // print("difference-------------------->${difference}");
+    //
+    // setState(() {
+    //   exDate = "${widget.offerData["offerExpire"]}";
+    // });
     setState(() {
-      difference = expiryDate.difference(date2).inDays;
+      exDate = "${widget.offerData["offerExpire"]}";
     });
-    print("-------------------->${difference}");
+    if (exDate != "") {
+      log("==========================");
+
+      date = exDate.split('/');
+      int year = int.parse("${date[0]}");
+      int month = int.parse("${date[1]}");
+      int day = int.parse("${date[2]}");
+      var expiryDate = DateTime(year, month, day);
+      print("expiryDate-------------------->${expiryDate}");
+      setState(() {
+        difference = expiryDate.difference(date2).inDays;
+      });
+    }
+
+    print("difference-------------------->${difference}");
   }
 
   @override
@@ -186,69 +212,81 @@ class _OfferDetailScreenState extends State<OfferDetailScreen> {
             SizedBox(
               height: 12,
             ),
-            Text(
-              "Offer Expires On",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 250.0),
-              child: Container(
-                height: 3,
-                width: 40,
-                color: appPrimaryMaterialColor,
-              ),
-            ),
+            exDate == ""
+                ? Container()
+                : Text(
+                    "Offer Expires On",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500),
+                  ),
+            exDate == ""
+                ? Container()
+                : Padding(
+                    padding: const EdgeInsets.only(right: 250.0),
+                    child: Container(
+                      height: 3,
+                      width: 40,
+                      color: appPrimaryMaterialColor,
+                    ),
+                  ),
             SizedBox(
               height: 10,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Row(
-                  children: [
-                    Icon(
-                      Icons.access_time,
-                      size: 35,
-                      color: Color(0xff367a98),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 5.0),
-                      child: Container(
-                        height: 45,
-                        child: Card(
-                          child: Center(
-                              child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Text("${widget.offerData["offerExpire"]}",
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 18)),
-                          )),
-                        ),
+            exDate == ""
+                ? Container()
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.access_time,
+                            size: 35,
+                            color: Color(0xff367a98),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5.0),
+                            child: Container(
+                              height: 45,
+                              child: Card(
+                                child: Center(
+                                    child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Text(
+                                      "${widget.offerData["offerExpire"]}",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 18)),
+                                )),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 5.0),
-                  child: Container(
-                    height: 45,
-                    child: Card(
-                      child: Center(
-                          child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Text(
-                            "${widget.offerData["daysRemain"]}" + " Days to Go",
-                            style:
-                                TextStyle(color: Colors.black, fontSize: 18)),
-                      )),
-                    ),
+                      exDate == ""
+                          ? Container()
+                          : Padding(
+                              padding: const EdgeInsets.only(left: 5.0),
+                              child: Container(
+                                height: 45,
+                                child: Card(
+                                  child: Center(
+                                      child: Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Text(
+                                        //"${widget.offerData["daysRemain"]}" + " Days to Go",
+                                        difference <= 0
+                                            ? "Offer Expired"
+                                            : "${difference}" + " Days to Go",
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 18)),
+                                  )),
+                                ),
+                              ),
+                            ),
+                    ],
                   ),
-                ),
-              ],
-            ),
             SizedBox(
               height: 12,
             ),

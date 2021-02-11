@@ -535,9 +535,9 @@ class _DirectoryProfileComponentState extends State<DirectoryProfileComponent> {
                                           ),
                                           Text(
                                             widget.directoryData[
-                                                        "business_category"] !=
+                                                        "businessCategory"] !=
                                                     null
-                                                ? "${widget.directoryData["business_category"]["categoryName"]}"
+                                                ? "${widget.directoryData["businessCategory"][0]["categoryName"]}"
                                                 : "-",
                                             style: TextStyle(
                                                 color: Colors.black,
@@ -805,60 +805,62 @@ class _DirectoryProfileComponentState extends State<DirectoryProfileComponent> {
                                                           appPrimaryMaterialColor[
                                                               50],
                                                       width: 1),
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(
-                                                              22.0))),
-                                              child:
-                                                  widget.directoryData[
-                                                              "memberOf"] ==
-                                                          null
-                                                      ? Center(
-                                                          child:
-                                                              Text("No Member"))
-                                                      : SizedBox(
-                                                          child: widget
-                                                                      .directoryData[
-                                                                          "memberOf"]
-                                                                      .length >
-                                                                  0
-                                                              ? ListView
-                                                                  .builder(
-                                                                      physics:
-                                                                          BouncingScrollPhysics(),
-                                                                      scrollDirection:
-                                                                          Axis
-                                                                              .horizontal,
-                                                                      itemCount: widget
-                                                                          .directoryData[
-                                                                              "memberOf"]
-                                                                          .length,
-                                                                      itemBuilder:
-                                                                          (BuildContext context,
-                                                                              int index) {
-                                                                        return Padding(
-                                                                          padding: const EdgeInsets.only(
-                                                                              left: 5.0,
-                                                                              bottom: 3),
-                                                                          child:
-                                                                              Container(
-                                                                            child:
-                                                                                Column(
-                                                                              children: [
-                                                                                Padding(
-                                                                                    padding: const EdgeInsets.only(top: 15.0, bottom: 5, left: 5),
-                                                                                    child: Image.network(
-                                                                                      "${widget.directoryData["memberOf"][index]["logo"]}",
-                                                                                      width: 45,
-                                                                                    )),
-                                                                                Text("${widget.directoryData["memberOf"][index]["memberShipName"]}"),
-                                                                              ],
-                                                                            ),
-                                                                          ),
-                                                                        );
-                                                                      })
-                                                              : SizedBox(),
-                                                        )),
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(22.0))),
+                                              child: widget.directoryData[
+                                                          "MemeberCategory"] ==
+                                                      null
+                                                  ? Center(
+                                                      child: Text("No Member"))
+                                                  : SizedBox(
+                                                      child: widget
+                                                                  .directoryData[
+                                                                      "MemeberCategory"]
+                                                                  .length >
+                                                              0
+                                                          ? ListView.builder(
+                                                              physics:
+                                                                  BouncingScrollPhysics(),
+                                                              scrollDirection:
+                                                                  Axis
+                                                                      .horizontal,
+                                                              itemCount: widget
+                                                                  .directoryData[
+                                                                      "MemeberCategory"]
+                                                                  .length,
+                                                              itemBuilder:
+                                                                  (BuildContext
+                                                                          context,
+                                                                      int index) {
+                                                                return Padding(
+                                                                  padding: const EdgeInsets
+                                                                          .only(
+                                                                      left: 5.0,
+                                                                      bottom:
+                                                                          3),
+                                                                  child:
+                                                                      Container(
+                                                                    child:
+                                                                        Column(
+                                                                      children: [
+                                                                        Padding(
+                                                                            padding: const EdgeInsets.only(
+                                                                                top: 15.0,
+                                                                                bottom: 5,
+                                                                                left: 5),
+                                                                            child: Image.network(
+                                                                              "${widget.directoryData["MemeberCategory"][index]["logo"]}",
+                                                                              width: 45,
+                                                                            )),
+                                                                        Text(
+                                                                            "${widget.directoryData["MemeberCategory"][index]["memberShipName"]}"),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              })
+                                                          : SizedBox(),
+                                                    )),
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.only(

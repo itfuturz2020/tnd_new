@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
 import 'package:the_national_dawn/Components/LoadingBlueComponent.dart';
@@ -23,6 +24,23 @@ class _SubCategoryComponentState extends State<SubCategoryComponent> {
   @override
   void initState() {
     _getSubCat();
+    _profile();
+  }
+
+  String isMember = "";
+
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   //print(widget.catData["memberOf"]);
+  // }
+
+  _profile() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isMember = prefs.getString(Session.ismember);
+    });
   }
 
   @override
@@ -145,48 +163,35 @@ class _SubCategoryComponentState extends State<SubCategoryComponent> {
                                             fontWeight: FontWeight.w600),
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 3.0),
-                                      child: Text(
-                                        "${catList[index]["business_category"]}",
-//                                      "xyz",
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.start,
-                                        style: TextStyle(
-                                            color: Colors.grey[700],
-                                            fontStyle: FontStyle.italic,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 5.0),
-                                      child: Text(
-                                        "${catList[index]["mobile"]}",
-//                                      "9915297227",
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.start,
-                                        style: TextStyle(
-                                            color: Colors.grey[700],
-                                            fontStyle: FontStyle.italic,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 5.0),
-                                      child: Text(
-                                        "${catList[index]["email"]}",
-//                                      "sharma@gmail.com",
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.start,
-                                        style: TextStyle(
-                                            color: Colors.grey[700],
-                                            fontStyle: FontStyle.italic,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                                    ),
+//                                     Padding(
+//                                       padding: const EdgeInsets.only(top: 3.0),
+//                                       child: Text(
+//                                         "${catList[index]["business_category"]}",
+// //                                      "xyz",
+//                                         overflow: TextOverflow.ellipsis,
+//                                         textAlign: TextAlign.start,
+//                                         style: TextStyle(
+//                                             color: Colors.grey[700],
+//                                             fontStyle: FontStyle.italic,
+//                                             fontSize: 14,
+//                                             fontWeight: FontWeight.w400),
+//                                       ),
+//                                     ),
+//                                     Padding(
+//                                       padding: const EdgeInsets.only(top: 5.0),
+//                                       child: Text(
+//                                         "${catList[index]["mobile"]}",
+// //                                      "9915297227",
+//                                         overflow: TextOverflow.ellipsis,
+//                                         textAlign: TextAlign.start,
+//                                         style: TextStyle(
+//                                             color: Colors.grey[700],
+//                                             fontStyle: FontStyle.italic,
+//                                             fontSize: 14,
+//                                             fontWeight: FontWeight.w400),
+//                                       ),
+//                                     ),
+
                                     Padding(
                                       padding: const EdgeInsets.only(top: 5.0),
                                       child: Text(
@@ -196,7 +201,22 @@ class _SubCategoryComponentState extends State<SubCategoryComponent> {
                                         textAlign: TextAlign.start,
                                         style: TextStyle(
                                             color: Colors.grey[700],
-                                            fontStyle: FontStyle.italic,
+                                            // fontStyle: FontStyle.italic,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 5.0),
+                                      child: Text(
+                                        "${catList[index]["about_business"]}",
+//                                      "sharma@gmail.com",
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 4,
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                            color: Colors.grey[700],
+                                            // fontStyle: FontStyle.italic,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w400),
                                       ),
@@ -217,7 +237,7 @@ class _SubCategoryComponentState extends State<SubCategoryComponent> {
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        var body = {"businessCategory_id": widget.catData["_id"]};
+        var body = {"bid": widget.catData["_id"]};
         print("oooooooooooooooooooooooooo" + widget.catData["_id"]);
         Services.PostForList(
                 api_name: 'admin/usersInBusinessCategory', body: body)

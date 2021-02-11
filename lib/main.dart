@@ -42,6 +42,7 @@ import 'package:the_national_dawn/Screens/MyOfferDetailScreen.dart';
 import 'package:the_national_dawn/Screens/NetworkScreen.dart';
 import 'package:the_national_dawn/Screens/NewsBannerDetail.dart';
 import 'package:the_national_dawn/Screens/NotificationDilog.dart';
+import 'package:the_national_dawn/Screens/NotificationInquiry.dart';
 import 'package:the_national_dawn/Screens/NotificationPopUp.dart';
 import 'package:the_national_dawn/Screens/NotificationScreen.dart';
 import 'package:the_national_dawn/Screens/OfferDetailScreen.dart';
@@ -85,6 +86,9 @@ class _MyAppState extends State<MyApp> {
         if (message["data"]["status"] == "requested") {
           Get.to(NotificationPopUp(message: message));
           print("onMessage  (requested) $message");
+        } else if (message["data"]["status"] == "inquiry") {
+          Get.to(NotificationInquiry(message: message));
+          print("onMessage  (requested) $message");
         } else {
           Get.to(NotificationDilog(message: message));
           print("onMessage (${message["data"]["status"]}): $message");
@@ -95,6 +99,9 @@ class _MyAppState extends State<MyApp> {
         if (message["data"]["status"] == "requested") {
           Get.to(NotificationPopUp(message: message));
           print("onLaunch: $message");
+        } else if (message["data"]["status"] == "inquiry") {
+          Get.to(NotificationInquiry(message: message));
+          print("onMessage  (requested) $message");
         } else {
           Get.to(NotificationDilog(message: message));
           print("onLaunch: $message");
@@ -106,6 +113,9 @@ class _MyAppState extends State<MyApp> {
         if (message["data"]["status"] == "requested") {
           Get.to(NotificationPopUp(message: message));
           print("onResume: $message");
+        } else if (message["data"]["status"] == "inquiry") {
+          Get.to(NotificationInquiry(message: message));
+          print("onMessage  (requested) $message");
         } else {
           Get.to(NotificationDilog(message: message));
           print("onResume: $message");

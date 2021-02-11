@@ -12,6 +12,7 @@ import 'package:the_national_dawn/Components/DirectoryProfileComponent.dart';
 import 'package:the_national_dawn/Components/LoadingBlueComponent.dart';
 import 'package:the_national_dawn/Components/LoadingComponent.dart';
 import 'package:the_national_dawn/Screens/CompleteScreen.dart';
+import 'package:the_national_dawn/Screens/EnquiryForm.dart';
 import 'package:the_national_dawn/Screens/RequestScreen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -151,21 +152,32 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
                             fontSize: 18,
                             fontWeight: FontWeight.w600),
                       ),
+                      Text(
+                        "${widget.directoryData["company_name"]}",
+                        // widget.directoryData["name"],
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600),
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(top: 3.0),
-                        child: widget.directoryData["business_category"] == null
-                            ? Text("")
-                            : Text(
-                                "${widget.directoryData["business_category"]["categoryName"]}",
-                                //widget.directoryData["business_category"],
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    color: Colors.grey[700],
-                                    fontStyle: FontStyle.italic,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400),
-                              ),
+                        child:
+                            widget.directoryData["businessCategory"].length == 0
+                                ? Text("")
+                                : Text(
+                                    "${widget.directoryData["businessCategory"][0]["categoryName"]}",
+                                    //widget.directoryData["business_category"],
+                                    overflow: TextOverflow.ellipsis,
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                        color: Colors.grey[700],
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400),
+                                  ),
                       ),
                       // Padding(
                       //   padding: const EdgeInsets.only(top: 8.0),
@@ -505,83 +517,203 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
                           ),
                         ),
                       ),*/
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                launchwhatsapp(
-                                    phone: "+91" +
-                                        widget.directoryData["whatsApp"],
-                                    message: "");
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 15.0),
+
+                      widget.directoryData["inquireData"].length == 0
+                          ? Padding(
+                              padding: const EdgeInsets.only(top: 10.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          new EnquiryForm(
+                                            directoryId:
+                                                widget.directoryData["_id"],
+                                          )));
+                                },
                                 child: Container(
-                                  height: 30,
-                                  width: 40,
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          color: Colors.grey[200], width: 1),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.grey[600]
-                                                .withOpacity(0.2),
-                                            blurRadius: 1.0,
-                                            spreadRadius: 1.0,
-                                            offset: Offset(3.0, 5.0))
-                                      ]),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 3.0, right: 3, top: 3, bottom: 3),
-                                    child: Image.asset('assets/whats.png'),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                _launchURL(
-                                    widget.directoryData["email"], '', '');
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 15.0),
-                                child: Container(
-                                  height: 30,
-                                  width: 40,
+                                  height: 25,
+                                  // width: 140,
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     border: Border.all(
-                                        color: Colors.grey[300], width: 1),
+                                        color: appPrimaryMaterialColor[100],
+                                        width: 1),
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10.0)),
                                   ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 4.0, right: 4, top: 5, bottom: 5),
-                                    child: Image.asset('assets/gmail.png'),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      //Image.asset('assets/videocall.png'),
+                                      //  Icon(Icons.format_list_bulleted_sharp),
+                                      FittedBox(
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 3.0),
+                                          child: Text(
+                                            "Enquiry Form  ",
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                        ),
+                                      )
+                                    ],
                                   ),
                                 ),
                               ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                launch(
-                                    ('tel:// ${widget.directoryData["mobile"]}'));
-                              },
-                              child: Container(
-                                height: 30,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      color: Colors.grey[300], width: 1),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
+                            )
+                          : widget.directoryData["inquireData"].length > 0
+                              ? widget.directoryData["inquireData"][0]
+                                          ["status"] ==
+                                      false
+                                  ? Padding(
+                                      padding: const EdgeInsets.only(top: 10.0),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder:
+                                                      (BuildContext context) =>
+                                                          new EnquiryForm(
+                                                            directoryId: widget
+                                                                    .directoryData[
+                                                                "_id"],
+                                                          )));
+                                        },
+                                        child: Container(
+                                          height: 25,
+                                          // width: 140,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            border: Border.all(
+                                                color: appPrimaryMaterialColor[
+                                                    100],
+                                                width: 1),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10.0)),
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              // Image.asset('assets/videocall.png'),
+                                              FittedBox(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 3.0),
+                                                  child: Text(
+                                                    "Enquiry Form  ",
+                                                    style:
+                                                        TextStyle(fontSize: 15),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  : Padding(
+                                      padding: const EdgeInsets.only(top: 10.0),
+                                      child: Row(
+                                        children: [
+                                          GestureDetector(
+                                            onTap: () {
+                                              launchwhatsapp(
+                                                  phone: "+91" +
+                                                      widget.directoryData[
+                                                          "whatsApp"],
+                                                  message: "");
+                                            },
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 15.0),
+                                              child: Container(
+                                                height: 30,
+                                                width: 40,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    border: Border.all(
+                                                        color: Colors.grey[200],
+                                                        width: 1),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10.0)),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                          color: Colors
+                                                              .grey[600]
+                                                              .withOpacity(0.2),
+                                                          blurRadius: 1.0,
+                                                          spreadRadius: 1.0,
+                                                          offset:
+                                                              Offset(3.0, 5.0))
+                                                    ]),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 3.0,
+                                                          right: 3,
+                                                          top: 3,
+                                                          bottom: 3),
+                                                  child: Image.asset(
+                                                      'assets/whats.png'),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
+                                              _launchURL(
+                                                  widget.directoryData["email"],
+                                                  '',
+                                                  '');
+                                            },
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 15.0),
+                                              child: Container(
+                                                height: 30,
+                                                width: 40,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  border: Border.all(
+                                                      color: Colors.grey[300],
+                                                      width: 1),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(
+                                                              10.0)),
+                                                ),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 4.0,
+                                                          right: 4,
+                                                          top: 5,
+                                                          bottom: 5),
+                                                  child: Image.asset(
+                                                      'assets/gmail.png'),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
+                                              launch(
+                                                  ('tel:// ${widget.directoryData["mobile"]}'));
+                                            },
+                                            child: Container(
+                                              height: 30,
+                                              width: 40,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                border: Border.all(
+                                                    color: Colors.grey[300],
+                                                    width: 1),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
 //                                boxShadow: [
 //                                  BoxShadow(
 //                                      color: Colors.grey[600].withOpacity(0.2),
@@ -589,20 +721,122 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
 //                                      spreadRadius: 1.0,
 //                                      offset: Offset(3.0, 5.0))
 //                                ],
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 4.0, right: 4, top: 4, bottom: 4),
-                                  child: Image.asset(
-                                    'assets/phone-call.png',
-                                    color: Colors.green,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                                              ),
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 4.0,
+                                                    right: 4,
+                                                    top: 4,
+                                                    bottom: 4),
+                                                child: Image.asset(
+                                                  'assets/phone-call.png',
+                                                  color: Colors.green,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                              : Container(),
+//                       Padding(
+//                         padding: const EdgeInsets.only(top: 10.0),
+//                         child: Row(
+//                           children: [
+//                             GestureDetector(
+//                               onTap: () {
+//                                 launchwhatsapp(
+//                                     phone: "+91" +
+//                                         widget.directoryData["whatsApp"],
+//                                     message: "");
+//                               },
+//                               child: Padding(
+//                                 padding: const EdgeInsets.only(right: 15.0),
+//                                 child: Container(
+//                                   height: 30,
+//                                   width: 40,
+//                                   decoration: BoxDecoration(
+//                                       color: Colors.white,
+//                                       border: Border.all(
+//                                           color: Colors.grey[200], width: 1),
+//                                       borderRadius: BorderRadius.all(
+//                                           Radius.circular(10.0)),
+//                                       boxShadow: [
+//                                         BoxShadow(
+//                                             color: Colors.grey[600]
+//                                                 .withOpacity(0.2),
+//                                             blurRadius: 1.0,
+//                                             spreadRadius: 1.0,
+//                                             offset: Offset(3.0, 5.0))
+//                                       ]),
+//                                   child: Padding(
+//                                     padding: const EdgeInsets.only(
+//                                         left: 3.0, right: 3, top: 3, bottom: 3),
+//                                     child: Image.asset('assets/whats.png'),
+//                                   ),
+//                                 ),
+//                               ),
+//                             ),
+//                             GestureDetector(
+//                               onTap: () {
+//                                 _launchURL(
+//                                     widget.directoryData["email"], '', '');
+//                               },
+//                               child: Padding(
+//                                 padding: const EdgeInsets.only(right: 15.0),
+//                                 child: Container(
+//                                   height: 30,
+//                                   width: 40,
+//                                   decoration: BoxDecoration(
+//                                     color: Colors.white,
+//                                     border: Border.all(
+//                                         color: Colors.grey[300], width: 1),
+//                                     borderRadius:
+//                                         BorderRadius.all(Radius.circular(10.0)),
+//                                   ),
+//                                   child: Padding(
+//                                     padding: const EdgeInsets.only(
+//                                         left: 4.0, right: 4, top: 5, bottom: 5),
+//                                     child: Image.asset('assets/gmail.png'),
+//                                   ),
+//                                 ),
+//                               ),
+//                             ),
+//                             GestureDetector(
+//                               onTap: () {
+//                                 launch(
+//                                     ('tel:// ${widget.directoryData["mobile"]}'));
+//                               },
+//                               child: Container(
+//                                 height: 30,
+//                                 width: 40,
+//                                 decoration: BoxDecoration(
+//                                   color: Colors.white,
+//                                   border: Border.all(
+//                                       color: Colors.grey[300], width: 1),
+//                                   borderRadius:
+//                                       BorderRadius.all(Radius.circular(10.0)),
+// //                                boxShadow: [
+// //                                  BoxShadow(
+// //                                      color: Colors.grey[600].withOpacity(0.2),
+// //                                      blurRadius: 1.0,
+// //                                      spreadRadius: 1.0,
+// //                                      offset: Offset(3.0, 5.0))
+// //                                ],
+//                                 ),
+//                                 child: Padding(
+//                                   padding: const EdgeInsets.only(
+//                                       left: 4.0, right: 4, top: 4, bottom: 4),
+//                                   child: Image.asset(
+//                                     'assets/phone-call.png',
+//                                     color: Colors.green,
+//                                   ),
+//                                 ),
+//                               ),
+//                             ),
+//                           ],
+//                         ),
+//                       ),
                       /*Padding(
                         padding: const EdgeInsets.only(top: 10.0),
                         child: GestureDetector(

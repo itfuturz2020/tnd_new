@@ -8,6 +8,8 @@ import 'package:the_national_dawn/Common/Services.dart';
 import 'package:the_national_dawn/Components/LoadingComponent.dart';
 
 class EnquiryForm extends StatefulWidget {
+  var directoryId;
+  EnquiryForm({this.directoryId});
   @override
   _EnquiryFormState createState() => _EnquiryFormState();
 }
@@ -33,6 +35,7 @@ class _EnquiryFormState extends State<EnquiryForm> {
       _name.text = prefs.getString(Session.CustomerName);
       _email.text = prefs.getString(Session.CustomerEmailId);
       _phone.text = prefs.getString(Session.CustomerPhoneNo);
+      customerId = prefs.getString(Session.CustomerId);
     });
   }
 
@@ -373,6 +376,8 @@ class _EnquiryFormState extends State<EnquiryForm> {
           "email": _email.text,
           "mobile": _phone.text,
           "description": _description.text,
+          "byUser": customerId,
+          "toUser": widget.directoryId
         };
         print(body);
         Services.PostForList(api_name: 'admin/inquiry', body: body).then(

@@ -20,6 +20,7 @@ class _MyOfferDetailScreenState extends State<MyOfferDetailScreen> {
   var date;
   var date2 = DateTime.now();
   var difference;
+  String emptyDate;
 
   @override
   void initState() {
@@ -30,17 +31,24 @@ class _MyOfferDetailScreenState extends State<MyOfferDetailScreen> {
   }
 
   funDate() {
-    exDate = " ${widget.offerData["offerExpire"]}";
-    date = exDate.split('-');
-    int year = int.parse("${date[0]}");
-    int month = int.parse("${date[1]}");
-    int day = int.parse("${date[2]}");
-    var expiryDate = DateTime(year, month, day);
-    print("-------------------->${expiryDate}");
     setState(() {
-      difference = expiryDate.difference(date2).inDays;
+      exDate = "${widget.offerData["offerExpire"]}";
     });
-    print("-------------------->${difference}");
+    if (exDate != "") {
+      log("==========================");
+
+      date = exDate.split('-');
+      int day = int.parse("${date[0]}");
+      int month = int.parse("${date[1]}");
+      int year = int.parse("${date[2]}");
+      var expiryDate = DateTime(year, month, day);
+      print("expiryDate-------------------->${expiryDate}");
+      setState(() {
+        difference = expiryDate.difference(date2).inDays;
+      });
+    }
+
+    print("difference-------------------->${difference}");
   }
 
   @override
@@ -194,72 +202,83 @@ class _MyOfferDetailScreenState extends State<MyOfferDetailScreen> {
             SizedBox(
               height: 12,
             ),
-            Text(
-              "Offer Expires On",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 250.0),
-              child: Container(
-                height: 3,
-                width: 40,
-                color: appPrimaryMaterialColor,
-              ),
-            ),
+            exDate == ""
+                ? Container()
+                : Text(
+                    "Offer Expires On",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500),
+                  ),
+            exDate == ""
+                ? Container()
+                : Padding(
+                    padding: const EdgeInsets.only(right: 250.0),
+                    child: Container(
+                      height: 3,
+                      width: 40,
+                      color: appPrimaryMaterialColor,
+                    ),
+                  ),
             SizedBox(
               height: 10,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Row(
-                  children: [
-                    Icon(
-                      Icons.access_time,
-                      size: 35,
-                      color: Color(0xff367a98),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 5.0),
-                      child: Container(
-                        height: 45,
-                        child: Card(
-                          child: Center(
-                              child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Text("${date[2]}-${date[1]}-${date[0]}",
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 18)),
-                          )),
-                        ),
+            exDate == ""
+                ? Container()
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.access_time,
+                            size: 35,
+                            color: Color(0xff367a98),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5.0),
+                            child: Container(
+                              height: 45,
+                              child: Card(
+                                child: Center(
+                                    child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Text(
+                                      "${date[2]}-${date[1]}-${date[0]}",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 18)),
+                                )),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 5.0),
-                  child: Container(
-                    height: 45,
-                    child: Card(
-                      child: Center(
-                          child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: difference < 0
-                            ? Text("Offer expired",
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 18))
-                            : Text("${difference}" + " Days to Go",
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 18)),
-                      )),
-                    ),
+                      exDate == ""
+                          ? Container()
+                          : Padding(
+                              padding: const EdgeInsets.only(left: 5.0),
+                              child: Container(
+                                height: 45,
+                                child: Card(
+                                  child: Center(
+                                      child: Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: difference <= 0
+                                        ? Text("Offer expired",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 18))
+                                        : Text("${difference}" + " Days to Go",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 18)),
+                                  )),
+                                ),
+                              ),
+                            ),
+                    ],
                   ),
-                ),
-              ],
-            ),
             SizedBox(
               height: 12,
             ),

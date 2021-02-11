@@ -289,14 +289,33 @@ class _DailyNewScreenState extends State<DailyNewScreen>
                                                       },
                                                       child: Stack(
                                                         children: [
-                                                          FadeInImage
-                                                              .assetNetwork(
-                                                            placeholder:
-                                                                'assets/TND Logo_PNG_Newspaper.png',
-                                                            image: link[
-                                                                "featured_img_src"],
-                                                            // width: 300,
-                                                          ),
+                                                          // FadeInImage
+                                                          //     .assetNetwork(
+                                                          //   placeholder:
+                                                          //       'assets/TND Logo_PNG_Newspaper.png',
+                                                          //   image: link[
+                                                          //       "featured_img_src"],
+                                                          //   // width: 300,
+                                                          // ),
+                                                          ClipRRect(
+                                                              // borderRadius: BorderRadius.circular(8.0),
+                                                              child: link['featured_img_src'] ==
+                                                                      null
+                                                                  ? Image.asset(
+                                                                      'assets/LOGO1.png')
+                                                                  : Image
+                                                                      .network(
+                                                                      link[
+                                                                          'featured_img_src'],
+                                                                      width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width,
+                                                                      height:
+                                                                          220,
+                                                                      fit: BoxFit
+                                                                          .contain,
+                                                                    )),
                                                           // Padding(
                                                           //   padding:
                                                           //       const EdgeInsets

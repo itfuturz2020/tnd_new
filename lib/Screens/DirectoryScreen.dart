@@ -409,6 +409,7 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
         SharedPreferences prefs = await SharedPreferences.getInstance();
 
         var body = {"userid": prefs.getString(Session.CustomerId)};
+        print("userid: ${prefs.getString(Session.CustomerId)}");
         Services.PostForList(api_name: 'directory/directorylisting', body: body)
             .then((ResponseList) async {
           setState(() {
