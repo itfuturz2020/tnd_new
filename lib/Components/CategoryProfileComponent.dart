@@ -803,7 +803,7 @@ class _CategoryProfileComponentState extends State<CategoryProfileComponent> {
                                         Padding(
                                           padding: const EdgeInsets.only(
                                               left: 20.0, top: 8),
-                                          child: Text("Member Type : ",
+                                          child: Text("Network Type : ",
                                               style: TextStyle(
                                                   fontSize: 15,
                                                   color: Colors.grey[500],

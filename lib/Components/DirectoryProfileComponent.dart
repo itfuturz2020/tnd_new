@@ -5,8 +5,9 @@ import 'package:the_national_dawn/Components/SocialMediaComponent.dart';
 
 class DirectoryProfileComponent extends StatefulWidget {
   var directoryData;
+  var catData;
 
-  DirectoryProfileComponent({this.directoryData});
+  DirectoryProfileComponent({this.directoryData, this.catData});
 
   @override
   _DirectoryProfileComponentState createState() =>
@@ -15,6 +16,7 @@ class DirectoryProfileComponent extends StatefulWidget {
 
 class _DirectoryProfileComponentState extends State<DirectoryProfileComponent> {
   String memberImg = "";
+  String isMember = "";
 
   @override
   void initState() {
@@ -211,8 +213,141 @@ class _DirectoryProfileComponentState extends State<DirectoryProfileComponent> {
                                 ),
                               ),
                             ),*/
+                            // isMember == "false"
+                            //     ? Container()
+                            //     : Padding(
+                            //   padding: const EdgeInsets.only(
+                            //       left: 20.0, top: 8),
+                            //   child: Text("Social Media : ",
+                            //       style: TextStyle(
+                            //           fontSize: 15,
+                            //           color: Colors.grey[500],
+                            //           fontWeight:
+                            //           FontWeight.w500)),
+                            // ),
+                            // isMember == "false"
+                            //     ? Container()
+                            //     : Padding(
+                            //   padding: const EdgeInsets.only(
+                            //       top: 8,
+                            //       left: 8.0,
+                            //       right: 8,
+                            //       bottom: 30),
+                            //   child: Container(
+                            //     height: 55,
+                            //     decoration: BoxDecoration(
+                            //         color: Colors.white,
+                            //         border: Border.all(
+                            //             color:
+                            //             appPrimaryMaterialColor[
+                            //             50],
+                            //             width: 1),
+                            //         borderRadius:
+                            //         BorderRadius.all(
+                            //             Radius.circular(
+                            //                 22.0))),
+                            //     child: SocialMediaComponent(
+                            //       facebook: widget
+                            //           .catData["faceBook"],
+                            //       instagram: widget
+                            //           .catData["instagram"],
+                            //       linkedIn: widget
+                            //           .catData["linkedIn"],
+                            //       twitter: widget
+                            //           .catData["twitter"],
+                            //       whatsapp: widget
+                            //           .catData["whatsApp"],
+                            //       youtube: widget
+                            //           .catData["youTube"],
+                            //     ),
+                            //   ),
+                            // ),
                             SizedBox(
-                              height: 40,
+                              height: 10,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 20.0, top: 8),
+                              child: Text("In Network : ",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.grey[500],
+                                      fontWeight: FontWeight.w500)),
+                            ),
+                            Container(
+                                height: MediaQuery.of(context).size.height*0.075,
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(
+                                      color: appPrimaryMaterialColor[50],
+                                      width: 1),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(22.0),
+                                  ),
+                                ),
+                                child:
+                                    widget.directoryData["MemeberCategory"] ==
+                                            null
+                                        ? Center(child: Text("No Member"))
+                                        : SizedBox(
+                                            child: widget
+                                                        .directoryData[
+                                                            "MemeberCategory"]
+                                                        .length >
+                                                    0
+                                                ? ListView.builder(
+                                                    // physics:
+                                                    //     BouncingScrollPhysics(),
+                                                    // scrollDirection:
+                                                    //     Axis.horizontal,
+                                                    itemCount: widget
+                                                        .directoryData[
+                                                            "MemeberCategory"]
+                                                        .length,
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      return Padding(
+                                                        padding: const EdgeInsets.all(8.0),
+                                                        child: Column(
+                                                          children: [
+                                                            Image.network(
+                                                              "${widget.directoryData["MemeberCategory"][index]["logo"]}",
+                                                              width: 45,
+                                                            ),
+                                                            Text(
+                                                                "${widget.directoryData["MemeberCategory"][index]["memberShipName"]}"),
+                                                          ],
+                                                        ),
+                                                      );
+                                                    })
+                                                : SizedBox(),
+                                          )),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 8, left: 8.0, right: 8, bottom: 30),
+                              child: Container(
+                                height: 55,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border.all(
+                                        color: appPrimaryMaterialColor[50],
+                                        width: 1),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(22.0))),
+                                child: SocialMediaComponent(
+                                  facebook: widget.directoryData["faceBook"],
+                                  instagram: widget.directoryData["instagram"],
+                                  linkedIn: widget.directoryData["linkedIn"],
+                                  twitter: widget.directoryData["twitter"],
+                                  whatsapp: widget.directoryData["whatsApp"],
+                                  youtube: widget.directoryData["youTube"],
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
                             ),
                             Container(
                               height: 250,
@@ -257,7 +392,7 @@ class _DirectoryProfileComponentState extends State<DirectoryProfileComponent> {
                                               padding: const EdgeInsets.only(
                                                   left: 5),
                                               child: Text(
-                                                'Personal Info',
+                                                'Personal Information',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                     fontSize: 18,
@@ -778,132 +913,132 @@ class _DirectoryProfileComponentState extends State<DirectoryProfileComponent> {
                                             ),
                                           ),
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 20.0, top: 8),
-                                          child: Text("Member Type : ",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  color: Colors.grey[500],
-                                                  fontWeight: FontWeight.w500)),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 20,
-                                              right: 20,
-                                              top: 5,
-                                              bottom: 10),
-                                          child: Container(
-                                              height: 75,
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  border: Border.all(
-                                                      color:
-                                                          appPrimaryMaterialColor[
-                                                              50],
-                                                      width: 1),
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(22.0))),
-                                              child: widget.directoryData[
-                                                          "MemeberCategory"] ==
-                                                      null
-                                                  ? Center(
-                                                      child: Text("No Member"))
-                                                  : SizedBox(
-                                                      child: widget
-                                                                  .directoryData[
-                                                                      "MemeberCategory"]
-                                                                  .length >
-                                                              0
-                                                          ? ListView.builder(
-                                                              physics:
-                                                                  BouncingScrollPhysics(),
-                                                              scrollDirection:
-                                                                  Axis
-                                                                      .horizontal,
-                                                              itemCount: widget
-                                                                  .directoryData[
-                                                                      "MemeberCategory"]
-                                                                  .length,
-                                                              itemBuilder:
-                                                                  (BuildContext
-                                                                          context,
-                                                                      int index) {
-                                                                return Padding(
-                                                                  padding: const EdgeInsets
-                                                                          .only(
-                                                                      left: 5.0,
-                                                                      bottom:
-                                                                          3),
-                                                                  child:
-                                                                      Container(
-                                                                    child:
-                                                                        Column(
-                                                                      children: [
-                                                                        Padding(
-                                                                            padding: const EdgeInsets.only(
-                                                                                top: 15.0,
-                                                                                bottom: 5,
-                                                                                left: 5),
-                                                                            child: Image.network(
-                                                                              "${widget.directoryData["MemeberCategory"][index]["logo"]}",
-                                                                              width: 45,
-                                                                            )),
-                                                                        Text(
-                                                                            "${widget.directoryData["MemeberCategory"][index]["memberShipName"]}"),
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              })
-                                                          : SizedBox(),
-                                                    )),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 20.0, top: 8),
-                                          child: Text("Social Media : ",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  color: Colors.grey[500],
-                                                  fontWeight: FontWeight.w500)),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 8,
-                                              left: 8.0,
-                                              right: 8,
-                                              bottom: 30),
-                                          child: Container(
-                                            height: 55,
-                                            decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                border: Border.all(
-                                                    color:
-                                                        appPrimaryMaterialColor[
-                                                            50],
-                                                    width: 1),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(22.0))),
-                                            child: SocialMediaComponent(
-                                              facebook: widget
-                                                  .directoryData["faceBook"],
-                                              instagram: widget
-                                                  .directoryData["instagram"],
-                                              linkedIn: widget
-                                                  .directoryData["linkedIn"],
-                                              twitter: widget
-                                                  .directoryData["twitter"],
-                                              whatsapp: widget
-                                                  .directoryData["whatsApp"],
-                                              youtube: widget
-                                                  .directoryData["youTube"],
-                                            ),
-                                          ),
-                                        ),
+                                        // Padding(
+                                        //   padding: const EdgeInsets.only(
+                                        //       left: 20.0, top: 8),
+                                        //   child: Text("Network Type : ",
+                                        //       style: TextStyle(
+                                        //           fontSize: 15,
+                                        //           color: Colors.grey[500],
+                                        //           fontWeight: FontWeight.w500)),
+                                        // ),
+                                        // Padding(
+                                        //   padding: const EdgeInsets.only(
+                                        //       left: 20,
+                                        //       right: 20,
+                                        //       top: 5,
+                                        //       bottom: 10),
+                                        //   child: Container(
+                                        //       height: 75,
+                                        //       width: MediaQuery.of(context)
+                                        //           .size
+                                        //           .width,
+                                        //       decoration: BoxDecoration(
+                                        //           color: Colors.white,
+                                        //           border: Border.all(
+                                        //               color:
+                                        //                   appPrimaryMaterialColor[
+                                        //                       50],
+                                        //               width: 1),
+                                        //           borderRadius: BorderRadius.all(
+                                        //               Radius.circular(22.0))),
+                                        //       child: widget.directoryData[
+                                        //                   "MemeberCategory"] ==
+                                        //               null
+                                        //           ? Center(
+                                        //               child: Text("No Member"))
+                                        //           : SizedBox(
+                                        //               child: widget
+                                        //                           .directoryData[
+                                        //                               "MemeberCategory"]
+                                        //                           .length >
+                                        //                       0
+                                        //                   ? ListView.builder(
+                                        //                       physics:
+                                        //                           BouncingScrollPhysics(),
+                                        //                       scrollDirection:
+                                        //                           Axis
+                                        //                               .horizontal,
+                                        //                       itemCount: widget
+                                        //                           .directoryData[
+                                        //                               "MemeberCategory"]
+                                        //                           .length,
+                                        //                       itemBuilder:
+                                        //                           (BuildContext
+                                        //                                   context,
+                                        //                               int index) {
+                                        //                         return Padding(
+                                        //                           padding: const EdgeInsets
+                                        //                                   .only(
+                                        //                               left: 5.0,
+                                        //                               bottom:
+                                        //                                   3),
+                                        //                           child:
+                                        //                               Container(
+                                        //                             child:
+                                        //                                 Column(
+                                        //                               children: [
+                                        //                                 Padding(
+                                        //                                     padding: const EdgeInsets.only(
+                                        //                                         top: 15.0,
+                                        //                                         bottom: 5,
+                                        //                                         left: 5),
+                                        //                                     child: Image.network(
+                                        //                                       "${widget.directoryData["MemeberCategory"][index]["logo"]}",
+                                        //                                       width: 45,
+                                        //                                     )),
+                                        //                                 Text(
+                                        //                                     "${widget.directoryData["MemeberCategory"][index]["memberShipName"]}"),
+                                        //                               ],
+                                        //                             ),
+                                        //                           ),
+                                        //                         );
+                                        //                       })
+                                        //                   : SizedBox(),
+                                        //             )),
+                                        // ),
+                                        // Padding(
+                                        //   padding: const EdgeInsets.only(
+                                        //       left: 20.0, top: 8),
+                                        //   child: Text("Social Media : ",
+                                        //       style: TextStyle(
+                                        //           fontSize: 15,
+                                        //           color: Colors.grey[500],
+                                        //           fontWeight: FontWeight.w500)),
+                                        // ),
+                                        // Padding(
+                                        //   padding: const EdgeInsets.only(
+                                        //       top: 8,
+                                        //       left: 8.0,
+                                        //       right: 8,
+                                        //       bottom: 30),
+                                        //   child: Container(
+                                        //     height: 55,
+                                        //     decoration: BoxDecoration(
+                                        //         color: Colors.white,
+                                        //         border: Border.all(
+                                        //             color:
+                                        //                 appPrimaryMaterialColor[
+                                        //                     50],
+                                        //             width: 1),
+                                        //         borderRadius: BorderRadius.all(
+                                        //             Radius.circular(22.0))),
+                                        //     child: SocialMediaComponent(
+                                        //       facebook: widget
+                                        //           .directoryData["faceBook"],
+                                        //       instagram: widget
+                                        //           .directoryData["instagram"],
+                                        //       linkedIn: widget
+                                        //           .directoryData["linkedIn"],
+                                        //       twitter: widget
+                                        //           .directoryData["twitter"],
+                                        //       whatsapp: widget
+                                        //           .directoryData["whatsApp"],
+                                        //       youtube: widget
+                                        //           .directoryData["youTube"],
+                                        //     ),
+                                        //   ),
+                                        // ),
                                       ],
                                     ),
                                   ),

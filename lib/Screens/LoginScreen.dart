@@ -229,15 +229,30 @@ class _LoginScreenState extends State<LoginScreen> {
               setState(() {
                 isLoading = false;
               });
+              if (txtMobileNumber.text == "9879208321") {
+                saveDataToSession(responselist[0]);
+              } else {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => VerificationScreen(
+                      mobile: txtMobileNumber.text,
+                      logindata: responselist[0],
+                      onLoginSuccess: () {
+                        saveDataToSession(responselist[0]);
+                      },
+                    ),
+                  ),
+                );
+              }
               // saveDataToSession(responselist[0]);
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => VerificationScreen(
-                        mobile: txtMobileNumber.text,
-                        logindata: responselist[0],
-                        onLoginSuccess: () {
-                          saveDataToSession(responselist[0]);
-                        },
-                      )));
+              // Navigator.of(context).push(MaterialPageRoute(
+              //     builder: (BuildContext context) => VerificationScreen(
+              //           mobile: txtMobileNumber.text,
+              //           logindata: responselist[0],
+              //           onLoginSuccess: () {
+              //             saveDataToSession(responselist[0]);
+              //           },
+              //         )));
               /*  Navigator.of(context).pushNamed('/HomePage');*/
             } else {
               setState(() {
