@@ -67,6 +67,7 @@ dependencies:
   progress_dialog: ^1.2.0
   get: ^3.24.0
   html: ^0.14.0+4
+  flutter_swiper: ^1.1.6
 
 
 

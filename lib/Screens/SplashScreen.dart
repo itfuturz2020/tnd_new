@@ -126,7 +126,8 @@ class _SplashScreenState extends State<SplashScreen> {
       print(Type);
       print(MobileNumber);
       if (MobileNumber == null) {
-        Navigator.pushReplacementNamed(context, '/LoginScreen');
+        //Navigator.pushReplacementNamed(context, '/LoginScreen');
+        Navigator.pushReplacementNamed(context, '/GuestDashBoard');
       } else {
         Navigator.pushReplacementNamed(context, '/HomePage');
       }

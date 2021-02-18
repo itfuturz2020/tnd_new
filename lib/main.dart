@@ -60,6 +60,14 @@ import 'package:the_national_dawn/Screens/UpdateProfileScreen.dart';
 import 'package:the_national_dawn/Screens/VerificationScreen.dart';
 import 'package:the_national_dawn/Screens/ViewDetailScreen.dart';
 
+import 'GuestScreens/GridScreen.dart';
+import 'GuestScreens/GuestBannerScreen.dart';
+import 'GuestScreens/GuestCategoryNews.dart';
+import 'GuestScreens/GuestDashBoard.dart';
+import 'GuestScreens/GuestHome.dart';
+import 'GuestScreens/GuestLatestNews.dart';
+import 'GuestScreens/GuestProfile.dart';
+import 'GuestScreens/GuestSearchScreen.dart';
 import 'Screens/AddOfferScreen.dart';
 import 'Screens/CompleteScreen.dart';
 import 'Screens/EnquiryForm.dart';
@@ -192,6 +200,16 @@ class _MyAppState extends State<MyApp> {
         '/AddService': (context) => AddService(),
         '/AddOffer': (context) => AddOffer(),
         '/EnquiryForm': (context) => EnquiryForm(),
+
+        //=============Guest Login
+        '/GuestDashBoard': (context) => GuestDashBoard(),
+        '/GridScreen': (context) => GridScreen(),
+        '/GuestBannerScreen': (context) => GuestBannerScreen(),
+        '/GuestHome': (context) => GuestHome(),
+        '/GuestLatestNews': (context) => GuestLatestNews(),
+        '/GuestProfile': (context) => GuestProfile(),
+        '/GuestSearchScreen': (context) => GuestSearchScreen(),
+        '/GuestCategoryNews': (context) => GuestCategoryNews(),
       },
       theme: ThemeData(
           //fontFamily: 'RobotoSlab',
