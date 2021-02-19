@@ -89,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             children: [
               SizedBox(
-                height: MediaQuery.of(context).padding.top + 20,
+                height: MediaQuery.of(context).padding.top + 50,
               ),
               Image.asset(
                 "assets/LOGO1.png",

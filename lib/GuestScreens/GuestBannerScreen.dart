@@ -13,7 +13,9 @@ import 'package:the_national_dawn/Screens/NewsBannerDetail.dart';
 
 class GuestBannerScreen extends StatefulWidget {
   List newsData;
+
   GuestBannerScreen({this.newsData});
+
   @override
   _GuestBannerScreenState createState() => _GuestBannerScreenState();
 }
@@ -33,8 +35,12 @@ class _GuestBannerScreenState extends State<GuestBannerScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [crousalContainer(), horizontalContainerList()],
+    return SizedBox(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: Column(
+        children: [crousalContainer(), horizontalContainerList()],
+      ),
     );
   }
 
@@ -200,41 +206,41 @@ class _GuestBannerScreenState extends State<GuestBannerScreen>
     );
   }
 
-  // _bannerImage() async {
-  //   try {
-  //     final result = await InternetAddress.lookup('google.com');
-  //     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-  //       setState(() {
-  //         isBannerLoading = true;
-  //       });
-  //       FormData body = FormData.fromMap({"news_category": "local-news"});
-  //       Services.PostForList1(api_name: 'custom/slider_news', body: body).then(
-  //           (bannerresponselist) async {
-  //         setState(() {
-  //           isBannerLoading = false;
-  //         });
-  //         if (bannerresponselist.length > 0) {
-  //           setState(() {
-  //             widget.newsData = bannerresponselist;
-  //             tabController =
-  //                 TabController(length: widget.newsData.length, vsync: this);
-  //             //set "data" here to your variable
-  //           });
-  //           log("My Data" + widget.newsData.toString());
-  //         } else {
-  //           Fluttertoast.showToast(msg: "Banner Not Found");
-  //           //show "data not found" in dialog
-  //         }
-  //       }, onError: (e) {
-  //         setState(() {
-  //           isBannerLoading = false;
-  //         });
-  //         print("error on call -> ${e.message}");
-  //         Fluttertoast.showToast(msg: "Something Went Wrong");
-  //       });
-  //     }
-  //   } on SocketException catch (_) {
-  //     Fluttertoast.showToast(msg: "No Internet Connection.");
-  //   }
-  // }
+// _bannerImage() async {
+//   try {
+//     final result = await InternetAddress.lookup('google.com');
+//     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+//       setState(() {
+//         isBannerLoading = true;
+//       });
+//       FormData body = FormData.fromMap({"news_category": "local-news"});
+//       Services.PostForList1(api_name: 'custom/slider_news', body: body).then(
+//           (bannerresponselist) async {
+//         setState(() {
+//           isBannerLoading = false;
+//         });
+//         if (bannerresponselist.length > 0) {
+//           setState(() {
+//             widget.newsData = bannerresponselist;
+//             tabController =
+//                 TabController(length: widget.newsData.length, vsync: this);
+//             //set "data" here to your variable
+//           });
+//           log("My Data" + widget.newsData.toString());
+//         } else {
+//           Fluttertoast.showToast(msg: "Banner Not Found");
+//           //show "data not found" in dialog
+//         }
+//       }, onError: (e) {
+//         setState(() {
+//           isBannerLoading = false;
+//         });
+//         print("error on call -> ${e.message}");
+//         Fluttertoast.showToast(msg: "Something Went Wrong");
+//       });
+//     }
+//   } on SocketException catch (_) {
+//     Fluttertoast.showToast(msg: "No Internet Connection.");
+//   }
+// }
 }

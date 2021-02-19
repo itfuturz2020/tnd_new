@@ -422,118 +422,11 @@ class _GridScreenState extends State<GridScreen> {
               subCategoriesTab = tabResponseList;
               //set "data" here to your variable
             });
-
-            // _newsCategory(tabResponseList[0]["newsType"]);
-            // _newsBanner(tabResponseList[0]["newsType"]);
-            print("===================");
-            print(tabResponseList[0]["_id"]);
-            //_tabCon();
           } else {
             setState(() {
               isLoadingCat = false;
             });
             Fluttertoast.showToast(msg: "Product Not Found");
-          }
-        }, onError: (e) {
-          setState(() {
-            isLoadingCat = false;
-          });
-          print("error on call -> ${e.message}");
-          Fluttertoast.showToast(msg: "Something Went Wrong");
-        });
-      }
-    } on SocketException catch (_) {
-      Fluttertoast.showToast(msg: "No Internet Connection.");
-    }
-  }
-
-  _newsCategory(var subcatId) async {
-    try {
-      final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        setState(() {
-          isLoadingCat = true;
-        });
-        // SharedPreferences prefs = await SharedPreferences.getInstance();
-        FormData body =
-            FormData.fromMap({"news_category": "${subcatId}", "user_id": ""});
-
-        // print(body.fields);
-        Services.PostForList1(api_name: 'custom/category_wise_news', body: body)
-            .then((subCatResponseList) async {
-          setState(() {
-            isLoadingCat = false;
-          });
-          if (subCatResponseList.length > 0) {
-            setState(() {
-              subCatNews = subCatResponseList;
-
-              //set "data" here to your variable
-            });
-            // for (var i = 0; i <= subCatResponseList.length; i++) {
-            //   if (subCatResponseList[i]["trending"] == true) {
-            //     setState(() {
-            //       imgList.add(subCatResponseList[i]);
-            //       tabController =
-            //           TabController(length: imgList.length, vsync: this);
-            //     });
-            //   }
-            // }
-          } else {
-            setState(() {
-              subCatNews = [];
-            });
-            Fluttertoast.showToast(msg: "Data Not Found");
-            //show "data not found" in dialog
-          }
-        }, onError: (e) {
-          setState(() {
-            isLoadingCat = false;
-          });
-          print("error on call -> ${e.message}");
-          Fluttertoast.showToast(msg: "Something Went Wrong");
-        });
-      }
-    } on SocketException catch (_) {
-      Fluttertoast.showToast(msg: "No Internet Connection.");
-    }
-  }
-
-  _newsBanner(var subcatName) async {
-    try {
-      final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        setState(() {
-          isLoadingCat = true;
-        });
-
-        FormData body = FormData.fromMap({"news_category": "${subcatName}"});
-        Services.PostForList1(api_name: 'custom/slider_news', body: body).then(
-            (subCatResponseList) async {
-          setState(() {
-            isLoadingCat = false;
-          });
-          if (subCatResponseList.length > 0) {
-            setState(() {
-              subCatNews = subCatResponseList;
-
-              //set "data" here to your variable
-            });
-            log("News Banners ${subCatNews}");
-            // for (var i = 0; i <= subCatResponseList.length; i++) {
-            //   //  if (subCatResponseList[i]["trending"] == true) {
-            //   setState(() {
-            //     imgList.add(subCatResponseList[i]);
-            //     tabController =
-            //         TabController(length: imgList.length, vsync: this);
-            //   });
-            // }
-            // }
-          } else {
-            setState(() {
-              subCatBanner = [];
-            });
-            Fluttertoast.showToast(msg: "Data Not Found");
           }
         }, onError: (e) {
           setState(() {

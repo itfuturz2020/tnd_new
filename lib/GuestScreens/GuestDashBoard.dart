@@ -45,7 +45,7 @@ class _GuestDashBoardState extends State<GuestDashBoard> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.grid_view),
-            label: 'Menu',
+            label: 'Category',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),

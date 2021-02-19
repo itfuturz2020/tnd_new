@@ -1027,8 +1027,10 @@ class _AlertboxLogoutState extends State<AlertboxLogout> {
           onPressed: () async {
             SharedPreferences prefs = await SharedPreferences.getInstance();
             await prefs.clear();
+            // Navigator.pushNamedAndRemoveUntil(
+            //     context, '/LoginScreen', (route) => false);
             Navigator.pushNamedAndRemoveUntil(
-                context, '/LoginScreen', (route) => false);
+                context, '/GuestDashBoard', (route) => false);
           },
         ),
       ],

@@ -85,13 +85,24 @@ class _GuestHomeState extends State<GuestHome> {
                 }
               },
               autoplay: false,
-              itemCount: newsCatList.length + 1,
+              loop: false,
+
+              itemHeight: MediaQuery.of(context).size.height,
+              containerHeight: MediaQuery.of(context).size.height,
+              itemCount: newsCatList.length,
+              autoplayDisableOnInteraction: false,
+
+              //viewportFraction: 0.8,
+
+              // scale: 0.9,
               scrollDirection: Axis.vertical,
               pagination: new SwiperPagination(
-                builder: new DotSwiperPaginationBuilder(
+                builder: new FractionPaginationBuilder(
                     color: Colors.transparent, activeColor: Colors.transparent),
               ),
-              control: new SwiperControl(color: Colors.transparent),
+              control: new SwiperControl(
+                color: Colors.transparent,
+              ),
             ),
     );
   }

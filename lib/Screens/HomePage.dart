@@ -323,6 +323,8 @@ class _HomePageState extends State<HomePage> {
           setState(() {
             _currentIndex = 0;
           });
+        } else {
+          SystemChannels.platform.invokeMethod('SystemNavigator.pop');
         }
       },
       child: Scaffold(

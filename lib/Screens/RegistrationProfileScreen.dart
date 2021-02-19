@@ -1899,7 +1899,23 @@ class _RegistrationProfileScreenState extends State<RegistrationProfileScreen> {
                                           fontWeight: FontWeight.w500))),
                         ),
                       ),
-                    )
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, '/HomePage', (route) => false);
+                      },
+                      child: Center(
+                          child: Padding(
+                        padding: const EdgeInsets.only(
+                            top: 20.0, bottom: 30, left: 30, right: 30),
+                        child: Text('Skip',
+                            style: TextStyle(
+                                color: appPrimaryMaterialColor,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500)),
+                      )),
+                    ),
                   ],
                 )
               ],
