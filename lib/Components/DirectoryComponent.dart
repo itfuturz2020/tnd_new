@@ -27,6 +27,13 @@ class DirectoryComponent extends StatefulWidget {
 
 class _DirectoryComponentState extends State<DirectoryComponent> {
   List list;
+  String isMember;
+  _isMember() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isMember = prefs.getString(Session.ismember);
+    });
+  }
 
   launchSocialMediaUrl(var url) async {
     if (await canLaunch(url)) {
@@ -90,16 +97,20 @@ class _DirectoryComponentState extends State<DirectoryComponent> {
       });
       print('----------->' + '${token}');
     });
+    _isMember();
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (BuildContext context) => new DirectoryProfileComponent(
-                  directoryData: widget.directoryData,
-                )));
+        isMember == "true"
+            ? Navigator.of(context).push(MaterialPageRoute(
+                builder: (BuildContext context) =>
+                    new DirectoryProfileComponent(
+                      directoryData: widget.directoryData,
+                    )))
+            : Container();
       },
       child: Padding(
         padding:

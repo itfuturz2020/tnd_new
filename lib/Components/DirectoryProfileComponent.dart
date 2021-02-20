@@ -115,7 +115,7 @@ class _DirectoryProfileComponentState extends State<DirectoryProfileComponent> {
                   ),
                 ),
                 Container(
-                    height: MediaQuery.of(context).size.height * 0.075,
+                    height: 90,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -134,8 +134,7 @@ class _DirectoryProfileComponentState extends State<DirectoryProfileComponent> {
                                     ? ListView.builder(
                                         // physics:
                                         //     BouncingScrollPhysics(),
-                                        // scrollDirection:
-                                        //     Axis.horizontal,
+                                        scrollDirection: Axis.horizontal,
                                         itemCount: widget
                                             .directoryData["MemeberCategory"]
                                             .length,

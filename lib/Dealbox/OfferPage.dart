@@ -1,6 +1,11 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
+import 'package:the_national_dawn/Common/Services.dart';
 
 import 'OfferPageDetails.dart';
 
@@ -10,6 +15,14 @@ class OfferPage extends StatefulWidget {
 }
 
 class _OfferPageState extends State<OfferPage> {
+  bool isOfferLoading = true;
+  bool isLoading = true;
+  List offerList = [];
+
+  @override
+  void initState() {
+    _offer();
+  }
 
   List<String> listOfIcons = [
     "assets/z.jpeg",
@@ -18,7 +31,6 @@ class _OfferPageState extends State<OfferPage> {
     "assets/z.jpeg",
     "assets/z.jpeg",
     "assets/z.jpeg",
-
   ];
 
   List<String> listOfContent = [
@@ -29,8 +41,6 @@ class _OfferPageState extends State<OfferPage> {
     "Girjesh",
     "Sunny",
   ];
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +59,7 @@ class _OfferPageState extends State<OfferPage> {
         ),
         leading: Padding(
           padding:
-          const EdgeInsets.only(top: 8.0, right: 0, left: 10, bottom: 8),
+              const EdgeInsets.only(top: 8.0, right: 0, left: 10, bottom: 8),
           child: GestureDetector(
             onTap: () {
               Navigator.of(context).pop();
@@ -76,59 +86,77 @@ class _OfferPageState extends State<OfferPage> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          crousalContainer(),
-          SizedBox(height: 20,),
-          gridViewContainer()
-        ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              crousalContainer(),
+              SizedBox(
+                height: 20,
+              ),
+              gridViewContainer(),
+              SizedBox(
+                height: 20,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
 
-  gridViewContainer(){
-    return Expanded(
-      child: Container(
-        height: 300,
-        child: GridView.builder(
-            gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                crossAxisSpacing: 0.0,
-                mainAxisSpacing: 0.0
-            ),
-            itemCount: 6,
-            itemBuilder: (context,index) =>
-                GestureDetector(
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => OfferPageDetails(
-                      image: listOfIcons[index],
-                      name: listOfContent[index],
-                    )));
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.grey[700],width: 0.2)
-                    ),
-                    child: Center(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(listOfIcons[index],height: 60,width: 60,),
-                          Text(listOfContent[index])
-                        ],
+  gridViewContainer() {
+    return GridView.builder(
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3, crossAxisSpacing: 0.0, mainAxisSpacing: 0.0),
+        itemCount: offerList.length,
+        itemBuilder: (context, index) => GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => OfferPageDetails(
+                              image: offerList[index]["categoryImage"],
+                              name: offerList[index]["categoryName"],
+                            )));
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color: Colors.grey[700], width: 0.2)),
+                child: Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Image.network(
+                        offerList[index]["categoryImage"],
+                        height: 60,
+                        width: MediaQuery.of(context).size.width,
                       ),
-                    ),
+                      Flexible(
+                          child: Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: Text(
+                          offerList[index]["categoryName"],
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ))
+                    ],
                   ),
-                )),
-      ),
-    );
+                ),
+              ),
+            ));
   }
 
   crousalContainer() {
     return Container(
-      height:MediaQuery.of(context).size.height * 0.35,
+      height: MediaQuery.of(context).size.height * 0.35,
       width: MediaQuery.of(context).size.width,
       child: Carousel(
         dotPosition: DotPosition.bottomCenter,
@@ -154,6 +182,37 @@ class _OfferPageState extends State<OfferPage> {
     );
   }
 
-
-
+  _offer() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        Services.PostForList(api_name: 'admin/businessCategory').then(
+            (tabResponseList) async {
+          setState(() {
+            isOfferLoading = false;
+          });
+          if (tabResponseList.length > 0) {
+            setState(() {
+              offerList = tabResponseList;
+              //set "data" here to your variable
+            });
+            log("=============${tabResponseList}");
+          } else {
+            setState(() {
+              isOfferLoading = false;
+            });
+            Fluttertoast.showToast(msg: "Product Not Found");
+          }
+        }, onError: (e) {
+          setState(() {
+            isOfferLoading = false;
+          });
+          print("error on call -> ${e.message}");
+          Fluttertoast.showToast(msg: "Something Went Wrong");
+        });
+      }
+    } on SocketException catch (_) {
+      Fluttertoast.showToast(msg: "No Internet Connection.");
+    }
+  }
 }

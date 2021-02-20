@@ -1,5 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
+
+import 'VideoScreen.dart';
+import 'ViewAllScreen.dart';
 
 class TndTvScreen extends StatefulWidget {
   @override
@@ -42,7 +46,12 @@ class _TndTvScreenState extends State<TndTvScreen> {
                         fontWeight: FontWeight.bold),
                   ),
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ViewAllScreen()));
+                    },
                     child: Text(
                       "View all",
                       style: TextStyle(
@@ -62,17 +71,15 @@ class _TndTvScreenState extends State<TndTvScreen> {
                   itemCount: 8,
                   itemBuilder: (context, index) => GestureDetector(
                         onTap: () {
-                          // Navigator.push(
-                          // context,
-                          // MaterialPageRoute(
-                          // builder: (context) => NewsBannerDetail(
-                          // newsData: widget.newsData[index],
-                          // ),
-                          // ));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => VideoScreen(),
+                              ));
                         },
                         child: Padding(
                             padding: const EdgeInsets.only(
-                                left: 6.0, top: 6.0, bottom: 6.0),
+                                left: 6.0, top: 0.0, bottom: 6.0),
                             child: Container(
                               height: 180,
                               width: MediaQuery.of(context).size.width / 1.3,
@@ -100,12 +107,14 @@ class _TndTvScreenState extends State<TndTvScreen> {
                                               //width: 8,
                                             ),
                                           ),
-                                          child:
-                                              // widget.newsData[index]
-                                              // ['featured_img_src'] ==
-                                              // null
-                                              // ?
-                                              Image.asset('assets/LOGO1.png')
+                                          child: Container(
+                                            color: appPrimaryMaterialColor[400],
+                                          )
+                                          // widget.newsData[index]
+                                          // ['featured_img_src'] ==
+                                          // null
+                                          // ?
+                                          // Image.asset('assets/LOGO1.png')
                                           //     : Image.network(
                                           // widget.newsData[index]
                                           // ['featured_img_src'],
@@ -120,7 +129,11 @@ class _TndTvScreenState extends State<TndTvScreen> {
                                           color:
                                               Colors.black54.withOpacity(0.2),
                                           padding: const EdgeInsets.all(4.0),
-                                          child: Text("1:20"),
+                                          child: Text(
+                                            "1:20",
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
                                         ),
                                       )
                                     ],
@@ -132,6 +145,8 @@ class _TndTvScreenState extends State<TndTvScreen> {
                                       child: Text(
                                         // "${widget.newsData[index]["title"]}",
                                         "Content",
+                                        overflow: TextOverflow.ellipsis,
+
                                         style: TextStyle(
                                             fontWeight: FontWeight.w500,
                                             color: Colors.black,
@@ -143,6 +158,88 @@ class _TndTvScreenState extends State<TndTvScreen> {
                               ),
                             )),
                       )),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0, bottom: 8),
+              child: GridView.builder(
+                  itemCount: 10,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2),
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: 3.0, left: 3.0, right: 3.0, top: 3),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => VideoScreen(),
+                              ));
+                        },
+                        child: Container(
+                          height: 200,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.grey[200],
+                              //width: 8,
+                            ),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: 130,
+                                width: MediaQuery.of(context).size.width,
+                                child: ClipRRect(
+                                    // borderRadius: BorderRadius.circular(8.0),
+                                    child:
+                                        // searchlist[index][
+                                        // 'categoryImage'] ==
+                                        //     null
+                                        //     ?
+                                        Container(
+                                  height: 130,
+                                  color: appPrimaryMaterialColor[400],
+                                )
+                                    //     : Image.network(
+                                    //   Image_URL +
+                                    //       searchlist[index][
+                                    //       'categoryImage'],
+                                    //   width: MediaQuery.of(
+                                    //       context)
+                                    //       .size
+                                    //       .width,
+                                    //   height: MediaQuery.of(
+                                    //       context)
+                                    //       .size
+                                    //       .height,
+                                    //   fit: BoxFit.fill,
+                                    // )
+                                    ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Container(
+                                  // height: 50,
+                                  child: Text(
+                                    "Content",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 15),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
             )
           ],
         ),

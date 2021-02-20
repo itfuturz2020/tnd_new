@@ -99,11 +99,13 @@ class _SubCategoryComponentState extends State<SubCategoryComponent> {
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              new CategoryProfileComponent(
-                                catData: catList[index],
-                              )));
+                      isMember == "true"
+                          ? Navigator.of(context).push(MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  new CategoryProfileComponent(
+                                    catData: catList[index],
+                                  )))
+                          : Container();
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(

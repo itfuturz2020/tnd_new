@@ -64,43 +64,61 @@ class _SocialMediaComponentState extends State<SocialMediaComponent> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          GestureDetector(
-              onTap: () {
-                launchSocialMediaUrl(widget.instagram);
-              },
-              child:
-                  Image.asset('assets/instagram.png', width: 30, height: 30)),
-          GestureDetector(
-              onTap: () {
-                launchSocialMediaUrl(widget.facebook);
-              },
-              child: Image.asset('assets/facebook.png', width: 30, height: 30)),
-          GestureDetector(
-              onTap: () {
-                launchSocialMediaUrl(widget.linkedIn);
-              },
-              child: Image.asset('assets/linkedin.png', width: 30, height: 30)),
-          GestureDetector(
-              onTap: () {
-                launchSocialMediaUrl(widget.twitter);
-              },
-              child: Image.asset('assets/twitter.png', width: 30, height: 30)),
-          GestureDetector(
-              onTap: () {
-                launchwhatsapp(phone: "+91" + widget.whatsapp, message: "");
-              },
-              child:
-                  Image.asset('assets/whatsapp2.png', width: 30, height: 30)),
-          GestureDetector(
-              onTap: () {
-                _launchURL(widget.mail, '', '');
-              },
-              child: Image.asset('assets/gmail.png', width: 30, height: 30)),
-          GestureDetector(
-              onTap: () {
-                launchSocialMediaUrl(widget.youtube);
-              },
-              child: Image.asset('assets/yout.png', width: 30, height: 30)),
+          widget.instagram == ""
+              ? Container()
+              : GestureDetector(
+                  onTap: () {
+                    launchSocialMediaUrl(widget.instagram);
+                  },
+                  child: Image.asset('assets/instagram.png',
+                      width: 30, height: 30)),
+          widget.facebook == ""
+              ? Container()
+              : GestureDetector(
+                  onTap: () {
+                    launchSocialMediaUrl(widget.facebook);
+                  },
+                  child: Image.asset('assets/facebook.png',
+                      width: 30, height: 30)),
+          widget.linkedIn == ""
+              ? Container()
+              : GestureDetector(
+                  onTap: () {
+                    launchSocialMediaUrl(widget.linkedIn);
+                  },
+                  child: Image.asset('assets/linkedin.png',
+                      width: 30, height: 30)),
+          widget.twitter == ""
+              ? Container()
+              : GestureDetector(
+                  onTap: () {
+                    launchSocialMediaUrl(widget.twitter);
+                  },
+                  child:
+                      Image.asset('assets/twitter.png', width: 30, height: 30)),
+          widget.whatsapp == ""
+              ? Container()
+              : GestureDetector(
+                  onTap: () {
+                    launchwhatsapp(phone: "+91" + widget.whatsapp, message: "");
+                  },
+                  child: Image.asset('assets/whatsapp2.png',
+                      width: 30, height: 30)),
+          widget.mail == ""
+              ? Container()
+              : GestureDetector(
+                  onTap: () {
+                    _launchURL(widget.mail, '', '');
+                  },
+                  child:
+                      Image.asset('assets/gmail.png', width: 30, height: 30)),
+          widget.youtube == ""
+              ? Container()
+              : GestureDetector(
+                  onTap: () {
+                    launchSocialMediaUrl(widget.youtube);
+                  },
+                  child: Image.asset('assets/yout.png', width: 30, height: 30)),
         ],
       ),
     );

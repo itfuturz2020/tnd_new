@@ -9,6 +9,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/ClassList.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
+import 'package:the_national_dawn/GuestScreens/GuestHome.dart';
 import 'package:the_national_dawn/Screens/HomeCalendarScreen.dart';
 import 'package:the_national_dawn/Screens/HomeCategoryScreen.dart';
 import 'package:the_national_dawn/Screens/HomeNetworkScreen.dart';
@@ -306,7 +307,7 @@ class _HomePageState extends State<HomePage> {
     HomeCalendarScreen(),
     HomeScreen(),
     HomeStoriesScreen(),
-    HomeNetworkScreen()
+    GuestHome()
   ];
 
   /*void _onItemTapped(int index) {
