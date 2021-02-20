@@ -42,7 +42,7 @@ class _GuestProfileState extends State<GuestProfile> {
 
   whiteContainer() {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.22,
+      height: MediaQuery.of(context).size.height * 0.24,
       width: MediaQuery.of(context).size.width,
       child: Padding(
         padding: const EdgeInsets.only(left: 12.0, bottom: 15.0, top: 12.0),
@@ -59,7 +59,7 @@ class _GuestProfileState extends State<GuestProfile> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 15,
             ),
             Text(
               "Your Profile",

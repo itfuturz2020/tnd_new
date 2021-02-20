@@ -346,7 +346,8 @@ class _HomeScreenState extends State<HomeScreen>
     {
       "lable": "Offers",
       "image": "assets/offers.png",
-      "screenName": "/OfferScreen",
+     // "screenName": "/OfferScreen",
+      "screenName": "/OfferPage",
     },
     {
       "lable": "Success Stories",

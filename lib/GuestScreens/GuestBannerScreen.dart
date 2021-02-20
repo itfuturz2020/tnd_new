@@ -46,7 +46,7 @@ class _GuestBannerScreenState extends State<GuestBannerScreen>
 
   horizontalContainerList() {
     return Container(
-      height: 220,
+      height: MediaQuery.of(context).size.height*0.35,
       child: ListView.builder(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
@@ -119,7 +119,7 @@ class _GuestBannerScreenState extends State<GuestBannerScreen>
 
   crousalContainer() {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.5,
+      height: MediaQuery.of(context).size.height * 0.45,
       width: MediaQuery.of(context).size.width,
       child: ImageSlider(
         /// Shows the tab indicating circles at the bottom

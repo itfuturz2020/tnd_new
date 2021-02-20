@@ -45,7 +45,7 @@ class _GuestLatestNewsState extends State<GuestLatestNews> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                  height: 300,
+                  height: MediaQuery.of(context).size.height*0.4,
                   width: MediaQuery.of(context).size.width,
                   child: widget.newsData['featured_img_src'] == null
                       ? Image.asset('assets/LOGO1.png')
@@ -71,7 +71,7 @@ class _GuestLatestNewsState extends State<GuestLatestNews> {
                 ),
               ),
               SizedBox(
-                height: 20.0,
+                height: 15.0,
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -79,7 +79,7 @@ class _GuestLatestNewsState extends State<GuestLatestNews> {
                   "${parsedString}",
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.justify,
-                  maxLines: 10,
+                  maxLines: 08,
                 ),
               )
             ],

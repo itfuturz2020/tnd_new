@@ -74,6 +74,7 @@ import 'Screens/CompleteScreen.dart';
 import 'Screens/DailyNewsDashBoard.dart';
 import 'Screens/EnquiryForm.dart';
 import 'Screens/MyOfferScreen.dart';
+import 'Dealbox/OfferPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -186,6 +187,7 @@ class _MyAppState extends State<MyApp> {
         '/MyOfferDetailScreen': (context) => MyOfferDetailScreen(),
         '/CompleteScreen': (context) => CompleteScreen(),
         '/DailyNewsDashBoard': (context) => DailyNewsDashBoard(),
+        '/OfferPage': (context) => OfferPage(),
 
         //===============digital card screen=============
         '/AddCard': (context) => AddCard(),
