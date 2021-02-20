@@ -68,8 +68,10 @@ import 'GuestScreens/GuestHome.dart';
 import 'GuestScreens/GuestLatestNews.dart';
 import 'GuestScreens/GuestProfile.dart';
 import 'GuestScreens/GuestSearchScreen.dart';
+import 'GuestScreens/VideoScreen.dart';
 import 'Screens/AddOfferScreen.dart';
 import 'Screens/CompleteScreen.dart';
+import 'Screens/DailyNewsDashBoard.dart';
 import 'Screens/EnquiryForm.dart';
 import 'Screens/MyOfferScreen.dart';
 
@@ -183,6 +185,7 @@ class _MyAppState extends State<MyApp> {
         '/NotificationDilog': (context) => NotificationDilog(),
         '/MyOfferDetailScreen': (context) => MyOfferDetailScreen(),
         '/CompleteScreen': (context) => CompleteScreen(),
+        '/DailyNewsDashBoard': (context) => DailyNewsDashBoard(),
 
         //===============digital card screen=============
         '/AddCard': (context) => AddCard(),
@@ -210,6 +213,7 @@ class _MyAppState extends State<MyApp> {
         '/GuestProfile': (context) => GuestProfile(),
         '/GuestSearchScreen': (context) => GuestSearchScreen(),
         '/GuestCategoryNews': (context) => GuestCategoryNews(),
+        '/VideoScreen': (context) => VideoScreen(),
       },
       theme: ThemeData(
           //fontFamily: 'RobotoSlab',

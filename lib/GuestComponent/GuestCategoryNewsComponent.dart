@@ -67,7 +67,7 @@ class _GuestCategoryNewsComponentState
                       padding:
                           const EdgeInsets.only(left: 5.0, top: 15.0, right: 5),
                       child: Text(
-                        "${widget.newsData["title"]} ",
+                        "${widget.newsData["title"]}",
                         overflow: TextOverflow.ellipsis,
                         maxLines: 3,
                         style: TextStyle(

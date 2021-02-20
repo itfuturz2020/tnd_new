@@ -68,6 +68,7 @@ dependencies:
   get: ^3.24.0
   html: ^0.14.0+4
   flutter_swiper: ^1.1.6
+  youtube_player_flutter: ^7.0.0+7
 
 
 

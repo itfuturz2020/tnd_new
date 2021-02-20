@@ -3,24 +3,28 @@ import 'dart:io';
 
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
-import 'package:the_national_dawn/Components/LoadingBlueComponent.dart';
 import 'package:the_national_dawn/GuestComponent/GuestCategoryNewsComponent.dart';
 import 'package:the_national_dawn/Screens/NewsBannerDetail.dart';
 
-class GuestCategoryNews extends StatefulWidget {
+import 'FollowingNewsComponent.dart';
+import 'LoadingBlueComponent.dart';
+
+class FollowingComponent extends StatefulWidget {
   var title;
 
-  GuestCategoryNews({this.title});
+  FollowingComponent({this.title});
 
   @override
-  _GuestCategoryNewsState createState() => _GuestCategoryNewsState();
+  _FollowingComponentState createState() => _FollowingComponentState();
 }
 
-class _GuestCategoryNewsState extends State<GuestCategoryNews> {
+class _FollowingComponentState extends State<FollowingComponent> {
   List subCatNews = [];
   List subCatBanner = [];
   bool isLoadingCat = true;
@@ -127,7 +131,7 @@ class _GuestCategoryNewsState extends State<GuestCategoryNews> {
                                 Positioned(
                                     bottom: 0.0,
                                     child: Container(
-                                      height: 60,
+                                      //  height: 60,
                                       width: MediaQuery.of(context).size.width,
                                       padding:
                                           EdgeInsets.only(left: 8, right: 8),
@@ -146,7 +150,8 @@ class _GuestCategoryNewsState extends State<GuestCategoryNews> {
                                             textAlign: TextAlign.start,
                                             style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 11,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
                                                 letterSpacing: 0.1),
                                           ),
                                           SizedBox(
@@ -189,8 +194,9 @@ class _GuestCategoryNewsState extends State<GuestCategoryNews> {
                                 // scrollDirection: Axis.vertical,
                                 itemCount: subCatNews.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  return GuestCategoryNewsComponent(
+                                  return FollowingNewsComponent(
                                     newsData: subCatNews[index],
+                                    isBookmark: subCatNews[index]["bookmark"],
                                   );
                                 })
                   ],
@@ -256,9 +262,11 @@ class _GuestCategoryNewsState extends State<GuestCategoryNews> {
         setState(() {
           isLoadingCatNews = true;
         });
-        // SharedPreferences prefs = await SharedPreferences.getInstance();
-        FormData body =
-            FormData.fromMap({"news_category": "${subcatId}", "user_id": ""});
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        FormData body = FormData.fromMap({
+          "news_category": "${subcatId}",
+          "user_id": prefs.getString(Session.CustomerId)
+        });
 
         // print(body.fields);
         Services.PostForList1(api_name: 'custom/category_wise_news', body: body)

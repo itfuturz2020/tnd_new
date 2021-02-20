@@ -100,9 +100,7 @@ class _GuestHomeState extends State<GuestHome> {
                 builder: new FractionPaginationBuilder(
                     color: Colors.transparent, activeColor: Colors.transparent),
               ),
-              control: new SwiperControl(
-                color: Colors.transparent,
-              ),
+              control: null,
             ),
     );
   }

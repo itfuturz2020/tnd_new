@@ -62,45 +62,57 @@ class _GuestBannerScreenState extends State<GuestBannerScreen>
                       ));
                 },
                 child: Padding(
-                  padding:
-                      const EdgeInsets.only(left: 6.0, top: 6.0, bottom: 6.0),
-                  child: Stack(children: [
-                    Container(
-                        height: 200,
-                        width: 180,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.grey[200],
-                            //width: 8,
-                          ),
+                    padding:
+                        const EdgeInsets.only(left: 6.0, top: 6.0, bottom: 6.0),
+                    child: Container(
+                      height: 180,
+                      width: 180,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.grey[200],
+                          //width: 8,
                         ),
-                        child:
-                            widget.newsData[index]['featured_img_src'] == null
-                                ? Image.asset('assets/LOGO1.png')
-                                : Image.network(
-                                    widget.newsData[index]['featured_img_src'],
-                                    //width: MediaQuery.of(context).size.width,
-                                    // height: MediaQuery.of(context).size.height * 0.5,
-                                    fit: BoxFit.fill,
-                                    // color: Color.fromRGBO(255, 255, 255, 0.5),
-                                    // colorBlendMode: BlendMode.colorDodge
-                                  )),
-                    Positioned(
-                        bottom: 10.0,
-                        // / left: 0.0,
-                        child: Container(
-                          color: Colors.black54.withOpacity(0.3),
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Text(
-                              "${widget.newsData[index]["title"]}",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 12),
+                      ),
+                      child: Column(
+                        children: [
+                          Container(
+                              height: 154,
+                              width: 180,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.grey[200],
+                                  //width: 8,
+                                ),
+                              ),
+                              child: widget.newsData[index]
+                                          ['featured_img_src'] ==
+                                      null
+                                  ? Image.asset('assets/LOGO1.png')
+                                  : Image.network(
+                                      widget.newsData[index]
+                                          ['featured_img_src'],
+                                      //width: MediaQuery.of(context).size.width,
+                                      // height: MediaQuery.of(context).size.height * 0.5,
+                                      fit: BoxFit.fill,
+                                      // color: Color.fromRGBO(255, 255, 255, 0.5),
+                                      // colorBlendMode: BlendMode.colorDodge
+                                    )),
+                          Container(
+                            //color: Colors.black54.withOpacity(0.3),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Text(
+                                "${widget.newsData[index]["title"]}",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black,
+                                    fontSize: 12),
+                              ),
                             ),
-                          ),
-                        ))
-                  ]),
-                ),
+                          )
+                        ],
+                      ),
+                    )),
               )),
     );
   }
@@ -111,7 +123,7 @@ class _GuestBannerScreenState extends State<GuestBannerScreen>
       width: MediaQuery.of(context).size.width,
       child: ImageSlider(
         /// Shows the tab indicating circles at the bottom
-        showTabIndicator: true,
+        showTabIndicator: false,
 
         /// Cutomize tab's colors
         tabIndicatorColor: Colors.grey[400],
@@ -173,11 +185,11 @@ class _GuestBannerScreenState extends State<GuestBannerScreen>
                   Positioned(
                       bottom: 0.0,
                       child: Container(
-                        height: 60,
+                        //height: 60,
                         width: MediaQuery.of(context).size.width,
                         padding: EdgeInsets.only(left: 8, right: 8),
                         decoration: BoxDecoration(
-                          color: Color(0xff4B4B4B4A),
+                          color: Colors.white.withOpacity(0.6),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -185,13 +197,17 @@ class _GuestBannerScreenState extends State<GuestBannerScreen>
                             SizedBox(
                               height: 5,
                             ),
-                            Text(
-                              link["title"],
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 11,
-                                  letterSpacing: 0.1),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                link["title"],
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25,
+                                    letterSpacing: 0.1),
+                              ),
                             ),
                             SizedBox(
                               height: 5,

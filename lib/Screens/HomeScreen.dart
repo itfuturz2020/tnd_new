@@ -330,7 +330,8 @@ class _HomeScreenState extends State<HomeScreen>
     {
       "lable": "Daily News",
       "image": "assets/news.png",
-      "screenName": "/DailyNewScreen",
+      // "screenName": "/DailyNewScreen",
+      "screenName": "/DailyNewsDashBoard",
     },
     {
       "lable": "Business Stories",
@@ -626,6 +627,7 @@ class _HomeScreenState extends State<HomeScreen>
             ),
             Container(
               height: 180,
+              width: MediaQuery.of(context).size.width,
               //margin: EdgeInsets.all(10),
 //                decoration: BoxDecoration(
 //                    //borderRadius: BorderRadius.circular(10),
@@ -690,7 +692,7 @@ class _HomeScreenState extends State<HomeScreen>
                                       link['featured_img_src'],
                                       width: MediaQuery.of(context).size.width,
                                       height: 220,
-                                      fit: BoxFit.contain,
+                                      fit: BoxFit.fill,
                                     )),
                         );
                       }).toList(),

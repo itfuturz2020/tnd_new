@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
+import 'package:the_national_dawn/GuestScreens/GuestHome.dart';
+import 'package:the_national_dawn/GuestScreens/TndTvScreen.dart';
+import 'package:the_national_dawn/GuestScreens/VideoScreen.dart';
 
-import 'GridScreen.dart';
-import 'GuestHome.dart';
-import 'GuestProfile.dart';
-import 'GuestSearchScreen.dart';
-import 'TndTvScreen.dart';
-import 'VideoScreen.dart';
+import 'ExploreScreen.dart';
+import 'FollowingScreen.dart';
 
-class GuestDashBoard extends StatefulWidget {
+class DailyNewsDashBoard extends StatefulWidget {
   @override
-  _GuestDashBoardState createState() => _GuestDashBoardState();
+  _DailyNewsDashBoardState createState() => _DailyNewsDashBoardState();
 }
 
-class _GuestDashBoardState extends State<GuestDashBoard> {
+class _DailyNewsDashBoardState extends State<DailyNewsDashBoard> {
   int _selectedIndex = 0;
 
   List<Widget> _widgetOptions = <Widget>[
     GuestHome(),
-    GridScreen(),
-    GuestSearchScreen(),
+    FollowingScreen(),
     TndTvScreen(),
-    GuestProfile()
+    ExploreScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -44,23 +42,19 @@ class _GuestDashBoardState extends State<GuestDashBoard> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: 'News',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.grid_view),
             label: 'Category',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.video_collection_rounded),
             label: 'Video',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+            icon: Icon(Icons.search),
+            label: 'Search',
           ),
         ],
         currentIndex: _selectedIndex,
