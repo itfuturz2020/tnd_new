@@ -3,9 +3,11 @@ import 'package:the_national_dawn/DigitalCommon/ClassList.dart';
 import 'package:the_national_dawn/DigitalCommon/Constants.dart' as cnst;
 
 class OfferDetail extends StatefulWidget {
-  final OfferClass offerClass;
-
-  const OfferDetail({Key key, this.offerClass}) : super(key: key);
+  // final OfferClass offerClass;
+  //
+  // const OfferDetail({Key key, this.offerClass}) : super(key: key);
+  var offerData, offerdate;
+  OfferDetail({this.offerData, this.offerdate});
 
   @override
   _OfferDetailState createState() => _OfferDetailState();
@@ -27,8 +29,9 @@ class _OfferDetailState extends State<OfferDetail> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            (widget.offerClass.Image != null && widget.offerClass.Image != "")
-                ? Image.network(widget.offerClass.Image,
+            (widget.offerData["imagecode"] != null &&
+                    widget.offerData["imagecode"] != "")
+                ? Image.network(widget.offerData["imagecode"],
                     height: 200,
                     width: MediaQuery.of(context).size.width,
                     fit: BoxFit.fill)
@@ -52,7 +55,7 @@ class _OfferDetailState extends State<OfferDetail> {
                         children: <Widget>[
                           Padding(
                             padding: const EdgeInsets.only(bottom: 5),
-                            child: Text(widget.offerClass.Title,
+                            child: Text(widget.offerData["title"],
                                 style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w600,
@@ -67,7 +70,7 @@ class _OfferDetailState extends State<OfferDetail> {
                                       color: Colors.grey[600])),
                               Padding(
                                 padding: const EdgeInsets.only(left: 5),
-                                child: Text(widget.offerClass.ValidTill,
+                                child: Text(widget.offerdate,
                                     style: TextStyle(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600,
@@ -112,7 +115,7 @@ class _OfferDetailState extends State<OfferDetail> {
               child: Container(
                 padding: EdgeInsets.all(20),
                 width: MediaQuery.of(context).size.width - 40,
-                child: Text(widget.offerClass.Descri,
+                child: Text(widget.offerData["description"],
                     style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w600,

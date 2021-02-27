@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class APIURL {
   static const String API_URL =
       "http://digitalvcard.thenationaldawn.in/DigitalcardService.asmx/";
+  static const String API_URL1 = "https://new-digital-card.herokuapp.com/";
   static const String API_URL_RazorPay_Order =
       "http://razorpayapi.itfuturz.com/Service.asmx/";
 }
@@ -17,8 +18,11 @@ const String mailLink =
     "mailto:#mail?subject=#subject&body=#msg"; //mobile no with country code
 const String shareMessage =
     "hello #recever, \nmy name is #sender \nyou can see my digital visiting card from the below link. \n#link \nRegards \n#sender";
+// const String profileUrl =
+//     "http://digitalvcard.thenationaldawn.in/Card3/Default.aspx?uid=#id";
+//by rinki
 const String profileUrl =
-    "http://digitalvcard.thenationaldawn.in/Card3/Default.aspx?uid=#id";
+    "https://www.thenationaldawn.in/digicard/index.php?uid=#id";
 const String playstoreUrl = "https://urlzs.com/JzR8A";
 //const String inviteFriMsg = "http://digitalcard.co.in?uid=#id, smart & simple app to manage your digital visiting card & business profile.\nDownload the app from #appurl and use my refer code “#refercode” to get 15 days free trial.";
 const String inviteFriMsg =
@@ -34,6 +38,33 @@ class Session {
   static const String Company = "Company";
   static const String Email = "Email";
   static const String ReferCode = "ReferCode";
+  //by rinki
+  static const String website = "website";
+  static const String faceBook = "faceBook";
+  static const String instagram = "instagram";
+  static const String linkedIn = "linkedIn";
+  static const String twitter = "twitter";
+  static const String youTube = "youTube";
+  static const String panNo = "panNo";
+  static const String googlePage = "googlePage";
+  static const String about = "about";
+  static const String role = "role";
+  static const String gstNo = "gstNo";
+  static const String mapLocation = "mapLocation";
+  static const String shareMsg = "shareMsg";
+  static const String company_website = "company_website";
+  static const String company_mobile = "company_mobile";
+  static const String company_address = "company_address";
+  static const String company_email = "company_email";
+  static const String imagecode = "imagecode";
+  static const String coverimg = "coverimg";
+  static const String name = "name";
+  static const String mobile = "mobile";
+  static const String email = "email";
+  static const String whatsapp = "whatsapp";
+  static const String company_name = "company_name";
+
+  //====
   static const String IsAppIntroCompleted = "IsAppIntroCompleted";
   static const String CardPaymentAmount = "CardPaymentAmount";
   static const String IsActivePayment = "IsActivePayment";

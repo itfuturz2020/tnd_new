@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
@@ -408,6 +409,41 @@ class Services {
     }
   }
 
+//by rinki
+  static Future<SaveDataClass2> postForSave({apiname, body}) async {
+    print(body.toString());
+    String url = APIURL.API_URL1 + '$apiname';
+    print("$apiname url : " + url);
+    var response;
+    try {
+      if (body == null) {
+        response = await dio.post(url);
+      } else {
+        response = await dio.post(url, data: body);
+      }
+
+      log("->>> ${response.data}");
+
+      if (response.statusCode == 200) {
+        SaveDataClass2 savedata1 = new SaveDataClass2(
+            Message: 'No Data', IsSuccess: false, Data: null);
+        print("$apiname Response: " + response.data.toString());
+        var responseData = response.data;
+        savedata1.Message = responseData["Message"];
+        savedata1.IsSuccess = responseData["IsSuccess"];
+        savedata1.Data = responseData["Data"].toString();
+
+        return savedata1;
+      } else {
+        print("error ->" + response.data.toString());
+        throw Exception(response.data.toString());
+      }
+    } catch (e) {
+      print("error -> ${e.toString()}");
+      throw Exception(e.toString());
+    }
+  }
+
   static Future<List<ThemeChange>> ChangeThemeImage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String memberId = prefs.getString(serv.Session.digital_Id);
@@ -620,7 +656,7 @@ class Services {
         final jsonResponse = json.decode(response.body);
         SaveDataClass1 saveDataClass =
             new SaveDataClass1.fromJson(jsonResponse);
-        print("savedataclass");
+        print("savedata1class");
         print(saveDataClass.Data);
         return saveDataClass;
         // SaveDataClass1 saveData =
@@ -907,6 +943,40 @@ class Services {
       }
     } catch (e) {
       print("App Error ${e.toString()}");
+      throw Exception(e.toString());
+    }
+  }
+
+  //by rinki new apis
+
+  static Future<List> PostForList4({api_name, body}) async {
+    String url = APIURL.API_URL1 + '$api_name';
+    print("$api_name url : " + url);
+    Response response = null;
+    try {
+      if (body == null) {
+        response = await dio.post(url);
+      } else {
+        response = await dio.post(url, data: body);
+      }
+      log("->>>" + response.data.toString());
+      if (response.statusCode == 200) {
+        List list = [];
+        print("$api_name Response: " + response.data.toString());
+        var responseData = response.data;
+        log("===response length ${responseData.length}");
+        if (responseData["IsSuccess"] == true &&
+            responseData["Data"].length > 0) {
+          print(responseData["Data"]);
+          list = responseData["Data"];
+        }
+        return list;
+      } else {
+        print("error ->" + response.data.toString());
+        throw Exception(response.data.toString());
+      }
+    } catch (e) {
+      print("error -> ${e.toString()}");
       throw Exception(e.toString());
     }
   }

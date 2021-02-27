@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/DigitalCommon/Constants.dart' as cnst;
 import 'package:the_national_dawn/DigitalCommon/ClassList.dart';
+import 'package:the_national_dawn/DigitalCommon/Constants.dart';
 import 'package:the_national_dawn/DigitalCommon/Services.dart';
 import 'package:the_national_dawn/DigitalComponent/HeaderComponent.dart';
 import 'package:the_national_dawn/DigitalComponent/LoadinComponent.dart';
@@ -13,6 +18,52 @@ class MemberServices extends StatefulWidget {
 }
 
 class _MemberServicesState extends State<MemberServices> {
+  List serviceList = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    _getService();
+  }
+
+  _getService() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+
+        var body = {"userid": prefs.getString(Session.MemberId)};
+        print("userid: ${prefs.getString(Session.MemberId)}");
+        Services.PostForList4(api_name: 'card/getuserservice', body: body).then(
+            (ResponseList) async {
+          setState(() {
+            isLoading = false;
+          });
+          if (ResponseList.length > 0) {
+            setState(() {
+              serviceList = ResponseList;
+            });
+            print(ResponseList);
+          } else {
+            setState(() {
+              isLoading = false;
+            });
+            Fluttertoast.showToast(msg: "No Data Found");
+            //show "data not found" in dialog
+          }
+        }, onError: (e) {
+          setState(() {
+            isLoading = false;
+          });
+          print("error on call -> ${e.message}");
+          Fluttertoast.showToast(msg: "Something Went Wrong");
+        });
+      }
+    } on SocketException catch (_) {
+      Fluttertoast.showToast(msg: "No Internet Connection.");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,25 +116,49 @@ class _MemberServicesState extends State<MemberServices> {
                   height: MediaQuery.of(context).size.height - 160,
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   margin: EdgeInsets.only(top: 100),
-                  child: FutureBuilder<List<ServicesClass>>(
-                    future: Services.GetMemberServices(),
-                    builder: (BuildContext context, AsyncSnapshot snapshot) {
-                      return snapshot.connectionState == ConnectionState.done
-                          ? snapshot.hasData
+                  child:
+
+                      //by rinki
+                      isLoading == true
+                          ? Center(
+                              child: CircularProgressIndicator(
+                                valueColor:
+                                    AlwaysStoppedAnimation<Color>(Colors.blue),
+                                strokeWidth: 3,
+                              ),
+                            )
+                          : serviceList.length > 0
                               ? ListView.builder(
                                   padding: EdgeInsets.all(0),
                                   shrinkWrap: true,
-                                  itemCount: snapshot.data.length,
+                                  itemCount: serviceList.length,
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     return ServiceComponent(
-                                        snapshot.data[index]);
+                                      serviceData: serviceList[index],
+                                    );
                                   },
                                 )
                               : NoDataComponent()
-                          : LoadinComponent();
-                    },
-                  ))
+                  //
+                  // FutureBuilder<List<ServicesClass>>(
+                  //   future: Services.GetMemberServices(),
+                  //   builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  //     return snapshot.connectionState == ConnectionState.done
+                  //         ? snapshot.hasData
+                  //             ? ListView.builder(
+                  //                 padding: EdgeInsets.all(0),
+                  //                 shrinkWrap: true,
+                  //                 itemCount: snapshot.data.length,
+                  //                 itemBuilder: (BuildContext context, int index) {
+                  //                   return ServiceComponent(snapshot.data[index]);
+                  //                 },
+                  //               )
+                  //             : NoDataComponent()
+                  //         : LoadinComponent();
+                  //   },
+                  // ),
+                  )
             ],
           ),
         ));

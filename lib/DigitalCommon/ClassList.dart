@@ -16,6 +16,14 @@ class SaveDataClass {
   }
 }
 
+class SaveDataClass2 {
+  String Message;
+  bool IsSuccess;
+  String Data;
+
+  SaveDataClass2({this.Message, this.IsSuccess, this.Data});
+}
+
 class PaymentDataClass {
   int code;
   String message;

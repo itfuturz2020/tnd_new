@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:the_national_dawn/DigitalCommon/Constants.dart' as cnst;
 
@@ -8,8 +10,11 @@ import 'package:the_national_dawn/DigitalCommon/Services.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 
 class EditService extends StatefulWidget {
-  final ServicesClass servicesClass;
-  const EditService({Key key, this.servicesClass}) : super(key: key);
+  // final ServicesClass servicesClass;
+  // const EditService({Key key, this.servicesClass}) : super(key: key);
+
+  var serviceData;
+  EditService({this.serviceData});
 
   @override
   _EditServiceState createState() => _EditServiceState();
@@ -41,8 +46,8 @@ class _EditServiceState extends State<EditService> {
   }
 
   SetData() {
-    txtTitle.text = widget.servicesClass.Title;
-    txtDesc.text = widget.servicesClass.Description;
+    txtTitle.text = widget.serviceData["title"];
+    txtDesc.text = widget.serviceData["description"];
   }
 
   SaveService() async {
@@ -51,38 +56,55 @@ class _EditServiceState extends State<EditService> {
         isLoading = true;
       });
 
-      var data = {
-        'type': 'service',
-        'title': txtTitle.text.replaceAll("'", "''"),
-        'desc': txtDesc.text.replaceAll("'", "''"),
-        'id': widget.servicesClass.Id,
-      };
+      try {
+        final result = await InternetAddress.lookup('google.com');
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          setState(() {
+            isLoading = true;
+          });
 
-      Future res = Services.UpdateService(data);
-      res.then((data) {
-        setState(() {
-          isLoading = false;
-        });
-        if (data != null && data.ERROR_STATUS == false) {
-          Fluttertoast.showToast(
-              msg: "Data Saved",
-              backgroundColor: Colors.green,
-              gravity: ToastGravity.TOP);
-          Navigator.popAndPushNamed(context, '/Dashboard');
-        } else {
-          Fluttertoast.showToast(
-              msg: "Data Not Saved" + data.MESSAGE,
-              backgroundColor: Colors.red,
-              gravity: ToastGravity.TOP,
-              toastLength: Toast.LENGTH_LONG);
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          var body = {
+            'title': txtTitle.text.replaceAll("'", "''"),
+            'description': txtDesc.text.replaceAll("'", "''"),
+            'serviceId': widget.serviceData["_id"],
+          };
+
+          print(prefs.getString(Session.CustomerId));
+          Services.PostForList4(api_name: 'card/updateservice', body: body)
+              .then((subCatResponseList) async {
+            print("a0");
+            setState(() {
+              isLoading = false;
+            });
+            if (subCatResponseList.length > 0) {
+              print("a1");
+
+              Fluttertoast.showToast(
+                  msg: "Service Updated Successfully!",
+                  backgroundColor: Colors.green,
+                  gravity: ToastGravity.TOP);
+              Navigator.popAndPushNamed(context, '/Dashboard');
+            } else {
+              print("a2");
+              Fluttertoast.showToast(
+                  msg: "Data Not Saved",
+                  backgroundColor: Colors.red,
+                  gravity: ToastGravity.TOP,
+                  toastLength: Toast.LENGTH_LONG);
+              //show "data not found" in dialog
+            }
+          }, onError: (e) {
+            setState(() {
+              isLoading = false;
+            });
+            print("error on call -> ${e.message}");
+            Fluttertoast.showToast(msg: "Something Went Wrong");
+          });
         }
-      }, onError: (e) {
-        setState(() {
-          isLoading = false;
-        });
-        Fluttertoast.showToast(
-            msg: "Data Not Saved" + e.toString(), backgroundColor: Colors.red);
-      });
+      } on SocketException catch (_) {
+        Fluttertoast.showToast(msg: "No Internet Connection.");
+      }
     } else {
       Fluttertoast.showToast(
           msg: "Please Enter Data First",
@@ -93,6 +115,55 @@ class _EditServiceState extends State<EditService> {
           fontSize: 15.0);
     }
   }
+
+  // SaveService() async {
+  //   if (txtTitle.text != '' && txtDesc.text != '') {
+  //     setState(() {
+  //       isLoading = true;
+  //     });
+  //
+  //     var data = {
+  //       'type': 'service',
+  //       'title': txtTitle.text.replaceAll("'", "''"),
+  //       'desc': txtDesc.text.replaceAll("'", "''"),
+  //       'id': widget.serviceData,
+  //     };
+  //
+  //     Future res = Services.UpdateService(data);
+  //     res.then((data) {
+  //       setState(() {
+  //         isLoading = false;
+  //       });
+  //       if (data != null && data.ERROR_STATUS == false) {
+  //         Fluttertoast.showToast(
+  //             msg: "Data Saved",
+  //             backgroundColor: Colors.green,
+  //             gravity: ToastGravity.TOP);
+  //         Navigator.popAndPushNamed(context, '/Dashboard');
+  //       } else {
+  //         Fluttertoast.showToast(
+  //             msg: "Data Not Saved" + data.MESSAGE,
+  //             backgroundColor: Colors.red,
+  //             gravity: ToastGravity.TOP,
+  //             toastLength: Toast.LENGTH_LONG);
+  //       }
+  //     }, onError: (e) {
+  //       setState(() {
+  //         isLoading = false;
+  //       });
+  //       Fluttertoast.showToast(
+  //           msg: "Data Not Saved" + e.toString(), backgroundColor: Colors.red);
+  //     });
+  //   } else {
+  //     Fluttertoast.showToast(
+  //         msg: "Please Enter Data First",
+  //         toastLength: Toast.LENGTH_LONG,
+  //         gravity: ToastGravity.TOP,
+  //         backgroundColor: Colors.yellow,
+  //         textColor: Colors.black,
+  //         fontSize: 15.0);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

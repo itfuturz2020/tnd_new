@@ -1,41 +1,89 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/DigitalCommon/ClassList.dart';
 import 'package:the_national_dawn/DigitalCommon/Services.dart';
 import 'package:the_national_dawn/DigitalScreens/EditService.dart';
 
 class ServiceComponent extends StatefulWidget {
-  final ServicesClass servicesClass;
+  // final ServicesClass servicesClass;
+  //
+  // const ServiceComponent(this.servicesClass);
 
-  const ServiceComponent(this.servicesClass);
+  var serviceData;
+
+  ServiceComponent({this.serviceData});
 
   @override
   _ServiceComponentState createState() => _ServiceComponentState();
 }
 
 class _ServiceComponentState extends State<ServiceComponent> {
-  bool isExpand = false;
+  // bool isExpand = false;
+  // DeleteService() async {
+  //   var data = {'type': 'service', 'id': widget.servicesClass.Id};
+  //   Future res = Services.DeleteService(data);
+  //   res.then((data) {
+  //     if (data != null && data.ERROR_STATUS == false) {
+  //       Fluttertoast.showToast(
+  //           msg: "Data Deleted",
+  //           backgroundColor: Colors.green,
+  //           gravity: ToastGravity.TOP);
+  //       Navigator.pushReplacementNamed(context, '/Dashboard');
+  //     } else {
+  //       Fluttertoast.showToast(
+  //           msg: "Data Not Deleted" + data.MESSAGE,
+  //           backgroundColor: Colors.red,
+  //           gravity: ToastGravity.TOP,
+  //           toastLength: Toast.LENGTH_LONG);
+  //     }
+  //   }, onError: (e) {
+  //     Fluttertoast.showToast(
+  //         msg: "Data Not Saved" + e.toString(), backgroundColor: Colors.red);
+  //   });
+  // }
+  bool isLoading = false;
+
   DeleteService() async {
-    var data = {'type': 'service', 'id': widget.servicesClass.Id};
-    Future res = Services.DeleteService(data);
-    res.then((data) {
-      if (data != null && data.ERROR_STATUS == false) {
-        Fluttertoast.showToast(
-            msg: "Data Deleted",
-            backgroundColor: Colors.green,
-            gravity: ToastGravity.TOP);
-        Navigator.pushReplacementNamed(context, '/Dashboard');
-      } else {
-        Fluttertoast.showToast(
-            msg: "Data Not Deleted" + data.MESSAGE,
-            backgroundColor: Colors.red,
-            gravity: ToastGravity.TOP,
-            toastLength: Toast.LENGTH_LONG);
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        setState(() {
+          isLoading = true;
+        });
+        var body = {"serviceId": widget.serviceData["_id"]};
+        print("======body${body}");
+        Services.postForSave(apiname: 'card/deleteservice', body: body).then(
+            (response) async {
+          setState(() {
+            isLoading = false;
+          });
+          if (response.IsSuccess == true && response.Data == "1") {
+            Fluttertoast.showToast(
+                msg: "Data Deleted",
+                backgroundColor: Colors.green,
+                gravity: ToastGravity.TOP);
+            Navigator.popAndPushNamed(context, '/Dashboard');
+          } else {
+            Fluttertoast.showToast(
+                msg: "Data Not Deleted",
+                backgroundColor: Colors.red,
+                gravity: ToastGravity.TOP,
+                toastLength: Toast.LENGTH_LONG);
+          }
+        }, onError: (e) {
+          setState(() {
+            isLoading = false;
+          });
+          print("error on call -> ${e.message}");
+          Fluttertoast.showToast(msg: "something went wrong");
+        });
       }
-    }, onError: (e) {
-      Fluttertoast.showToast(
-          msg: "Data Not Saved" + e.toString(), backgroundColor: Colors.red);
-    });
+    } on SocketException catch (_) {
+      Fluttertoast.showToast(msg: "No Internet Connection");
+    }
   }
 
   @override
@@ -52,7 +100,7 @@ class _ServiceComponentState extends State<ServiceComponent> {
               isExpand=!isExpand;
             });
           }),*/
-          title: Text(widget.servicesClass.Title,
+          title: Text(widget.serviceData["title"],
               style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w600,
@@ -61,7 +109,7 @@ class _ServiceComponentState extends State<ServiceComponent> {
             Container(
               padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
               width: MediaQuery.of(context).size.width - 40,
-              child: Text(widget.servicesClass.Description,
+              child: Text(widget.serviceData["description"],
                   style: TextStyle(fontSize: 15, color: Colors.grey[700])),
             ),
             Row(
@@ -123,7 +171,7 @@ class _ServiceComponentState extends State<ServiceComponent> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => EditService(
-                          servicesClass: widget.servicesClass,
+                          serviceData: widget.serviceData,
                         ),
                       ),
                     );

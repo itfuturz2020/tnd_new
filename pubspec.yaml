@@ -69,6 +69,9 @@ dependencies:
   html: ^0.14.0+4
   flutter_swiper: ^1.1.6
   youtube_player_flutter: ^7.0.0+7
+  multi_image_picker: ^4.7.15
+  video_player: ^0.11.1+2
+
 
 
 

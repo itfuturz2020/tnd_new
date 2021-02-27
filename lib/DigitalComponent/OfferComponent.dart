@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/DigitalCommon/ClassList.dart';
 import 'package:the_national_dawn/DigitalCommon/Constants.dart' as cnst;
 import 'package:the_national_dawn/DigitalCommon/Services.dart';
@@ -7,9 +10,15 @@ import 'package:the_national_dawn/DigitalScreens/EditOffer.dart';
 import 'package:the_national_dawn/DigitalScreens/OfferDetail.dart';
 
 class OfferComponent extends StatefulWidget {
-  final OfferClass offerClass;
+  // final OfferClass offerClass;
+  //
+  // const OfferComponent(this.offerClass);
 
-  const OfferComponent(this.offerClass);
+  //by rinki
+
+  var offerData;
+
+  OfferComponent({this.offerData});
 
   @override
   _OfferComponentState createState() => _OfferComponentState();
@@ -18,40 +27,92 @@ class OfferComponent extends StatefulWidget {
 class _OfferComponentState extends State<OfferComponent> {
   bool isLoading = false;
   bool showComponent = true;
+  var date;
+
+  @override
+  void initState() {
+    funDate();
+  }
+
+  funDate() {
+    String dateData = " ${widget.offerData["validtilldate"]}";
+    date = dateData.split('-');
+    print("-------------------->${date}");
+    // funMonth("${date[2]}");
+  }
+
+  // DeleteOffer() async {
+  //   setState(() {
+  //     isLoading = true;
+  //   });
+  //   var data = {'type': 'offer', 'id': widget.offerData};
+  //   Future res = Services.DeleteOffer(data);
+  //   res.then((data) {
+  //     setState(() {
+  //       isLoading = false;
+  //     });
+  //     if (data != null && data.ERROR_STATUS == false) {
+  //       Fluttertoast.showToast(
+  //           msg: "Data Deleted",
+  //           backgroundColor: Colors.green,
+  //           gravity: ToastGravity.TOP);
+  //       //Navigator.pushReplacementNamed(context, '/Dashboard');
+  //       setState(() {
+  //         showComponent = false;
+  //       });
+  //     } else {
+  //       Fluttertoast.showToast(
+  //           msg: "Data Not Deleted" + data.MESSAGE,
+  //           backgroundColor: Colors.red,
+  //           gravity: ToastGravity.TOP,
+  //           toastLength: Toast.LENGTH_LONG);
+  //     }
+  //   }, onError: (e) {
+  //     setState(() {
+  //       isLoading = false;
+  //     });
+  //     Fluttertoast.showToast(
+  //         msg: "Data Not Saved" + e.toString(), backgroundColor: Colors.red);
+  //   });
+  // }
 
   DeleteOffer() async {
-    setState(() {
-      isLoading = true;
-    });
-    var data = {'type': 'offer', 'id': widget.offerClass.Id};
-    Future res = Services.DeleteOffer(data);
-    res.then((data) {
-      setState(() {
-        isLoading = false;
-      });
-      if (data != null && data.ERROR_STATUS == false) {
-        Fluttertoast.showToast(
-            msg: "Data Deleted",
-            backgroundColor: Colors.green,
-            gravity: ToastGravity.TOP);
-        //Navigator.pushReplacementNamed(context, '/Dashboard');
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         setState(() {
-          showComponent = false;
+          isLoading = true;
         });
-      } else {
-        Fluttertoast.showToast(
-            msg: "Data Not Deleted" + data.MESSAGE,
-            backgroundColor: Colors.red,
-            gravity: ToastGravity.TOP,
-            toastLength: Toast.LENGTH_LONG);
+        var body = {"offerId": widget.offerData["_id"]};
+        Services.postForSave(apiname: 'card/deleteoffer', body: body).then(
+            (response) async {
+          setState(() {
+            isLoading = false;
+          });
+          if (response.IsSuccess == true && response.Data == "1") {
+            Fluttertoast.showToast(
+                msg: "Data Deleted",
+                backgroundColor: Colors.green,
+                gravity: ToastGravity.TOP);
+            Navigator.popAndPushNamed(context, '/Dashboard');
+          } else {
+            Fluttertoast.showToast(
+                msg: "Data Not Deleted",
+                backgroundColor: Colors.red,
+                gravity: ToastGravity.TOP,
+                toastLength: Toast.LENGTH_LONG);
+          }
+        }, onError: (e) {
+          setState(() {
+            isLoading = false;
+          });
+          print("error on call -> ${e.message}");
+          Fluttertoast.showToast(msg: "something went wrong");
+        });
       }
-    }, onError: (e) {
-      setState(() {
-        isLoading = false;
-      });
-      Fluttertoast.showToast(
-          msg: "Data Not Saved" + e.toString(), backgroundColor: Colors.red);
-    });
+    } on SocketException catch (_) {
+      Fluttertoast.showToast(msg: "No Internet Connection");
+    }
   }
 
   @override
@@ -74,7 +135,11 @@ class _OfferComponentState extends State<OfferComponent> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => OfferDetail(
-                                      offerClass: widget.offerClass)));
+                                        //    offerClass: widget.offerClass)));
+                                        offerData: widget.offerData,
+                                        offerdate:
+                                            "${date[2]}-${date[1]}-${date[0]}",
+                                      )));
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width - 150,
@@ -84,7 +149,7 @@ class _OfferComponentState extends State<OfferComponent> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Text(widget.offerClass.Title,
+                                  Text(widget.offerData["title"],
                                       style: TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.w600,
@@ -92,7 +157,7 @@ class _OfferComponentState extends State<OfferComponent> {
                                   Padding(
                                     padding: EdgeInsets.only(top: 10),
                                     child: Text(
-                                        '${widget.offerClass.Descri.length > 65 ? widget.offerClass.Descri.substring(0, 65) : widget.offerClass.Descri}...',
+                                        '${widget.offerData["description"].length > 65 ? widget.offerData["description"].substring(0, 65) : widget.offerData["description"]}...',
                                         style: TextStyle(
                                             fontSize: 13,
                                             fontWeight: FontWeight.w600,
@@ -117,7 +182,7 @@ class _OfferComponentState extends State<OfferComponent> {
                                           padding:
                                               const EdgeInsets.only(left: 5),
                                           child: Text(
-                                              widget.offerClass.ValidTill,
+                                              "${date[2]}-${date[1]}-${date[0]}",
                                               style: TextStyle(
                                                   fontSize: 13,
                                                   fontWeight: FontWeight.w600,
@@ -151,7 +216,10 @@ class _OfferComponentState extends State<OfferComponent> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => EditOffer(
-                                        offerClass: widget.offerClass))),
+                                          offerData: widget.offerData,
+                                          offerDate:
+                                              "${date[2]}-${date[1]}-${date[0]}",
+                                        ))),
                             child: Container(
                               margin: EdgeInsets.all(10),
                               child: Icon(Icons.edit),

@@ -1,6 +1,9 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:the_national_dawn/DigitalCommon/Constants.dart' as cnst;
 
 import 'package:flutter/material.dart';
@@ -14,6 +17,7 @@ import 'package:the_national_dawn/DigitalCommon/Services.dart' as serv;
 import 'package:the_national_dawn/DigitalCommon/ClassList.dart';
 import 'package:the_national_dawn/DigitalComponent/CardShareComponent.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:video_player/video_player.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -43,7 +47,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   String txtCompany;
 
   Map<String, dynamic> profileList = {};
-  List<DigitalClass> digitalList = [];
+  List digitalList = [];
 
   @override
   void initState() {
@@ -54,55 +58,236 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     _getUpdatedProfile();
   }
 
-  CreateDigital(String Mobile, String Name, String Email) async {
+//by rinki
+  CreateDigital(
+      String Mobile1,
+      String Name1,
+      String Email,
+      String Company1,
+      String Referal,
+      String Image,
+      String Whatsapp,
+      String Fb,
+      String Insta,
+      String Linkin,
+      String Twitter,
+      String Youtube,
+      String CompanyWebsite,
+      String CompEmail,
+      String CompAdd,
+      String CompMoblie,
+      String PAN,
+      String About,
+      String GooglePage,
+      String Role,
+      String GST,
+      String MapLocation,
+      String ShareMsg1,
+      String AboutComp,
+      String CoverImg1) async {
     try {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      //Future res = Services.MemberLogin(prefs.getString(cnst.Session.Mobile));
-      setState(() {
-        isLoading = true;
-      });
-      serv.Services.CreateDigitalCard(
-        Mobile,
-        Name,
-        Email,
-      ).then((data) async {
-        if (data != null && data.length > 0) {
-          setState(() {
-            isLoading = false;
-          });
-          print("length : ${data.length}");
-          if (data.length > 0) {
-            setState(() {
-              isLoading = false;
-              // isMultipleCard = true;
-              digitalList = data;
-            });
-            print("========================${digitalList[0].Id}");
-            SharedPreferences prefs = await SharedPreferences.getInstance();
-            await prefs.setString(Session.digital_Id, digitalList[0].Id);
-            DigitalId = prefs.getString(Session.digital_Id);
-            GetProfileData();
-          }
-        } else {
-          setState(() {
-            isLoading = false;
-          });
-          showMsg("Data Send");
-        }
-      }, onError: (e) {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         setState(() {
-          isLoading = false;
+          isLoading = true;
         });
-        print("Error : Data Not Saved");
-        showMsg("$e");
-      });
-    } catch (Ex) {
-      setState(() {
-        isLoading = false;
-      });
-      showMsg("Something Went Wrong");
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        FormData body = FormData.fromMap({
+          // "name": Name,
+          // "mobile": Mobile,
+          // "company_name": Company,
+          // "email": Email,
+          // "Imagecode": Image,
+          "referalcode": Referal,
+          "myreferalcode": "",
+          "name": Name1,
+          "mobile": Mobile1,
+          "company_name": Company1,
+          "email": Email,
+          "whatsapp": Whatsapp,
+          "faceBook": Fb,
+          "instagram": Insta,
+          "linkedIn": Linkin,
+          "twitter": Twitter,
+          "youTube": Youtube,
+          "company_website": CompanyWebsite,
+          "company_email": CompEmail,
+          "company_address": CompAdd,
+          "company_mobile": CompMoblie,
+          "panNo": PAN,
+          "about": About,
+          "googlePage": GooglePage,
+          "role": Role,
+          "gstNo": GST,
+          "mapLocation": MapLocation,
+          "shareMsg": ShareMsg1,
+          "about_company": AboutComp,
+          "imagecode": Image,
+          "covering": CoverImg1,
+        });
+
+        log(prefs.getString(Session.CustomerId));
+        serv.Services.PostForList4(
+                api_name: 'card/checkDigitalCardMember', body: body)
+            .then((subCatResponseList) async {
+          log("a022222");
+          setState(() {
+            isLoading = false;
+          });
+          if (subCatResponseList.length > 0) {
+            log("a122222");
+            setState(() {
+              digitalList = subCatResponseList;
+              //set "data" here to your variable
+            });
+            Fluttertoast.showToast(msg: "Login successfully");
+            // print("========================${digitalList[0].Id}");
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+
+            setState(() {
+              MemberId = subCatResponseList[0]["_id"];
+              Name = subCatResponseList[0]["name"];
+              Company = subCatResponseList[0]["company_name"];
+              Photo = subCatResponseList[0]["imagecode"] != null
+                  ? subCatResponseList[0]["imagecode"]
+                  : profileList["img"];
+              CoverPhoto = subCatResponseList[0]["coverimg"] != null
+                  ? subCatResponseList[0]["coverimg"]
+                  : "";
+              ReferCode = "${Referal}";
+              ExpDate = "";
+              MemberType = "";
+              ShareMsg = "";
+            });
+            setState(() {});
+            await prefs.setString(
+                Session.digital_Id, subCatResponseList[0]["_id"]);
+            DigitalId = prefs.getString(Session.digital_Id);
+            await prefs.setString(
+                cnst.Session.MemberId, subCatResponseList[0]["_id"]);
+            await prefs.setString(cnst.Session.ReferCode, Referal);
+            await prefs.setString(
+                cnst.Session.website, subCatResponseList[0]["website"]);
+            await prefs.setString(
+                cnst.Session.faceBook, subCatResponseList[0]["faceBook"]);
+            await prefs.setString(
+                cnst.Session.instagram, subCatResponseList[0]["instagram"]);
+            await prefs.setString(
+                cnst.Session.linkedIn, subCatResponseList[0]["linkedIn"]);
+            await prefs.setString(
+                cnst.Session.twitter, subCatResponseList[0]["twitter"]);
+            await prefs.setString(
+                cnst.Session.youTube, subCatResponseList[0]["youTube"]);
+            await prefs.setString(
+                cnst.Session.panNo, subCatResponseList[0]["panNo"]);
+            await prefs.setString(
+                cnst.Session.googlePage, subCatResponseList[0]["googlePage"]);
+            await prefs.setString(
+                cnst.Session.about, subCatResponseList[0]["about"]);
+            await prefs.setString(
+                cnst.Session.role, subCatResponseList[0]["role"]);
+            await prefs.setString(
+                cnst.Session.gstNo, subCatResponseList[0]["gstNo"]);
+            await prefs.setString(
+                cnst.Session.mapLocation, subCatResponseList[0]["mapLocation"]);
+            await prefs.setString(
+                cnst.Session.shareMsg, subCatResponseList[0]["shareMsg"]);
+            await prefs.setString(cnst.Session.company_website,
+                subCatResponseList[0]["company_website"]);
+            await prefs.setString(cnst.Session.company_mobile,
+                subCatResponseList[0]["company_mobile"]);
+            await prefs.setString(cnst.Session.company_address,
+                subCatResponseList[0]["company_address"]);
+            await prefs.setString(cnst.Session.company_email,
+                subCatResponseList[0]["company_email"]);
+            await prefs.setString(
+                cnst.Session.imagecode, subCatResponseList[0]["imagecode"]);
+            await prefs.setString(
+                cnst.Session.coverimg, subCatResponseList[0]["coverimg"]);
+            await prefs.setString(
+                cnst.Session.name, subCatResponseList[0]["name"]);
+            await prefs.setString(
+                cnst.Session.mobile, subCatResponseList[0]["mobile"]);
+            await prefs.setString(
+                cnst.Session.email, subCatResponseList[0]["email"]);
+            await prefs.setString(
+                cnst.Session.whatsapp, subCatResponseList[0]["whatsapp"]);
+            await prefs.setString(cnst.Session.company_name,
+                subCatResponseList[0]["company_name"]);
+
+            //   GetProfileData();
+            //Fluttertoast.showToast(msg: "Login successfully");
+          } else {
+            log("a222");
+            setState(() {
+              digitalList = [];
+            });
+            Fluttertoast.showToast(msg: "Data Not Found");
+            //show "data not found" in dialog
+          }
+        }, onError: (e) {
+          setState(() {
+            isLoading = false;
+          });
+          print("error on call -> ${e.message}");
+          Fluttertoast.showToast(msg: "Something Went Wrong");
+        });
+      }
+    } on SocketException catch (_) {
+      Fluttertoast.showToast(msg: "No Internet Connection.");
     }
   }
+
+//old create digital
+//   CreateDigital(String Mobile, String Name, String Email) async {
+//     try {
+//       SharedPreferences prefs = await SharedPreferences.getInstance();
+//       //Future res = Services.MemberLogin(prefs.getString(cnst.Session.Mobile));
+//       setState(() {
+//         isLoading = true;
+//       });
+//       serv.Services.CreateDigitalCard(
+//         Mobile,
+//         Name,
+//         Email,
+//       ).then((data) async {
+//         if (data != null && data.length > 0) {
+//           setState(() {
+//             isLoading = false;
+//           });
+//           print("length : ${data.length}");
+//           if (data.length > 0) {
+//             setState(() {
+//               isLoading = false;
+//               // isMultipleCard = true;
+//               digitalList = data;
+//             });
+//             print("========================${digitalList[0].Id}");
+//             SharedPreferences prefs = await SharedPreferences.getInstance();
+//             await prefs.setString(Session.digital_Id, digitalList[0].Id);
+//             DigitalId = prefs.getString(Session.digital_Id);
+//             GetProfileData();
+//           }
+//         } else {
+//           setState(() {
+//             isLoading = false;
+//           });
+//           showMsg("Data Send");
+//         }
+//       }, onError: (e) {
+//         setState(() {
+//           isLoading = false;
+//         });
+//         print("Error : Data Not Saved");
+//         showMsg("$e");
+//       });
+//     } catch (Ex) {
+//       setState(() {
+//         isLoading = false;
+//       });
+//       showMsg("Something Went Wrong");
+//     }
+//   }
 
   // CreateDigital(String Mobile, String Name, String Email) async {
   //   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -258,6 +443,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         };
         print("=================================");
         print(prefs.getString(Session.CustomerId));
+
         Services.PostForList(api_name: 'admin/getsingleid', body: body).then(
             (ResponseList) async {
           setState(() {
@@ -268,8 +454,35 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               profileList = ResponseList[0];
               //set "data" here to your variable
             });
-            CreateDigital(profileList["mobile"], profileList["name"],
-                profileList["email"]);
+            print("=================================11");
+            // CreateDigital(profileList["mobile"], profileList["name"],
+            //     profileList["email"]);
+            CreateDigital(
+                profileList["mobile"],
+                profileList["name"],
+                profileList["email"],
+                profileList["company_name"],
+                profileList["referred_by"],
+                profileList["img"],
+                profileList["mobile"],
+                profileList["faceBook"],
+                profileList["instagram"],
+                profileList["linkedIn"],
+                profileList["twitter"],
+                profileList["youTube"],
+                "",
+                profileList["email"],
+                "",
+                profileList["mobile"],
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                profileList["about_business"],
+                profileList["img"]);
 
             print("${ResponseList[0]}");
           } else {
@@ -821,6 +1034,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                   : Container()
                             ],
                           ),
+
                           SizedBox(
                             width: MediaQuery.of(context).size.width / 1.5,
                             child: RaisedButton(

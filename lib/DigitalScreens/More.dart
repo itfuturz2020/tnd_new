@@ -259,6 +259,30 @@ class _MoreState extends State<More> {
                           )),
                     ),
                     GestureDetector(
+                      onTap: () =>
+                          Navigator.pushNamed(context, "/GalleryScreen"),
+                      child: Container(
+                          decoration: BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(
+                                      width: 0.5, color: Colors.grey[600]))),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          child: Row(
+                            children: <Widget>[
+                              Image.asset("assets/logo.png",
+                                  height: 35, width: 35),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20),
+                                child: Text("Gallery",
+                                    style: TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w600)),
+                              ),
+                            ],
+                          )),
+                    ),
+                    GestureDetector(
                       onTap: () {
                         _logout();
                       },

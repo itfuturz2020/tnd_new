@@ -60,6 +60,7 @@ import 'package:the_national_dawn/Screens/UpdateProfileScreen.dart';
 import 'package:the_national_dawn/Screens/VerificationScreen.dart';
 import 'package:the_national_dawn/Screens/ViewDetailScreen.dart';
 
+import 'DigitalScreens/GalleryScreen.dart';
 import 'GuestScreens/GridScreen.dart';
 import 'GuestScreens/GuestBannerScreen.dart';
 import 'GuestScreens/GuestCategoryNews.dart';
@@ -205,6 +206,7 @@ class _MyAppState extends State<MyApp> {
         '/AddService': (context) => AddService(),
         '/AddOffer': (context) => AddOffer(),
         '/EnquiryForm': (context) => EnquiryForm(),
+        '/GalleryScreen': (context) => GalleryScreen(),
 
         //=============Guest Login
         '/GuestDashBoard': (context) => GuestDashBoard(),

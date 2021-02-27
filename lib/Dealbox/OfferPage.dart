@@ -119,7 +119,7 @@ class _OfferPageState extends State<OfferPage> {
                     MaterialPageRoute(
                         builder: (context) => OfferPageDetails(
                               image: offerList[index]["categoryImage"],
-                              name: offerList[index]["categoryName"],
+                              offerData: offerList[index],
                             )));
               },
               child: Container(
@@ -131,16 +131,22 @@ class _OfferPageState extends State<OfferPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Image.network(
-                        offerList[index]["categoryImage"],
-                        height: 60,
-                        width: MediaQuery.of(context).size.width,
-                      ),
+                      offerList[index]["categoryIcon"] == ""
+                          ? Image.asset(
+                              "assets/LOGO1.png",
+                              height: 60,
+                              width: MediaQuery.of(context).size.width,
+                            )
+                          : Image.network(
+                              offerList[index]["categoryIcon"],
+                              height: 60,
+                              width: MediaQuery.of(context).size.width,
+                            ),
                       Flexible(
                           child: Padding(
                         padding: const EdgeInsets.all(3.0),
                         child: Text(
-                          offerList[index]["categoryName"],
+                          "${offerList[index]["categoryName"]}",
                           style: TextStyle(
                               fontSize: 12,
                               color: Colors.black,
@@ -196,6 +202,7 @@ class _OfferPageState extends State<OfferPage> {
               offerList = tabResponseList;
               //set "data" here to your variable
             });
+
             log("=============${tabResponseList}");
           } else {
             setState(() {
