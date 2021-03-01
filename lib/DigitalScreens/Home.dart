@@ -93,11 +93,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         });
         SharedPreferences prefs = await SharedPreferences.getInstance();
         FormData body = FormData.fromMap({
-          // "name": Name,
-          // "mobile": Mobile,
-          // "company_name": Company,
-          // "email": Email,
-          // "Imagecode": Image,
           "referalcode": Referal,
           "myreferalcode": "",
           "name": Name1,
@@ -124,6 +119,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           "about_company": AboutComp,
           "imagecode": Image,
           "covering": CoverImg1,
+          "website": CompanyWebsite
         });
 
         log(prefs.getString(Session.CustomerId));
@@ -140,7 +136,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               digitalList = subCatResponseList;
               //set "data" here to your variable
             });
-            Fluttertoast.showToast(msg: "Login successfully");
+            //   Fluttertoast.showToast(msg: "Login successfully");
             // print("========================${digitalList[0].Id}");
             SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -881,22 +877,26 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                       ],
                                     ),
                                     onPressed: () {
-                                      bool val = checkValidity();
-                                      Navigator.of(context).push(
-                                        PageRouteBuilder(
-                                          opaque: false,
-                                          pageBuilder:
-                                              (BuildContext context, _, __) =>
-                                                  CardShareComponent(
-                                            memberId: DigitalId,
-                                            memberName: Name,
-                                            isRegular: val,
-                                            memberType: MemberType,
-                                            shareMsg: ShareMsg,
-                                            IsActivePayment: IsActivePayment,
-                                          ),
-                                        ),
-                                      );
+                                      String profileUrl = cnst.profileUrl
+                                          .replaceAll("#id", DigitalId);
+                                      Share.share(profileUrl);
+
+                                      // bool val = checkValidity();
+                                      // Navigator.of(context).push(
+                                      //   PageRouteBuilder(
+                                      //     opaque: false,
+                                      //     pageBuilder:
+                                      //         (BuildContext context, _, __) =>
+                                      //             CardShareComponent(
+                                      //       memberId: DigitalId,
+                                      //       memberName: Name,
+                                      //       isRegular: val,
+                                      //       memberType: MemberType,
+                                      //       shareMsg: ShareMsg,
+                                      //       IsActivePayment: IsActivePayment,
+                                      //     ),
+                                      //   ),
+                                      // );
                                     },
                                     shape: new RoundedRectangleBorder(
                                         borderRadius:

@@ -18,7 +18,7 @@ class _DailyNewsDashBoardState extends State<DailyNewsDashBoard> {
   List<Widget> _widgetOptions = <Widget>[
     GuestHome(),
     FollowingScreen(),
-    TndTvScreen(),
+    //TndTvScreen(),
     ExploreScreen(),
   ];
 
@@ -48,10 +48,10 @@ class _DailyNewsDashBoardState extends State<DailyNewsDashBoard> {
             icon: Icon(Icons.grid_view),
             label: 'Category',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.video_collection_rounded),
-            label: 'Video',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.video_collection_rounded),
+          //   label: 'Video',
+          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
             label: 'Search',

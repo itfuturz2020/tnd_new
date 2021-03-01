@@ -173,7 +173,7 @@ class _FollowingComponentState extends State<FollowingComponent> {
                       padding:
                           const EdgeInsets.only(top: 15.0, bottom: 10, left: 5),
                       child: Text(
-                        "${widget.title}  :  ",
+                        "  ",
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,

@@ -149,9 +149,8 @@ class _FollowingScreenState extends State<FollowingScreen> {
                                                               400],
                                                     )
                                                   : Image.network(
-                                                      Image_URL +
-                                                          searchlist[index]
-                                                              ['categoryImage'],
+                                                      searchlist[index]
+                                                          ['categoryImage'],
                                                       width:
                                                           MediaQuery.of(context)
                                                               .size
@@ -234,9 +233,8 @@ class _FollowingScreenState extends State<FollowingScreen> {
                                                                   400],
                                                         )
                                                       : Image.network(
-                                                          Image_URL +
-                                                              searchlist[index][
-                                                                  'categoryImage'],
+                                                          searchlist[index]
+                                                              ['categoryImage'],
                                                           width: MediaQuery.of(
                                                                   context)
                                                               .size
@@ -323,10 +321,9 @@ class _FollowingScreenState extends State<FollowingScreen> {
                                                                   400],
                                                         )
                                                       : Image.network(
-                                                          Image_URL +
-                                                              subCategoriesTab[
-                                                                      index][
-                                                                  'categoryImage'],
+                                                          subCategoriesTab[
+                                                                  index]
+                                                              ['categoryImage'],
                                                           width: MediaQuery.of(
                                                                   context)
                                                               .size

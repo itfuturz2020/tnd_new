@@ -71,6 +71,7 @@ dependencies:
   youtube_player_flutter: ^7.0.0+7
   multi_image_picker: ^4.7.15
   video_player: ^0.11.1+2
+  flutter_absolute_path: ^1.0.6
 
 
 

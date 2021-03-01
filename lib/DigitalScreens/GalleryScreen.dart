@@ -1,10 +1,16 @@
+import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_absolute_path/flutter_absolute_path.dart';
+import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/DigitalCommon/Constants.dart' as cnst;
@@ -24,54 +30,58 @@ class _GalleryScreenState extends State<GalleryScreen> {
 
   String _error = 'No Error Dectected';
 
-  Save() async {
-    // String img = '';
-    // if (_image != null) {
-    //   List<int> imageBytes = await _image.readAsBytesSync();
-    //   String base64Image = base64Encode(imageBytes);
-    //   img = base64Image;
-    // }
-    //
-    // print('base64 Img : $img');
+  Future<File> getImageFileFromAssets(String path) async {
+    final byteData = await rootBundle.load('assets/$path');
 
+    final file = File('${(await getTemporaryDirectory()).path}/$path');
+    await file.writeAsBytes(byteData.buffer
+        .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+
+    return file;
+  }
+
+  Save() async {
+    List files = [];
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         setState(() {
-          isLoading = true;
+          // isLoading = true;
         });
+        for (int i = 0; i < images.length; i++) {
+          String filename = "";
+          String filePath = "";
+          File compressedFile;
 
-        // String filename = "";
-        // String filePath = "";
-        // File compressedFile;
-        // if (_image != null) {
-        //   ImageProperties properties =
-        //   await FlutterNativeImage.getImageProperties(_image.path);
-        //
-        //   compressedFile = await FlutterNativeImage.compressImage(
-        //     _image.path,
-        //     quality: 80,
-        //     targetWidth: 600,
-        //     targetHeight:
-        //     (properties.height * 600 / properties.width).round(),
-        //   );
-        //
-        //   filename = _image.path.split('/').last;
-        //   filePath = compressedFile.path;
-        // }
+          File _imageEvent = await File(images[i].identifier);
+          log("IMage wvwnt===${_imageEvent.path}");
+          if (_imageEvent != null) {
+            ImageProperties properties =
+                await FlutterNativeImage.getImageProperties(_imageEvent.path);
+
+            compressedFile = await FlutterNativeImage.compressImage(
+              _imageEvent.path,
+              quality: 80,
+              targetWidth: 600,
+              targetHeight:
+                  (properties.height * 600 / properties.width).round(),
+            );
+
+            filename = _imageEvent.path.split('/').last;
+            filePath = compressedFile.path;
+            files.add((filePath != null && filePath != '')
+                ? await MultipartFile.fromFile(filePath,
+                    filename: filename.toString())
+                : null);
+            log("file=====${files}");
+          }
+        }
         SharedPreferences prefs = await SharedPreferences.getInstance();
         FormData body = FormData.fromMap({
-          //    "imagecode": img,
-          // "imagecode": (filePath != null && filePath != '')
-          //     ? await MultipartFile.fromFile(filePath,
-          //     filename: filename.toString())
-          //     : null,
           "memberid": prefs.getString(cnst.Session.MemberId),
-          "images": images,
-          "videos": _video
+          "images": files
+          //"videos": _video
         });
-
-        print(prefs.getString(Session.CustomerId));
         Services.PostForList4(api_name: 'card/addimages', body: body).then(
             (subCatResponseList) async {
           print("a0");

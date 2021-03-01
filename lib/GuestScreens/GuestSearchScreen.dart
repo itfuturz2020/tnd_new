@@ -176,7 +176,7 @@ class _GuestSearchScreenState extends State<GuestSearchScreen>
                                         physics: BouncingScrollPhysics(),
                                         child: Padding(
                                           padding: const EdgeInsets.only(
-                                              top: 18.0, left: 0, right: 0),
+                                              top: 5.0, left: 0, right: 0),
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -187,7 +187,7 @@ class _GuestSearchScreenState extends State<GuestSearchScreen>
                                                     top: 3,
                                                     left: 5),
                                                 child: Text(
-                                                  "Featured  :",
+                                                  "",
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 16,
@@ -348,10 +348,10 @@ class _GuestSearchScreenState extends State<GuestSearchScreen>
                                               Padding(
                                                 padding: const EdgeInsets.only(
                                                     bottom: 10.0,
-                                                    top: 25,
+                                                    top: 10,
                                                     left: 5),
                                                 child: Text(
-                                                  "Popular News  :",
+                                                  "",
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 16,

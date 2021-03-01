@@ -42,7 +42,7 @@ class _GuestProfileState extends State<GuestProfile> {
 
   whiteContainer() {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.24,
+      height: MediaQuery.of(context).size.height / 4,
       width: MediaQuery.of(context).size.width,
       child: Padding(
         padding: const EdgeInsets.only(left: 12.0, bottom: 15.0, top: 12.0),
@@ -73,7 +73,7 @@ class _GuestProfileState extends State<GuestProfile> {
 
   redContainer() {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.58,
+      height: MediaQuery.of(context).size.height / 1.8,
       width: MediaQuery.of(context).size.width,
       color: appPrimaryMaterialColor[500],
       child: Padding(

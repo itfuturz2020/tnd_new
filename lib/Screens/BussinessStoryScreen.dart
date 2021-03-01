@@ -1,13 +1,20 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
+import 'package:carousel_pro/carousel_pro.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:the_national_dawn/Common/Services.dart';
+import 'package:the_national_dawn/Components/FollowingNewsComponent.dart';
 import 'package:the_national_dawn/Components/LoadingBlueComponent.dart';
 import 'package:the_national_dawn/Components/SocialMediaComponent.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'NewsBannerDetail.dart';
 
 class BussinessStoryScreen extends StatefulWidget {
   @override
@@ -16,46 +23,21 @@ class BussinessStoryScreen extends StatefulWidget {
 
 class _BussinessStoryScreenState extends State<BussinessStoryScreen>
     with TickerProviderStateMixin {
-  TabController _tabController;
-  TabController tabController;
-  List subCategoriesTab = [];
-  List subCategoriesList = [];
+  List subCatNews = [];
+  List subCatBanner = [];
   bool isLoadingCat = true;
-  bool isLoadingNews = false;
+  bool isLoadingCatNews = true;
 
   @override
   void initState() {
-    super.initState();
-    _newsCatTab();
+    _bannerName();
   }
 
-  _tabCon() {
-    _tabController = TabController(
-      vsync: this,
-      length: subCategoriesTab.length,
-    );
-    _tabController.addListener(() {
-      _newsCategory(subCategoriesTab[_tabController.index]["_id"]);
-    });
-  }
-
-  void launchwhatsapp({
-    @required String phone,
-    @required String message,
-  }) async {
-    String url() {
-      if (Platform.isIOS) {
-        return "whatsapp://wa.me/$phone/?text=${Uri.parse(message)}";
-      } else {
-        return "whatsapp://send?phone=$phone&text=${Uri.parse(message)}";
-      }
-    }
-
-    if (await canLaunch(url())) {
-      await launch(url());
-    } else {
-      throw 'Could not launch ${url()}';
-    }
+  _bannerName() async {
+    String name;
+    name = "Business-News";
+    _newsBanner(name);
+    _newsCategory(name);
   }
 
   @override
@@ -104,658 +86,180 @@ class _BussinessStoryScreenState extends State<BussinessStoryScreen>
           ),
         ),
       ),
-      body: isLoadingCat
+      body: isLoadingCat == true
           ? LoadingBlueComponent()
-          : Row(
-              children: <Widget>[
-                Expanded(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 50.0,
-                        child: TabBar(
-                          isScrollable: true,
-                          controller: _tabController,
-                          unselectedLabelColor: Colors.black,
-                          labelColor: appPrimaryMaterialColor,
-                          indicatorColor: appPrimaryMaterialColor,
-                          onTap: (index) {
-                            _newsCategory(subCategoriesTab[index]["_id"]);
-                          },
-                          tabs: List<Widget>.generate(subCategoriesTab.length,
-                              (int index) {
-                            return Tab(
-                              child: Text(
-                                subCategoriesTab[index]["categoryType"],
-                                style: TextStyle(fontSize: 14.0),
-                              ),
-                            );
-                          }),
-                        ),
+          : SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 200,
+                      decoration: BoxDecoration(
+                        //color: Colors.grey[100],
+                        border: Border.all(color: Colors.grey[200], width: 2),
                       ),
-                      Flexible(
-                        child: TabBarView(
-                          physics: BouncingScrollPhysics(),
-                          controller: _tabController,
-                          children: List<Widget>.generate(
-                              subCategoriesTab.length, (int index) {
-                            return isLoadingNews
-                                ? Center(
-                                    child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        appPrimaryMaterialColor),
-                                  ))
-                                : SingleChildScrollView(
-                                    physics: BouncingScrollPhysics(),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 18.0, left: 15, right: 15),
+                      child: Carousel(
+                        boxFit: BoxFit.contain,
+                        autoplay: true,
+                        animationCurve: Curves.fastOutSlowIn,
+                        animationDuration: Duration(milliseconds: 1500),
+                        dotSize: 0.0,
+                        //  borderRadius: true,
+                        dotIncreasedColor: Color(0xFF9f782d),
+                        dotBgColor: Colors.transparent,
+                        dotPosition: DotPosition.bottomCenter,
+                        dotVerticalPadding: 10.0,
+                        showIndicator: false,
+                        indicatorBgPadding: 7.0,
+                        dotColor: Colors.grey,
+                        onImageChange: (a, b) {
+//                                                    log(a.toString());
+//                                                    log(b.toString());
+                          setState(() {
+                            //skip = b;
+                          });
+                        },
+                        images: subCatBanner.map((link) {
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => NewsBannerDetail(
+                                      newsData: link,
+                                    ),
+                                  ));
+                            },
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                    // borderRadius: BorderRadius.circular(8.0),
+                                    child: link['featured_img_src'] == null
+                                        ? Center(
+                                            child:
+                                                Image.asset('assets/LOGO1.png'))
+                                        : Image.network(
+                                            link['featured_img_src'],
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            // height: 220,
+                                            fit: BoxFit.fill,
+                                          )),
+                                Positioned(
+                                    bottom: 0.0,
+                                    child: Container(
+                                      //  height: 60,
+                                      width: MediaQuery.of(context).size.width,
+                                      padding:
+                                          EdgeInsets.only(left: 8, right: 8),
+                                      decoration: BoxDecoration(
+                                        color: Color(0xff4B4B4B4A),
+                                      ),
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
-                                        children: [
-                                          isLoadingCat
-                                              ? Center(
-                                                  child: LoadingBlueComponent())
-                                              : subCategoriesList.length > 0 &&
-                                                      subCategoriesList != null
-                                                  ? ListView.builder(
-                                                      physics:
-                                                          NeverScrollableScrollPhysics(),
-                                                      shrinkWrap: true,
-                                                      // scrollDirection: Axis.horizontal,
-                                                      itemCount:
-                                                          subCategoriesList
-                                                              .length,
-                                                      itemBuilder:
-                                                          (BuildContext context,
-                                                              int index) {
-                                                        return Flexible(
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    bottom:
-                                                                        15.0),
-                                                            child: Column(
-                                                              children: [
-                                                                SizedBox(
-                                                                  height: MediaQuery.of(
-                                                                              context)
-                                                                          .padding
-                                                                          .top +
-                                                                      2,
-                                                                ),
-                                                                Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                              .all(
-                                                                          8.0),
-                                                                  child:
-                                                                      Container(
-                                                                    child:
-                                                                        Stack(
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .bottomCenter,
-                                                                      children: [
-                                                                        Container(
-                                                                          child:
-                                                                              Container(
-                                                                            height:
-                                                                                420,
-                                                                            width:
-                                                                                MediaQuery.of(context).size.width,
-                                                                            child:
-                                                                                Image.network(
-                                                                              // "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202101/WhatsApp_Image_2021-01-02_at_1_1200x768.jpeg?size=483:271",
-                                                                              "${subCategoriesList[index]["bussImage"]}",
-
-                                                                              fit: BoxFit.contain,
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                        Container(
-                                                                            height:
-                                                                                40,
-                                                                            width:
-                                                                                MediaQuery.of(context).size.width,
-                                                                            color: Colors.white,
-                                                                            child: Padding(padding: const EdgeInsets.only(left: 15.0, right: 15, top: 25), child: Text(""))),
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                          .only(
-                                                                    left: 15.0,
-                                                                    right: 15.0,
-                                                                  ),
-                                                                  child:
-                                                                      Container(
-                                                                    child:
-                                                                        Column(
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: <
-                                                                          Widget>[
-                                                                        Padding(
-                                                                          padding:
-                                                                              const EdgeInsets.only(bottom: 8.0),
-                                                                          child: Container(
-//                                    height: 80,
-                                                                              color: Colors.white,
-                                                                              child: Row(
-                                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                children: <Widget>[
-                                                                                  Container(
-                                                                                    width: 80,
-                                                                                    height: 80,
-                                                                                    decoration: BoxDecoration(
-                                                                                      color: Colors.white,
-                                                                                      border: Border.all(color: Colors.grey[200], width: 1),
-                                                                                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                                                                                    ),
-                                                                                    child: ClipRRect(
-                                                                                        borderRadius: BorderRadius.circular(20),
-                                                                                        child: Image.network(
-                                                                                          //"https://akm-img-a-in.tosshub.com/indiatoday/images/story/202101/WhatsApp_Image_2021-01-02_at_1_1200x768.jpeg?size=483:271",
-                                                                                          "${subCategoriesList[index]["bussImage"]}",
-                                                                                          fit: BoxFit.cover,
-                                                                                        )),
-                                                                                  ),
-                                                                                  Expanded(
-                                                                                    child: Padding(
-                                                                                      padding: const EdgeInsets.only(left: 6.0),
-                                                                                      child: Text(
-                                                                                        //"Sourav Ganguly stable after primary angioplasty at Kolkata hospital",
-                                                                                        "${subCategoriesList[index]["headline"]}",
-//                                            maxLines: 2,
-//                                            overflow: TextOverflow.ellipsis,
-                                                                                        style: TextStyle(color: appPrimaryMaterialColor, fontWeight: FontWeight.w500, fontSize: 20),
-                                                                                      ),
-                                                                                    ),
-                                                                                  )
-                                                                                ],
-                                                                              )),
-                                                                        ),
-                                                                        SizedBox(
-                                                                          height:
-                                                                              10,
-                                                                        ),
-                                                                        SocialMediaComponent(
-                                                                          facebook:
-                                                                              "",
-                                                                          instagram:
-                                                                              "",
-                                                                          linkedIn:
-                                                                              "",
-                                                                          twitter:
-                                                                              "",
-                                                                          whatsapp:
-                                                                              "",
-                                                                        ),
-                                                                        Row(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.center,
-                                                                          children: [
-                                                                            Text("Social Media links",
-                                                                                style: TextStyle(fontSize: 12, color: Colors.grey)),
-                                                                          ],
-                                                                        ),
-                                                                        Divider(),
-                                                                        Text(
-                                                                            //"Five Indian players have been placed in isolation after video emerged on social media of the group appearing to eat at an indoor venue on Friday in Melbourne Five Indian players have been placed in isolation after video emerged on social media of the group appearing to eat at an indoor venue on Friday in Melbourne.",
-                                                                            "${subCategoriesList[index]["content"]}",
-                                                                            textAlign: TextAlign
-                                                                                .justify,
-                                                                            style: TextStyle(
-                                                                                color: Color(0xff010101),
-                                                                                fontSize: 14,
-                                                                                letterSpacing: 0)),
-                                                                        SizedBox(
-                                                                          height:
-                                                                              10,
-                                                                        ),
-                                                                        Divider(
-                                                                          color:
-                                                                              Colors.grey[200],
-                                                                        )
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        );
-                                                      })
-                                                  : Center(
-                                                      child: Container(
-                                                        //color: Color.fromRGBO(0, 0, 0, 0.6),
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal: 20,
-                                                                vertical: 10),
-                                                        child: Text(
-                                                            "No Data Available",
-                                                            style: TextStyle(
-                                                                fontSize: 20,
-                                                                color:
-                                                                    appPrimaryMaterialColor)),
-                                                      ),
-                                                    )
+                                        children: <Widget>[
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Text(
+                                            link["title"],
+                                            textAlign: TextAlign.start,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                                letterSpacing: 0.1),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
                                         ],
                                       ),
-                                    ),
-                                  );
-                          }),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-//         ListView.builder(
-//             physics: BouncingScrollPhysics(),
-//             // scrollDirection: Axis.horizontal,
-//             itemCount: 5,
-//             itemBuilder: (BuildContext context,
-//                 int index) {
-//               return Padding(
-//                 padding: const EdgeInsets.only(
-//                     bottom: 15.0),
-//                 child: Column(
-//                   children: [
-//                     SizedBox(
-//                       height:
-//                       MediaQuery.of(context)
-//                           .padding
-//                           .top +
-//                           2,
-//                     ),
-//                     Padding(
-//                       padding:
-//                       const EdgeInsets.all(
-//                           8.0),
-//                       child: Container(
-//                         child: Stack(
-//                           alignment: Alignment
-//                               .bottomCenter,
-//                           children: [
-//                             Container(
-//                               child: Container(
-//                                 height: 420,
-//                                 width:
-//                                 MediaQuery.of(
-//                                     context)
-//                                     .size
-//                                     .width,
-//                                 child:
-//                                 Image.network(
-//                                   "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202101/WhatsApp_Image_2021-01-02_at_1_1200x768.jpeg?size=483:271",
-//                                   //"${successStoriesList[index]["storyImage"]}",
-//
-//                                   fit: BoxFit
-//                                       .contain,
-//                                 ),
-//                               ),
-//                             ),
-//                             Container(
-//                                 height: 40,
-//                                 width: MediaQuery
-//                                     .of(
-//                                     context)
-//                                     .size
-//                                     .width,
-//                                 color:
-//                                 Colors.white,
-//                                 child: Padding(
-//                                     padding: const EdgeInsets
-//                                         .only(
-//                                         left:
-//                                         15.0,
-//                                         right: 15,
-//                                         top: 25),
-//                                     child: Text(
-//                                         ""))),
-//                           ],
-//                         ),
-//                       ),
-//                     ),
-//                     Padding(
-//                       padding:
-//                       const EdgeInsets.only(
-//                         left: 15.0,
-//                         right: 15.0,
-//                       ),
-//                       child: Container(
-//                         child: Column(
-//                           crossAxisAlignment:
-//                           CrossAxisAlignment
-//                               .start,
-//                           children: <Widget>[
-//                             Padding(
-//                               padding:
-//                               const EdgeInsets
-//                                   .only(
-//                                   bottom:
-//                                   8.0),
-//                               child: Container(
-// //                                    height: 80,
-//                                   color: Colors
-//                                       .white,
-//                                   child: Row(
-//                                     mainAxisAlignment:
-//                                     MainAxisAlignment
-//                                         .spaceBetween,
-//                                     children: <
-//                                         Widget>[
-//                                       Container(
-//                                         width: 80,
-//                                         height:
-//                                         80,
-//                                         decoration:
-//                                         BoxDecoration(
-//                                           color: Colors
-//                                               .white,
-//                                           border: Border.all(
-//                                               color:
-//                                               Colors.grey[200],
-//                                               width: 1),
-//                                           borderRadius:
-//                                           BorderRadius.all(Radius.circular(20.0)),
-//                                         ),
-//                                         child: ClipRRect(
-//                                             borderRadius: BorderRadius.circular(20),
-//                                             child: Image.network(
-//                                               "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202101/WhatsApp_Image_2021-01-02_at_1_1200x768.jpeg?size=483:271",
-//                                               // "${successStoriesList[index]["storyImage"]}",
-//                                               fit:
-//                                               BoxFit.cover,
-//                                             )),
-//                                       ),
-//                                       Expanded(
-//                                         child:
-//                                         Padding(
-//                                           padding:
-//                                           const EdgeInsets.only(left: 6.0),
-//                                           child:
-//                                           Text(
-//                                             "Sourav Ganguly stable after primary angioplasty at Kolkata hospital",
-//                                             // "${successStoriesList[index]["headline"]}",
-// //                                            maxLines: 2,
-// //                                            overflow: TextOverflow.ellipsis,
-//                                             style: TextStyle(
-//                                                 color: appPrimaryMaterialColor,
-//                                                 fontWeight: FontWeight.w500,
-//                                                 fontSize: 20),
-//                                           ),
-//                                         ),
-//                                       )
-//                                     ],
-//                                   )),
-//                             ),
-//                             SizedBox(
-//                               height: 10,
-//                             ),
-//                             SocialMediaComponent(
-//                               facebook: "",
-//                               instagram: "",
-//                               linkedIn: "",
-//                               twitter: "",
-//                               whatsapp: "",
-//                             ),
-//                             Row(
-//                               mainAxisAlignment:
-//                               MainAxisAlignment
-//                                   .center,
-//                               children: [
-//                                 Text(
-//                                     "Social Media links",
-//                                     style: TextStyle(
-//                                         fontSize:
-//                                         12,
-//                                         color: Colors
-//                                             .grey)),
-//                               ],
-//                             ),
-//                             Divider(),
-//                             Text(
-//                                 "Five Indian players have been placed in isolation after video emerged on social media of the group appearing to eat at an indoor venue on Friday in Melbourne Five Indian players have been placed in isolation after video emerged on social media of the group appearing to eat at an indoor venue on Friday in Melbourne.",
-//                                 //  "${successStoriesList[index]["storyContent"]}",
-//                                 textAlign:
-//                                 TextAlign
-//                                     .justify,
-//                                 style: TextStyle(
-//                                     color: Color(
-//                                         0xff010101),
-//                                     fontSize: 14,
-//                                     letterSpacing:
-//                                     0)),
-//                             SizedBox(
-//                               height: 10,
-//                             ),
-//                             Divider(
-//                               color: Colors
-//                                   .grey[200],
-//                             )
-//                           ],
-//                         ),
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               );
-//             })
-      /*ListView.builder(
-            physics: BouncingScrollPhysics(),
-            // scrollDirection: Axis.horizontal,
-            itemCount: 5,
-            itemBuilder: (BuildContext context, int index) {
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 15.0),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).padding.top + 2,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        child: Stack(
-                          alignment: Alignment.bottomCenter,
-                          children: [
-                            Container(
-                              child: Container(
-                                height: 420,
-                                width: MediaQuery.of(context).size.width,
-                                child: Image.network(
-                                  "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202101/WhatsApp_Image_2021-01-02_at_1_1200x768.jpeg?size=483:271",
-                                  //"${successStoriesList[index]["storyImage"]}",
-
-                                  fit: BoxFit.contain,
-                                ),
-                              ),
-                            ),
-                            Container(
-                                height: 40,
-                                width: MediaQuery.of(context).size.width,
-                                color: Colors.white,
-                                child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 15.0, right: 15, top: 25),
-                                    child: Text(""))),
-//                               Positioned(
-//                                   bottom: 15.0,
-//                                   right: 10.0,
-//                                   child: GestureDetector(
-//                                     onTap: () {
-//                                       // Navigator.push(context,MaterialPageRoute(builder:(context) =>Offers()));
-//                                     },
-//                                     child: Container(
-//                                       height: 74,
-//                                       width: 74,
-//                                       decoration: BoxDecoration(
-//                                         color: Colors.white,
-//                                         shape: BoxShape.circle,
-//                                         boxShadow: [
-//                                           BoxShadow(
-//                                               blurRadius: 2,
-//                                               color: Color(0xff16B8FF)
-//                                                   .withOpacity(0.2),
-//                                               spreadRadius: 3,
-//                                               offset: Offset(1, 6))
-//                                         ],
-//                                       ),
-//                                       child: CircleAvatar(
-//                                           radius: 30.0,
-//                                           backgroundColor: Colors.white,
-//                                           child: Icon(Icons.star,
-//                                               color: appPrimaryMaterialColor,
-//                                               size: 45.0)
-// //                            Image.asset("assets/Lheart.png"),
-//                                           //Icon(Icons.favorite,color: Colors.red,size: 45.0,),
-//                                           ),
-//                                     ),
-//                                   )
-// //                      child: CircleAvatar(
-// //                        radius: 40,
-// //                          backgroundColor: Colors.white,
-// //                          child: Icon(Icons.favorite,color: Colors.red,size: 45.0,))
-//                                   ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 15.0,
-                        right: 15.0,
-                      ),
-                      child: Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0),
-                              child: Container(
-//                                    height: 80,
-                                  color: Colors.white,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Container(
-                                        width: 80,
-                                        height: 80,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          border: Border.all(
-                                              color: Colors.grey[200],
-                                              width: 1),
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(20.0)),
-                                        ),
-                                        child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            child: Image.network(
-                                              "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202101/WhatsApp_Image_2021-01-02_at_1_1200x768.jpeg?size=483:271",
-                                              // "${successStoriesList[index]["storyImage"]}",
-                                              fit: BoxFit.cover,
-                                            )),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 6.0),
-                                          child: Text(
-                                            "Sourav Ganguly stable after primary angioplasty at Kolkata hospital",
-                                            // "${successStoriesList[index]["headline"]}",
-//                                            maxLines: 2,
-//                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                                color: appPrimaryMaterialColor,
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 20),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  )),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            SocialMediaComponent(
-                              facebook: "",
-                              instagram: "",
-                              linkedIn: "",
-                              twitter: "",
-                              whatsapp: "",
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Social Media links",
-                                    style: TextStyle(
-                                        fontSize: 12, color: Colors.grey)),
+                                    )),
                               ],
                             ),
-                            Divider(),
-                            Text(
-                                "Five Indian players have been placed in isolation after video emerged on social media of the group appearing to eat at an indoor venue on Friday in Melbourne Five Indian players have been placed in isolation after video emerged on social media of the group appearing to eat at an indoor venue on Friday in Melbourne.",
-                                //  "${successStoriesList[index]["storyContent"]}",
-                                textAlign: TextAlign.justify,
-                                style: TextStyle(
-                                    color: Color(0xff010101),
-                                    fontSize: 14,
-                                    letterSpacing: 0)),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Divider(
-                              color: Colors.grey[200],
-                            )
-                          ],
-                        ),
+                          );
+                        }).toList(),
                       ),
                     ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 10.0, bottom: 10, left: 5),
+                      child: Text(
+                        "    ",
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: appPrimaryMaterialColor),
+                      ),
+                    ),
+                    isLoadingCatNews == true
+                        ? Center(
+                            child: Padding(
+                            padding: const EdgeInsets.only(top: 30.0),
+                            child: LoadingBlueComponent(),
+                          ))
+                        : subCatNews.length <= 0
+                            ? Center(child: Text("No Data Found"))
+                            : ListView.builder(
+                                physics: NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                // scrollDirection: Axis.vertical,
+                                itemCount: subCatNews.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return FollowingNewsComponent(
+                                    newsData: subCatNews[index],
+                                    isBookmark: subCatNews[index]["bookmark"],
+                                  );
+                                })
                   ],
                 ),
-              );
-            })
-       */
+              ),
+            ),
     );
   }
 
-  _newsCatTab() async {
+  _newsBanner(var subcatName) async {
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        Services.PostForList(api_name: 'admin/getbussCategory').then(
-            (tabResponseList) async {
+        setState(() {
+          isLoadingCat = true;
+        });
+
+        FormData body = FormData.fromMap({"news_category": "${subcatName}"});
+        Services.PostForList1(api_name: 'custom/slider_news', body: body).then(
+            (subCatResponseList) async {
           setState(() {
             isLoadingCat = false;
           });
-          if (tabResponseList.length > 0) {
+          if (subCatResponseList.length > 0) {
             setState(() {
-              subCategoriesTab = tabResponseList;
+              subCatBanner = subCatResponseList;
+
               //set "data" here to your variable
             });
-
-            _newsCategory(tabResponseList[0]["_id"]);
-            print("===================");
-            print(tabResponseList[0]["_id"]);
-            _tabCon();
+            log("News Banners ${subCatBanner}");
+            // for (var i = 0; i <= subCatResponseList.length; i++) {
+            //   //  if (subCatResponseList[i]["trending"] == true) {
+            //   setState(() {
+            //     imgList.add(subCatResponseList[i]);
+            //     tabController =
+            //         TabController(length: imgList.length, vsync: this);
+            //   });
+            // }
+            // }
           } else {
             setState(() {
-              isLoadingCat = false;
+              subCatBanner = [];
             });
             Fluttertoast.showToast(msg: "Data Not Found");
           }
@@ -777,22 +281,23 @@ class _BussinessStoryScreenState extends State<BussinessStoryScreen>
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         setState(() {
-          isLoadingNews = true;
+          isLoadingCatNews = true;
+        });
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        FormData body = FormData.fromMap({
+          "news_category": "${subcatId}",
+          "user_id": prefs.getString(Session.CustomerId)
         });
 
-        var body = {
-          "categoryid": "${subcatId}",
-        };
-
         // print(body.fields);
-        Services.PostForList(api_name: 'admin/getstorybyid', body: body).then(
-            (subCatResponseList) async {
+        Services.PostForList1(api_name: 'custom/category_wise_news', body: body)
+            .then((subCatResponseList) async {
           setState(() {
-            isLoadingNews = false;
+            isLoadingCatNews = false;
           });
           if (subCatResponseList.length > 0) {
             setState(() {
-              subCategoriesList = subCatResponseList;
+              subCatNews = subCatResponseList;
 
               //set "data" here to your variable
             });
@@ -807,14 +312,14 @@ class _BussinessStoryScreenState extends State<BussinessStoryScreen>
             // }
           } else {
             setState(() {
-              subCategoriesList = [];
+              subCatNews = [];
             });
             Fluttertoast.showToast(msg: "Data Not Found");
             //show "data not found" in dialog
           }
         }, onError: (e) {
           setState(() {
-            isLoadingNews = false;
+            isLoadingCatNews = false;
           });
           print("error on call -> ${e.message}");
           Fluttertoast.showToast(msg: "Something Went Wrong");
