@@ -84,16 +84,16 @@ class _DirectoryScreenState extends State<DirectoryScreen> {
             ),
           ),
         ),
-        bottomNavigationBar: Container(
-          height: 50,
-          color: appPrimaryMaterialColor[800],
-          child: Center(
-              child: Text(
-            "Become Premium Member",
-            style: TextStyle(
-                color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
-          )),
-        ),
+        // bottomNavigationBar: Container(
+        //   height: 50,
+        //   color: appPrimaryMaterialColor[800],
+        //   child: Center(
+        //       child: Text(
+        //     "Become Premium Member",
+        //     style: TextStyle(
+        //         color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
+        //   )),
+        // ),
         body: Column(
           children: [
             Padding(
