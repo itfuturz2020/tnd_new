@@ -1,22 +1,28 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:the_national_dawn/DigitalCommon/Constants.dart' as cnst;
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:the_national_dawn/DigitalCommon/Services.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
+import 'package:the_national_dawn/DigitalComponent/ImagePickerHandlerComponent.dart';
 
 class AddService extends StatefulWidget {
   @override
   _AddServiceState createState() => _AddServiceState();
 }
 
-class _AddServiceState extends State<AddService> {
+class _AddServiceState extends State<AddService> with TickerProviderStateMixin, ImagePickerListener {
   bool isLoading = false;
   String MemberId = "";
+  File _image;
+  AnimationController _controller;
+  ImagePickerHandler imagePicker;
   TextEditingController txtTitle = new TextEditingController();
   TextEditingController txtDesc = new TextEditingController();
 
@@ -26,6 +32,15 @@ class _AddServiceState extends State<AddService> {
   void initState() {
     super.initState();
     GetLocalData();
+
+    _controller = new AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+
+    imagePicker = new ImagePickerHandler(this, _controller);
+    imagePicker.init();
+
   }
 
   GetLocalData() async {
@@ -41,18 +56,56 @@ class _AddServiceState extends State<AddService> {
 //by rinki
   SaveService() async {
     if (txtTitle.text != '' && txtDesc.text != '') {
+      setState(() {
+        isLoading = true;
+      });
       try {
         final result = await InternetAddress.lookup('google.com');
         if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
           setState(() {
             isLoading = true;
           });
+          String filename = "";
+          String filePath = "";
+          File compressedFile;
+          if (_image != null) {
+            ImageProperties properties =
+            await FlutterNativeImage.getImageProperties(_image.path);
+
+            compressedFile = await FlutterNativeImage.compressImage(
+              _image.path,
+              quality: 80,
+              targetWidth: 600,
+              targetHeight:
+              (properties.height * 600 / properties.width).round(),
+            );
+
+            filename = _image.path.split('/').last;
+            filePath = compressedFile.path;
+          }
           SharedPreferences prefs = await SharedPreferences.getInstance();
-          var body = {
+
+          FormData body = FormData.fromMap({
             "title": txtTitle.text.replaceAll("'", "''"),
             "description": txtDesc.text.replaceAll("'", "''"),
             "memberid": prefs.getString(cnst.Session.MemberId),
-          };
+            "serviceimg" : (filePath != null && filePath != '')
+                ? await MultipartFile.fromFile(filePath,
+                filename: filename.toString())
+                : null,
+
+          });
+
+          // var body = {
+          //   "title": txtTitle.text.replaceAll("'", "''"),
+          //   "description": txtDesc.text.replaceAll("'", "''"),
+          //   "memberid": prefs.getString(cnst.Session.MemberId),
+          //   "serviceimg" : (filePath != null && filePath != '')
+          // ? await MultipartFile.fromFile(filePath,
+          // filename: filename.toString())
+          //     : null,
+
+          // };
           log("====${body}");
           log(prefs.getString(Session.CustomerId));
           Services.PostForList4(api_name: 'card/addservice', body: body).then(
@@ -198,6 +251,52 @@ class _AddServiceState extends State<AddService> {
                   //height: 40,
                   width: MediaQuery.of(context).size.width - 40,
                 ),
+
+
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: GestureDetector(
+                    onTap: () => imagePicker.showDialog(context),
+                    child: new Center(
+                      child: _image == null
+                          ? Container(
+                          height: MediaQuery.of(context).size.width - 100,
+                          width: MediaQuery.of(context).size.width - 100,
+                          decoration: new BoxDecoration(
+                            //  color: const Color(0xff7c94b6),
+                            border: Border.all(
+                                color: cnst.buttoncolor, width: 1.0),
+                            borderRadius: new BorderRadius.all(
+                                const Radius.circular(60.0)),
+                          ),
+                          child: Center(child: Text("Select Image"))
+
+                        // Image.asset(
+                        //   "images/logo.png",
+                        //   height: MediaQuery.of(context).size.width - 100,
+                        //   width: MediaQuery.of(context).size.width - 100,
+                        // ),
+                      )
+                          : new Container(
+                        height: MediaQuery.of(context).size.width - 100,
+                        width: MediaQuery.of(context).size.width - 100,
+                        decoration: new BoxDecoration(
+                          color: const Color(0xff7c94b6),
+                          image: new DecorationImage(
+                            image: new ExactAssetImage(_image.path),
+                            fit: BoxFit.cover,
+                          ),
+                          border: Border.all(
+                              color: cnst.buttoncolor, width: 2.0),
+                          borderRadius: new BorderRadius.all(
+                              const Radius.circular(60.0)),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+
                 Container(
                   width: MediaQuery.of(context).size.width,
                   margin: EdgeInsets.only(top: 10),
@@ -244,4 +343,12 @@ class _AddServiceState extends State<AddService> {
       );
     }
   }
+
+  @override
+  userImage(File _image) {
+    setState(() {
+      this._image = _image;
+    });
+  }
+
 }

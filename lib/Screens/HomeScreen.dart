@@ -339,9 +339,9 @@ class _HomeScreenState extends State<HomeScreen>
       "screenName": "/BussinessStoryScreen",
     },
     {
-      "lable": " IBC",
+      "lable": " E-Paper",
       "image": "assets/directory.png",
-      "screenName": "/DirectoryScreen",
+      "screenName": "/PaperScreen",
     },
     {
       "lable": "Offers",
@@ -627,7 +627,7 @@ class _HomeScreenState extends State<HomeScreen>
               color: appPrimaryMaterialColor,
             ),
             Container(
-              height: 180,
+              height: 300,
               width: MediaQuery.of(context).size.width,
               //margin: EdgeInsets.all(10),
 //                decoration: BoxDecoration(

@@ -8,6 +8,8 @@ import 'package:the_national_dawn/DigitalCommon/Constants.dart' as cnst;
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:geocoder/geocoder.dart';
+import 'package:the_national_dawn/Common/Constants.dart';
+
 
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
@@ -42,6 +44,7 @@ class _ProfileDetailState extends State<ProfileDetail>
 
   ImageListener _listener;
   String MemberId = "";
+ // String Gender = "";
 
   bool showProfileEdit = false;
   bool isProfileLoading = true;
@@ -117,6 +120,7 @@ class _ProfileDetailState extends State<ProfileDetail>
   @override
   void initState() {
     super.initState();
+    userInfo();
     // GetProfileData();
     //  _getUpdatedProfile();
     //checkFirstTime();
@@ -364,6 +368,12 @@ class _ProfileDetailState extends State<ProfileDetail>
   //   }
   // }
 
+  userInfo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var Gender = prefs.getString(Session.gender);
+    print("DDDDDDDDDdddd---------${Gender}");
+  }
+
   SetDataToController() async {
     //Profile Data
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -434,6 +444,7 @@ class _ProfileDetailState extends State<ProfileDetail>
       MemberId = prefs.getString(cnst.Session.MemberId);
     });
     prefs.setString(Session.CustomerName, prefs.getString(cnst.Session.name));
+
   }
 
   // SetDataToController1() async {
@@ -595,7 +606,7 @@ class _ProfileDetailState extends State<ProfileDetail>
         //child: profile,
       );
     }
-
+    userInfo();
     return Scaffold(
         body:
             // isProfileLoading == true
@@ -1051,12 +1062,11 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                   const EdgeInsets
                                                                           .only(
                                                                       left: 10),
-                                                              child: Text(
-                                                                  txtName.text !=
-                                                                          null
-                                                                      ? txtName
-                                                                          .text
-                                                                      : "",
+                                                              child: Text("${txtName.text !=
+                                                                  null
+                                                                  ? txtName
+                                                                  .text
+                                                                  : ""}",
                                                                   style: TextStyle(
                                                                       color: Colors
                                                                               .grey[
