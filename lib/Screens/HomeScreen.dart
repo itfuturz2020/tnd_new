@@ -367,14 +367,20 @@ class _HomeScreenState extends State<HomeScreen>
     },
     {
       "lable": "Bookmark",
-      "image": "assets/bookmark.png",
+      "image": "assets/category.png",
       "screenName": "/BookMarkScreen",
     },
+
     {
-      "lable": "Category",
-      "image": "assets/category.png",
-      "screenName": "/CategoryScreen",
-    },
+      "lable": "IBC",
+      "image": "assets/directory.png",
+      "screenName": "/DirectoryScreen"
+    }
+    // {
+    //   "lable": "Category",
+    //   "image": "assets/category.png",
+    //   "screenName": "/CategoryScreen",
+    // },
   ];
 
   List imgList = [];

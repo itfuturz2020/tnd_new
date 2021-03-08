@@ -73,6 +73,7 @@ import 'GuestScreens/VideoScreen.dart';
 import 'Screens/AddOfferScreen.dart';
 import 'Screens/CompleteScreen.dart';
 import 'Screens/DailyNewsDashBoard.dart';
+import 'Screens/EPaperScreen.dart';
 import 'Screens/EnquiryForm.dart';
 import 'Screens/MyOfferScreen.dart';
 import 'Dealbox/OfferPage.dart';
@@ -155,6 +156,7 @@ class _MyAppState extends State<MyApp> {
         '/CategoryScreen': (context) => CategoryScreen(),
         '/StoriesScreen': (context) => StoriesScreen(),
         '/OneTwoOneScreen': (context) => OneTwoOneScreen(),
+        '/PaperScreen': (context) => PaperScreen(),
         '/DirectoryScreen': (context) => DirectoryScreen(),
         '/NetworkScreen': (context) => NetworkScreen(),
         '/DailyNewScreen': (context) => DailyNewScreen(),

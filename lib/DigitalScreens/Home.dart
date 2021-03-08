@@ -45,6 +45,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   String ShareMsg = "";
   String txtName;
   String txtCompany;
+  bool isVerified = false;
 
   Map<String, dynamic> profileList = {};
   List digitalList = [];
@@ -451,6 +452,13 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               //set "data" here to your variable
             });
             print("=================================11");
+            print("=================================GIRISH THAKUR");
+            prefs.setBool(Session.isVerified, ResponseList[0]["isVerified"]);
+            print("${prefs.getBool(Session.isVerified)}");
+            setState(() {
+              isVerified = prefs.getBool(Session.isVerified);
+            });
+            print("=================================GIRISH THAKUR${isVerified}");
             // CreateDigital(profileList["mobile"], profileList["name"],
             //     profileList["email"]);
             CreateDigital(
@@ -950,7 +958,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                 ? MainAxisAlignment.spaceEvenly
                                 : MainAxisAlignment.center,
                             children: <Widget>[
-                              SizedBox(
+                            isVerified == true ?  SizedBox(
                                 width: MediaQuery.of(context).size.width / 2.5,
                                 child: RaisedButton(
                                     padding:
@@ -990,7 +998,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                     shape: new RoundedRectangleBorder(
                                         borderRadius:
                                             new BorderRadius.circular(30.0))),
-                              ),
+                              ): Container(),
                               (IsActivePayment == true) &&
                                       (MemberType.toLowerCase() == "trial" ||
                                           checkValidity() == false)
