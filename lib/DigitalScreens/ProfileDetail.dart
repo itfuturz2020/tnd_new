@@ -37,6 +37,8 @@ class _ProfileDetailState extends State<ProfileDetail>
 
   File _imageCover;
   bool _editCoverImg = false;
+  File _imageLogo;
+  bool _editCoverLogo = false;
   List profileDataList = [];
 
   File _imageProfile;
@@ -161,7 +163,25 @@ class _ProfileDetailState extends State<ProfileDetail>
         String filePath1 = "";
         String filename2 = "";
         String filePath2 = "";
+        String filename3 = "";
+        String filePath3 = "";
         File compressedFile;
+
+        if (_imageLogo != null) {
+          ImageProperties properties =
+          await FlutterNativeImage.getImageProperties(_imageLogo.path);
+
+          compressedFile = await FlutterNativeImage.compressImage(
+            _imageLogo.path,
+            quality: 80,
+            targetWidth: 600,
+            targetHeight: (properties.height * 600 / properties.width).round(),
+          );
+
+          filename3 = _imageLogo.path.split('/').last;
+          filename3 = compressedFile.path;
+        }
+
         if (_imageCover != null) {
           ImageProperties properties =
               await FlutterNativeImage.getImageProperties(_imageCover.path);
@@ -223,6 +243,10 @@ class _ProfileDetailState extends State<ProfileDetail>
           "coverimg": (filePath1 != null && filePath1 != '')
               ? await MultipartFile.fromFile(filePath1,
                   filename: filename1.toString())
+              : null,
+          "didiCardLogo": (filePath3 != null && filePath3 != '')
+              ? await MultipartFile.fromFile(filePath3,
+              filename: filename3.toString())
               : null,
           "memberid": prefs.getString(cnst.Session.MemberId)
         });
@@ -744,7 +768,7 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                     .size
                                                                     .width -
                                                                 30) /
-                                                            2,
+                                                            3,
                                                     child: Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
@@ -849,7 +873,7 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                     .size
                                                                     .width -
                                                                 30) /
-                                                            2,
+                                                            3,
                                                   ),
                                             //Divider
                                             Container(
@@ -869,7 +893,7 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                     .size
                                                                     .width -
                                                                 30) /
-                                                            2,
+                                                            3,
                                                     child: Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
@@ -973,8 +997,136 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                     .size
                                                                     .width -
                                                                 30) /
-                                                            2,
-                                                  )
+                                                            3,
+                                                  ),
+
+                                            //Divider
+                                            Container(
+                                              height: 30,
+                                              width: 3,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                  BorderRadius.all(
+                                                      Radius.circular(10))),
+                                            ),
+                                            //Divider End
+
+                                            _editCoverLogo
+                                                ? Container(
+                                              width:
+                                              (MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                                  30) /
+                                                  3,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment
+                                                    .spaceEvenly,
+                                                children: <Widget>[
+                                                  GestureDetector(
+                                                      child: Icon(
+                                                          Icons
+                                                              .done_outline,
+                                                          color: Colors
+                                                              .white),
+                                                      onTap: () async {
+                                                        // String img = '';
+                                                        //
+                                                        // if (_imageCover !=
+                                                        //     null) {
+                                                        //   setState(() {
+                                                        //     isLoading =
+                                                        //         true;
+                                                        //   });
+                                                        //   List<int>
+                                                        //       imageBytes =
+                                                        //       await _imageCover
+                                                        //           .readAsBytesSync();
+                                                        //   String
+                                                        //       base64Image =
+                                                        //       base64Encode(
+                                                        //           imageBytes);
+                                                        //   img =
+                                                        //       base64Image;
+                                                        //   setState(() {
+                                                        //     CoverImage1 =
+                                                        //         img;
+                                                        //   });
+                                                        //
+                                                        //   SharedPreferences
+                                                        //       prefs =
+                                                        //       await SharedPreferences
+                                                        //           .getInstance();
+                                                        //   await prefs.setString(
+                                                        //       cnst.Session
+                                                        //           .coverimg,
+                                                        //       CoverImage1);
+                                                        //
+                                                        //   setState(() {
+                                                        //     _editCoverImg =
+                                                        //         false;
+                                                        //   });
+                                                        UpdateProfile();
+                                                        setState(() {
+                                                          _editCoverImg =
+                                                          false;
+                                                        });
+                                                        // updateProfile(
+                                                        //         'CoverImage',
+                                                        //         img)
+                                                        //     .then(
+                                                        //         (val) {
+                                                        //   setState(() {
+                                                        //     _editCoverImg =
+                                                        //         false;
+                                                        //   });
+                                                        // }, onError: (e) {
+                                                        //   setState(() {
+                                                        //     _editCoverImg =
+                                                        //         false;
+                                                        //   });
+                                                        // });
+                                                        // }
+                                                      }),
+                                                  GestureDetector(
+                                                      child: Icon(
+                                                          Icons.close,
+                                                          color: Colors
+                                                              .white),
+                                                      onTap: () async {
+                                                        setState(() {
+                                                          _editCoverLogo =
+                                                          false;
+                                                          _imageLogo =
+                                                          null;
+                                                        });
+                                                      })
+                                                ],
+                                              ),
+                                            )
+                                                : MaterialButton(
+                                              onPressed: () {
+                                                _logoImagePopup(context);
+                                              },
+                                              child: Text(
+                                                "Edit Logo",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                    FontWeight.w600),
+                                              ),
+                                              minWidth:
+                                              (MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                                  30) /
+                                                  3,
+                                            )
+
+
                                           ],
                                         ))
                                   ],
@@ -10169,6 +10321,45 @@ class _ProfileDetailState extends State<ProfileDetail>
                         )));*/
               }
             }));
+  }
+
+  void _logoImagePopup(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return Container(
+            child: new Wrap(
+              children: <Widget>[
+                new ListTile(
+                    leading: new Icon(Icons.camera_alt),
+                    title: new Text('Camera'),
+                    onTap: () async {
+                      var image = await ImagePicker.pickImage(
+                          source: ImageSource.camera);
+                      if (image != null)
+                        setState(() {
+                          _imageLogo = image;
+                          _editCoverLogo = true;
+                        });
+                      Navigator.pop(context);
+                    }),
+                new ListTile(
+                    leading: new Icon(Icons.photo),
+                    title: new Text('Gallery'),
+                    onTap: () async {
+                      var image = await ImagePicker.pickImage(
+                          source: ImageSource.gallery);
+                      if (image != null)
+                        setState(() {
+                          _imageLogo = image;
+                          _editCoverLogo = true;
+                        });
+                      Navigator.pop(context);
+                    }),
+              ],
+            ),
+          );
+        });
   }
 
   void _coverImagePopup(context) {

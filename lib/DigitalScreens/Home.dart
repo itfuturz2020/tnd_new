@@ -46,6 +46,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   String txtName;
   String txtCompany;
   bool isVerified = false;
+  bool isMember = false;
 
   Map<String, dynamic> profileList = {};
   List digitalList = [];
@@ -457,6 +458,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             print("${prefs.getBool(Session.isVerified)}");
             setState(() {
               isVerified = prefs.getBool(Session.isVerified);
+              isMember = prefs.getBool(Session.isVerified);
             });
             print("=================================GIRISH THAKUR${isVerified}");
             // CreateDigital(profileList["mobile"], profileList["name"],
@@ -958,7 +960,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                 ? MainAxisAlignment.spaceEvenly
                                 : MainAxisAlignment.center,
                             children: <Widget>[
-                            isVerified == true ?  SizedBox(
+                            isMember == true ?  SizedBox(
                                 width: MediaQuery.of(context).size.width / 2.5,
                                 child: RaisedButton(
                                     padding:

@@ -373,7 +373,7 @@ class _HomeScreenState extends State<HomeScreen>
 
     {
       "lable": "IBC",
-      "image": "assets/directory.png",
+      "image": "assets/ibc1.png",
       "screenName": "/DirectoryScreen"
     }
     // {
