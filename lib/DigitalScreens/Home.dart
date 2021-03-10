@@ -45,6 +45,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   String ShareMsg = "";
   String txtName;
   String txtCompany;
+  String ismember;
   bool isVerified = false;
   bool isMember = false;
 
@@ -86,7 +87,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       String MapLocation,
       String ShareMsg1,
       String AboutComp,
-      String CoverImg1) async {
+      String CoverImg1,
+      String LogoImage) async {
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
@@ -121,7 +123,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           "about_company": AboutComp,
           "imagecode": Image,
           "covering": CoverImg1,
-          "website": CompanyWebsite
+          "website": CompanyWebsite,
+          "digiCardLogo": LogoImage
         });
 
         log(prefs.getString(Session.CustomerId));
@@ -212,6 +215,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 cnst.Session.whatsapp, subCatResponseList[0]["whatsapp"]);
             await prefs.setString(cnst.Session.company_name,
                 subCatResponseList[0]["company_name"]);
+            await prefs.setString(
+                cnst.Session.LogoImage, subCatResponseList[0]["digiCardLogo"]);
 
             //   GetProfileData();
             //Fluttertoast.showToast(msg: "Login successfully");
@@ -441,6 +446,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         };
         print("=================================");
         print(prefs.getString(Session.CustomerId));
+        print(prefs.getString(Session.ismember));
+        setState(() {
+          ismember = prefs.getString(Session.ismember);
+        });
 
         Services.PostForList(api_name: 'admin/getsingleid', body: body).then(
             (ResponseList) async {
@@ -460,7 +469,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               isVerified = prefs.getBool(Session.isVerified);
               isMember = prefs.getBool(Session.isVerified);
             });
-            print("=================================GIRISH THAKUR${isVerified}");
+            print(
+                "=================================GIRISH THAKUR${isVerified}");
             // CreateDigital(profileList["mobile"], profileList["name"],
             //     profileList["email"]);
             CreateDigital(
@@ -488,7 +498,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 "",
                 "",
                 profileList["about_business"],
-                profileList["img"]);
+                profileList["img"],
+                "");
 
             print("${ResponseList[0]}");
           } else {
@@ -855,104 +866,114 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                           Padding(
                             padding: EdgeInsets.only(top: 20),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width / 2.5,
-                                child: RaisedButton(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 20),
-                                    elevation: 5,
-                                    textColor: Colors.white,
-                                    color: cnst.buttoncolor,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        Icon(
-                                          Icons.share,
-                                          color: Colors.white,
-                                          size: 16,
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10),
-                                          child: Text("Share",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 14)),
-                                        )
-                                      ],
-                                    ),
-                                    onPressed: () {
-                                      String profileUrl = cnst.profileUrl
-                                          .replaceAll("#id", DigitalId);
-                                      Share.share(profileUrl);
+                          ismember == "true"
+                              ? Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width /
+                                          2.5,
+                                      child: RaisedButton(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 20),
+                                          elevation: 5,
+                                          textColor: Colors.white,
+                                          color: cnst.buttoncolor,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              Icon(
+                                                Icons.share,
+                                                color: Colors.white,
+                                                size: 16,
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 10),
+                                                child: Text("Share",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontSize: 14)),
+                                              )
+                                            ],
+                                          ),
+                                          onPressed: () {
+                                            String profileUrl = cnst.profileUrl
+                                                .replaceAll("#id", DigitalId);
+                                            Share.share(profileUrl);
 
-                                      // bool val = checkValidity();
-                                      // Navigator.of(context).push(
-                                      //   PageRouteBuilder(
-                                      //     opaque: false,
-                                      //     pageBuilder:
-                                      //         (BuildContext context, _, __) =>
-                                      //             CardShareComponent(
-                                      //       memberId: DigitalId,
-                                      //       memberName: Name,
-                                      //       isRegular: val,
-                                      //       memberType: MemberType,
-                                      //       shareMsg: ShareMsg,
-                                      //       IsActivePayment: IsActivePayment,
-                                      //     ),
-                                      //   ),
-                                      // );
-                                    },
-                                    shape: new RoundedRectangleBorder(
-                                        borderRadius:
-                                            new BorderRadius.circular(30.0))),
-                              ),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width / 2.5,
-                                child: RaisedButton(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 20),
-                                    elevation: 5,
-                                    textColor: Colors.white,
-                                    color: cnst.buttoncolor,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        Image.asset("assets/logo.png",
-                                            height: 24, width: 24),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10),
-                                          child: Text("Refer",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 14)),
-                                        )
-                                      ],
+                                            // bool val = checkValidity();
+                                            // Navigator.of(context).push(
+                                            //   PageRouteBuilder(
+                                            //     opaque: false,
+                                            //     pageBuilder:
+                                            //         (BuildContext context, _, __) =>
+                                            //             CardShareComponent(
+                                            //       memberId: DigitalId,
+                                            //       memberName: Name,
+                                            //       isRegular: val,
+                                            //       memberType: MemberType,
+                                            //       shareMsg: ShareMsg,
+                                            //       IsActivePayment: IsActivePayment,
+                                            //     ),
+                                            //   ),
+                                            // );
+                                          },
+                                          shape: new RoundedRectangleBorder(
+                                              borderRadius:
+                                                  new BorderRadius.circular(
+                                                      30.0))),
                                     ),
-                                    onPressed: () {
-                                      // String withrefercode = cnst.inviteFriMsg
-                                      //     .replaceAll("#refercode", ReferCode);
-                                      String withappurl = cnst.inviteFriMsg
-                                          .replaceAll(
-                                              "#appurl", cnst.playstoreUrl);
-                                      String withmemberid = withappurl
-                                          .replaceAll("#id", DigitalId);
-                                      Share.share(withmemberid);
-                                    },
-                                    shape: new RoundedRectangleBorder(
-                                        borderRadius:
-                                            new BorderRadius.circular(30.0))),
-                              )
-                            ],
-                          ),
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width /
+                                          2.5,
+                                      child: RaisedButton(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 20),
+                                          elevation: 5,
+                                          textColor: Colors.white,
+                                          color: cnst.buttoncolor,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              Image.asset("assets/logo.png",
+                                                  height: 24, width: 24),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 10),
+                                                child: Text("Refer",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontSize: 14)),
+                                              )
+                                            ],
+                                          ),
+                                          onPressed: () {
+                                            // String withrefercode = cnst.inviteFriMsg
+                                            //     .replaceAll("#refercode", ReferCode);
+                                            String withappurl =
+                                                cnst.inviteFriMsg.replaceAll(
+                                                    "#appurl",
+                                                    cnst.playstoreUrl);
+                                            String withmemberid = withappurl
+                                                .replaceAll("#id", DigitalId);
+                                            Share.share(withmemberid);
+                                          },
+                                          shape: new RoundedRectangleBorder(
+                                              borderRadius:
+                                                  new BorderRadius.circular(
+                                                      30.0))),
+                                    )
+                                  ],
+                                )
+                              : Container(),
                           Row(
                             mainAxisAlignment: (IsActivePayment == true) &&
                                     (MemberType.toLowerCase() == "trial" ||
@@ -960,47 +981,52 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                 ? MainAxisAlignment.spaceEvenly
                                 : MainAxisAlignment.center,
                             children: <Widget>[
-                            isMember == true ?  SizedBox(
-                                width: MediaQuery.of(context).size.width / 2.5,
-                                child: RaisedButton(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 20),
-                                    elevation: 5,
-                                    textColor: Colors.white,
-                                    color: cnst.buttoncolor,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        Icon(
-                                          Icons.remove_red_eye,
-                                          color: Colors.white,
-                                          size: 16,
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10),
-                                          child: Text("View Card",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 14)),
-                                        )
-                                      ],
-                                    ),
-                                    onPressed: () async {
-                                      String profileUrl = cnst.profileUrl
-                                          .replaceAll("#id", DigitalId);
-                                      if (await canLaunch(profileUrl)) {
-                                        await launch(profileUrl);
-                                      } else {
-                                        throw 'Could not launch $profileUrl';
-                                      }
-                                    },
-                                    shape: new RoundedRectangleBorder(
-                                        borderRadius:
-                                            new BorderRadius.circular(30.0))),
-                              ): Container(),
+                              ismember == "true"
+                                  ? SizedBox(
+                                      width: MediaQuery.of(context).size.width /
+                                          2.5,
+                                      child: RaisedButton(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 20),
+                                          elevation: 5,
+                                          textColor: Colors.white,
+                                          color: cnst.buttoncolor,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              Icon(
+                                                Icons.remove_red_eye,
+                                                color: Colors.white,
+                                                size: 16,
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 10),
+                                                child: Text("View Card",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontSize: 14)),
+                                              )
+                                            ],
+                                          ),
+                                          onPressed: () async {
+                                            String profileUrl = cnst.profileUrl
+                                                .replaceAll("#id", DigitalId);
+                                            if (await canLaunch(profileUrl)) {
+                                              await launch(profileUrl);
+                                            } else {
+                                              throw 'Could not launch $profileUrl';
+                                            }
+                                          },
+                                          shape: new RoundedRectangleBorder(
+                                              borderRadius:
+                                                  new BorderRadius.circular(
+                                                      30.0))),
+                                    )
+                                  : Container(),
                               (IsActivePayment == true) &&
                                       (MemberType.toLowerCase() == "trial" ||
                                           checkValidity() == false)

@@ -346,7 +346,7 @@ class _HomeScreenState extends State<HomeScreen>
     {
       "lable": "Offers",
       "image": "assets/offers.png",
-     // "screenName": "/OfferScreen",
+      // "screenName": "/OfferScreen",
       "screenName": "/OfferPage",
     },
     {
@@ -694,7 +694,7 @@ class _HomeScreenState extends State<HomeScreen>
                           child: new ClipRRect(
                               // borderRadius: BorderRadius.circular(8.0),
                               child: link['featured_img_src'] == null
-                                  ? Image.asset('assets/LOGO1.png')
+                                  ? Image.asset('assets/appLogo.png')
                                   : Image.network(
                                       link['featured_img_src'],
                                       width: MediaQuery.of(context).size.width,

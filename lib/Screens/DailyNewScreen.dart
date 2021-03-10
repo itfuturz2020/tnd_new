@@ -302,7 +302,7 @@ class _DailyNewScreenState extends State<DailyNewScreen>
                                                               child: link['featured_img_src'] ==
                                                                       null
                                                                   ? Image.asset(
-                                                                      'assets/LOGO1.png')
+                                                                      'assets/appLogo.png')
                                                                   : Image
                                                                       .network(
                                                                       link[

@@ -256,7 +256,7 @@ class _ExploreScreenState extends State<ExploreScreen>
                                                                           null
                                                                       ? Center(
                                                                           child:
-                                                                              Image.asset('assets/LOGO1.png'),
+                                                                              Image.asset('assets/appLogo.png'),
                                                                         )
                                                                       : Image
                                                                           .network(

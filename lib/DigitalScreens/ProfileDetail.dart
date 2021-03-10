@@ -10,7 +10,6 @@ import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:geocoder/geocoder.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
 
-
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 import 'package:progress_dialog/progress_dialog.dart';
@@ -46,7 +45,7 @@ class _ProfileDetailState extends State<ProfileDetail>
 
   ImageListener _listener;
   String MemberId = "";
- // String Gender = "";
+  // String Gender = "";
 
   bool showProfileEdit = false;
   bool isProfileLoading = true;
@@ -118,6 +117,7 @@ class _ProfileDetailState extends State<ProfileDetail>
   String appBarTitle = "";
   String Image1;
   String CoverImage1;
+  String CompanyLogo;
 
   @override
   void initState() {
@@ -169,7 +169,7 @@ class _ProfileDetailState extends State<ProfileDetail>
 
         if (_imageLogo != null) {
           ImageProperties properties =
-          await FlutterNativeImage.getImageProperties(_imageLogo.path);
+              await FlutterNativeImage.getImageProperties(_imageLogo.path);
 
           compressedFile = await FlutterNativeImage.compressImage(
             _imageLogo.path,
@@ -179,7 +179,7 @@ class _ProfileDetailState extends State<ProfileDetail>
           );
 
           filename3 = _imageLogo.path.split('/').last;
-          filename3 = compressedFile.path;
+          filePath3 = compressedFile.path;
         }
 
         if (_imageCover != null) {
@@ -244,9 +244,9 @@ class _ProfileDetailState extends State<ProfileDetail>
               ? await MultipartFile.fromFile(filePath1,
                   filename: filename1.toString())
               : null,
-          "didiCardLogo": (filePath3 != null && filePath3 != '')
+          "digiCardLogo": (filePath3 != null && filePath3 != '')
               ? await MultipartFile.fromFile(filePath3,
-              filename: filename3.toString())
+                  filename: filename3.toString())
               : null,
           "memberid": prefs.getString(cnst.Session.MemberId)
         });
@@ -307,6 +307,8 @@ class _ProfileDetailState extends State<ProfileDetail>
             await prefs.setString(
                 cnst.Session.coverimg, subCatResponseList[0]["coverimg"]);
             await prefs.setString(
+                cnst.Session.LogoImage, subCatResponseList[0]["digiCardLogo"]);
+            await prefs.setString(
                 cnst.Session.name, subCatResponseList[0]["name"]);
             await prefs.setString(
                 cnst.Session.mobile, subCatResponseList[0]["mobile"]);
@@ -316,7 +318,7 @@ class _ProfileDetailState extends State<ProfileDetail>
                 cnst.Session.whatsapp, subCatResponseList[0]["whatsapp"]);
             await prefs.setString(cnst.Session.company_name,
                 subCatResponseList[0]["company_name"]);
-
+            Navigator.pop(context);
             //   GetProfileData();
             //Fluttertoast.showToast(msg: "Login successfully");
           } else {
@@ -450,6 +452,7 @@ class _ProfileDetailState extends State<ProfileDetail>
     Image1 = prefs.getString(cnst.Session.imagecode);
     Image1 = prefs.getString(cnst.Session.imagecode);
     CoverImage1 = prefs.getString(cnst.Session.coverimg);
+    CompanyLogo = prefs.getString(cnst.Session.LogoImage);
 
     //Company Data
     txtCompany.text = prefs.getString(cnst.Session.company_name);
@@ -468,7 +471,6 @@ class _ProfileDetailState extends State<ProfileDetail>
       MemberId = prefs.getString(cnst.Session.MemberId);
     });
     prefs.setString(Session.CustomerName, prefs.getString(cnst.Session.name));
-
   }
 
   // SetDataToController1() async {
@@ -630,6 +632,7 @@ class _ProfileDetailState extends State<ProfileDetail>
         //child: profile,
       );
     }
+
     userInfo();
     return Scaffold(
         body:
@@ -1007,126 +1010,125 @@ class _ProfileDetailState extends State<ProfileDetail>
                                               decoration: BoxDecoration(
                                                   color: Colors.white,
                                                   borderRadius:
-                                                  BorderRadius.all(
-                                                      Radius.circular(10))),
+                                                      BorderRadius.all(
+                                                          Radius.circular(10))),
                                             ),
                                             //Divider End
 
                                             _editCoverLogo
                                                 ? Container(
-                                              width:
-                                              (MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                                  30) /
-                                                  3,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment
-                                                    .spaceEvenly,
-                                                children: <Widget>[
-                                                  GestureDetector(
-                                                      child: Icon(
-                                                          Icons
-                                                              .done_outline,
-                                                          color: Colors
-                                                              .white),
-                                                      onTap: () async {
-                                                        // String img = '';
-                                                        //
-                                                        // if (_imageCover !=
-                                                        //     null) {
-                                                        //   setState(() {
-                                                        //     isLoading =
-                                                        //         true;
-                                                        //   });
-                                                        //   List<int>
-                                                        //       imageBytes =
-                                                        //       await _imageCover
-                                                        //           .readAsBytesSync();
-                                                        //   String
-                                                        //       base64Image =
-                                                        //       base64Encode(
-                                                        //           imageBytes);
-                                                        //   img =
-                                                        //       base64Image;
-                                                        //   setState(() {
-                                                        //     CoverImage1 =
-                                                        //         img;
-                                                        //   });
-                                                        //
-                                                        //   SharedPreferences
-                                                        //       prefs =
-                                                        //       await SharedPreferences
-                                                        //           .getInstance();
-                                                        //   await prefs.setString(
-                                                        //       cnst.Session
-                                                        //           .coverimg,
-                                                        //       CoverImage1);
-                                                        //
-                                                        //   setState(() {
-                                                        //     _editCoverImg =
-                                                        //         false;
-                                                        //   });
-                                                        UpdateProfile();
-                                                        setState(() {
-                                                          _editCoverImg =
-                                                          false;
-                                                        });
-                                                        // updateProfile(
-                                                        //         'CoverImage',
-                                                        //         img)
-                                                        //     .then(
-                                                        //         (val) {
-                                                        //   setState(() {
-                                                        //     _editCoverImg =
-                                                        //         false;
-                                                        //   });
-                                                        // }, onError: (e) {
-                                                        //   setState(() {
-                                                        //     _editCoverImg =
-                                                        //         false;
-                                                        //   });
-                                                        // });
-                                                        // }
-                                                      }),
-                                                  GestureDetector(
-                                                      child: Icon(
-                                                          Icons.close,
-                                                          color: Colors
-                                                              .white),
-                                                      onTap: () async {
-                                                        setState(() {
-                                                          _editCoverLogo =
-                                                          false;
-                                                          _imageLogo =
-                                                          null;
-                                                        });
-                                                      })
-                                                ],
-                                              ),
-                                            )
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                    .size
+                                                                    .width -
+                                                                30) /
+                                                            3,
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
+                                                      children: <Widget>[
+                                                        GestureDetector(
+                                                            child: Icon(
+                                                                Icons
+                                                                    .done_outline,
+                                                                color: Colors
+                                                                    .white),
+                                                            onTap: () async {
+                                                              // String img = '';
+                                                              //
+                                                              // if (_imageCover !=
+                                                              //     null) {
+                                                              //   setState(() {
+                                                              //     isLoading =
+                                                              //         true;
+                                                              //   });
+                                                              //   List<int>
+                                                              //       imageBytes =
+                                                              //       await _imageCover
+                                                              //           .readAsBytesSync();
+                                                              //   String
+                                                              //       base64Image =
+                                                              //       base64Encode(
+                                                              //           imageBytes);
+                                                              //   img =
+                                                              //       base64Image;
+                                                              //   setState(() {
+                                                              //     CoverImage1 =
+                                                              //         img;
+                                                              //   });
+                                                              //
+                                                              //   SharedPreferences
+                                                              //       prefs =
+                                                              //       await SharedPreferences
+                                                              //           .getInstance();
+                                                              //   await prefs.setString(
+                                                              //       cnst.Session
+                                                              //           .coverimg,
+                                                              //       CoverImage1);
+                                                              //
+                                                              //   setState(() {
+                                                              //     _editCoverImg =
+                                                              //         false;
+                                                              //   });
+                                                              UpdateProfile();
+                                                              setState(() {
+                                                                _editCoverLogo =
+                                                                    false;
+                                                              });
+
+                                                              // updateProfile(
+                                                              //         'CoverImage',
+                                                              //         img)
+                                                              //     .then(
+                                                              //         (val) {
+                                                              //   setState(() {
+                                                              //     _editCoverImg =
+                                                              //         false;
+                                                              //   });
+                                                              // }, onError: (e) {
+                                                              //   setState(() {
+                                                              //     _editCoverImg =
+                                                              //         false;
+                                                              //   });
+                                                              // });
+                                                              // }
+                                                            }),
+                                                        GestureDetector(
+                                                            child: Icon(
+                                                                Icons.close,
+                                                                color: Colors
+                                                                    .white),
+                                                            onTap: () async {
+                                                              setState(() {
+                                                                _editCoverLogo =
+                                                                    false;
+                                                                _imageLogo =
+                                                                    null;
+                                                              });
+                                                            })
+                                                      ],
+                                                    ),
+                                                  )
                                                 : MaterialButton(
-                                              onPressed: () {
-                                                _logoImagePopup(context);
-                                              },
-                                              child: Text(
-                                                "Edit Logo",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                    FontWeight.w600),
-                                              ),
-                                              minWidth:
-                                              (MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                                  30) /
-                                                  3,
-                                            )
-
-
+                                                    onPressed: () {
+                                                      _logoImagePopup(context);
+                                                    },
+                                                    child: Text(
+                                                      "Edit Logo",
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                    ),
+                                                    minWidth:
+                                                        (MediaQuery.of(context)
+                                                                    .size
+                                                                    .width -
+                                                                30) /
+                                                            3,
+                                                  )
                                           ],
                                         ))
                                   ],
@@ -1214,11 +1216,8 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                                   const EdgeInsets
                                                                           .only(
                                                                       left: 10),
-                                                              child: Text("${txtName.text !=
-                                                                  null
-                                                                  ? txtName
-                                                                  .text
-                                                                  : ""}",
+                                                              child: Text(
+                                                                  "${txtName.text != null ? txtName.text : ""}",
                                                                   style: TextStyle(
                                                                       color: Colors
                                                                               .grey[
@@ -5871,6 +5870,29 @@ class _ProfileDetailState extends State<ProfileDetail>
                                                   ],
                                                 ),
                                         ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text(
+                                          "Company Logo",
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        CompanyLogo != null
+                                            ? FadeInImage.assetNetwork(
+                                                placeholder:
+                                                    "assets/profilebackground.png",
+                                                image: CompanyLogo,
+                                                height: 230,
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                                fit: BoxFit.cover)
+                                            : Text("Edit your company Logo")
                                       ],
                                     ),
                                   ),

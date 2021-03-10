@@ -112,7 +112,7 @@ class _GuestCategoryNewsComponentState
                                   color: appPrimaryMaterialColor[100],
                                   child: Center(
                                       child: Image.asset(
-                                    'assets/LOGO1.png',
+                                    'assets/appLogo.png',
                                     width: 150,
                                     height: 300,
                                   )),

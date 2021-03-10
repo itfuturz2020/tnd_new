@@ -64,6 +64,7 @@ class Session {
   static const String whatsapp = "whatsapp";
   static const String isVerified = "isVerified";
   static const String company_name = "company_name";
+  static const String LogoImage = "LogoImage";
 
   //====
   static const String IsAppIntroCompleted = "IsAppIntroCompleted";

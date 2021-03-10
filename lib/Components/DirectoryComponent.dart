@@ -28,6 +28,7 @@ class DirectoryComponent extends StatefulWidget {
 class _DirectoryComponentState extends State<DirectoryComponent> {
   List list;
   String isMember;
+
   _isMember() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -931,110 +932,112 @@ class _AlertSendState extends State<AlertSend> {
       ),
       content: new Wrap(
         children: [
-          ListTile(
-            title: Column(
-              children: <Widget>[
-                Container(
-                  height: 40,
-                  child: RadioListTile(
-                    activeColor: appPrimaryMaterialColor,
-                    groupValue: requestType,
-                    title: Text("Physical-Meeting",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600)),
-                    value: 'physical',
-                    onChanged: (val) {
-                      setState(() {
-                        requestType = val;
-                      });
-                    },
+          SingleChildScrollView(
+            child: ListTile(
+              title: Column(
+                children: <Widget>[
+                  Container(
+                    height: 40,
+                    child: RadioListTile(
+                      activeColor: appPrimaryMaterialColor,
+                      groupValue: requestType,
+                      title: Text("Physical-Meeting",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600)),
+                      value: 'physical',
+                      onChanged: (val) {
+                        setState(() {
+                          requestType = val;
+                        });
+                      },
+                    ),
                   ),
-                ),
-                Container(
-                  height: 40,
-                  child: RadioListTile(
-                    activeColor: appPrimaryMaterialColor,
-                    groupValue: requestType,
-                    title: Text("Online-Meeting",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600)),
-                    value: 'online',
-                    onChanged: (val) {
-                      setState(() {
-                        requestType = val;
-                      });
-                    },
+                  Container(
+                    height: 40,
+                    child: RadioListTile(
+                      activeColor: appPrimaryMaterialColor,
+                      groupValue: requestType,
+                      title: Text("Online-Meeting",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600)),
+                      value: 'online',
+                      onChanged: (val) {
+                        setState(() {
+                          requestType = val;
+                        });
+                      },
+                    ),
                   ),
-                ),
-                requestType == "physical"
-                    ? Container()
-                    : Padding(
-                        padding: const EdgeInsets.only(top: 20.0),
-                        child: Container(
-                          height: 42,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              //border: Border.all(color: Colors.grey[500], width: 1),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0)),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: appPrimaryMaterialColor
-                                        .withOpacity(0.2),
-                                    blurRadius: 2.0,
-                                    spreadRadius: 2.0,
-                                    offset: Offset(3.0, 5.0))
-                              ]),
-                          child: TextFormField(
-                            //controller: txtName,
-                            controller: txtOnlineLink,
-                            // validator: (exp) {
-                            //   if (exp.length == 0) {
-                            //     return 'Please enter your experience';
-                            //   }
-                            //   return null;
-                            // },
-                            keyboardType: TextInputType.text,
+                  requestType == "physical"
+                      ? Container()
+                      : Padding(
+                          padding: const EdgeInsets.only(top: 20.0),
+                          child: Container(
+                            height: 42,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                //border: Border.all(color: Colors.grey[500], width: 1),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.0)),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: appPrimaryMaterialColor
+                                          .withOpacity(0.2),
+                                      blurRadius: 2.0,
+                                      spreadRadius: 2.0,
+                                      offset: Offset(3.0, 5.0))
+                                ]),
+                            child: TextFormField(
+                              //controller: txtName,
+                              controller: txtOnlineLink,
+                              // validator: (exp) {
+                              //   if (exp.length == 0) {
+                              //     return 'Please enter your experience';
+                              //   }
+                              //   return null;
+                              // },
+                              keyboardType: TextInputType.text,
 
-                            style: TextStyle(fontSize: 15),
-                            cursorColor: appPrimaryMaterialColor,
+                              style: TextStyle(fontSize: 15),
+                              cursorColor: appPrimaryMaterialColor,
 
-                            decoration: InputDecoration(
-                              errorStyle: TextStyle(height: 0),
-                              counterText: "",
-                              hintText: "Enter Zoom Link or Google Meet Link",
-                              contentPadding: const EdgeInsets.all(15),
-                              fillColor: Colors.white,
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20.0)),
-                                borderSide: BorderSide(color: Colors.grey),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20.0)),
-                                borderSide: BorderSide(color: Colors.red),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20.0)),
-                                borderSide: BorderSide(color: Colors.red),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20.0)),
-                                borderSide: BorderSide(color: Colors.grey),
+                              decoration: InputDecoration(
+                                errorStyle: TextStyle(height: 0),
+                                counterText: "",
+                                hintText: "Enter Zoom Link or Google Meet Link",
+                                contentPadding: const EdgeInsets.all(15),
+                                fillColor: Colors.white,
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(color: Colors.grey),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(color: Colors.red),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(color: Colors.red),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide: BorderSide(color: Colors.grey),
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-              ],
+                ],
+              ),
             ),
           ),
         ],

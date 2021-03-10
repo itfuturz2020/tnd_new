@@ -114,8 +114,8 @@ class _GuestCategoryNewsState extends State<GuestCategoryNews> {
                                     // borderRadius: BorderRadius.circular(8.0),
                                     child: link['featured_img_src'] == null
                                         ? Center(
-                                            child:
-                                                Image.asset('assets/LOGO1.png'))
+                                            child: Image.asset(
+                                                'assets/appLogo.png'))
                                         : Image.network(
                                             link['featured_img_src'],
                                             width: MediaQuery.of(context)

@@ -45,10 +45,10 @@ class _GuestLatestNewsState extends State<GuestLatestNews> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                  height: MediaQuery.of(context).size.height*0.4,
+                  height: MediaQuery.of(context).size.height * 0.4,
                   width: MediaQuery.of(context).size.width,
                   child: widget.newsData['featured_img_src'] == null
-                      ? Image.asset('assets/LOGO1.png')
+                      ? Image.asset('assets/appLogo.png')
                       : Image.network(
                           widget.newsData['featured_img_src'],
                           //width: MediaQuery.of(context).size.width,

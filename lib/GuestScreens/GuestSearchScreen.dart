@@ -255,7 +255,7 @@ class _GuestSearchScreenState extends State<GuestSearchScreen>
                                                                           null
                                                                       ? Center(
                                                                           child:
-                                                                              Image.asset('assets/LOGO1.png'),
+                                                                              Image.asset('assets/appLogo.png'),
                                                                         )
                                                                       : Image
                                                                           .network(

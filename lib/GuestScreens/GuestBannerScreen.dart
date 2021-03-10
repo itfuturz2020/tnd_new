@@ -13,8 +13,9 @@ import 'package:the_national_dawn/Screens/NewsBannerDetail.dart';
 
 class GuestBannerScreen extends StatefulWidget {
   List newsData;
+  List extraNewsData;
 
-  GuestBannerScreen({this.newsData});
+  GuestBannerScreen({this.newsData, this.extraNewsData});
 
   @override
   _GuestBannerScreenState createState() => _GuestBannerScreenState();
@@ -46,7 +47,7 @@ class _GuestBannerScreenState extends State<GuestBannerScreen>
 
   horizontalContainerList() {
     return Container(
-      height: MediaQuery.of(context).size.height*0.35,
+      height: MediaQuery.of(context).size.height * 0.35,
       child: ListView.builder(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
@@ -84,12 +85,12 @@ class _GuestBannerScreenState extends State<GuestBannerScreen>
                                   //width: 8,
                                 ),
                               ),
-                              child: widget.newsData[index]
+                              child: widget.extraNewsData[index]
                                           ['featured_img_src'] ==
                                       null
-                                  ? Image.asset('assets/LOGO1.png')
+                                  ? Image.asset('assets/appLogo.png')
                                   : Image.network(
-                                      widget.newsData[index]
+                                      widget.extraNewsData[index]
                                           ['featured_img_src'],
                                       //width: MediaQuery.of(context).size.width,
                                       // height: MediaQuery.of(context).size.height * 0.5,
@@ -102,7 +103,7 @@ class _GuestBannerScreenState extends State<GuestBannerScreen>
                             child: Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: Text(
-                                "${widget.newsData[index]["title"]}",
+                                "${widget.extraNewsData[index]["title"]}",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w500,
                                     color: Colors.black,
@@ -175,7 +176,7 @@ class _GuestBannerScreenState extends State<GuestBannerScreen>
                   ClipRRect(
                       // borderRadius: BorderRadius.circular(8.0),
                       child: link['featured_img_src'] == null
-                          ? Center(child: Image.asset('assets/LOGO1.png'))
+                          ? Center(child: Image.asset('assets/appLogo.png'))
                           : Image.network(
                               link['featured_img_src'],
                               width: MediaQuery.of(context).size.width,

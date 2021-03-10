@@ -178,12 +178,12 @@ class _DealOffersDetailsState extends State<DealOffersDetails> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            color: appPrimaryMaterialColor[200],
+                            // color: appPrimaryMaterialColor[200],
                             height: 130,
                             width: 120,
                             child: offerList[index]["bannerImage"] == ""
                                 ? Image.asset(
-                                    "assets/LOGO1.png",
+                                    "assets/appLogo.png",
                                     height: 100,
                                     width: 100,
                                   )

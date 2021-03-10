@@ -20,12 +20,14 @@ class GuestHome extends StatefulWidget {
 
 class _GuestHomeState extends State<GuestHome> {
   List newsList = [];
+  List extraNewsList = [];
   List newsCatList = [];
   bool isLoading = true;
 
   @override
   void initState() {
     _LatestNews();
+    _ExtraLatestNews();
     _newsCategory();
   }
 
@@ -77,6 +79,7 @@ class _GuestHomeState extends State<GuestHome> {
                 if (index == 0) {
                   return GuestBannerScreen(
                     newsData: newsList,
+                    extraNewsData: extraNewsList,
                   );
                 } else {
                   return GuestLatestNews(
@@ -121,6 +124,42 @@ class _GuestHomeState extends State<GuestHome> {
           if (bannerresponselist.length > 0) {
             setState(() {
               newsList = bannerresponselist;
+              //set "data" here to your variable
+            });
+            //  log("My Data" + imgList.toString());
+          } else {
+            Fluttertoast.showToast(msg: "Banner Not Found");
+            //show "data not found" in dialog
+          }
+        }, onError: (e) {
+          setState(() {
+            isLoading = false;
+          });
+          print("error on call -> ${e.message}");
+          Fluttertoast.showToast(msg: "Something Went Wrong");
+        });
+      }
+    } on SocketException catch (_) {
+      Fluttertoast.showToast(msg: "No Internet Connection.");
+    }
+  }
+
+  _ExtraLatestNews() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        setState(() {
+          isLoading = true;
+        });
+        FormData body = FormData.fromMap({"news_category": "local-news"});
+        Services.PostForList1(api_name: 'custom/extra_slider_news', body: body)
+            .then((bannerresponselist) async {
+          setState(() {
+            isLoading = false;
+          });
+          if (bannerresponselist.length > 0) {
+            setState(() {
+              extraNewsList = bannerresponselist;
               //set "data" here to your variable
             });
             //  log("My Data" + imgList.toString());

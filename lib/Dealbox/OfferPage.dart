@@ -133,7 +133,7 @@ class _OfferPageState extends State<OfferPage> {
                     children: [
                       offerList[index]["categoryIcon"] == ""
                           ? Image.asset(
-                              "assets/LOGO1.png",
+                              "assets/appLogo.png",
                               height: 60,
                               width: MediaQuery.of(context).size.width,
                             )
