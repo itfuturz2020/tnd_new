@@ -428,6 +428,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
+    print(imgList);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -644,7 +645,7 @@ class _HomeScreenState extends State<HomeScreen>
                   ? Center(child: LoadingBlueComponent())
                   : ImageSlider(
                       /// Shows the tab indicating circles at the bottom
-                      showTabIndicator: true,
+                      showTabIndicator: false,
 
                       /// Cutomize tab's colors
                       tabIndicatorColor: Colors.grey[400],
@@ -683,6 +684,7 @@ class _HomeScreenState extends State<HomeScreen>
                       children: imgList.map((link) {
                         return GestureDetector(
                           onTap: () {
+                            print(link['title']);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -691,16 +693,51 @@ class _HomeScreenState extends State<HomeScreen>
                                   ),
                                 ));
                           },
-                          child: new ClipRRect(
-                              // borderRadius: BorderRadius.circular(8.0),
-                              child: link['featured_img_src'] == null
-                                  ? Image.asset('assets/appLogo.png')
-                                  : Image.network(
-                                      link['featured_img_src'],
-                                      width: MediaQuery.of(context).size.width,
-                                      height: 220,
-                                      fit: BoxFit.fill,
-                                    )),
+                          child: new Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              ClipRRect(
+                                // borderRadius: BorderRadius.circular(8.0),
+                                child: link['featured_img_src'] == null
+                                    ? Image.asset('assets/appLogo.png')
+                                    : Image.network(
+                                        link['featured_img_src'],
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height: 220,
+                                        fit: BoxFit.fill,
+                                      ),
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          color: Colors.white.withOpacity(0.45),
+                                          child: Flexible(
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(10),
+                                              child: Text(
+                                                link['title'],
+                                                textAlign: TextAlign.justify,
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 20,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         );
                       }).toList(),
                     ),
