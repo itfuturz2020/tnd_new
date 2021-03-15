@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:the_national_dawn/Common/Constants.dart';
-
+import 'package:http/http.dart' as http;
 import 'VideoScreen.dart';
+import 'dart:convert';
 import 'ViewAllScreen.dart';
 
 class TndTvScreen extends StatefulWidget {
@@ -10,7 +11,23 @@ class TndTvScreen extends StatefulWidget {
   _TndTvScreenState createState() => _TndTvScreenState();
 }
 
+
 class _TndTvScreenState extends State<TndTvScreen> {
+Future fetchdata() async{
+  var url = " http://15.207.46.236/admin/youtube_video_list";
+  var response = await http.post(url);
+  setState(() {
+  var data = json.decode(response.body);
+  print(data[0]);
+  });
+
+}
+@override
+  void initState() {
+    // TODO: implement initState
+   fetchdata();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

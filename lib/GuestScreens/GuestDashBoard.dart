@@ -20,7 +20,7 @@ class _GuestDashBoardState extends State<GuestDashBoard> {
     GuestHome(),
     GridScreen(),
     GuestSearchScreen(),
-    //TndTvScreen(),
+    TndTvScreen(),
     GuestProfile()
   ];
 
@@ -54,10 +54,10 @@ class _GuestDashBoardState extends State<GuestDashBoard> {
             icon: Icon(Icons.search),
             label: 'Search',
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.video_collection_rounded),
-          //   label: 'Video',
-          // ),
+           BottomNavigationBarItem(
+            icon: Icon(Icons.video_collection_rounded),
+            label: 'Video',
+           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
