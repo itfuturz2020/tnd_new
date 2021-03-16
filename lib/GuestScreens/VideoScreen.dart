@@ -7,6 +7,8 @@ import 'package:the_national_dawn/Common/Constants.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoScreen extends StatefulWidget {
+  final String ytlink;
+  VideoScreen({Key key, @required this.ytlink}) : super(key: key);
   @override
   _VideoScreenState createState() => _VideoScreenState();
 }
@@ -39,7 +41,7 @@ class _VideoScreenState extends State<VideoScreen> {
   void initState() {
     super.initState();
     _controller = YoutubePlayerController(
-      initialVideoId: _ids.first,
+      initialVideoId: widget.ytlink,
       flags: const YoutubePlayerFlags(
         mute: false,
         autoPlay: true,

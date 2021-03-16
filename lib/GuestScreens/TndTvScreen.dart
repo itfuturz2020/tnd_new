@@ -5,29 +5,33 @@ import 'package:http/http.dart' as http;
 import 'VideoScreen.dart';
 import 'dart:convert';
 import 'ViewAllScreen.dart';
+import 'package:flutter/services.dart';
 
 class TndTvScreen extends StatefulWidget {
   @override
   _TndTvScreenState createState() => _TndTvScreenState();
 }
 
-
 class _TndTvScreenState extends State<TndTvScreen> {
-Future fetchdata() async{
-  var url = " http://15.207.46.236/admin/youtube_video_list";
-  var response = await http.post(url);
-  setState(() {
-  var data = json.decode(response.body);
-  print(data[0]);
-  });
+  var data;
+  var url;
+  var response;
+  Future fetchdata() async {
+    url = "http://15.207.46.236/admin/youtube_video_list";
+    response = await http.post(url);
+    setState(() {
+      data = json.decode(response.body);
+      print(data["Data"][1]["publishedAt"]);
+    });
+  }
 
-}
-@override
+  @override
   void initState() {
     // TODO: implement initState
-   fetchdata();
+    fetchdata();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,13 +89,14 @@ Future fetchdata() async{
               child: ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  itemCount: 8,
+                  itemCount: 10,
                   itemBuilder: (context, index) => GestureDetector(
                         onTap: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => VideoScreen(),
+                                builder: (context) => VideoScreen(
+                                    ytlink: data["Data"][index]["videoId"]),
                               ));
                         },
                         child: Padding(
@@ -103,6 +108,7 @@ Future fetchdata() async{
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color: Colors.grey[200],
+
                                   //width: 8,
                                 ),
                               ),
@@ -119,14 +125,17 @@ Future fetchdata() async{
                                                   .width /
                                               1.3,
                                           decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              image: NetworkImage(
+                                                  "https://img.youtube.com/vi/${data["Data"][index]["videoId"]}/0.jpg"),
+                                              fit: BoxFit.cover,
+                                            ),
                                             border: Border.all(
                                               color: Colors.grey[200],
                                               //width: 8,
                                             ),
                                           ),
-                                          child: Container(
-                                            color: appPrimaryMaterialColor[400],
-                                          )
+                                          child: Container()
                                           // widget.newsData[index]
                                           // ['featured_img_src'] ==
                                           // null
@@ -161,7 +170,7 @@ Future fetchdata() async{
                                       padding: const EdgeInsets.all(5.0),
                                       child: Text(
                                         // "${widget.newsData[index]["title"]}",
-                                        "Content",
+                                        "${data["Data"][index]["title"]}",
                                         overflow: TextOverflow.ellipsis,
 
                                         style: TextStyle(
@@ -179,7 +188,7 @@ Future fetchdata() async{
             Padding(
               padding: const EdgeInsets.only(top: 8.0, bottom: 8),
               child: GridView.builder(
-                  itemCount: 10,
+                  itemCount: data["Data"].length,
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
@@ -208,6 +217,13 @@ Future fetchdata() async{
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(
+                                        "https://img.youtube.com/vi/${data["Data"][index]["videoId"]}/0.jpg"),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                                 height: 130,
                                 width: MediaQuery.of(context).size.width,
                                 child: ClipRRect(
@@ -219,7 +235,6 @@ Future fetchdata() async{
                                         //     ?
                                         Container(
                                   height: 130,
-                                  color: appPrimaryMaterialColor[400],
                                 )
                                     //     : Image.network(
                                     //   Image_URL +
@@ -242,7 +257,7 @@ Future fetchdata() async{
                                 child: Container(
                                   // height: 50,
                                   child: Text(
-                                    "Content",
+                                    "${data["Data"][index]["title"]}",
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                         color: Colors.black,
