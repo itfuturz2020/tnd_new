@@ -37,6 +37,7 @@ class _AddOfferState extends State<AddOffer>
     super.initState();
     GetLocalData();
     _controller = new AnimationController(
+
       vsync: this,
       duration: const Duration(milliseconds: 500),
     );

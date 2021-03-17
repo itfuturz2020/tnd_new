@@ -815,7 +815,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                   decoration: BoxDecoration(
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(10)),
-                                      gradient: new LinearGradient(colors: [
+                                      gradient: new LinearGradient(colors:[
                                         cnst.buttoncolor,
                                         cnst.appMaterialColor
                                       ]),

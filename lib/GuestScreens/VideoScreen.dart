@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,7 +7,9 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoScreen extends StatefulWidget {
   final String ytlink;
+
   VideoScreen({Key key, @required this.ytlink}) : super(key: key);
+
   @override
   _VideoScreenState createState() => _VideoScreenState();
 }
