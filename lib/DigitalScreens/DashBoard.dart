@@ -13,7 +13,7 @@ class Dashboard extends StatefulWidget {
     BarItem(
         text: "Service", iconData: Icons.people, color: Colors.yellow.shade900),
     BarItem(text: "Offer", iconData: Icons.local_offer, color: Colors.teal),
-    //BarItem(text: "Gallery", iconData: Icons.image_sharp, color: Colors.indigo),
+    BarItem(text: "Gallery", iconData: Icons.image_sharp, color: Colors.indigo),
     BarItem(
         text: "More", iconData: Icons.apps, color: Colors.deepOrange.shade600),
   ];
@@ -57,7 +57,7 @@ class _DashboardState extends State<Dashboard> {
     Home(),
     MemberServices(),
     Offers(),
-    // GalleryScreen(),
+    GalleryScreen(),
     More(),
   ];
 

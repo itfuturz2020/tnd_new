@@ -32,33 +32,33 @@ class _GalleryScreenState extends State<GalleryScreen> {
 
   Future<File> getImageFileFromAssets(String path) async {
     final byteData = await rootBundle.load('assets/$path');
-
     final file = File('${(await getTemporaryDirectory()).path}/$path');
     await file.writeAsBytes(byteData.buffer
         .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
-
     return file;
   }
-
   Save() async {
     List files = [];
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         setState(() {
-          // isLoading = true;
+          //isLoading = true;
         });
         for (int i = 0; i < images.length; i++) {
+          print(
+              "heloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
           String filename = "";
           String filePath = "";
           File compressedFile;
-
           File _imageEvent = await File(images[i].identifier);
+          print("${_imageEvent.path}");
           log("IMage wvwnt===${_imageEvent.path}");
+          print("222222222222222222222222222222222222222222");
           if (_imageEvent != null) {
-            ImageProperties properties =
-                await FlutterNativeImage.getImageProperties(_imageEvent.path);
-
+            print(_imageEvent);
+            print(FlutterNativeImage.getImageProperties(_imageEvent.path));
+            ImageProperties properties = await FlutterNativeImage.getImageProperties(_imageEvent.path);
             compressedFile = await FlutterNativeImage.compressImage(
               _imageEvent.path,
               quality: 80,
@@ -66,9 +66,13 @@ class _GalleryScreenState extends State<GalleryScreen> {
               targetHeight:
                   (properties.height * 600 / properties.width).round(),
             );
-
+            print(_imageEvent.path);
+            print("333333333333333333333333333333333333333333333333333");
             filename = _imageEvent.path.split('/').last;
+            print("4444444444444444444444444444444444444444444444444444444444444");
             filePath = compressedFile.path;
+            print(filePath);
+
             files.add((filePath != null && filePath != '')
                 ? await MultipartFile.fromFile(filePath,
                     filename: filename.toString())

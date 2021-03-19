@@ -655,7 +655,6 @@ class _HomeScreenState extends State<HomeScreen>
 
                       /// Height of the indicators from the bottom
                       tabIndicatorHeight: 16,
-
                       /// Size of the tab indicator circles
                       tabIndicatorSize: 12,
 
@@ -716,18 +715,16 @@ class _HomeScreenState extends State<HomeScreen>
                                       Expanded(
                                         child: Container(
                                           color: Colors.white.withOpacity(0.45),
-                                          child: Flexible(
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(10),
-                                              child: Text(
-                                                link['title'],
-                                                textAlign: TextAlign.justify,
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 20,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(10),
+                                            child: Text(
+                                              link['title'],
+                                              textAlign: TextAlign.justify,
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 20,
+                                                  fontWeight:
+                                                      FontWeight.bold),
                                             ),
                                           ),
                                         ),

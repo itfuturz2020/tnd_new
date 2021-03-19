@@ -15,6 +15,70 @@
       },
       "oauth_client": [
         {
+          "client_id": "1005606757963-6a9p2ttp47sklfjn428pbht1gkhogkuj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example1.the_national_dawn",
+            "certificate_hash": "e9055683cb27977b0532ca178d1669acda498ba9"
+          }
+        },
+        {
+          "client_id": "1005606757963-eoeciccnsmaev044u614ul3bog6jon72.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example1.the_national_dawn",
+            "certificate_hash": "7b137d4742744e8a503d5bb3fba8ef262037980e"
+          }
+        },
+        {
+          "client_id": "1005606757963-hhtm0aislp8vu769814dkhbn20mj5d7n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example1.the_national_dawn",
+            "certificate_hash": "a04db47436f9f13e95d85aa24957d3188fd2e1de"
+          }
+        },
+        {
+          "client_id": "1005606757963-jknr58fcbg6crbd37832nns3qrbcma32.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example1.the_national_dawn",
+            "certificate_hash": "19b05d9b968a262d86cac4ac876f774a82b3848b"
+          }
+        },
+        {
+          "client_id": "1005606757963-jmu3mp66t1ff3hnh0rbjfnbq083tkfps.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example1.the_national_dawn",
+            "certificate_hash": "b901e1fc6a9937f23708006a6ef16528ad6134f7"
+          }
+        },
+        {
+          "client_id": "1005606757963-mbgu5i0u92vgas3979pn368crucd3ebl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example1.the_national_dawn",
+            "certificate_hash": "17caeea06fd73de328e9a2c2baa9357b6d63e10d"
+          }
+        },
+        {
+          "client_id": "1005606757963-unt1gac0kt8u0ap4nvbr47lsgiq841qs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example1.the_national_dawn",
+            "certificate_hash": "3f40fd06337fdf76b40bfeec36d8c39fd355216e"
+          }
+        },
+        {
+          "client_id": "1005606757963-vund75op37ru1il1aabmq0ffuta1vmsk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example1.the_national_dawn",
+            "certificate_hash": "d60f980932c64e4d8297daa42481b3a6ac09bd3e"
+          }
+        },
+        {
           "client_id": "1005606757963-nlfa740kgoc4d9odogkolkc04e59ba82.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -30,6 +94,13 @@
             {
               "client_id": "1005606757963-nlfa740kgoc4d9odogkolkc04e59ba82.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1005606757963-njihiidua2vv7n4af1sn5730pnd7s6ad.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.theNationalDawn"
+              }
             }
           ]
         }
